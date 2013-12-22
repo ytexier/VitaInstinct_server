@@ -1,0 +1,42 @@
+    
+    body {
+    	width:85%;
+    	height:85%;
+    }
+    
+    body header {
+    	color: yellowgreen;
+        height:50px;
+        background-color:DarkGreen;
+        text-align:right;
+    }
+ 
+    body aside {
+        width:20%;
+        height:90%;
+        background-color:lightgreen;
+        float: left;
+        padding: 2px;
+    }
+    
+    body article {
+    	width:100%;
+        background-color:GreenYellow;
+        width:auto;
+    }
+    
+     
+    body footer {
+        height:50px;
+        background-color:DarkGreen;
+    }
+ 
+    a{
+    	color: white;
+    }
+    
+    #email{float:right; text-align:center; }
+    #options{float:right; text-align:center; }
+ 
+
+ 

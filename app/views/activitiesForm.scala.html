@@ -1,0 +1,16 @@
+@(user	: User, activityForm : Form[forms.AbstractActivityAllString])
+@import helper._
+
+  @form(routes.Activities.newActivity()) {
+  
+	@select(activityForm("sector"), options = options("" -> "Select Sector", "hunting" -> "hunting", "fishing" -> "fishing", "picking" -> "picking")) 
+    @inputDate(activityForm("date"), 'id -> "itDate")  
+    @inputText(activityForm("latitude"), 'id -> "itLatitude") 
+    @inputText(activityForm("longitude"), 'id -> "itLongitude") 
+    @inputText(activityForm("amountOfOrganism"), 'id -> "itAmountOfOrganism") 
+    @inputText(activityForm("organism"), 'id -> "itOrganism") 
+    @select(activityForm("activityEnding"), options = options("" -> "Select ActivityEnding", "kill" -> "kill", "sight" -> "sight"))
+    @select(activityForm("sex"), options = options("" -> "Select Sex", "male" -> "male", "female" -> "female"))
+    <input type="submit" value="Create">
+  } 
+  

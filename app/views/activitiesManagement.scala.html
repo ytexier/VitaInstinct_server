@@ -1,0 +1,14 @@
+@(user	: User, activityForm : Form[forms.AbstractActivityAllString], addUserForm: Form[forms.AddUserForm])
+
+					
+				<header>@header(user, addUserForm)</header>
+				
+							<article>
+							
+   <aside>@activitiesForm(user, activityForm)</aside>  		@map(user)
+
+							</article>
+
+					<footer>@footer(user)</footer>
+
+
