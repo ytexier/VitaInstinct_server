@@ -3,14 +3,14 @@ package forms;
 import controllers.Users;
 import models.User;
 
-public class AddUserForm {
+public class AddFriendForm {
    
 	public String email;
 	
     public String validate() throws Exception {
         User userId = Users.findByEmail(email);
-        	if (userId == null)
-            	return "email doesn't exist";
+        if (userId == null)
+            return "email doesn't exist";
         return null;
     }
     

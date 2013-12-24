@@ -3,7 +3,7 @@
 
   @form(routes.Activities.newActivity()) {
   
-	@select(activityForm("sector"), options = options("" -> "Select Sector", "hunting" -> "hunting", "fishing" -> "fishing", "picking" -> "picking")) 
+	@select(activityForm("sector"), options = options("-1" -> "Select Sector", "0" -> "hunting", "1" -> "fishing", "2" -> "picking")) 
     @inputDate(activityForm("date"), 'id -> "itDate")  
     @inputText(activityForm("latitude"), 'id -> "itLatitude") 
     @inputText(activityForm("longitude"), 'id -> "itLongitude") 
@@ -11,6 +11,6 @@
     @inputText(activityForm("organism"), 'id -> "itOrganism") 
     @select(activityForm("activityEnding"), options = options("" -> "Select ActivityEnding", "kill" -> "kill", "sight" -> "sight"))
     @select(activityForm("sex"), options = options("" -> "Select Sex", "male" -> "male", "female" -> "female"))
-    <input type="submit" value="Create">
+    <input type="submit" id="btAddActivity" value="Create">
   } 
   

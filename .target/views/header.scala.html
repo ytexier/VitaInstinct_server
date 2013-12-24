@@ -1,16 +1,14 @@
-@(user	: User, addUserForm : Form[forms.AddUserForm])
+@(user	: User, addFriendForm : Form[forms.AddFriendForm])
 @import helper._
 
-	@form(routes.Users.addFriend()) {
-    	@inputText(addUserForm("email"), 'id -> "itFriendEmail")
-    	<input type="submit" id="btAddUser" value="addUser"/>
-	}
-
-	@if(addUserForm.hasErrors){<p class="error">@addUserForm.globalError.message</p>}	
-  
-  
 	(@user.getEmail())
 	<a href="@routes.Application.logout()">Logout</a>
 	
+	<div id="addFriendForm">
+	@form(routes.Users.addFriend()) {
+    	@inputText(addFriendForm("email"), 'id -> "itFriendEmail")
+    	<input type="submit" id="btAddFriend" value="addFriend"/>
+	}
 
-	
+	@if(addFriendForm.hasErrors){<p class="error">@addFriendForm.globalError.message</p>}	
+	</div> 

@@ -4,11 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
-import forms.AddUserForm;
+import forms.AddFriendForm;
 import forms.Secured;
 import models.User;
 import play.data.Form;
@@ -16,11 +18,12 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import views.html.login;
 
 public class Users extends Controller{
 	
 	static Form<User> userForm = Form.form(User.class);
-	static Form<AddUserForm> addUserForm = Form.form(AddUserForm.class);
+	static Form<AddFriendForm> addFriendFrom = Form.form(AddFriendForm.class);
     
 	public static List<User> all() throws Exception{
         if (MorphiaObject.datastore != null) {
@@ -65,9 +68,9 @@ public class Users extends Controller{
     
     @Security.Authenticated(Secured.class)
     public static Result addFriend() throws Exception{
-    	Form<AddUserForm> filledForm = addUserForm.bindFromRequest();
+    	Form<AddFriendForm> filledForm = addFriendFrom.bindFromRequest();
         if(filledForm.hasErrors()) {
-            return badRequest();
+        	//TODO
 	    }
 	    else {
 	    	String friend_email = filledForm.get().getEmail();
@@ -81,11 +84,10 @@ public class Users extends Controller{
 		    						user,
 		    						MorphiaObject.datastore.createUpdateOperations(User.class).add("friends", friendKey)
 		    				);  
-		    		return ok("friend has been added");
 	    		}
 	    	}
 	    }
-        return ok(":(");
+        return redirect(routes.Application.index());
     }
     
     

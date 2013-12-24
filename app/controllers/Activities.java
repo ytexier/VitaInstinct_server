@@ -30,7 +30,7 @@ import forms.Secured;
 
 public class Activities extends Controller {
 	
-	static Form<AbstractActivityForm> activityForm = Form.form(AbstractActivityForm.class);
+	static Form<AbstractActivityForm> abstractActivityForm = Form.form(AbstractActivityForm.class);
 
 	public static Result listActivities(String userId) throws Exception {
    		User user = MorphiaObject.datastore.find(User.class)
@@ -59,7 +59,7 @@ public class Activities extends Controller {
 	@Security.Authenticated(Secured.class)
 	public static Result newActivity() throws Exception{
         
-		Form<AbstractActivityForm> filledForm = activityForm.bindFromRequest();
+		Form<AbstractActivityForm> filledForm = abstractActivityForm.bindFromRequest();
         
         if(filledForm.hasErrors()) {
                 return badRequest();
@@ -68,7 +68,7 @@ public class Activities extends Controller {
         	
         	SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-dd-MM");
         	
-			String strSector = filledForm.get().sector;
+			int intSector = filledForm.get().sector;
 			String strDate =	filledForm.get().date;
 			String strLatitude = filledForm.get().latitude;
 			String strLongitude = filledForm.get().longitude;
@@ -84,23 +84,25 @@ public class Activities extends Controller {
 			Organism organism = null;
 			
         	try {
-				switch (strSector)
+				switch (intSector)
 				{
-					case "hunting":
-						
+					//HUNTING
+					case 0:
 						aSector = new HuntingSector();
 						aActivity = aSector.createActivity();
 						organism = new Mammal(strOrganism, Enum.valueOf(Sex.class, strSex));
 		                break;
 		                
-					case "fishing":
+		            //FISHING    
+					case 1:
 						
 						aSector = new FishingSector();
 						aActivity = aSector.createActivity();
 						organism = new Fish(strOrganism, Enum.valueOf(Sex.class, strSex));
 		                break;
-						
-					case "picking":
+		                
+					//PICKKING	
+					case 2:
 						
 						aSector = new PickingSector();
 						aActivity = aSector.createActivity();

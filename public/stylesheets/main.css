@@ -1,14 +1,17 @@
     
     body {
-    	width:85%;
-    	height:85%;
+    	width:98%;
+    	height:75%;
+    	background-color:#99FF66;
+    	padding: 10px;
     }
     
     body header {
     	color: yellowgreen;
-        height:50px;
         background-color:DarkGreen;
         text-align:right;
+        margin-bottom: 15px;
+        padding: 10px;
     }
  
     body aside {
@@ -16,17 +19,19 @@
         height:90%;
         background-color:lightgreen;
         float: left;
-        padding: 2px;
+        padding: 10px;
+        color:DarkGreen;
+        margin-right:30px;
     }
     
     body article {
     	width:100%;
-        background-color:GreenYellow;
         width:auto;
     }
     
      
     body footer {
+    	margin-top:15px;
         height:50px;
         background-color:DarkGreen;
     }
@@ -37,6 +42,8 @@
     
     #email{float:right; text-align:center; }
     #options{float:right; text-align:center; }
+    #btAddFriend{background-color:lightgreen;}
+    #btAddActivity{background-color:lightgreen;float:right;}
  
 
  

@@ -1,7 +1,7 @@
 package controllers;
 
 import forms.AbstractActivityForm;
-import forms.AddUserForm;
+import forms.AddFriendForm;
 import forms.LoginForm;
 import forms.Secured;
 import models.User;
@@ -14,14 +14,14 @@ public class Application extends Controller {
 
 	static Form<User> userForm = Form.form(User.class);
 	static Form<LoginForm> loginForm = Form.form(LoginForm.class);
-	static Form<AddUserForm> addUserForm = Form.form(AddUserForm.class);
+	static Form<AddFriendForm> addFriendForm = Form.form(AddFriendForm.class);
 	static Form<AbstractActivityForm> activityFrom = Form.form(AbstractActivityForm.class);
 	
 	
 	@Security.Authenticated(Secured.class)
 	public static Result index() throws Exception {
 	    return ok(
-	    	index.render(Users.findByEmail(request().username()),activityFrom,addUserForm)
+	    	index.render(Users.findByEmail(request().username()),activityFrom,addFriendForm)
 	    );
 	}
 	
