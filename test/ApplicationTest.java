@@ -26,4 +26,14 @@ import static org.fest.assertions.Assertions.*;
 *
 */
 public class ApplicationTest {
+<<<<<<< HEAD
+=======
+
+    @Test
+    public void simpleCheck() {
+        int a = 1 + 1;
+        assertThat(a).isEqualTo(2);
+    }
+
+>>>>>>> jetemergZ
 }
