@@ -83,26 +83,24 @@ public class Activities extends Controller {
 			AbstractActivity aActivity = null;
 			Organism organism = null;
 			
-			int testSwitch = 0;
-			
         	try {
-				switch (testSwitch)
+				switch (strSector)
 				{
-					case 0:
+					case "hunting":
 						
 						aSector = new HuntingSector();
 						aActivity = aSector.createActivity();
 						organism = new Mammal(strOrganism, Enum.valueOf(Sex.class, strSex));
 		                break;
 		                
-					case 1:
+					case "fishing":
 						
 						aSector = new FishingSector();
 						aActivity = aSector.createActivity();
 						organism = new Fish(strOrganism, Enum.valueOf(Sex.class, strSex));
 		                break;
 						
-					case 2:
+					case "picking":
 						
 						aSector = new PickingSector();
 						aActivity = aSector.createActivity();
