@@ -1,8 +1,9 @@
 package controllers;
 
-import forms.AbstractActivityAllString;
+import forms.AbstractActivityForm;
 import forms.AddUserForm;
 import forms.LoginForm;
+import forms.Secured;
 import models.User;
 import views.html.*;
 import play.Logger;
@@ -14,10 +15,10 @@ public class Application extends Controller {
 	static Form<User> userForm = Form.form(User.class);
 	static Form<LoginForm> loginForm = Form.form(LoginForm.class);
 	static Form<AddUserForm> addUserForm = Form.form(AddUserForm.class);
-	static Form<AbstractActivityAllString> activityFrom = Form.form(AbstractActivityAllString.class);
+	static Form<AbstractActivityForm> activityFrom = Form.form(AbstractActivityForm.class);
 	
 	
-	@Security.Authenticated(forms.Secured.class)
+	@Security.Authenticated(Secured.class)
 	public static Result index() throws Exception {
 	    return ok(
 	    	index.render(Users.findByEmail(request().username()),activityFrom,addUserForm)

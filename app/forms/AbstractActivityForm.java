@@ -1,6 +1,6 @@
 package forms;
 
-public class AbstractActivityAllString {
+public class AbstractActivityForm {
 	public String sector;
 	public String date;
 	public String latitude;

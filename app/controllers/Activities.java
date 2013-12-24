@@ -25,11 +25,12 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import exceptions.UnknownSectorException;
-import forms.AbstractActivityAllString;
+import forms.AbstractActivityForm;
+import forms.Secured;
 
 public class Activities extends Controller {
 	
-	static Form<AbstractActivityAllString> activityForm = Form.form(AbstractActivityAllString.class);
+	static Form<AbstractActivityForm> activityForm = Form.form(AbstractActivityForm.class);
 
 	public static Result listActivities(String userId) throws Exception {
    		User user = MorphiaObject.datastore.find(User.class)
@@ -55,10 +56,10 @@ public class Activities extends Controller {
    		return (Result) Json.toJson(user.getActivities());
 	}
 
-	@Security.Authenticated(forms.Secured.class)
+	@Security.Authenticated(Secured.class)
 	public static Result newActivity() throws Exception{
         
-		Form<AbstractActivityAllString> filledForm = activityForm.bindFromRequest();
+		Form<AbstractActivityForm> filledForm = activityForm.bindFromRequest();
         
         if(filledForm.hasErrors()) {
                 return badRequest();
@@ -81,25 +82,27 @@ public class Activities extends Controller {
 			AbstractSector aSector = null;
 			AbstractActivity aActivity = null;
 			Organism organism = null;
-		
+			
+			int testSwitch = 0;
+			
         	try {
-				switch (strSector)
+				switch (testSwitch)
 				{
-					case "hunting":
+					case 0:
 						
 						aSector = new HuntingSector();
 						aActivity = aSector.createActivity();
 						organism = new Mammal(strOrganism, Enum.valueOf(Sex.class, strSex));
 		                break;
 		                
-					case "fishing":
+					case 1:
 						
 						aSector = new FishingSector();
 						aActivity = aSector.createActivity();
 						organism = new Fish(strOrganism, Enum.valueOf(Sex.class, strSex));
 		                break;
 						
-					case "picking":
+					case 2:
 						
 						aSector = new PickingSector();
 						aActivity = aSector.createActivity();

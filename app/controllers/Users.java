@@ -9,6 +9,7 @@ import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
 import forms.AddUserForm;
+import forms.Secured;
 import models.User;
 import play.data.Form;
 import play.libs.Json;
@@ -62,7 +63,7 @@ public class Users extends Controller{
         }
     }
     
-    @Security.Authenticated(forms.Secured.class)
+    @Security.Authenticated(Secured.class)
     public static Result addFriend() throws Exception{
     	Form<AddUserForm> filledForm = addUserForm.bindFromRequest();
         if(filledForm.hasErrors()) {
