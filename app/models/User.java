@@ -12,6 +12,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
+import controllers.MorphiaObject;
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
 
@@ -49,6 +50,7 @@ public class User{
         this.friends = new ArrayList<User>();
 	}
     
+    /*
     public List<String> getNS() {
         ArrayList<String> nss = new ArrayList<String>();
         nss.add("xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"");
@@ -58,6 +60,7 @@ public class User{
         nss.add("xmlns:sioc=\"http://rdfs.org/sioc/ns#\"");
         return nss;
     }
+    */
     
     public String toRDF(String url_user, String rdf_toInsert, ArrayList<String> urls_seeAlso) 
     {

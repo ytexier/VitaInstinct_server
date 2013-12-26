@@ -11,9 +11,9 @@ public abstract class Organism {
 	@Id
 	@Property("id")
 	private ObjectId id;
-	protected String specie;
+	private String specie;
 	@Embedded
-	protected Sex sex;
+	private Sex sex;
 	
 	public Organism(){}
 	public Organism(String _specie){
@@ -36,5 +36,12 @@ public abstract class Organism {
 	}
 	public void setSpecie(String specie) {
 		this.specie = specie;
+	}
+	
+	public Sex getSex() {
+		return sex;
+	}
+	public void setSex(Sex sex) {
+		this.sex = sex;
 	}
 }

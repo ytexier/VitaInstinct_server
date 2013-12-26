@@ -13,6 +13,7 @@ import org.mongodb.morphia.query.UpdateResults;
 import forms.AddFriendForm;
 import forms.Secured;
 import models.User;
+import models.factory.AbstractActivity;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -24,7 +25,7 @@ public class Users extends Controller{
 	
 	static Form<User> userForm = Form.form(User.class);
 	static Form<AddFriendForm> addFriendFrom = Form.form(AddFriendForm.class);
-    
+
 	public static List<User> all() throws Exception{
         if (MorphiaObject.datastore != null) {
                 return MorphiaObject.datastore
@@ -35,18 +36,24 @@ public class Users extends Controller{
         }
     }
 	
-    public static Result get(String id){
-   		User user = MorphiaObject.datastore.find(User.class)
-        		.field("id").equal(id).get();
-   		return (Result) Json.toJson(user);
+    public static Result get(String user_id){
+        User userFound = MorphiaObject.datastore.find(User.class)
+        		.field("_id")
+        		.equal(new ObjectId(user_id))
+        		.get();
+   		return (Result) Json.toJson(userFound);
     }
     
-    public static User findByEmail(String email) throws Exception{
+    
+    public static User findByEmail(String user_email) throws Exception{
    		User user = MorphiaObject.datastore.find(User.class)
-            		.field("email").equal(email).get();
+            		.field("email")
+            		.equal(user_email)
+            		.get();
     	return user;
     }
-    	
+    
+    
     public static Result newUser() throws Exception{
         Form<User> filledForm = userForm.bindFromRequest();
         if(filledForm.hasErrors()) {
@@ -60,7 +67,6 @@ public class Users extends Controller{
             			filledForm.get().getPassword(), 
             			toDay
             			);
-            	//return ok(user.getEmail());
                 MorphiaObject.datastore.save(user);
                 return redirect(routes.Application.signup());  
         }
@@ -74,15 +80,17 @@ public class Users extends Controller{
 	    }
 	    else {
 	    	String friend_email = filledForm.get().getEmail();
-	    	User user = findByEmail(request().username());
+	    	User user = Users.findByEmail(request().username());
 	    	if(user!=null){
-	    		User friend = findByEmail(friend_email);
+	    		User friend = Users.findByEmail(friend_email);
 	    		if(friend!=null && !friend.equals(user)){
 		    		Key<User> friendKey = MorphiaObject.datastore.getKey(friend);
 		    		UpdateResults<User> res =
 		    				MorphiaObject.datastore.update(
 		    						user,
-		    						MorphiaObject.datastore.createUpdateOperations(User.class).add("friends", friendKey)
+		    						MorphiaObject.datastore
+		    							.createUpdateOperations(User.class)
+		    							.add("friends", friendKey)
 		    				);  
 	    		}
 	    	}
@@ -90,30 +98,84 @@ public class Users extends Controller{
         return redirect(routes.Application.index());
     }
     
+    public static User getUserById(String user_id){
+        User userFound = MorphiaObject.datastore.find(User.class)
+        		.field("_id")
+        		.equal(new ObjectId(user_id))
+        		.get();
+        if (userFound != null)
+        	return userFound;
+        return null;
+    }
     
-    public static Result deleteUser(String _id) throws Exception{
+    public static Result deleteUser(String user_id) throws Exception{
         User toDelete = MorphiaObject.datastore.find(User.class)
-        		.field("_id").equal(new ObjectId(_id)).get();
+        		.field("_id")
+        		.equal(new ObjectId(user_id))
+        		.get();
         if (toDelete != null)
         	MorphiaObject.datastore.delete(toDelete);
         return redirect(routes.Application.signup());
     }
     
-    /*
-     * Authenticate
-     */
-	public static User authenticate(String _email, String _password) {
-		
+	public static User authenticate(String user_email, String user_password) {
 		User userFound = MorphiaObject.datastore.find(User.class)
-				.field("email").equal(_email)
-				.field("password").equal(_password)
+				.field("email").equal(user_email)
+				.field("password").equal(user_password)
 				.get();
-		
 		if (userFound != null)
 			return userFound;
-
 		return null;
 	}
+	
+    public static Result timeLine(String user_id) throws Exception{
+    	
+        User userFound = MorphiaObject.datastore.find(User.class)
+        		.field("_id")
+        		.equal(new ObjectId(user_id))
+        		.get();
+        
+    	List<AbstractActivity> allActivities = userFound.getActivities();
+        
+   		for(User friend : userFound.getFriends())
+   			allActivities.addAll(friend.getActivities());
+
+   		if(request().accepts("text/html")){
+   			//TODO
+   		}
+   		
+   		else if(request().accepts("application/json"))
+            return ok(Json.toJson(allActivities));
+   		
+   		else if (request().accepts("application/rdf+xml")){
+   			//TODO
+   		}
+
+		return ok(Json.toJson(allActivities));
+    }
+    
+    public static Result activities(String user_id) throws Exception{
+    	
+        User userFound = MorphiaObject.datastore.find(User.class)
+        		.field("_id")
+        		.equal(new ObjectId(user_id))
+        		.get();
+        
+    	List<AbstractActivity> activities = userFound.getActivities();
+
+   		if(request().accepts("text/html")){
+   			//TODO
+   		}
+   		
+   		else if(request().accepts("application/json"))
+            return ok(Json.toJson(activities));
+   		
+   		else if (request().accepts("application/rdf+xml")){
+   			//TODO
+   		}
+
+		return ok(Json.toJson(activities));
+    }
 	
 
 }

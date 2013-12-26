@@ -2,6 +2,7 @@ package models.factory;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import models.ActivityEnding;
 import models.Location;
@@ -27,7 +28,6 @@ public abstract class AbstractActivity {
 	private Key<User> creator;
 	
 	public AbstractActivity() {
-		super();
 	}
 	
     public String toRDF(String url_activity, String rdf_toInsert, ArrayList<String> urls_seeAlso) 

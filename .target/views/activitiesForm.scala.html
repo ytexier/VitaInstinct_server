@@ -9,8 +9,8 @@
     @inputText(activityForm("longitude"), 'id -> "itLongitude") 
     @inputText(activityForm("amountOfOrganism"), 'id -> "itAmountOfOrganism") 
     @inputText(activityForm("organism"), 'id -> "itOrganism") 
-    @select(activityForm("activityEnding"), options = options("" -> "Select ActivityEnding", "kill" -> "kill", "sight" -> "sight"))
-    @select(activityForm("sex"), options = options("" -> "Select Sex", "male" -> "male", "female" -> "female"))
+    @select(activityForm("activityEnding"), options = options("-1" -> "Select ActivityEnding", "kill" -> "kill", "sight" -> "sight"))
+    @select(activityForm("sex"), options = options("-1" -> "Select Sex", "male" -> "male", "female" -> "female"))
     <input type="submit" id="btAddActivity" value="Create">
   } 
   

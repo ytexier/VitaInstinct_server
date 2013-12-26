@@ -1,3 +1,4 @@
-/controllers
-/forms
 /views
+/controllers
+/models
+/forms

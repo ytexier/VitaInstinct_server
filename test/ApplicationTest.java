@@ -26,8 +26,6 @@ import static org.fest.assertions.Assertions.*;
 *
 */
 public class ApplicationTest {
-<<<<<<< HEAD
-=======
 
     @Test
     public void simpleCheck() {
@@ -35,5 +33,4 @@ public class ApplicationTest {
         assertThat(a).isEqualTo(2);
     }
 
->>>>>>> jetemergZ
 }

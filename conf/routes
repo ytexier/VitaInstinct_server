@@ -3,21 +3,35 @@
 # ~~~~
 
 # Home page
-GET     /                           controllers.Application.index()
-POST	/							controllers.Activities.newActivity()
+GET     /                           		controllers.Application.index()
+POST	/									controllers.Activities.newActivity()
 
 # Application
-GET			/signup						controllers.Application.signup()
-GET			/login						controllers.Application.login()
-GET     	/logout                     controllers.Application.logout()
-POST    	/login                      controllers.Application.authenticate()
-POST    	/signup                     controllers.Users.newUser()
-POST    	/signup/:id/delete          controllers.Users.deleteUser(id: String)
-POST    	/addFriend                  controllers.Users.addFriend()
+
+GET			/signup							controllers.Application.signup()
+POST    	/signup                     	controllers.Users.newUser()
+POST    	/signup/:user_id/delete         controllers.Users.deleteUser(user_id: String)
+
+GET			/login							controllers.Application.login()
+POST    	/login                      	controllers.Application.authenticate()
+
+GET     	/logout                     	controllers.Application.logout()
+
+# Users 
+
+GET			/users/:user_id						controllers.Users.get(user_id: String)
+GET			/users/:user_id/timeLine			controllers.Users.timeLine(user_id: String)
+GET			/users/:user_id/activities			controllers.Users.activities(user_id: String)
+
+POST    	/addFriend                  		controllers.Users.addFriend()
 
 # Activities
-#GET		/:user_id/activity		controllers.Activities.list(user_id: String)
-#POST		/:user_id/activity		controllers.Activities.add(user_id: String)
+
+GET			/activities/hunting/:activity_id	controllers.Activities.getFromHunt(activity_id: String)
+GET			/activities/picking/:activity_id	controllers.Activities.getFromPick(activity_id: String)
+GET			/activities/fishing/:activity_id	controllers.Activities.getFromFish(activity_id: String)
+
+POST		/activities/:user_id/add			controllers.Activities.add(user_id: String)
 
 # Comments
 #GET		/:object_id/comment		controllers.Comments.list(object_id: String)
