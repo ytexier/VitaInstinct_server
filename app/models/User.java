@@ -1,10 +1,6 @@
 package models;
 
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
+import controllers.MorphiaObject;
 import models.factory.AbstractActivity;
 
 import org.bson.types.ObjectId;
@@ -12,25 +8,23 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
-import controllers.MorphiaObject;
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
+
+import java.util.ArrayList;
+import java.util.Date;
 
 
-@Entity
-public class User{
-	@Id 
-    private ObjectId id;
-    @Required @Email
-    private String email;
-    @Required
-    private String password;
-    private String pseudo;
-    private Date registration;
-    @Reference
-    private ArrayList<AbstractActivity> activities; 
-    @Reference
-    private ArrayList<User> friends;
+@Entity public class User extends Model{
+	
+	@Id 				private ObjectId id;
+    @Required @Email 	private String email;
+    @Required 			private String password;
+    					private String pseudo;
+    					private Date registration;
+    @Reference 			private ArrayList<AbstractActivity> activities; 
+    @Reference 			private ArrayList<User> friends;
 
 	public User(String _pseudo, String _email, String _password, Date _registration){
     	this.pseudo = _pseudo;
@@ -50,6 +44,30 @@ public class User{
         this.friends = new ArrayList<User>();
 	}
     
+    public static User findById(String id){
+    	User user = MorphiaObject.datastore.find(User.class)
+    			.field("_id")
+    			.equal(new ObjectId(id))
+    			.get();
+    	return user;
+    }
+    
+    public static User findByEmail(String email){
+   		User user = MorphiaObject.datastore.find(User.class)
+   				.field("email")
+            	.equal(email)
+            	.get();
+    	return user;
+    }
+
+	public static User authenticate(String email, String password) {
+		User user = MorphiaObject.datastore.find(User.class)
+				.field("email").equal(email)
+				.field("password").equal(password)
+				.get();
+		return user;
+	}
+	
     /*
     public List<String> getNS() {
         ArrayList<String> nss = new ArrayList<String>();

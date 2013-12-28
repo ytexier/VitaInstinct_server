@@ -25,35 +25,22 @@ public class Users extends Controller{
 	
 	static Form<User> userForm = Form.form(User.class);
 	static Form<AddFriendForm> addFriendFrom = Form.form(AddFriendForm.class);
+	
+    public static Result delete(String id) throws Exception{
+        User user = User.findById(id);
+        if (user != null)
+        	MorphiaObject.datastore.delete(user);
+        return redirect(routes.Application.signup());
+    }
 
 	public static List<User> all() throws Exception{
-        if (MorphiaObject.datastore != null) {
+        if (MorphiaObject.datastore != null)
                 return MorphiaObject.datastore
                 		.find(User.class).asList();
-        }
-        else {
-                return new ArrayList<User>();
-        }
+        else
+        	return new ArrayList<User>();
     }
 	
-    public static Result get(String user_id){
-        User userFound = MorphiaObject.datastore.find(User.class)
-        		.field("_id")
-        		.equal(new ObjectId(user_id))
-        		.get();
-   		return (Result) Json.toJson(userFound);
-    }
-    
-    
-    public static User findByEmail(String user_email) throws Exception{
-   		User user = MorphiaObject.datastore.find(User.class)
-            		.field("email")
-            		.equal(user_email)
-            		.get();
-    	return user;
-    }
-    
-    
     public static Result newUser() throws Exception{
         Form<User> filledForm = userForm.bindFromRequest();
         if(filledForm.hasErrors()) {
@@ -80,9 +67,9 @@ public class Users extends Controller{
 	    }
 	    else {
 	    	String friend_email = filledForm.get().getEmail();
-	    	User user = Users.findByEmail(request().username());
+	    	User user = User.findByEmail(request().username());
 	    	if(user!=null){
-	    		User friend = Users.findByEmail(friend_email);
+	    		User friend = User.findByEmail(friend_email);
 	    		if(friend!=null && !friend.equals(user)){
 		    		Key<User> friendKey = MorphiaObject.datastore.getKey(friend);
 		    		UpdateResults<User> res =
@@ -98,46 +85,33 @@ public class Users extends Controller{
         return redirect(routes.Application.index());
     }
     
-    public static User getUserById(String user_id){
-        User userFound = MorphiaObject.datastore.find(User.class)
-        		.field("_id")
-        		.equal(new ObjectId(user_id))
-        		.get();
-        if (userFound != null)
-        	return userFound;
-        return null;
-    }
-    
-    public static Result deleteUser(String user_id) throws Exception{
-        User toDelete = MorphiaObject.datastore.find(User.class)
-        		.field("_id")
-        		.equal(new ObjectId(user_id))
-        		.get();
-        if (toDelete != null)
-        	MorphiaObject.datastore.delete(toDelete);
-        return redirect(routes.Application.signup());
-    }
-    
-	public static User authenticate(String user_email, String user_password) {
-		User userFound = MorphiaObject.datastore.find(User.class)
-				.field("email").equal(user_email)
-				.field("password").equal(user_password)
-				.get();
-		if (userFound != null)
-			return userFound;
-		return null;
-	}
-	
-    public static Result timeLine(String user_id) throws Exception{
+     
+    public static Result get(String id){
     	
-        User userFound = MorphiaObject.datastore.find(User.class)
-        		.field("_id")
-        		.equal(new ObjectId(user_id))
-        		.get();
+        User user = User.findById(id);
         
-    	List<AbstractActivity> allActivities = userFound.getActivities();
+   		if(request().accepts("text/html")){
+   			//TODO
+   		}
+   		
+   		else if(request().accepts("application/json"))
+            return ok(Json.toJson(user));
+   		
+   		else if (request().accepts("application/rdf+xml")){
+   			//TODO
+   		}
+   		
+		return ok(Json.toJson(user));
+    }
+    
+    
+    public static Result timeLine(String id) throws Exception{
+    	
+        User user = User.findById(id);
         
-   		for(User friend : userFound.getFriends())
+    	List<AbstractActivity> allActivities = user.getActivities();
+        
+   		for(User friend : user.getFriends())
    			allActivities.addAll(friend.getActivities());
 
    		if(request().accepts("text/html")){
@@ -154,14 +128,11 @@ public class Users extends Controller{
 		return ok(Json.toJson(allActivities));
     }
     
-    public static Result activities(String user_id) throws Exception{
+    public static Result activities(String id) throws Exception{
     	
-        User userFound = MorphiaObject.datastore.find(User.class)
-        		.field("_id")
-        		.equal(new ObjectId(user_id))
-        		.get();
+    	User user = User.findById(id);
         
-    	List<AbstractActivity> activities = userFound.getActivities();
+    	List<AbstractActivity> activities = user.getActivities();
 
    		if(request().accepts("text/html")){
    			//TODO
@@ -176,6 +147,7 @@ public class Users extends Controller{
 
 		return ok(Json.toJson(activities));
     }
+	
 	
 
 }

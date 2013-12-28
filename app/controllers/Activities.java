@@ -154,7 +154,7 @@ public class Activities extends Controller {
 						aActivity.setActivityEnding(Enum.valueOf(ActivityEnding.class, strActivityEnding));
 
 
-				User user = Users.getUserById(user_id);
+				User user = User.findById(user_id);
 				
 				aActivity.setCreator(MorphiaObject.datastore.getKey(user));
 				
@@ -181,7 +181,7 @@ public class Activities extends Controller {
 		Form<AbstractActivityForm> filledForm = abstractActivityForm.bindFromRequest();
         
         if(filledForm.hasErrors()) {
-                return badRequest();
+                return badRequest("newActivity : filledForm.hasErrors()");
         }
         else {
         	
@@ -246,7 +246,7 @@ public class Activities extends Controller {
 				if(ActivityEnding.contains(strActivityEnding))
 						aActivity.setActivityEnding(Enum.valueOf(ActivityEnding.class, strActivityEnding));
 
-				User user = Users.findByEmail(request().username());
+				User user = User.findByEmail(request().username());
 				
 				aActivity.setCreator(MorphiaObject.datastore.getKey(user));
 				

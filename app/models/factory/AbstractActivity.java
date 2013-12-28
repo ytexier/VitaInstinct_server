@@ -2,7 +2,6 @@ package models.factory;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import models.ActivityEnding;
 import models.Location;

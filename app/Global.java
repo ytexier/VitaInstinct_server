@@ -55,9 +55,7 @@ public class Global extends GlobalSettings {
         		.createDatastore(
         				MorphiaObject.mongo, 
         				prop.getProperty("db"));
-        
-        MorphiaObject.morphia.map(User.class);
-        //MorphiaObject.morphia.map(AbstractActivity.class);
+
         MorphiaObject.datastore.ensureIndexes();   
         MorphiaObject.datastore.ensureCaps(); 
         

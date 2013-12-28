@@ -10,7 +10,7 @@ POST	/									controllers.Activities.newActivity()
 
 GET			/signup							controllers.Application.signup()
 POST    	/signup                     	controllers.Users.newUser()
-POST    	/signup/:user_id/delete         controllers.Users.deleteUser(user_id: String)
+POST    	/signup/:user_id/delete         controllers.Users.delete(user_id: String)
 
 GET			/login							controllers.Application.login()
 POST    	/login                      	controllers.Application.authenticate()

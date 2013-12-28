@@ -9,7 +9,7 @@ public class LoginForm {
     private String password;
     
     public String validate() {
-       	User userId = Users.authenticate(email, password);
+       	User userId = User.authenticate(email, password);
         if (userId == null)
         	return "Wrong user or password";
         return null;

@@ -8,7 +8,7 @@ public class AddFriendForm {
 	public String email;
 	
     public String validate() throws Exception {
-        User user_id = Users.findByEmail(email);
+        User user_id = User.findByEmail(email);
         if (user_id == null)
             return "email doesn't exist";
         return null;

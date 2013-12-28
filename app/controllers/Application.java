@@ -21,7 +21,7 @@ public class Application extends Controller {
 	@Security.Authenticated(Secured.class)
 	public static Result index() throws Exception {
 	    return ok(
-	    	index.render(Users.findByEmail(request().username()),activityFrom,addFriendForm)
+	    	index.render(User.findByEmail(request().username()),activityFrom,addFriendForm)
 	    );
 	}
 	

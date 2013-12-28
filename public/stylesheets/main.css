@@ -40,6 +40,39 @@
     	color: white;
     }
     
+	.btSector{
+	    border: 0px solid #006;
+    	background: lightgray;
+    	width: 100px;
+    	margin-top: 10px;
+    	margin-bottom: 10px;
+    	margin-left: 10px;
+    	margin-right: -5px;
+    	padding: 5px;
+	}
+	
+	.btMenu{
+	    border: 3px solid darkslategray;
+    	background: white;
+    	width: 100px;
+    	margin: 9px;
+    	margin-left: 20px;
+    	margin-right: 20px;
+    	padding: 3px;
+	}
+        
+    #menu_sector{
+    	float:left;
+    }
+    
+    #menu_action{
+    	float:left;
+    }
+    
+    #addFriendForm{
+    
+    }
+    
     #email{float:right; text-align:center; }
     #options{float:right; text-align:center; }
     #btAddFriend{background-color:lightgreen;}
