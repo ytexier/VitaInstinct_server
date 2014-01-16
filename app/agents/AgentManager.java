@@ -1,5 +1,6 @@
 package agents;
 
+import models.User;
 import models.fishing.FishingAccessory;
 import models.fishing.FishingActivity;
 import models.fishing.FishingEquipment;
@@ -14,20 +15,23 @@ import models.picking.PickingEquipment;
 import models.picking.PickingEvent;
 
 public abstract class AgentManager {
-	public abstract void visitActivity(HuntingActivity activity);
-	public abstract void visitActivity(FishingActivity activity);
-	public abstract void visitActivity(PickingActivity activity);
 	
-	public abstract void visitEquipment(HuntingEquipment equipment);
-	public abstract void visitEquipment(FishingEquipment equipment);
-	public abstract void visitEquipment(PickingEquipment equipment);
+	public abstract String visitUser(User user);
 	
-	public abstract void visitAccessory(HuntingAccessory accessory);
-	public abstract void visitAccessory(FishingAccessory accessory);
-	public abstract void visitAccessory(PickingAccessory accessory);
+	public abstract String visitActivity(HuntingActivity activity);
+	public abstract String visitActivity(FishingActivity activity);
+	public abstract String visitActivity(PickingActivity activity);
 	
-	public abstract void visitEvent(HuntingEvent event);
-	public abstract void visitEvent(FishingEvent event);
-	public abstract void visitEvent(PickingEvent event);
+	public abstract String visitEquipment(HuntingEquipment equipment);
+	public abstract String visitEquipment(FishingEquipment equipment);
+	public abstract String visitEquipment(PickingEquipment equipment);
+	
+	public abstract String visitAccessory(HuntingAccessory accessory);
+	public abstract String visitAccessory(FishingAccessory accessory);
+	public abstract String visitAccessory(PickingAccessory accessory);
+	
+	public abstract String visitEvent(HuntingEvent event);
+	public abstract String visitEvent(FishingEvent event);
+	public abstract String visitEvent(PickingEvent event);
 
 }

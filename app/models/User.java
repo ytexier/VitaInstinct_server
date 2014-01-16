@@ -21,13 +21,13 @@ import java.util.Date;
 	@Id 				private ObjectId id;
     @Required @Email 	private String email;
     @Required 			private String password;
-    					private String pseudo;
+    					private String user_name;
     					private Date registration;
     @Reference 			private ArrayList<AbstractActivity> activities; 
     @Reference 			private ArrayList<User> friends;
 
 	public User(String _pseudo, String _email, String _password, Date _registration){
-    	this.pseudo = _pseudo;
+    	this.user_name = _pseudo;
         this.email = _email;
         this.password = _password;
         this.registration = _registration;
@@ -36,7 +36,7 @@ import java.util.Date;
     }
     
     public User() {
-    	this.pseudo = "";
+    	this.user_name = "";
         this.email = "";
         this.password = "";
         this.registration = new Date();
@@ -86,7 +86,7 @@ import java.util.Date;
             
             rdf += 	"<sioc:UserAccount rdf:about=\""+url_user+"?id="+id+"\">"
             		+	"<sioc:email>"+email+"</sioc:email>"
-            		+ 	"<rdfs:label>"+pseudo+"</rdfs:label>"
+            		+ 	"<rdfs:label>"+user_name+"</rdfs:label>"
             		+	"<dcterms:created>"+registration+"</dcterms:created>";
             
             if(urls_seeAlso != null && urls_seeAlso.size()>0)
@@ -129,10 +129,10 @@ import java.util.Date;
 		this.password = password;
 	}
 	public String getPseudo() {
-		return pseudo;
+		return user_name;
 	}
 	public void setPseudo(String pseudo) {
-		this.pseudo = pseudo;
+		this.user_name = pseudo;
 	} 
     public Date getRegistration() {
 		return registration;
