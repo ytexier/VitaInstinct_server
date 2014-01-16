@@ -49,7 +49,7 @@ public class Users extends Controller{
         else {
 	        	Date toDay = new Date(); 
             	User user = new User(
-            			filledForm.get().getPseudo(), 
+            			filledForm.get().getUsername(), 
             			filledForm.get().getEmail(), 
             			filledForm.get().getPassword(), 
             			toDay

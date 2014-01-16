@@ -16,18 +16,18 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-@Entity public class User extends Model{
+@Entity public class User {
 	
 	@Id 				private ObjectId id;
     @Required @Email 	private String email;
     @Required 			private String password;
-    					private String pseudo;
+    					private String username;
     					private Date registration;
     @Reference 			private ArrayList<AbstractActivity> activities; 
     @Reference 			private ArrayList<User> friends;
 
-	public User(String _pseudo, String _email, String _password, Date _registration){
-    	this.pseudo = _pseudo;
+	public User(String _username, String _email, String _password, Date _registration){
+    	this.username = _username;
         this.email = _email;
         this.password = _password;
         this.registration = _registration;
@@ -36,7 +36,7 @@ import java.util.Date;
     }
     
     public User() {
-    	this.pseudo = "";
+    	this.username = "";
         this.email = "";
         this.password = "";
         this.registration = new Date();
@@ -86,7 +86,7 @@ import java.util.Date;
             
             rdf += 	"<sioc:UserAccount rdf:about=\""+url_user+"?id="+id+"\">"
             		+	"<sioc:email>"+email+"</sioc:email>"
-            		+ 	"<rdfs:label>"+pseudo+"</rdfs:label>"
+            		+ 	"<rdfs:label>"+username+"</rdfs:label>"
             		+	"<dcterms:created>"+registration+"</dcterms:created>";
             
             if(urls_seeAlso != null && urls_seeAlso.size()>0)
@@ -128,11 +128,11 @@ import java.util.Date;
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPseudo() {
-		return pseudo;
+	public String getUsername() {
+		return username;
 	}
-	public void setPseudo(String pseudo) {
-		this.pseudo = pseudo;
+	public void setUsername(String pseudo) {
+		this.username = pseudo;
 	} 
     public Date getRegistration() {
 		return registration;
