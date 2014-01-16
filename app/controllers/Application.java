@@ -45,6 +45,7 @@ public class Application extends Controller {
         );
     }
     
+    @Security.Authenticated(Secured.class)
     public static Result authenticate() {
     	
     	if(request().accepts("application/json")) {

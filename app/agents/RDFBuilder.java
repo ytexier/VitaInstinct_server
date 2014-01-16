@@ -25,12 +25,12 @@ public class RDFBuilder extends AgentManager {
 		rdf += getHeader();
 		
         rdf += 	"<sioc:UserAccount rdf:about=\""
-        			+url+"\""+user.getPseudo()
+        			+url+"\""+user.getUsername()
         			+"?id="+user.getId().toString()
         			+"\">"
         			
 	        		+	"<sioc:email>"+user.getEmail()+"</sioc:email>"
-	        		+ 	"<rdfs:label>"+user.getPseudo()+"</rdfs:label>"
+	        		+ 	"<rdfs:label>"+user.getUsername()+"</rdfs:label>"
 	        		+	"<dcterms:created>"+user.getRegistration().toString()+"</dcterms:created>"
         		+ "</sioc:UserAccount>";	
         

@@ -17,26 +17,28 @@ import java.util.Date;
 
 
 @Entity public class User{
+
 	
 	@Id 				private ObjectId id;
     @Required @Email 	private String email;
     @Required 			private String password;
-    					private String pseudo;
+    					private String username;
     					private Date registration;
     @Reference 			private ArrayList<AbstractActivity> activities; 
     @Reference 			private ArrayList<User> friends;
 
-	public User(String pseudo, String email, String password, Date registration){
-    	this.pseudo = pseudo;
-        this.email = email;
-        this.password = password;
-        this.registration = registration;
+
+	public User(String _username, String _email, String _password, Date _registration){
+    	this.username = _username;
+        this.email = _email;
+        this.password = _password;
+        this.registration = _registration;
         this.activities = new ArrayList<AbstractActivity>();
         this.friends = new ArrayList<User>();
     }
     
     public User() {
-    	this.pseudo = "";
+    	this.username = "";
         this.email = "";
         this.password = "";
         this.registration = new Date();
@@ -75,7 +77,7 @@ import java.util.Date;
             
             rdf += 	"<sioc:UserAccount rdf:about=\""+url_user+"?id="+id+"\">"
             		+	"<sioc:email>"+email+"</sioc:email>"
-            		+ 	"<rdfs:label>"+pseudo+"</rdfs:label>"
+            		+ 	"<rdfs:label>"+username+"</rdfs:label>"
             		+	"<dcterms:created>"+registration+"</dcterms:created>";
             
             if(urls_seeAlso != null && urls_seeAlso.size()>0)
@@ -117,12 +119,12 @@ import java.util.Date;
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getPseudo() {
-		return pseudo;
+	public String getUsername() {
+		return username;
 	}
-	public void setUserName(String pseudo) {
-		this.pseudo = pseudo;
-	} 
+	public void setUsername(String username) {
+		this.username = username;
+	}
     public Date getRegistration() {
 		return registration;
 	}
