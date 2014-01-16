@@ -1,7 +1,7 @@
 package forms;
 
 public class AbstractActivityForm {
-	public int sector;
+	public String sector;
 	public String date;
 	public String latitude;
 	public String longitude;

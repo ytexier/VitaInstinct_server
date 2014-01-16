@@ -12,13 +12,13 @@ import models.Plant;
 import models.Sex;
 import models.User;
 import models.factory.AbstractActivity;
-import models.factory.AbstractSector;
+import models.factory.FactorySector;
 import models.fishing.FishingActivity;
-import models.fishing.FishingSector;
+import models.fishing.FactoryFishingSector;
 import models.hunting.HuntingActivity;
-import models.hunting.HuntingSector;
+import models.hunting.FactoryHuntingSector;
 import models.picking.PickingActivity;
-import models.picking.PickingSector;
+import models.picking.FactoryPickingSector;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
@@ -94,49 +94,41 @@ public class Activities extends Controller {
         }
         else {
         	
-        	SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-dd-MM");
-        	
-			int intSector = filledForm.get().sector;//0:Hunt,1:Fish,2:Pick
-			String strDate = filledForm.get().date;
-			String strLatitude = filledForm.get().latitude;
-			String strLongitude = filledForm.get().longitude;
-			String strAmountOfOrganism = filledForm.get().amountOfOrganism;
-			String strOrganism = filledForm.get().organism;
-			String strSex = filledForm.get().sex;
-			String strActivityEnding = filledForm.get().activityEnding;
-			
-			Location myLocation = new Location(strLatitude, strLongitude);
-			
-			AbstractSector aSector = null;
-			AbstractActivity aActivity = null;
-			Organism organism = null;
-			
-        	try {
-				switch (intSector)
-				{
-					//HUNTING
-					case 0:
-						aSector = new HuntingSector();
-						aActivity = aSector.createActivity();
-						organism = new Mammal(strOrganism);
-		                break;
-		            //FISHING    
-					case 1:
-						aSector = new FishingSector();
-						aActivity = aSector.createActivity();
-						organism = new Fish(strOrganism);
-		                break;
-					//PICKKING	
-					case 2:
-						aSector = new PickingSector();
-						aActivity = aSector.createActivity();
-						organism = new Plant(strOrganism);
-		                break;
-
-					default:
-						throw new UnknownSectorException();
+	        	SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-dd-MM");
+	        	
+				String sector = filledForm.get().sector;
+				String strDate = filledForm.get().date;
+				String strLatitude = filledForm.get().latitude;
+				String strLongitude = filledForm.get().longitude;
+				String strAmountOfOrganism = filledForm.get().amountOfOrganism;
+				String strOrganism = filledForm.get().organism;
+				String strSex = filledForm.get().sex;
+				String strActivityEnding = filledForm.get().activityEnding;
+				
+				Location myLocation = new Location(strLatitude, strLongitude);
+				
+				FactorySector aSector = null;
+				AbstractActivity aActivity = null;
+				Organism organism = null;
+				
+				
+				if(sector.equals("hunting")){
+					aSector = new FactoryHuntingSector();
+					organism = new Mammal(strOrganism);
 				}
 				
+				if(sector.equals("fishing")){
+					aSector = new FactoryFishingSector();
+					organism = new Fish(strOrganism);				
+				}
+				
+				if(sector.equals("picking")){
+					aSector = new FactoryPickingSector();
+					organism = new Plant(strOrganism);
+				}
+				
+				aActivity = aSector.createActivity();
+			
 				if(Sex.contains(strSex))
 					organism.setSex(Enum.valueOf(Sex.class, strSex));
 				
@@ -166,14 +158,13 @@ public class Activities extends Controller {
 								MorphiaObject.datastore.createUpdateOperations(User.class).add("activities", activityKey)
 						);
 				
-			} catch (UnknownSectorException e) {
-				return ok("Invalid Sector.");
-			}
-        	
-        	return ok(Json.toJson(aActivity));
+       	
+				return ok(Json.toJson(aActivity));
 		} 
 		
 	}	
+	
+
 	
 	@Security.Authenticated(Secured.class)
 	public static Result newActivity() throws Exception{
@@ -185,50 +176,38 @@ public class Activities extends Controller {
         }
         else {
         	
-        	SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-dd-MM");
-        	
-			int intSector = filledForm.get().sector;
-			String strDate =	filledForm.get().date;
-			String strLatitude = filledForm.get().latitude;
-			String strLongitude = filledForm.get().longitude;
-			String strAmountOfOrganism = filledForm.get().amountOfOrganism;
-			String strOrganism = filledForm.get().organism;
-			String strSex = filledForm.get().sex;
-			String strActivityEnding = filledForm.get().activityEnding;
-			
-			Location myLocation = new Location(strLatitude, strLongitude);
-			
-			AbstractSector aSector = null;
-			AbstractActivity aActivity = null;
-			Organism organism = null;
-			
-        	try {
-				switch (intSector)
-				{
-					//HUNTING
-					case 0:
-						aSector = new HuntingSector();
-						aActivity = aSector.createActivity();
-						organism = new Mammal(strOrganism);
-		                break;
-		                
-		            //FISHING    
-					case 1:
-						aSector = new FishingSector();
-						aActivity = aSector.createActivity();
-						organism = new Fish(strOrganism);
-		                break;
-		                
-					//PICKKING	
-					case 2:
-						aSector = new PickingSector();
-						aActivity = aSector.createActivity();
-						organism = new Plant(strOrganism);
-		                break;
-
-					default:
-						throw new UnknownSectorException();
+	        	SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-dd-MM");
+	        	
+				String sector = filledForm.get().sector;
+				String strDate =	filledForm.get().date;
+				String strLatitude = filledForm.get().latitude;
+				String strLongitude = filledForm.get().longitude;
+				String strAmountOfOrganism = filledForm.get().amountOfOrganism;
+				String strOrganism = filledForm.get().organism;
+				String strSex = filledForm.get().sex;
+				String strActivityEnding = filledForm.get().activityEnding;
+				
+				Location myLocation = new Location(strLatitude, strLongitude);
+				
+				FactorySector factorySector = null;
+				
+				AbstractActivity aActivity = null;
+				Organism organism = null;
+				
+				if(sector.equals("hunting")){
+					factorySector = new FactoryHuntingSector();
+					organism = new Mammal(strOrganism);
+				}else if(sector.equals("fishing")){
+					factorySector = new FactoryFishingSector();
+					organism = new Fish(strOrganism);				
+				}else if(sector.equals("picking")){
+					factorySector = new FactoryPickingSector();
+					organism = new Plant(strOrganism);
 				}
+				
+				aActivity = factorySector.createActivity();
+				
+
 				
 				if(Sex.contains(strSex))
 					organism.setSex(Enum.valueOf(Sex.class, strSex));
@@ -258,11 +237,7 @@ public class Activities extends Controller {
 								MorphiaObject.datastore.createUpdateOperations(User.class).add("activities", activityKey)
 						);
 				
-			} catch (UnknownSectorException e) {
-				return ok("Invalid Sector.");
-			}
-        	
-        	return redirect(routes.Application.index());
+				return redirect(routes.Application.index());
 		} 
 		
 	}

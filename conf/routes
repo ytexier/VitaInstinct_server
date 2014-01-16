@@ -31,7 +31,7 @@ GET			/activities/hunting/:activity_id	controllers.Activities.getFromHunt(activi
 GET			/activities/picking/:activity_id	controllers.Activities.getFromPick(activity_id: String)
 GET			/activities/fishing/:activity_id	controllers.Activities.getFromFish(activity_id: String)
 
-POST		/activities/:user_id/add			controllers.Activities.add(user_id: String)
+
 
 # Comments
 #GET		/:object_id/comment		controllers.Comments.list(object_id: String)

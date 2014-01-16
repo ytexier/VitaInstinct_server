@@ -1,8 +1,9 @@
 package models.fishing;
 
-import models.factory.AbstractSector;
+import models.factory.AbstractEvent;
+import models.factory.FactorySector;
 
-public class FishingSector extends AbstractSector{
+public class FactoryFishingSector extends FactorySector{
 
 	@Override
 	public FishingActivity createActivity() {
@@ -17,6 +18,11 @@ public class FishingSector extends AbstractSector{
 	@Override
 	public FishingAccessory createAccessory() {
 		return (new FishingAccessory());
+	}
+
+	@Override
+	public AbstractEvent createEvent() {
+		return (new FishingEvent());
 	}
 
 	

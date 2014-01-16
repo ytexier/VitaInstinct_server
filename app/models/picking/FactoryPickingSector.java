@@ -1,8 +1,8 @@
 package models.picking;
 
-import models.factory.AbstractSector;
+import models.factory.FactorySector;
 
-public class PickingSector extends AbstractSector {
+public class FactoryPickingSector extends FactorySector {
 
 	@Override
 	public PickingActivity createActivity() {
@@ -17,6 +17,11 @@ public class PickingSector extends AbstractSector {
 	@Override
 	public PickingAccessory createAccessory() {
 		return (new PickingAccessory());
+	}
+
+	@Override
+	public PickingEvent createEvent() {
+		return (new PickingEvent());
 	}
 
 }

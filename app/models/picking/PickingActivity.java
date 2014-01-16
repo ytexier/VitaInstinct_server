@@ -9,9 +9,19 @@ import models.factory.AbstractActivity;
 
 import org.mongodb.morphia.annotations.Entity;
 
+import agents.AgentManager;
+
 @Entity
 public class PickingActivity extends AbstractActivity{
-
+	
+	public void accept(AgentManager v){
+		v.visitActivity(this);
+	}	
+	
+	
+	
+	
+	
 	public void setPlant(Plant _plant){
 		super.setOrganism(_plant);
 	}

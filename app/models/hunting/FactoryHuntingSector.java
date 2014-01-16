@@ -1,8 +1,9 @@
 package models.hunting;
 
-import models.factory.AbstractSector;
+import models.factory.AbstractEvent;
+import models.factory.FactorySector;
 
-public class HuntingSector extends AbstractSector{
+public class FactoryHuntingSector extends FactorySector{
 
 	@Override
 	public HuntingActivity createActivity() {
@@ -17,5 +18,10 @@ public class HuntingSector extends AbstractSector{
 	@Override
 	public HuntingAccessory createAccessory() {
 		return (new HuntingAccessory());
+	}
+
+	@Override
+	public AbstractEvent createEvent() {
+		return (new HuntingEvent());
 	}
 }
