@@ -45,42 +45,42 @@ public class Application extends Controller {
         );
     }
     
-    @Security.Authenticated(Secured.class)
+
     public static Result authenticate() {
-    	
-    	if(request().accepts("application/json")) {
-    		try{
-    	        Form<LoginForm> filledForm = loginForm.bindFromRequest();
-    	        if (filledForm.hasErrors()) {
-    	            return badRequest(login.render(filledForm));
-    	        } else {
-    	            session().clear();
-    	            session("email", filledForm.get().getEmail());
-    	            return ok(Json.toJson(User.findByEmail(request().username())));
-    	        }
-        	}catch(Exception e){
-        		e.printStackTrace();
-        	}
-    		return ok();
-    	}
-    	else {
-    		try{
-    	        Form<LoginForm> filledForm = loginForm.bindFromRequest();
-    	        if (filledForm.hasErrors()) {
-    	            return badRequest(login.render(filledForm));
-    	        } else {
-    	            session().clear();
-    	            session("email", filledForm.get().getEmail());
-    	            return redirect(
-    	                routes.Application.index()
-    	            );
-    	        }
-        	}catch(Exception e){
-        		e.printStackTrace();
-        	}
-        	return null;
-        }
-    	}
+		Form<LoginForm> filledForm = loginForm.bindFromRequest();
+		if (filledForm.hasErrors()) {
+			return badRequest(login.render(filledForm));
+		}
+		else {
+			if(request().accepts("text/html")) {
+				try{
+					session().clear();
+					session("email", filledForm.get().getEmail());
+					return redirect(
+							routes.Application.index()
+							);
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+			}
+			//JSON
+			else if(request().accepts("application/json"))
+			{
+				try{
+					session().clear();
+					session("email", filledForm.get().getEmail());
+					User rslt = User.findByEmail(filledForm.get().getEmail());
+					return ok(Json.toJson(rslt));
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				return ok();
+			}
+		}
+
+
+		return null;
+	}
     	
     
 }

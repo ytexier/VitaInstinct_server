@@ -8,6 +8,7 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
+import play.Logger;
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
 import play.db.ebean.Model;
@@ -63,6 +64,7 @@ import java.util.Date;
     }
 
 	public static User authenticate(String email, String password) {
+		Logger.debug("**email***********"+email+"    "+password);
 		User user = MorphiaObject.datastore.find(User.class)
 				.field("email").equal(email)
 				.field("password").equal(password)

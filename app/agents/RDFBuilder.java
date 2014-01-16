@@ -45,6 +45,9 @@ public class RDFBuilder extends AgentManager {
 		
 		rdf += getHeader();
 		
+		
+		
+		
 		return rdf;
 	}
 
