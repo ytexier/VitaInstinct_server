@@ -8,6 +8,7 @@ import models.User;
 import views.html.*;
 import play.Logger;
 import play.data.*;
+import play.libs.Json;
 import play.mvc.*;
 
 public class Application extends Controller {
@@ -45,21 +46,40 @@ public class Application extends Controller {
     }
     
     public static Result authenticate() {
-    	try{
-	        Form<LoginForm> filledForm = loginForm.bindFromRequest();
-	        if (filledForm.hasErrors()) {
-	            return badRequest(login.render(filledForm));
-	        } else {
-	            session().clear();
-	            session("email", filledForm.get().getEmail());
-	            return redirect(
-	                routes.Application.index()
-	            );
-	        }
-    	}catch(Exception e){
-    		e.printStackTrace();
+    	
+    	if(request().accepts("application/json")) {
+    		try{
+    	        Form<LoginForm> filledForm = loginForm.bindFromRequest();
+    	        if (filledForm.hasErrors()) {
+    	            return badRequest(login.render(filledForm));
+    	        } else {
+    	            session().clear();
+    	            session("email", filledForm.get().getEmail());
+    	            return ok(Json.toJson(User.findByEmail(request().username())));
+    	        }
+        	}catch(Exception e){
+        		e.printStackTrace();
+        	}
+    		return ok();
     	}
-    	return null;
-    }
+    	else {
+    		try{
+    	        Form<LoginForm> filledForm = loginForm.bindFromRequest();
+    	        if (filledForm.hasErrors()) {
+    	            return badRequest(login.render(filledForm));
+    	        } else {
+    	            session().clear();
+    	            session("email", filledForm.get().getEmail());
+    	            return redirect(
+    	                routes.Application.index()
+    	            );
+    	        }
+        	}catch(Exception e){
+        		e.printStackTrace();
+        	}
+        	return null;
+        }
+    	}
+    	
     
 }
