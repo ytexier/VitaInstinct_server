@@ -1,6 +1,18 @@
+<<<<<<< HEAD
 /visitors
 /models
 /agents
+=======
+/ApplicationTest.class
+/Global.class
+/IntegrationTest$1.class
+/IntegrationTest.class
+>>>>>>> dimbranch
 /controllers
+/exceptions
 /forms
+<<<<<<< HEAD
+=======
+/models
+>>>>>>> dimbranch
 /views
