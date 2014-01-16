@@ -16,27 +16,27 @@ import java.util.ArrayList;
 import java.util.Date;
 
 
-@Entity public class User extends Model{
+@Entity public class User{
 	
 	@Id 				private ObjectId id;
     @Required @Email 	private String email;
     @Required 			private String password;
-    					private String user_name;
+    					private String pseudo;
     					private Date registration;
     @Reference 			private ArrayList<AbstractActivity> activities; 
     @Reference 			private ArrayList<User> friends;
 
-	public User(String _pseudo, String _email, String _password, Date _registration){
-    	this.user_name = _pseudo;
-        this.email = _email;
-        this.password = _password;
-        this.registration = _registration;
+	public User(String pseudo, String email, String password, Date registration){
+    	this.pseudo = pseudo;
+        this.email = email;
+        this.password = password;
+        this.registration = registration;
         this.activities = new ArrayList<AbstractActivity>();
         this.friends = new ArrayList<User>();
     }
     
     public User() {
-    	this.user_name = "";
+    	this.pseudo = "";
         this.email = "";
         this.password = "";
         this.registration = new Date();
@@ -68,17 +68,6 @@ import java.util.Date;
 		return user;
 	}
 	
-    /*
-    public List<String> getNS() {
-        ArrayList<String> nss = new ArrayList<String>();
-        nss.add("xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\"");
-        nss.add("xmlns:rdfs=\"http://www.w3.org/2000/01/rdf-schema#\"");
-        nss.add("xmlns:dcterms=\"http://purl.org/dc/terms/\"");
-        nss.add("xmlns:foaf=\"http://xmlns.com/foaf/0.1/\"");
-        nss.add("xmlns:sioc=\"http://rdfs.org/sioc/ns#\"");
-        return nss;
-    }
-    */
     
     public String toRDF(String url_user, String rdf_toInsert, ArrayList<String> urls_seeAlso) 
     {
@@ -86,7 +75,7 @@ import java.util.Date;
             
             rdf += 	"<sioc:UserAccount rdf:about=\""+url_user+"?id="+id+"\">"
             		+	"<sioc:email>"+email+"</sioc:email>"
-            		+ 	"<rdfs:label>"+user_name+"</rdfs:label>"
+            		+ 	"<rdfs:label>"+pseudo+"</rdfs:label>"
             		+	"<dcterms:created>"+registration+"</dcterms:created>";
             
             if(urls_seeAlso != null && urls_seeAlso.size()>0)
@@ -129,10 +118,10 @@ import java.util.Date;
 		this.password = password;
 	}
 	public String getPseudo() {
-		return user_name;
+		return pseudo;
 	}
-	public void setPseudo(String pseudo) {
-		this.user_name = pseudo;
+	public void setUserName(String pseudo) {
+		this.pseudo = pseudo;
 	} 
     public Date getRegistration() {
 		return registration;
