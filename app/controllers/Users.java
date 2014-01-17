@@ -153,6 +153,29 @@ public class Users extends Controller{
 
 		return ok(Json.toJson(activities));
     }
+    
+    public static Result friends(String id) throws Exception{
+    	
+    	User user = User.findById(id);
+        
+    	List<User> friends = user.getFriends();
+
+   		if(request().accepts("text/html")){
+   			//TODO
+   		}
+   		
+   		else if(request().accepts("application/json"))
+            return ok(Json.toJson(friends));
+   		
+   		else if (request().accepts("application/rdf+xml")){
+   			//TODO
+   		}
+
+		return ok(Json.toJson(friends));
+    }
+    
+    
+
 	
 	
 

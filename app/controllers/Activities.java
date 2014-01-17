@@ -1,6 +1,7 @@
 package controllers;
 
 import java.text.SimpleDateFormat;
+import java.util.List;
 
 import models.ActivityEnding;
 import models.Fish;
@@ -34,6 +35,36 @@ public class Activities extends Controller {
 	
 	static Form<AbstractActivityForm> abstractActivityForm = Form.form(AbstractActivityForm.class);
 
+	
+    public static Result creator(String id, String sector) throws Exception{
+    	AbstractActivity activityFound = null;
+    	if(sector.equals("hunting")){
+    		activityFound = HuntingActivity.findById(id);
+    	}
+    	
+    	if(sector.equals("picking")){
+    		activityFound = PickingActivity.findById(id);
+    	}
+    	
+    	if(sector.equals("fishing")){
+    		activityFound = FishingActivity.findById(id);
+    	}
+
+   		if(request().accepts("text/html")){
+   			//TODO
+   		}
+   		
+   		else if(request().accepts("application/json"))
+            return ok(Json.toJson(activityFound.getCreator()));
+   		
+   		else if (request().accepts("application/rdf+xml")){
+   			//TODO
+   		}
+
+		return ok(Json.toJson(activityFound.getCreator()));
+    }
+	
+	
 	public static Result getFromHunt(String activity_id) throws Exception {
 		AbstractActivity activityFound = HuntingActivity.findById(activity_id);
    		if(request().accepts("text/html")){
@@ -164,7 +195,7 @@ public class Activities extends Controller {
         }
         else {
         	
-	        	SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-dd-MM");
+	        	SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
 	        	
 				String sector = filledForm.get().sector;
 				String strDate =	filledForm.get().date;
@@ -175,7 +206,7 @@ public class Activities extends Controller {
 				String strSex = filledForm.get().sex;
 				String strActivityEnding = filledForm.get().activityEnding;
 				
-				Location myLocation = new Location(strLatitude, strLongitude);
+				Location myLocation = new Location(strLongitude, strLatitude);
 				
 				FactorySector factorySector = null;
 				

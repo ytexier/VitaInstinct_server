@@ -23,6 +23,10 @@ GET			/users/:user_id						controllers.Users.get(user_id: String)
 GET			/users/:user_id/timeLine			controllers.Users.timeLine(user_id: String)
 GET			/users/:user_id/activities			controllers.Users.activities(user_id: String)
 
+GET			/users/:user_id/friends				controllers.Users.friends(user_id: String)
+
+
+
 POST    	/addFriend                  		controllers.Users.addFriend()
 
 # Activities
@@ -31,6 +35,9 @@ GET			/activities/hunting/:activity_id	controllers.Activities.getFromHunt(activi
 GET			/activities/picking/:activity_id	controllers.Activities.getFromPick(activity_id: String)
 GET			/activities/fishing/:activity_id	controllers.Activities.getFromFish(activity_id: String)
 
+GET			/activities/hunting/:activity_id/creator controllers.Activities.creator(activity_id: String, sector = "hunting")
+GET			/activities/picking/:activity_id/creator controllers.Activities.creator(activity_id: String, sector = "picking")
+GET			/activities/fishing/:activity_id/creator controllers.Activities.creator(activity_id: String, sector = "fishing")
 
 
 # Comments
