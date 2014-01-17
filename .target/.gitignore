@@ -1,7 +1,3 @@
-/agents
-/models
-<<<<<<< HEAD
-=======
 /controllers
->>>>>>> vita_rdf
-/views
+/models
+/agents
