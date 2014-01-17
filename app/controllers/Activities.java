@@ -189,7 +189,7 @@ public class Activities extends Controller {
 		
 	}
 	
-	public static Result newActivity(String user_id) throws Exception{
+	public static Result add(String user_id) throws Exception{
         
 		Form<AbstractActivityForm> filledForm = abstractActivityForm.bindFromRequest();
         
