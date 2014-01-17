@@ -10,7 +10,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
-import agents.AgentJena;
+
 import forms.AddFriendForm;
 import forms.Secured;
 import models.User;
@@ -59,7 +59,7 @@ public class Users extends Controller{
             			);
                 MorphiaObject.datastore.save(user);
                 
-                user.accept(new AgentJena());
+                //user.accept(new AgentJena());
                 
                 return redirect(routes.Application.signup());  
         }
