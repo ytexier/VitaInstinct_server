@@ -233,6 +233,8 @@ public class Activities extends Controller {
 				
 				aActivity.setOrganism(organism);
 				aActivity.setDate(dateFormatter.parse(strDate));
+				
+				
 				aActivity.setLocation(myLocation);
 				
 			    try { 
