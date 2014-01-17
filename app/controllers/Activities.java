@@ -189,4 +189,85 @@ public class Activities extends Controller {
 		
 	}
 	
+	public static Result newActivity(String user_id) throws Exception{
+        
+		Form<AbstractActivityForm> filledForm = abstractActivityForm.bindFromRequest();
+        
+        if(filledForm.hasErrors()) {
+                return badRequest("newActivity : filledForm.hasErrors()");
+        }
+        else {
+        	
+	        	SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+	        	
+				String sector = filledForm.get().sector;
+				String strDate =	filledForm.get().date;
+				String strLatitude = filledForm.get().latitude;
+				String strLongitude = filledForm.get().longitude;
+				String strAmountOfOrganism = filledForm.get().amountOfOrganism;
+				String strOrganism = filledForm.get().organism;
+				String strSex = filledForm.get().sex;
+				String strActivityEnding = filledForm.get().activityEnding;
+				
+				Location myLocation = new Location(strLongitude, strLatitude);
+				
+				FactorySector factorySector = null;
+				
+				AbstractActivity aActivity = null;
+				Organism organism = null;
+				
+				if(sector.equals("hunting")){
+					factorySector = new FactoryHuntingSector();
+					organism = new Mammal(strOrganism);
+					aActivity.setSectorName("hunting");
+				}else if(sector.equals("fishing")){
+					factorySector = new FactoryFishingSector();
+					organism = new Fish(strOrganism);
+					aActivity.setSectorName("fishing");
+				}else if(sector.equals("picking")){
+					factorySector = new FactoryPickingSector();
+					organism = new Plant(strOrganism);
+					aActivity.setSectorName("picking");
+				}
+				
+				aActivity = factorySector.createActivity();
+				
+
+				
+				if(Sex.contains(strSex))
+					organism.setSex(Enum.valueOf(Sex.class, strSex));
+				
+				aActivity.setOrganism(organism);
+				aActivity.setDate(dateFormatter.parse(strDate));
+				
+				
+				aActivity.setLocation(myLocation);
+				
+			    try { 
+			    	aActivity.setAmountOfOrganism(Integer.parseInt(strAmountOfOrganism));
+			    } catch(NumberFormatException e) { 
+			    	aActivity.setAmountOfOrganism(1);
+			    }
+
+				if(ActivityEnding.contains(strActivityEnding))
+						aActivity.setActivityEnding(Enum.valueOf(ActivityEnding.class, strActivityEnding));
+
+				User user = User.findById(user_id);
+				
+				aActivity.setCreator(user);
+
+				
+				Key<AbstractActivity> activityKey = MorphiaObject.datastore.save(aActivity);
+
+				UpdateResults<User> res =
+						MorphiaObject.datastore.update(
+								user,
+								MorphiaObject.datastore.createUpdateOperations(User.class).add("activities", activityKey)
+						);
+				
+				return redirect(routes.Application.index());
+		} 
+		
+	}
+	
 }
