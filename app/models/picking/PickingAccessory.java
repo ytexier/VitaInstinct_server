@@ -7,7 +7,7 @@ import models.factory.AbstractAccessory;
 public class PickingAccessory extends AbstractAccessory {
 
 	public void accept(AgentManager v){
-		v.visitAccessory(this);
+		v.spy(this);
 	}
 	
 	

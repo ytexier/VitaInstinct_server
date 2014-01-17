@@ -1,5 +1,6 @@
 package models;
 
+import agents.AgentManager;
 import controllers.MorphiaObject;
 import models.factory.AbstractActivity;
 
@@ -68,6 +69,10 @@ import java.util.Date;
       	this.setActivities(new ArrayList<AbstractActivity>());
     	this.setFriends(new ArrayList<User>());
     	
+	}
+    
+	public void accept(AgentManager v){
+		v.spy(this);
 	}
     
     public static User findById(String id){

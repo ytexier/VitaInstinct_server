@@ -9,9 +9,15 @@ import models.factory.AbstractActivity;
 
 import org.mongodb.morphia.annotations.Entity;
 
+import agents.AgentManager;
+
 @Entity
 public class HuntingActivity extends AbstractActivity{
 
+	public void accept(AgentManager v){
+		v.spy(this);
+	}
+	
 	public void setOrganism(Amniote _amniote){
 		super.setOrganism(_amniote);
 	}

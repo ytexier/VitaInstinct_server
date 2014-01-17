@@ -15,7 +15,7 @@ import agents.AgentManager;
 public class PickingActivity extends AbstractActivity{
 	
 	public void accept(AgentManager v){
-		v.visitActivity(this);
+		v.spy(this);
 	}	
 	
 	

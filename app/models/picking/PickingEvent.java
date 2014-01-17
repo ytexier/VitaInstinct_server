@@ -7,6 +7,6 @@ import models.factory.AbstractEvent;
 
 public class PickingEvent extends AbstractEvent {
 	public void accept(AgentManager v){
-		v.visitEvent(this);
+		v.spy(this);
 	}	
 }

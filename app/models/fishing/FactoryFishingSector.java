@@ -1,5 +1,6 @@
 package models.fishing;
 
+import agents.AgentManager;
 import models.factory.AbstractEvent;
 import models.factory.FactorySector;
 
