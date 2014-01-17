@@ -13,6 +13,6 @@ public abstract class AbstractEquipment {
 	protected ObjectId id;
 	@NotNull
 	protected String name;
-	protected URI picture;
+	protected URI picture_uri;
 	protected String features;
 }

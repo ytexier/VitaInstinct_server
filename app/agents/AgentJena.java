@@ -1,8 +1,5 @@
 package agents;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-
 import play.Logger;
 
 import com.hp.hpl.jena.rdf.model.Model;
@@ -22,7 +19,6 @@ import models.Mammal;
 import models.Organism;
 import models.Plant;
 import models.User;
-import models.Vita;
 import models.fishing.FishingAccessory;
 import models.fishing.FishingActivity;
 import models.fishing.FishingEquipment;
