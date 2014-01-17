@@ -19,7 +19,6 @@ import models.hunting.FactoryHuntingSector;
 import models.picking.PickingActivity;
 import models.picking.FactoryPickingSector;
 
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
@@ -28,7 +27,6 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import exceptions.UnknownSectorException;
 import forms.AbstractActivityForm;
 import forms.Secured;
 
@@ -37,10 +35,7 @@ public class Activities extends Controller {
 	static Form<AbstractActivityForm> abstractActivityForm = Form.form(AbstractActivityForm.class);
 
 	public static Result getFromHunt(String activity_id) throws Exception {
-		AbstractActivity activityFound = MorphiaObject.datastore.find(HuntingActivity.class)
-				.field("_id")
-        		.equal(new ObjectId(activity_id))
-        		.get();
+		AbstractActivity activityFound = HuntingActivity.findById(activity_id);
    		if(request().accepts("text/html")){
    			//TODO
    		}
@@ -53,10 +48,7 @@ public class Activities extends Controller {
 	}
 	
 	public static Result getFromPick(String activity_id) throws Exception {
-		AbstractActivity activityFound = MorphiaObject.datastore.find(PickingActivity.class)
-				.field("_id")
-        		.equal(new ObjectId(activity_id))
-        		.get();
+		AbstractActivity activityFound = PickingActivity.findById(activity_id);
    		if(request().accepts("text/html")){
    			//TODO
    		}
@@ -69,10 +61,7 @@ public class Activities extends Controller {
 	}
 	
 	public static Result getFromFish(String activity_id) throws Exception {
-		AbstractActivity activityFound = MorphiaObject.datastore.find(FishingActivity.class)
-				.field("_id")
-        		.equal(new ObjectId(activity_id))
-        		.get();
+		AbstractActivity activityFound = FishingActivity.findById(activity_id);
    		if(request().accepts("text/html")){
    			//TODO
    		}

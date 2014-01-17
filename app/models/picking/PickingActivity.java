@@ -6,9 +6,12 @@ import models.ActivityEnding;
 import models.Location;
 import models.Plant;
 import models.factory.AbstractActivity;
+import models.hunting.HuntingActivity;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 
+import controllers.MorphiaObject;
 import agents.AgentManager;
 
 @Entity
@@ -18,7 +21,13 @@ public class PickingActivity extends AbstractActivity{
 		v.spy(this);
 	}	
 	
-	
+    public static PickingActivity findById(String id){
+    	PickingActivity activity = MorphiaObject.datastore.find(PickingActivity.class)
+    			.field("_id")
+    			.equal(new ObjectId(id))
+    			.get();
+    	return activity;
+    }
 	
 	
 	
