@@ -38,7 +38,9 @@ public class AgentJena extends AgentManager{
 	
 	/**
 	 * USER
+	 *
 	 */
+	
 	
 	@Override
 	public void spy(User user) {
