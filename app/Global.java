@@ -7,7 +7,6 @@ import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.Properties;
 
-import models.User;
 
 import org.mongodb.morphia.Morphia;
 

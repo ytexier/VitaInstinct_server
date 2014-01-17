@@ -1,5 +1,12 @@
 package agents;
 
+import models.Amniote;
+import models.Animal;
+import models.Bird;
+import models.Fish;
+import models.Mammal;
+import models.Organism;
+import models.Plant;
 import models.User;
 import models.fishing.FishingAccessory;
 import models.fishing.FishingActivity;
@@ -16,22 +23,30 @@ import models.picking.PickingEvent;
 
 public abstract class AgentManager {
 	
-	public abstract String visitUser(User user);
+	public abstract void spy(User user);
 	
-	public abstract String visitActivity(HuntingActivity activity);
-	public abstract String visitActivity(FishingActivity activity);
-	public abstract String visitActivity(PickingActivity activity);
+	public abstract void spy(HuntingActivity huntingActivity);
+	public abstract void spy(PickingActivity pickingActivity);
+	public abstract void spy(FishingActivity fishingActivity);
 	
-	public abstract String visitEquipment(HuntingEquipment equipment);
-	public abstract String visitEquipment(FishingEquipment equipment);
-	public abstract String visitEquipment(PickingEquipment equipment);
+	public abstract void spy(HuntingEquipment huntingEquipment);
+	public abstract void spy(PickingEquipment pickingEquipment);
+	public abstract void spy(FishingEquipment fishingEquipment);
 	
-	public abstract String visitAccessory(HuntingAccessory accessory);
-	public abstract String visitAccessory(FishingAccessory accessory);
-	public abstract String visitAccessory(PickingAccessory accessory);
+	public abstract void spy(HuntingEvent huntingEvent);
+	public abstract void spy(PickingEvent pickingEvent);
+	public abstract void spy(FishingEvent fishingEvent);
 	
-	public abstract String visitEvent(HuntingEvent event);
-	public abstract String visitEvent(FishingEvent event);
-	public abstract String visitEvent(PickingEvent event);
-
+	public abstract void spy(HuntingAccessory huntingAccessory);
+	public abstract void spy(PickingAccessory pickingAccessory);
+	public abstract void spy(FishingAccessory fishingAccessory);
+	
+	public abstract void spy(Organism organism);
+	public abstract void spy(Animal annimal);
+	public abstract void spy(Plant plant);
+	public abstract void spy(Amniote amniote);
+	public abstract void spy(Bird bird);
+	public abstract void spy(Fish fish);
+	public abstract void spy(Mammal mammal);
+	
 }

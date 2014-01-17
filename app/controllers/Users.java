@@ -10,6 +10,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
+import agents.AgentJena;
 import forms.AddFriendForm;
 import forms.Secured;
 import models.User;
@@ -49,12 +50,17 @@ public class Users extends Controller{
         else {
 	        	Date toDay = new Date(); 
             	User user = new User(
-            			filledForm.get().getUsername(), 
+            			filledForm.get().getGivenName(), 
+            			filledForm.get().getFamilyName(), 
+            			filledForm.get().getNickName(),
             			filledForm.get().getEmail(), 
             			filledForm.get().getPassword(), 
             			toDay
             			);
                 MorphiaObject.datastore.save(user);
+                
+                user.accept(new AgentJena());
+                
                 return redirect(routes.Application.signup());  
         }
     }

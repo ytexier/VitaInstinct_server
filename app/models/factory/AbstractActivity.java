@@ -1,6 +1,5 @@
 package models.factory;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 import models.ActivityEnding;
@@ -29,34 +28,6 @@ public abstract class AbstractActivity {
 	public AbstractActivity() {
 	}
 	
-    public String toRDF(String url_activity, String rdf_toInsert, ArrayList<String> urls_seeAlso) 
-    {
-            String rdf = "";
-            
-            rdf += "<myOnto:Activity rdf:about=\""+url_activity+"?id="+getId().toString()+"\" >";
-            
-            //TODO
-            
-            if(urls_seeAlso != null && urls_seeAlso.size()>0)
-            	for(String url_seeAlso: urls_seeAlso)
-            		rdf += toSeeAlso(url_seeAlso);
-            
-            if(rdf_toInsert != null && rdf_toInsert.length() > 0) 
-            	rdf += rdf_toInsert;
-            
-            rdf += "</myOnto:Activity>";
-            
-            return rdf;
-    }
-    
-    public String toSeeAlso(String _url_seeAlso)
-    {
-            String rdf = "";
-            rdf += "<rdfs:seeAlso rdf:resource=\""+_url_seeAlso+"?id="+id.toString()+"\"/>";
-            return rdf ;
-    }
-    
-
     public ObjectId getId() {
 		return id;
 	}

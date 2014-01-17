@@ -7,7 +7,7 @@
   
   <ul>
     @for(user <- users) {
-      <li>@user.getRegistration() | @user.getUsername() / @user.getEmail() / @user.getPassword()
+      <li>@user.getRegistration() | @user.getGivenName() / @user.getFamilyName() / @user.getNickName() / @user.getEmail() / @user.getPassword()
       @form(routes.Users.delete(user.getId().toString())) { 
          <input type="submit" value="Delete"> 
       }
@@ -18,7 +18,9 @@
   <h2>Add a new User</h2>
   
   @form(routes.Users.newUser()) {
-     @inputText(userForm("userName")) 
+     @inputText(userForm("givenName")) 
+     @inputText(userForm("familyName")) 
+     @inputText(userForm("nickName")) 
      @inputText(userForm("email")) 
      @inputText(userForm("password"))
      <input type="submit" value="Create">

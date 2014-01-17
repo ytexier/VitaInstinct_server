@@ -67,8 +67,6 @@ public class Application extends Controller {
 			else if(request().accepts("application/json"))
 			{
 				try{
-					session().clear();
-					session("email", filledForm.get().getEmail());
 					User rslt = User.findByEmail(filledForm.get().getEmail());
 					return ok(Json.toJson(rslt));
 				}catch(Exception e){

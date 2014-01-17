@@ -2,13 +2,9 @@ package models.picking;
 
 
 import agents.AgentManager;
-import models.factory.AbstractAccessory;
 
-public class PickingAccessory extends AbstractAccessory {
-
+public class PickingAccessory extends PickingEquipment{
 	public void accept(AgentManager v){
-		v.visitAccessory(this);
+		super.accept(v);
 	}
-	
-	
 }
