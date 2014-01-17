@@ -1,10 +1,9 @@
 package models.fishing;
 
 import agents.AgentManager;
-import models.factory.AbstractAccessory;
 
-public class FishingAccessory extends AbstractAccessory{
+public class FishingAccessory extends FishingEquipment{
 	public void accept(AgentManager v){
-		v.spy(this);
+		super.accept(v);
 	}
 }
