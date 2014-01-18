@@ -217,7 +217,7 @@ public class Activities extends Controller {
 		                
 		                String sector = requestData.get("sector");
 		                String day = requestData.get("day");
-		                String mounth = requestData.get("mounth");
+		                String mounth = requestData.get("month");
 		                String year = requestData.get("year");
 		                String strLatitude = requestData.get("latitude");
 		                String strLongitude = requestData.get("longitude");
