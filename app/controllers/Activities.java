@@ -206,8 +206,8 @@ public class Activities extends Controller {
 		        Query<User> updateQuery = MorphiaObject.datastore.createQuery(User.class).field("_id").equal(oid);
 		        String result = "";
 
-		        if(requestData.hasErrors() || requestData.get("nom") == null) {
-		                return ok("Error : Must specify name.");
+		        if(requestData.hasErrors()) {
+		        		return badRequest("filledForm.hasErrors()");
 		        }
 		        else {
 		                AbstractActivity post = null;
