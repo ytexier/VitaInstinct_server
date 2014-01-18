@@ -3,10 +3,6 @@ package controllers;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javax.swing.JOptionPane;
-
-import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
@@ -20,7 +16,7 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.login;
+
 
 public class Users extends Controller{
 	
