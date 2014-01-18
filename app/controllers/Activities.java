@@ -135,22 +135,20 @@ public class Activities extends Controller {
 				AbstractActivity aActivity = null;
 				Organism organism = null;
 				
+				
 				if(sector.equals("hunting")){
 					factorySector = new FactoryHuntingSector();
 					organism = new Mammal(strOrganism);
-					aActivity.setSectorName("hunting");
 				}else if(sector.equals("fishing")){
 					factorySector = new FactoryFishingSector();
 					organism = new Fish(strOrganism);
-					aActivity.setSectorName("fishing");
 				}else if(sector.equals("picking")){
 					factorySector = new FactoryPickingSector();
 					organism = new Plant(strOrganism);
-					aActivity.setSectorName("picking");
 				}
 				
 				aActivity = factorySector.createActivity();
-				
+				aActivity.setSectorName(sector);
 
 				
 				if(Sex.contains(strSex))
