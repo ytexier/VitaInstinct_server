@@ -20,9 +20,13 @@ import models.hunting.FactoryHuntingSector;
 import models.picking.PickingActivity;
 import models.picking.FactoryPickingSector;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 import org.mongodb.morphia.query.UpdateResults;
 
+import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -192,86 +196,88 @@ public class Activities extends Controller {
 		
 	}
 	
+
 	public static Result add(String user_id) throws Exception{
         
-		Form<AbstractActivityForm> filledForm = abstractActivityForm.bindFromRequest();
-        
-        if(filledForm.hasErrors()) {
-                return badRequest("newActivity : filledForm.hasErrors()");
-        }
-        else {
-        	
-	        	SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
-	        	
-				String sector = filledForm.get().sector;
-				Date date =	filledForm.get().date;
-				String strLatitude = filledForm.get().latitude;
-				String strLongitude = filledForm.get().longitude;
-				String strAmountOfOrganism = filledForm.get().amountOfOrganism;
-				String strOrganism = filledForm.get().organism;
-				String strSex = filledForm.get().sex;
-				String strActivityEnding = filledForm.get().activityEnding;
-				
-				Location myLocation = new Location(strLongitude, strLatitude);
-				
-				FactorySector factorySector = null;
-				
-				AbstractActivity aActivity = null;
-				Organism organism = null;
-				
-				if(sector.equals("hunting")){
-					factorySector = new FactoryHuntingSector();
-					organism = new Mammal(strOrganism);
-				}else if(sector.equals("fishing")){
-					factorySector = new FactoryFishingSector();
-					organism = new Fish(strOrganism);
-				}else if(sector.equals("picking")){
-					factorySector = new FactoryPickingSector();
-					organism = new Plant(strOrganism);
-				}
-				
-				aActivity = factorySector.createActivity();
-				aActivity.setSectorName(sector);
+		  DynamicForm requestData = Form.form().bindFromRequest();
 
-				
-				if(Sex.contains(strSex))
-					organism.setSex(Enum.valueOf(Sex.class, strSex));
-				
-				aActivity.setOrganism(organism);
-				
-				String formattedDate = dateFormatter.format(date);
-				
-				aActivity.setDate(formattedDate);
-				
-				
-				aActivity.setLocation(myLocation);
-				
-			    try { 
-			    	aActivity.setAmountOfOrganism(Integer.parseInt(strAmountOfOrganism));
-			    } catch(NumberFormatException e) { 
-			    	aActivity.setAmountOfOrganism(1);
-			    }
+		        ObjectId oid = new ObjectId(user_id);
+		        UpdateOperations<User> ops;
+		        Query<User> updateQuery = MorphiaObject.datastore.createQuery(User.class).field("_id").equal(oid);
+		        String result = "";
 
-				if(ActivityEnding.contains(strActivityEnding))
-						aActivity.setActivityEnding(Enum.valueOf(ActivityEnding.class, strActivityEnding));
+		        if(requestData.hasErrors() || requestData.get("nom") == null) {
+		                return ok("Error : Must specify name.");
+		        }
+		        else {
+		                AbstractActivity post = null;
+		                FactorySector factorySector;
+		                Organism organism = null;
+		                
+		                String sector = requestData.get("sector");
+		                String day = requestData.get("day");
+		                String mounth = requestData.get("mounth");
+		                String year = requestData.get("year");
+		                String strLatitude = requestData.get("latitude");
+		                String strLongitude = requestData.get("longitude");
+		                String strAmountOfOrganism = requestData.get("amountOfOrganism");
+		                String strOrganism = requestData.get("organism");
+		                String strSex = requestData.get("sex");
+		                String strActivityEnding = requestData.get("activityEnding");
+		                
+		                
+		                if(sector.contains("hunting")) {
+		                 factorySector = new FactoryHuntingSector();
+		                    organism = new Mammal(strOrganism);
+		                }
+		                else if(sector.contains("fishing")) {
+		                 factorySector = new FactoryFishingSector();
+		                    organism = new Fish(strOrganism);
+		                }
+		                else if(sector.contains("picking")){
+		                 factorySector = new FactoryPickingSector();
+		                    organism = new Plant(strOrganism);
+		                }
+		                
+		                
+		                post.setActivityEnding(Enum.valueOf(ActivityEnding.class, strActivityEnding));
+		                
+		                try {
+		                 post.setAmountOfOrganism(Integer.parseInt(strAmountOfOrganism));
+		                }
+		                catch(NumberFormatException nfe) {
+		                 
+		                }
+		                
+		                post.setLocation(new Location(strLongitude, strLatitude));
+		                post.setOrganism(organism);
+		                
+		                SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+		                Date d = new Date(Integer.parseInt(year), 
+		                  Integer.parseInt(mounth), 
+		                  Integer.parseInt(day));
+		                String fDate = dateFormatter.format(d);
+		                
+		                post.setDate(fDate);
+		                
+		                User user = User.findById(user_id);
+		                
+		                post.setCreator(MorphiaObject.datastore.getKey(user));
+		                post.setCreatorName(user.getFullName());
+		                
+		                Key<AbstractActivity> activityKey = MorphiaObject.datastore.save(post);
+		                result = activityKey.getId().toString();
 
-				User user = User.findById(user_id);
-				
-				aActivity.setCreator(MorphiaObject.datastore.getKey(user));
-				aActivity.setCreatorName(user.getFullName());
+		                UpdateResults<User> res =
+		                        MorphiaObject.datastore.update(
+		                                        user,
+		                                        MorphiaObject.datastore.createUpdateOperations(User.class).add("activities",
+		                                          activityKey)
+		                        );
 
-				
-				Key<AbstractActivity> activityKey = MorphiaObject.datastore.save(aActivity);
-
-				UpdateResults<User> res =
-						MorphiaObject.datastore.update(
-								user,
-								MorphiaObject.datastore.createUpdateOperations(User.class).add("activities", activityKey)
-						);
-				
-				return ok(Json.toJson(aActivity));
-		} 
-		
-	}
+		                return ok(Json.toJson(post));
+		        }
+		  
+		 }
 	
 }
