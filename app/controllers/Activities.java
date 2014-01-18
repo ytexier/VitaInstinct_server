@@ -26,6 +26,7 @@ import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.UpdateOperations;
 import org.mongodb.morphia.query.UpdateResults;
 
+import play.Logger;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
@@ -257,7 +258,9 @@ public class Activities extends Controller {
 		                post.setOrganism(organism);
 		               
 		                
-		                SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+		                
+		            	            
+		                SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yy");
 		                Date d = new Date(Integer.parseInt(year), 
 		                  Integer.parseInt(mounth), 
 		                  Integer.parseInt(day));
