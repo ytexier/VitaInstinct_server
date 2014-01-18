@@ -1,6 +1,5 @@
 package models;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 import com.hp.hpl.jena.ontology.ObjectProperty;
@@ -15,7 +14,7 @@ import com.hp.hpl.jena.rdf.model.Statement;
 import com.hp.hpl.jena.rdf.model.StmtIterator;
 import com.hp.hpl.jena.vocabulary.RDFS;
 
-public class Vita {
+public class VitaOWL {
 	
 	public static final String vita_src ="vita-instinct.herokuapp.com/ontology";
 	
@@ -50,7 +49,7 @@ public class Vita {
 	ObjectProperty hasSector;
 	ObjectProperty hasShowcase;
 
-	public Vita() {
+	public VitaOWL() {
 
 		omVita = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM);
 		addClasses();

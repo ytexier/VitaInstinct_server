@@ -44,7 +44,7 @@ public class AgentJena extends AgentManager{
 	
 	@Override
 	public void spy(User user) {
-		Resource user_rsc= model.createResource(user.getURI())
+		Vita.= model.createResource(user.getURI())
 		    .addProperty(VCARD.FN,user.getFullName())
 			.addProperty(VCARD.Given,user.getGivenName())
 			.addProperty(VCARD.Family,user.getFamilyName())
