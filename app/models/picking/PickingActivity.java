@@ -34,7 +34,7 @@ public class PickingActivity extends AbstractActivity{
 	public void setPlant(Plant _plant){
 		super.setOrganism(_plant);
 	}
-	public void setDate(Date _date) {
+	public void setDate(String _date) {
 		super.setDate(_date);		
 	}
 	public void setLocation(Location _location) {

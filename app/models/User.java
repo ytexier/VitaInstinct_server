@@ -36,7 +36,7 @@ import java.util.Date;
     					private Date registration;
     					
     @Reference 			private ArrayList<AbstractActivity> activities; 
-    @Reference 			private ArrayList<User> friends;
+    @Embedded 			private ArrayList<Key<User>> friends;
 
 	public User(String givenName, String familyName, String nickName, String email, String password, Date registration){
 		
@@ -50,7 +50,7 @@ import java.util.Date;
         this.setRegistration(registration);
         
         this.setActivities(new ArrayList<AbstractActivity>());
-        this.setFriends(new ArrayList<User>());
+        this.setFriends(new ArrayList<Key<User>>());
     }
     
     public User() {
@@ -66,7 +66,7 @@ import java.util.Date;
       	this.setRegistration(new Date());
   
       	this.setActivities(new ArrayList<AbstractActivity>());
-    	this.setFriends(new ArrayList<User>());
+    	this.setFriends(new ArrayList<Key<User>>());
     	
 	}
     
@@ -141,10 +141,10 @@ import java.util.Date;
 	public void setActivities(ArrayList<AbstractActivity> activities) {
 		this.activities = activities;
 	}
-	public ArrayList<User> getFriends() {
+	public ArrayList<Key<User>> getFriends() {
 		return friends;
 	}
-	public void setFriends(ArrayList<User> friends) {
+	public void setFriends(ArrayList<Key<User>> friends) {
 		this.friends = friends;
 	}
 

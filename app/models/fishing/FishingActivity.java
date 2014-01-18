@@ -28,20 +28,20 @@ public class FishingActivity extends AbstractActivity{
     	return activity;
     }
 	
-	public void setFish(Fish _fish){
-		super.setOrganism(_fish);
+	public void setFish(Fish fish){
+		super.setOrganism(fish);
 	}
-	public void setDate(Date _date) {
-		super.setDate(_date);		
-	}
-	
-	public void setLocation(Location _location) {
-		super.setLocation(_location);		
+	public void setDate(String date) {
+		super.setDate(date);		
 	}
 	
+	public void setLocation(Location location) {
+		super.setLocation(location);		
+	}
 	
-	public void setActivityEnding(ActivityEnding _ActivityEnding) {
-		super.setActivityEnding(_ActivityEnding);		
+	
+	public void setActivityEnding(ActivityEnding activityEnding) {
+		super.setActivityEnding(activityEnding);		
 	}
 	
 	

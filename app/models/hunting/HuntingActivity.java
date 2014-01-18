@@ -36,7 +36,7 @@ public class HuntingActivity extends AbstractActivity{
 		super.setOrganism(_amniote);
 	}
 
-	public void setDate(Date _date) {
+	public void setDate(String _date) {
 		super.setDate(_date);		
 	}
 	

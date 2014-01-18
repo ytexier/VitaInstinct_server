@@ -1,7 +1,7 @@
 package controllers;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
+import java.util.Date;
 
 import models.ActivityEnding;
 import models.Fish;
@@ -120,7 +120,9 @@ public class Activities extends Controller {
 	        	SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
 	        	
 				String sector = filledForm.get().sector;
-				String strDate =	filledForm.get().date;
+				
+				
+				Date date =	filledForm.get().date;			
 				String strLatitude = filledForm.get().latitude;
 				String strLongitude = filledForm.get().longitude;
 				String strAmountOfOrganism = filledForm.get().amountOfOrganism;
@@ -155,7 +157,10 @@ public class Activities extends Controller {
 					organism.setSex(Enum.valueOf(Sex.class, strSex));
 				
 				aActivity.setOrganism(organism);
-				aActivity.setDate(dateFormatter.parse(strDate));
+				
+				String formattedDate = dateFormatter.format(date);
+				
+				aActivity.setDate(formattedDate);
 				
 				
 				aActivity.setLocation(myLocation);
@@ -183,8 +188,12 @@ public class Activities extends Controller {
 						);
 				
 				return redirect(routes.Application.index());
+<<<<<<< HEAD
 				
 		} 
+=======
+        } 
+>>>>>>> master
 		
 	}
 	
@@ -200,7 +209,7 @@ public class Activities extends Controller {
 	        	SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
 	        	
 				String sector = filledForm.get().sector;
-				String strDate =	filledForm.get().date;
+				Date date =	filledForm.get().date;
 				String strLatitude = filledForm.get().latitude;
 				String strLongitude = filledForm.get().longitude;
 				String strAmountOfOrganism = filledForm.get().amountOfOrganism;
@@ -234,7 +243,10 @@ public class Activities extends Controller {
 					organism.setSex(Enum.valueOf(Sex.class, strSex));
 				
 				aActivity.setOrganism(organism);
-				aActivity.setDate(dateFormatter.parse(strDate));
+				
+				String formattedDate = dateFormatter.format(date);
+				
+				aActivity.setDate(formattedDate);
 				
 				
 				aActivity.setLocation(myLocation);

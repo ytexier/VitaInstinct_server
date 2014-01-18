@@ -16,7 +16,7 @@ public abstract class AbstractActivity {
 	
 	@Id 
 	private ObjectId id;
-	private Date date;
+	private String date;
 	private String sectorName;
 	
 	@Embedded 
@@ -57,10 +57,10 @@ public abstract class AbstractActivity {
 	public void setAmountOfOrganism(Integer amountOfOrganism) {
 		this.amountOfOrganism = amountOfOrganism;
 	}
-	public Date getDate() {
+	public String getDate() {
 		return date;
 	}
-	public void setDate(Date date) {
+	public void setDate(String date) {
 		this.date = date;
 	}
 	public Organism getOrganism() {
