@@ -188,13 +188,7 @@ public class Activities extends Controller {
 						);
 				
 				return redirect(routes.Application.index());
-<<<<<<< HEAD
-				
-		} 
-=======
-        } 
->>>>>>> master
-		
+        }
 	}
 	
 	public static Result add(String user_id) throws Exception{
