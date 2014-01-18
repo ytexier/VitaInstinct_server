@@ -6,6 +6,12 @@
 GET     /                           		controllers.Application.index()
 POST	/									controllers.Activities.newActivity()
 
+
+# Ontology
+
+GET			/ontology						controllers.VitaCtrl.make()
+
+
 # Application
 
 GET			/signup							controllers.Application.signup()
