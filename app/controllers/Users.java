@@ -117,8 +117,10 @@ public class Users extends Controller{
         
     	List<AbstractActivity> allActivities = user.getActivities();
         
-   		for(User friend : user.getFriends())
-   			allActivities.addAll(friend.getActivities());
+   		for(Key<User> friend : user.getFriends()){
+   			User friendFound = User.findById(friend.getId().toString());
+   			allActivities.addAll(friendFound.getActivities());
+   		}
 
    		if(request().accepts("text/html")){
    			//TODO
@@ -156,22 +158,26 @@ public class Users extends Controller{
     
     public static Result friends(String id) throws Exception{
     	
+    	ArrayList<User> allFriends = new ArrayList<User>();	
     	User user = User.findById(id);
         
-    	List<User> friends = user.getFriends();
+   		for(Key<User> friend : user.getFriends()){
+   			User friendFound = User.findById(friend.getId().toString());
+   			allFriends.add(friendFound);
+   		}
 
    		if(request().accepts("text/html")){
    			//TODO
    		}
    		
    		else if(request().accepts("application/json"))
-            return ok(Json.toJson(friends));
+            return ok(Json.toJson(allFriends));
    		
    		else if (request().accepts("application/rdf+xml")){
    			//TODO
    		}
 
-		return ok(Json.toJson(friends));
+		return ok(Json.toJson(allFriends));
     }
     
     
