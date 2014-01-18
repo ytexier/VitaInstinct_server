@@ -182,7 +182,8 @@ public class Activities extends Controller {
 								MorphiaObject.datastore.createUpdateOperations(User.class).add("activities", activityKey)
 						);
 				
-				return ok(Json.toJson(aActivity));
+				return redirect(routes.Application.index());
+				
 		} 
 		
 	}
@@ -261,7 +262,7 @@ public class Activities extends Controller {
 								MorphiaObject.datastore.createUpdateOperations(User.class).add("activities", activityKey)
 						);
 				
-				return redirect(routes.Application.index());
+				return ok(Json.toJson(aActivity));
 		} 
 		
 	}
