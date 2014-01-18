@@ -1,8 +1,10 @@
 package forms;
 
+import java.util.Date;
+
 public class AbstractActivityForm {
 	public String sector;
-	public String date;
+	public Date date;
 	public String latitude;
 	public String longitude;
     public String amountOfOrganism;
