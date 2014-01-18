@@ -211,7 +211,7 @@ public class Activities extends Controller {
 		        }
 		        else {
 		                AbstractActivity post = null;
-		                FactorySector factorySector;
+		                FactorySector factorySector = null;
 		                Organism organism = null;
 		                
 		                String sector = requestData.get("sector");
@@ -239,8 +239,12 @@ public class Activities extends Controller {
 		                    organism = new Plant(strOrganism);
 		                }
 		                
+		                post = factorySector.createActivity();
 		                
-		                post.setActivityEnding(Enum.valueOf(ActivityEnding.class, strActivityEnding));
+		                if(ActivityEnding.contains(strActivityEnding))
+		                	post.setActivityEnding(Enum.valueOf(ActivityEnding.class, strActivityEnding));
+		                if(Sex.contains(strSex))
+                          organism.setSex(Enum.valueOf(Sex.class, strSex));
 		                
 		                try {
 		                 post.setAmountOfOrganism(Integer.parseInt(strAmountOfOrganism));
@@ -251,6 +255,7 @@ public class Activities extends Controller {
 		                
 		                post.setLocation(new Location(strLongitude, strLatitude));
 		                post.setOrganism(organism);
+		               
 		                
 		                SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
 		                Date d = new Date(Integer.parseInt(year), 
