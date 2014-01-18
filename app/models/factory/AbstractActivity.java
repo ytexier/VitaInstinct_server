@@ -8,6 +8,7 @@ import models.Organism;
 import models.User;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
 
@@ -25,7 +26,8 @@ public abstract class AbstractActivity {
 	private Organism organism;
 	private ActivityEnding activityEnding;
 	@Embedded
-	private User creator;
+	private Key<User> creator;
+	private String creatorName;
 
 	
 	public AbstractActivity() {
@@ -67,10 +69,10 @@ public abstract class AbstractActivity {
 	public void setOrganism(Organism _organism){
 		organism = _organism;
 	}
-	public User getCreator() {
+	public Key<User> getCreator() {
 		return creator;
 	}
-	public void setCreator(User creator) {
+	public void setCreator(Key<User> creator) {
 		this.creator = creator;
 	}
 
@@ -80,6 +82,14 @@ public abstract class AbstractActivity {
 
 	public void setSectorName(String sectorName) {
 		this.sectorName = sectorName;
+	}
+
+	public String getCreatorName() {
+		return creatorName;
+	}
+
+	public void setCreatorName(String creatorName) {
+		this.creatorName = creatorName;
 	}
 	
 }

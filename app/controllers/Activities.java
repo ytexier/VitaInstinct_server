@@ -171,8 +171,8 @@ public class Activities extends Controller {
 
 				User user = User.findByEmail(request().username());
 				
-				aActivity.setCreator(user);
-
+				aActivity.setCreator(MorphiaObject.datastore.getKey(user));
+				aActivity.setCreatorName(user.getFullName());
 				
 				Key<AbstractActivity> activityKey = MorphiaObject.datastore.save(aActivity);
 
@@ -217,19 +217,16 @@ public class Activities extends Controller {
 				if(sector.equals("hunting")){
 					factorySector = new FactoryHuntingSector();
 					organism = new Mammal(strOrganism);
-					aActivity.setSectorName("hunting");
 				}else if(sector.equals("fishing")){
 					factorySector = new FactoryFishingSector();
 					organism = new Fish(strOrganism);
-					aActivity.setSectorName("fishing");
 				}else if(sector.equals("picking")){
 					factorySector = new FactoryPickingSector();
 					organism = new Plant(strOrganism);
-					aActivity.setSectorName("picking");
 				}
 				
 				aActivity = factorySector.createActivity();
-				
+				aActivity.setSectorName(sector);
 
 				
 				if(Sex.contains(strSex))
@@ -252,7 +249,8 @@ public class Activities extends Controller {
 
 				User user = User.findById(user_id);
 				
-				aActivity.setCreator(user);
+				aActivity.setCreator(MorphiaObject.datastore.getKey(user));
+				aActivity.setCreatorName(user.getFullName());
 
 				
 				Key<AbstractActivity> activityKey = MorphiaObject.datastore.save(aActivity);
