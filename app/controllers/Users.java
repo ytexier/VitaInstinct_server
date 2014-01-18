@@ -1,15 +1,28 @@
 package controllers;
 
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.riot.RDFFormat;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
 
+
+
+
+
+import com.hp.hpl.jena.rdf.model.Model;
+
+import agents.AgentJena;
 import forms.AddFriendForm;
 import forms.Secured;
 import models.User;
+import models.Vita;
 import models.factory.AbstractActivity;
 import play.data.Form;
 import play.libs.Json;
@@ -55,6 +68,9 @@ public class Users extends Controller{
             			);
                 MorphiaObject.datastore.save(user);
                 
+                Model m = user.accept(new AgentJena());
+        		OutputStream os = new FileOutputStream("test/data.rdf");
+        		RDFDataMgr.write(os, m, RDFFormat.RDFXML_ABBREV) ;
                 //user.accept(new AgentJena());
                 
                 return redirect(routes.Application.signup());  

@@ -1,5 +1,7 @@
 package agents;
 
+import org.apache.jena.riot.RDFDataMgr;
+
 import play.Logger;
 
 import com.hp.hpl.jena.rdf.model.Model;
@@ -19,6 +21,7 @@ import models.Mammal;
 import models.Organism;
 import models.Plant;
 import models.User;
+import models.Vita;
 import models.fishing.FishingAccessory;
 import models.fishing.FishingActivity;
 import models.fishing.FishingEquipment;
@@ -34,24 +37,24 @@ import models.picking.PickingEvent;
 
 public class AgentJena extends AgentManager{
 
-	public static Model model = ModelFactory.createDefaultModel();
-	
+	public static Model model;
+
+
 	/**
 	 * USER
 	 *
 	 */
 	
-	
 	@Override
-	public void spy(User user) {
-		Vita.= model.createResource(user.getURI())
+	public Model spy(User user) {
+		model = ModelFactory.createDefaultModel();
+		Vita.rscUser = model.createResource(user.getURI())
 		    .addProperty(VCARD.FN,user.getFullName())
 			.addProperty(VCARD.Given,user.getGivenName())
 			.addProperty(VCARD.Family,user.getFamilyName())
 			.addProperty(VCARD.NICKNAME, user.getNickName())
 			.addProperty(VCARD.EMAIL, user.getEmail());
-		
-		//Vita.model.write(System.out, "RDF/XML-ABBREV");
+		return model;
 	}
 	
 	/**

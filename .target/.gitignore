@@ -1,11 +1,2 @@
-/agents
-/controllers
-<<<<<<< HEAD
->>>>>>> vita_rdf
-/views
-/Log.owl
-=======
+/data.rdf
 /models
->>>>>>> master
-/forms
-/exceptions
