@@ -17,13 +17,18 @@ public abstract class AbstractActivity {
 	@Id 
 	private ObjectId id;
 	private Date date;
+	private String sectorName;
+	
 	@Embedded 
 	private Location location;
 	private Integer amountOfOrganism;
  	@Embedded
 	private Organism organism;
 	private ActivityEnding activityEnding;
+	@Embedded
 	private Key<User> creator;
+	private String creatorName;
+
 	
 	public AbstractActivity() {
 	}
@@ -69,6 +74,22 @@ public abstract class AbstractActivity {
 	}
 	public void setCreator(Key<User> creator) {
 		this.creator = creator;
+	}
+
+	public String getSectorName() {
+		return sectorName;
+	}
+
+	public void setSectorName(String sectorName) {
+		this.sectorName = sectorName;
+	}
+
+	public String getCreatorName() {
+		return creatorName;
+	}
+
+	public void setCreatorName(String creatorName) {
+		this.creatorName = creatorName;
 	}
 	
 }

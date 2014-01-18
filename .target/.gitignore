@@ -1,9 +1,10 @@
 /agents
-/models
-<<<<<<< HEAD
-=======
 /controllers
+<<<<<<< HEAD
 >>>>>>> vita_rdf
 /views
 /Log.owl
+=======
+/models
+>>>>>>> master
 /forms

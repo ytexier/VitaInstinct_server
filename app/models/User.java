@@ -39,8 +39,6 @@ import java.util.Date;
 
 	public User(String givenName, String familyName, String nickName, String email, String password, Date registration){
 		
-		this.setURI(Vita.vita_ns+givenName+"."+familyName);
-		
 		this.setFullName(givenName + " " + familyName);
 		this.setGivenName(givenName);
 		this.setFamilyName(familyName);

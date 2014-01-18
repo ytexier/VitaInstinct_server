@@ -104,84 +104,6 @@ public class Activities extends Controller {
    		return ok(Json.toJson(activityFound));
 	}
 	
-	public static Result add(String user_id) throws Exception{
-        
-		Form<AbstractActivityForm> filledForm = abstractActivityForm.bindFromRequest();
-        
-        if(filledForm.hasErrors()) {
-                return badRequest();
-        }
-        else {
-        	
-	        	SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-dd-MM");
-	        	
-				String sector = filledForm.get().sector;
-				String strDate = filledForm.get().date;
-				String strLatitude = filledForm.get().latitude;
-				String strLongitude = filledForm.get().longitude;
-				String strAmountOfOrganism = filledForm.get().amountOfOrganism;
-				String strOrganism = filledForm.get().organism;
-				String strSex = filledForm.get().sex;
-				String strActivityEnding = filledForm.get().activityEnding;
-				
-				Location myLocation = new Location(strLatitude, strLongitude);
-				
-				FactorySector aSector = null;
-				AbstractActivity aActivity = null;
-				Organism organism = null;
-				
-				
-				if(sector.equals("hunting")){
-					aSector = new FactoryHuntingSector();
-					organism = new Mammal(strOrganism);
-				}
-				
-				if(sector.equals("fishing")){
-					aSector = new FactoryFishingSector();
-					organism = new Fish(strOrganism);				
-				}
-				
-				if(sector.equals("picking")){
-					aSector = new FactoryPickingSector();
-					organism = new Plant(strOrganism);
-				}
-				
-				aActivity = aSector.createActivity();
-			
-				if(Sex.contains(strSex))
-					organism.setSex(Enum.valueOf(Sex.class, strSex));
-				
-				aActivity.setOrganism(organism);
-				aActivity.setDate(dateFormatter.parse(strDate));
-				aActivity.setLocation(myLocation);
-				
-			    try { 
-			    	aActivity.setAmountOfOrganism(Integer.parseInt(strAmountOfOrganism));
-			    } catch(NumberFormatException e) { 
-			    	aActivity.setAmountOfOrganism(1);
-			    }
-
-				if(ActivityEnding.contains(strActivityEnding))
-						aActivity.setActivityEnding(Enum.valueOf(ActivityEnding.class, strActivityEnding));
-
-
-				User user = User.findById(user_id);
-				
-				aActivity.setCreator(MorphiaObject.datastore.getKey(user));
-				
-				Key<AbstractActivity> activityKey = MorphiaObject.datastore.save(aActivity);
-
-				UpdateResults<User> res =
-						MorphiaObject.datastore.update(
-								user,
-								MorphiaObject.datastore.createUpdateOperations(User.class).add("activities", activityKey)
-						);
-				
-       	
-				return ok(Json.toJson(aActivity));
-		} 
-		
-	}	
 	
 
 	
@@ -213,19 +135,20 @@ public class Activities extends Controller {
 				AbstractActivity aActivity = null;
 				Organism organism = null;
 				
+				
 				if(sector.equals("hunting")){
 					factorySector = new FactoryHuntingSector();
 					organism = new Mammal(strOrganism);
 				}else if(sector.equals("fishing")){
 					factorySector = new FactoryFishingSector();
-					organism = new Fish(strOrganism);				
+					organism = new Fish(strOrganism);
 				}else if(sector.equals("picking")){
 					factorySector = new FactoryPickingSector();
 					organism = new Plant(strOrganism);
 				}
 				
 				aActivity = factorySector.createActivity();
-				
+				aActivity.setSectorName(sector);
 
 				
 				if(Sex.contains(strSex))
@@ -233,6 +156,8 @@ public class Activities extends Controller {
 				
 				aActivity.setOrganism(organism);
 				aActivity.setDate(dateFormatter.parse(strDate));
+				
+				
 				aActivity.setLocation(myLocation);
 				
 			    try { 
@@ -247,6 +172,86 @@ public class Activities extends Controller {
 				User user = User.findByEmail(request().username());
 				
 				aActivity.setCreator(MorphiaObject.datastore.getKey(user));
+				aActivity.setCreatorName(user.getFullName());
+				
+				Key<AbstractActivity> activityKey = MorphiaObject.datastore.save(aActivity);
+
+				UpdateResults<User> res =
+						MorphiaObject.datastore.update(
+								user,
+								MorphiaObject.datastore.createUpdateOperations(User.class).add("activities", activityKey)
+						);
+				
+				return ok(Json.toJson(aActivity));
+		} 
+		
+	}
+	
+	public static Result add(String user_id) throws Exception{
+        
+		Form<AbstractActivityForm> filledForm = abstractActivityForm.bindFromRequest();
+        
+        if(filledForm.hasErrors()) {
+                return badRequest("newActivity : filledForm.hasErrors()");
+        }
+        else {
+        	
+	        	SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+	        	
+				String sector = filledForm.get().sector;
+				String strDate =	filledForm.get().date;
+				String strLatitude = filledForm.get().latitude;
+				String strLongitude = filledForm.get().longitude;
+				String strAmountOfOrganism = filledForm.get().amountOfOrganism;
+				String strOrganism = filledForm.get().organism;
+				String strSex = filledForm.get().sex;
+				String strActivityEnding = filledForm.get().activityEnding;
+				
+				Location myLocation = new Location(strLongitude, strLatitude);
+				
+				FactorySector factorySector = null;
+				
+				AbstractActivity aActivity = null;
+				Organism organism = null;
+				
+				if(sector.equals("hunting")){
+					factorySector = new FactoryHuntingSector();
+					organism = new Mammal(strOrganism);
+				}else if(sector.equals("fishing")){
+					factorySector = new FactoryFishingSector();
+					organism = new Fish(strOrganism);
+				}else if(sector.equals("picking")){
+					factorySector = new FactoryPickingSector();
+					organism = new Plant(strOrganism);
+				}
+				
+				aActivity = factorySector.createActivity();
+				aActivity.setSectorName(sector);
+
+				
+				if(Sex.contains(strSex))
+					organism.setSex(Enum.valueOf(Sex.class, strSex));
+				
+				aActivity.setOrganism(organism);
+				aActivity.setDate(dateFormatter.parse(strDate));
+				
+				
+				aActivity.setLocation(myLocation);
+				
+			    try { 
+			    	aActivity.setAmountOfOrganism(Integer.parseInt(strAmountOfOrganism));
+			    } catch(NumberFormatException e) { 
+			    	aActivity.setAmountOfOrganism(1);
+			    }
+
+				if(ActivityEnding.contains(strActivityEnding))
+						aActivity.setActivityEnding(Enum.valueOf(ActivityEnding.class, strActivityEnding));
+
+				User user = User.findById(user_id);
+				
+				aActivity.setCreator(MorphiaObject.datastore.getKey(user));
+				aActivity.setCreatorName(user.getFullName());
+
 				
 				Key<AbstractActivity> activityKey = MorphiaObject.datastore.save(aActivity);
 
