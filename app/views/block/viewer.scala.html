@@ -9,19 +9,19 @@
 		<li class="@activity.getSectorName()">@activity.getSectorName() | @activity.getDate() | @activity.getOrganism().getSpecie()</li>
     	@if(activity.getSectorName()=="hunting"){
 			@form(routes.Activities.deleteHunting(activity.getId().toString())) { 
-				<input type="submit" value="Delete"> 
+				<input type="submit" value="Delete" class="btDeleteActivity"> 
 			}
     	}
     	
     	@if(activity.getSectorName()=="picking"){
 			@form(routes.Activities.deletePicking(activity.getId().toString())) { 
-		         <input type="submit" value="Delete"> 
+		         <input class="btDeleteActivity" type="submit" value="Delete"> 
 			}
     	}
     	
     	@if(activity.getSectorName()=="fishing"){
 			@form(routes.Activities.deleteFishing(activity.getId().toString())) { 
-		         <input type="submit" value="Delete"> 
+		         <input class="btDeleteActivity" type="submit" value="Delete"> 
 			}
     	}
 

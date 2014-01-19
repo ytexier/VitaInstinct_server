@@ -90,6 +90,14 @@ public class Activities extends Controller {
 	
 	public static Result deletePicking(String activity_id) throws Exception {
 		AbstractActivity activityFound = PickingActivity.findById(activity_id);
+		Key<User> userKey = activityFound.getCreator();
+		User creator = User.findById(userKey.getId().toString());
+		
+		UpdateResults<User> res =
+				MorphiaObject.datastore.update(
+						creator,
+						MorphiaObject.datastore.createUpdateOperations(User.class).removeAll("activities", activityFound)
+				);
         if (activityFound != null)
         	MorphiaObject.datastore.delete(activityFound);
         return redirect(routes.Application.index());
@@ -97,6 +105,14 @@ public class Activities extends Controller {
 	
 	public static Result deleteFishing(String activity_id) throws Exception {
 		AbstractActivity activityFound = FishingActivity.findById(activity_id);
+		Key<User> userKey = activityFound.getCreator();
+		User creator = User.findById(userKey.getId().toString());
+		
+		UpdateResults<User> res =
+				MorphiaObject.datastore.update(
+						creator,
+						MorphiaObject.datastore.createUpdateOperations(User.class).removeAll("activities", activityFound)
+				);
         if (activityFound != null)
         	MorphiaObject.datastore.delete(activityFound);
         return redirect(routes.Application.index());
