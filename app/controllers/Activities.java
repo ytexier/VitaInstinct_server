@@ -289,6 +289,7 @@ public class Activities extends Controller {
 		                }
 		                
 		                post = factorySector.createActivity();
+		                post.setSectorName(sector);
 		                
 		                if(ActivityEnding.contains(strActivityEnding))
 		                	post.setActivityEnding(Enum.valueOf(ActivityEnding.class, strActivityEnding));

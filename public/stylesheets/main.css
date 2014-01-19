@@ -61,10 +61,7 @@
     	padding: 3px;
 	}
 	
-	.hunting{
-		background: darkkhaki;
-	}
-	
+
 .btDeleteActivity
 {
 background-color:white;
@@ -84,6 +81,11 @@ color:black;
 {
 background-color:grey;
 }
+
+	.hunting{
+		background: darkkhaki;
+	}
+	
 
 	.fishing{
 		background: Turquoise;
