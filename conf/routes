@@ -49,8 +49,9 @@ GET			/activities/hunting/:activity_id/creator controllers.Activities.creator(ac
 GET			/activities/picking/:activity_id/creator controllers.Activities.creator(activity_id: String, sector = "picking")
 GET			/activities/fishing/:activity_id/creator controllers.Activities.creator(activity_id: String, sector = "fishing")
 
-
-
+POST    	/activities/hunting/:id/delete         controllers.Activities.deleteHunting(id: String)
+POST    	/activities/picking/:id/delete         controllers.Activities.deleteFishing(id: String)
+POST    	/activities/fishing/:id/delete         controllers.Activities.deletePicking(id: String)
 
 # Comments
 #GET		/:object_id/comment		controllers.Comments.list(object_id: String)

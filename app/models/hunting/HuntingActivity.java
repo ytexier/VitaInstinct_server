@@ -21,8 +21,7 @@ public class HuntingActivity extends AbstractActivity{
 		v.spy(this);
 	}
 	
-	
-	
+
     public static HuntingActivity findById(String id){
     	HuntingActivity activity = MorphiaObject.datastore.find(HuntingActivity.class)
     			.field("_id")
@@ -53,5 +52,7 @@ public class HuntingActivity extends AbstractActivity{
 	public void setAmountOfOrganism(Integer _amountOfOrganism){
 		super.setAmountOfOrganism(_amountOfOrganism);
 	}
+	
+	
 
 }

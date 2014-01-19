@@ -60,6 +60,16 @@
     	margin-right: 20px;
     	padding: 3px;
 	}
+	
+	.hunting{
+		background: darkkhaki;
+	}
+	.fishing{
+		background: Turquoise;
+	}
+	.picking{
+		background: springgreen;
+	}
         
     #menu_sector{
     	float:left;

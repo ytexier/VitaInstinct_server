@@ -1,4 +1,9 @@
-@(user: User, activityForm: Form[forms.AbstractActivityForm], addUserForm: Form[forms.AddFriendForm])
+@(
+	activities	: List[models.factory.AbstractActivity], 
+	user		: User, 
+	activityForm: Form[forms.AbstractActivityForm], 
+	addUserForm	: Form[forms.AddFriendForm]
+	)
 
 <html>
    <head> 
@@ -9,7 +14,7 @@
    </head>
    
    	<body>
-   		@main.manager(user, activityForm, addUserForm)
+   		@main.manager(activities, user, activityForm, addUserForm)
    	</body>
     
     

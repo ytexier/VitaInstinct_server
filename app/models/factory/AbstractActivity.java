@@ -6,11 +6,14 @@ import models.ActivityEnding;
 import models.Location;
 import models.Organism;
 import models.User;
+import models.hunting.HuntingActivity;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
+
+import controllers.MorphiaObject;
 
 public abstract class AbstractActivity {
 	
@@ -33,6 +36,8 @@ public abstract class AbstractActivity {
 	public AbstractActivity() {
 	}
 	
+	
+
     public ObjectId getId() {
 		return id;
 	}
@@ -91,5 +96,7 @@ public abstract class AbstractActivity {
 	public void setCreatorName(String creatorName) {
 		this.creatorName = creatorName;
 	}
+	
+    
 	
 }

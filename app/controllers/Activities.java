@@ -28,10 +28,13 @@ import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import views.html.block.viewer;
 import forms.AbstractActivityForm;
 import forms.Secured;
 
 public class Activities extends Controller {
+	
+
 	
 	static Form<AbstractActivityForm> abstractActivityForm = Form.form(AbstractActivityForm.class);
 
@@ -63,6 +66,36 @@ public class Activities extends Controller {
 
 		return ok(Json.toJson(activityFound.getCreator()));
     }
+    
+    
+	public static Result deleteHunting(String activity_id) throws Exception {
+		AbstractActivity activityFound = HuntingActivity.findById(activity_id);
+		Key<User> userKey = activityFound.getCreator();
+		User creator = User.findById(userKey.getId().toString());
+		
+		UpdateResults<User> res =
+				MorphiaObject.datastore.update(
+						creator,
+						MorphiaObject.datastore.createUpdateOperations(User.class).removeAll("activities", activityFound)
+				);
+        if (activityFound != null)
+        	MorphiaObject.datastore.delete(activityFound);
+        return redirect(routes.Application.index());
+	}
+	
+	public static Result deletePicking(String activity_id) throws Exception {
+		AbstractActivity activityFound = PickingActivity.findById(activity_id);
+        if (activityFound != null)
+        	MorphiaObject.datastore.delete(activityFound);
+        return redirect(routes.Application.index());
+	}
+	
+	public static Result deleteFishing(String activity_id) throws Exception {
+		AbstractActivity activityFound = FishingActivity.findById(activity_id);
+        if (activityFound != null)
+        	MorphiaObject.datastore.delete(activityFound);
+        return redirect(routes.Application.index());
+	}
 	
 	
 	public static Result getFromHunt(String activity_id) throws Exception {
@@ -117,7 +150,7 @@ public class Activities extends Controller {
         }
         else {
         	
-	        	SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+	        	SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yy");
 	        	
 				String sector = filledForm.get().sector;
 				
