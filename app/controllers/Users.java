@@ -1,5 +1,6 @@
 package controllers;
 
+import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.ObjectInputStream;
@@ -12,6 +13,7 @@ import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
+
 
 
 
@@ -80,22 +82,7 @@ public class Users extends Controller{
             			toDay
             			);
                 MorphiaObject.datastore.save(user);
-               
-                //TESSTT WRITE
-                String directory = "dataset/db.rdf" ;
-                OutputStream os = new FileOutputStream(directory);
-                Model m = user.accept(new AgentJena());
-                RDFDataMgr.write(os, m, RDFFormat.RDFXML_ABBREV) ;
-                os.close();
                 
-                ///TESSTT LOAD
-                Model model = FileManager.get().loadModel(directory);
-                String directory2 = "dataset/db2.rdf" ;
-                OutputStream os2 = new FileOutputStream(directory2);
-                RDFDataMgr.write(os2, model, RDFFormat.RDFXML_ABBREV) ;
-                os.close();
-        		
-                  
                 return redirect(routes.Application.signup());  
         }
     }

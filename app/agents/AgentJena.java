@@ -1,25 +1,24 @@
 package agents;
 
-import org.apache.jena.riot.RDFDataMgr;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 
-import play.Logger;
+import org.apache.jena.riot.RDFDataMgr;
+import org.apache.jena.riot.RDFFormat;
+
+
+
+
 
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Property;
-import com.hp.hpl.jena.rdf.model.RDFNode;
-import com.hp.hpl.jena.rdf.model.Resource;
-import com.hp.hpl.jena.rdf.model.Statement;
-import com.hp.hpl.jena.rdf.model.StmtIterator;
+import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.VCARD;
 
-import models.Amniote;
-import models.Animal;
-import models.Bird;
-import models.Fish;
-import models.Mammal;
+
 import models.Organism;
-import models.Plant;
 import models.User;
 import models.Vita;
 import models.fishing.FishingAccessory;
@@ -36,9 +35,9 @@ import models.picking.PickingEquipment;
 import models.picking.PickingEvent;
 
 public class AgentJena extends AgentManager{
-
-	public static Model model;
-
+	
+	private String db = "db/vita.rdf";
+	private Model model;
 
 	/**
 	 * USER
@@ -48,12 +47,14 @@ public class AgentJena extends AgentManager{
 	@Override
 	public Model spy(User user) {
 		model = ModelFactory.createDefaultModel();
+		
 		Vita.rscUser = model.createResource(user.getURI())
 		    .addProperty(VCARD.FN,user.getFullName())
 			.addProperty(VCARD.Given,user.getGivenName())
 			.addProperty(VCARD.Family,user.getFamilyName())
 			.addProperty(VCARD.NICKNAME, user.getNickName())
 			.addProperty(VCARD.EMAIL, user.getEmail());
+		
 		return model;
 	}
 	
@@ -63,14 +64,40 @@ public class AgentJena extends AgentManager{
 
 	@Override
 	public void spy(HuntingActivity huntingActivity) {
+
+		//TODO
+		///TESTTTT
+		Model model_activity = ModelFactory.createDefaultModel();
+		Model model_creator = User.findById(huntingActivity.getCreator().getId().toString())
+				.accept(new AgentJena());
+		Model model_organism = huntingActivity.getOrganism()
+				.accept(new AgentJena());
+ 		model = ModelFactory.createUnion(model_creator, model_organism);
+		this.writeRDF(model);
+		///TESTTTT
+		
 	}
 
 	@Override
 	public void spy(PickingActivity pickingActivity) {
+		
+		model = ModelFactory.createDefaultModel();
+		
+		///TODO
+		
+		this.writeRDF(model);
+		
 	}
 
 	@Override
 	public void spy(FishingActivity fishingActivity) {
+		
+		model = ModelFactory.createDefaultModel();
+		
+		///TODO
+		
+		this.writeRDF(model);
+		
 	}
 	
 	/**
@@ -126,33 +153,44 @@ public class AgentJena extends AgentManager{
 	 */
 	
 	@Override
-	public void spy(Organism organism) {
-	}
-
-	@Override
-	public void spy(Animal annimal) {
-	}
-
-	@Override
-	public void spy(Plant plant) {
-	}
-
-	@Override
-	public void spy(Amniote amniote) {
-	}
-
-	@Override
-	public void spy(Bird bird) {
-	}
-
-	@Override
-	public void spy(Fish fish) {
-	}
-
-	@Override
-	public void spy(Mammal mammal) {
+	public Model spy(Organism organism) {
+		model = ModelFactory.createDefaultModel();
+		
+		Vita.rscUser = model.createResource(organism.getURI())
+				.addProperty(VCARD.NICKNAME, organism.getSpecie());
+		
+		
+		return model;
 	}
 
 
+	
+	/**
+	 * 
+	 * @param model
+	 */
+	private void writeOutput(Model model){
+		OutputStream os = null;
+        try {
+			os = new FileOutputStream(db);
+			RDFDataMgr.write(os, model, RDFFormat.RDFXML_ABBREV) ;
+			os.close();  
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	/**
+	 * 
+	 * @param model 
+	 */
+	private void writeRDF(Model model){
+		Model model_loaded = FileManager.get().loadModel(db);
+		model = ModelFactory.createUnion(model_loaded, model);
+		writeOutput(model);
+	}
 
 }

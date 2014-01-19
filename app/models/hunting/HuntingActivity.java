@@ -30,7 +30,6 @@ public class HuntingActivity extends AbstractActivity{
     	return activity;
     }
     
-	
 	public void setOrganism(Amniote _amniote){
 		super.setOrganism(_amniote);
 	}

@@ -17,13 +17,13 @@ public class Vita {
 	 */
 	public static final String user_url 	= vita_src + "/user/";
 	public static final String activity_url = vita_src + "/activity/";
-	public static final String equipment 	= vita_src + "/equipment/";
-	public static final String event 		= vita_src + "/event/";
-	public static final String showcase 	= vita_src + "/showcase/";
-	public static final String organism 	= vita_src + "/organism/";
-	public static final String picture 		= vita_src + "/picture/";
-	public static final String description 	= vita_src + "/description/";
-	public static final String location 	= vita_src + "/location/";
+	public static final String equipment_url 	= vita_src + "/equipment/";
+	public static final String event_url 		= vita_src + "/event/";
+	public static final String showcase_url 	= vita_src + "/showcase/";
+	public static final String organism_url 	= vita_src + "/organism/";
+	public static final String picture_url 		= vita_src + "/picture/";
+	public static final String description_url 	= vita_src + "/description/";
+	public static final String location_url 	= vita_src + "/location/";
 
 
 	

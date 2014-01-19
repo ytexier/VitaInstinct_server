@@ -6,6 +6,10 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Property;
 
+import agents.AgentManager;
+
+import com.hp.hpl.jena.rdf.model.Model;
+
 
 public abstract class Organism {
 	@Id
@@ -15,9 +19,21 @@ public abstract class Organism {
 	@Embedded
 	private Sex sex;
 	
+	private String URI;
+    
+	public Model accept(AgentManager v){
+		return v.spy(this);
+	}
+	
+	
 	public Organism(){}
 	public Organism(String _specie){
 		specie = _specie;
+	}
+	
+	public Organism(String _specie, String url){
+		specie = _specie;
+		setURI(url + specie);
 	}
 	
 	public Organism(String _specie, Sex _sex){
@@ -43,5 +59,15 @@ public abstract class Organism {
 	}
 	public void setSex(Sex sex) {
 		this.sex = sex;
+	}
+
+
+	public String getURI() {
+		return URI;
+	}
+
+
+	public void setURI(String uRI) {
+		URI = uRI;
 	}
 }

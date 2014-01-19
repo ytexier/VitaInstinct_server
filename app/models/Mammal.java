@@ -4,13 +4,15 @@ import org.mongodb.morphia.annotations.Entity;
 
 @Entity
 public class Mammal extends Amniote{
-
+	private String url;
 	public Mammal(){}
-	public Mammal(String _specie){
-		super(_specie);
+	public Mammal(String specie){
+		super(specie);
+		url = Vita.organism_url + "mammal/" + specie;
+		super.setURI(url);
 	}
-	public Mammal(String _specie, Sex _sex) {
-		super(_specie, _sex);
+	public Mammal(String specie, Sex sex) {
+		super(specie, sex);
 	}
 
 }

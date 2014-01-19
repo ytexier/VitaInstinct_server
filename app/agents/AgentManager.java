@@ -43,12 +43,7 @@ public abstract class AgentManager {
 	public abstract void spy(PickingAccessory pickingAccessory);
 	public abstract void spy(FishingAccessory fishingAccessory);
 	
-	public abstract void spy(Organism organism);
-	public abstract void spy(Animal annimal);
-	public abstract void spy(Plant plant);
-	public abstract void spy(Amniote amniote);
-	public abstract void spy(Bird bird);
-	public abstract void spy(Fish fish);
-	public abstract void spy(Mammal mammal);
+	public abstract Model spy(Organism organism);
+
 	
 }
