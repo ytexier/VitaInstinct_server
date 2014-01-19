@@ -1,12 +1,30 @@
-@(user	: User, activityForm : Form[forms.AbstractActivityForm])
+@(activities	: List[models.factory.AbstractActivity])
 @import helper._
 
-VIEWER
-VIEWER
-VIEWER
-VIEWER
-VIEWER
-VIEWER
-VIEWER
-VIEWER
-VIEWER
+  <h1>@activities.size() activities(s)</h1>
+  
+  <ul>
+    @for(activity <- activities) {
+
+		<li class="@activity.getSectorName()">@activity.getSectorName() | @activity.getDate() | @activity.getOrganism().getSpecie()</li>
+    	@if(activity.getSectorName()=="hunting"){
+			@form(routes.Activities.deleteHunting(activity.getId().toString())) { 
+				<input type="submit" value="Delete"> 
+			}
+    	}
+    	
+    	@if(activity.getSectorName()=="picking"){
+			@form(routes.Activities.deletePicking(activity.getId().toString())) { 
+		         <input type="submit" value="Delete"> 
+			}
+    	}
+    	
+    	@if(activity.getSectorName()=="fishing"){
+			@form(routes.Activities.deleteFishing(activity.getId().toString())) { 
+		         <input type="submit" value="Delete"> 
+			}
+    	}
+
+     
+    }
+  </ul>

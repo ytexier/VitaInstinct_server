@@ -11,6 +11,8 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
 
@@ -38,7 +40,6 @@ import java.util.Date;
     @Reference 			private ArrayList<AbstractActivity> activities; 
     @Embedded 			private ArrayList<Key<User>> friends;
 
-
 	public User(String givenName, String familyName, String nickName, String email, String password, Date registration){
 		
 		this.setFullName(givenName + " " + familyName);
@@ -46,6 +47,8 @@ import java.util.Date;
 		this.setFamilyName(familyName);
 		this.setNickName(nickName);	
 
+		this.setURI(Vita.user_url+familyName);
+		
         this.setEmail(email);
         this.setPassword(password);
         this.setRegistration(registration);
@@ -71,8 +74,8 @@ import java.util.Date;
     	
 	}
     
-	public void accept(AgentManager v){
-		v.spy(this);
+	public Model accept(AgentManager v){
+		return v.spy(this);
 	}
     
     public static User findById(String id){

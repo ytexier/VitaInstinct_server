@@ -1,10 +1,13 @@
 package controllers;
 
+import java.util.List;
+
 import forms.AbstractActivityForm;
 import forms.AddFriendForm;
 import forms.LoginForm;
 import forms.Secured;
 import models.User;
+import models.factory.AbstractActivity;
 import views.html.*;
 import play.Logger;
 import play.data.*;
@@ -21,8 +24,10 @@ public class Application extends Controller {
 	
 	@Security.Authenticated(Secured.class)
 	public static Result index() throws Exception {
+		User userFound = User.findByEmail(request().username());
+		List<AbstractActivity> activities = userFound.getActivities();
 	    return ok(
-	    	index.render(User.findByEmail(request().username()),activityFrom,addFriendForm)
+	    	index.render(activities, userFound,activityFrom,addFriendForm)
 	    );
 	}
 	

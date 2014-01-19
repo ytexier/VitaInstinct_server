@@ -1,4 +1,9 @@
-@(user	: User, activityForm : Form[forms.AbstractActivityForm], addFriendForm: Form[forms.AddFriendForm])
+@(
+	activities		: List[models.factory.AbstractActivity], 
+	user			: User, activityForm : Form[forms.AbstractActivityForm], 
+	addFriendForm	: Form[forms.AddFriendForm]
+	)
+	
 
 	
 	<script>
@@ -103,7 +108,7 @@
 	
 		<aside>
 			<div id="newActivityForm">@block.newActivityForm(user, activityForm)</div>
-			<div id="viewer">@block.viewer(user, activityForm)</div>
+			<div id="viewer">@block.viewer(activities)</div>
 			<div id="equipments">@block.equipments(user, activityForm)</div>
 		</aside>
 		

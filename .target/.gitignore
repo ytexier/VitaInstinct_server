@@ -1,6 +1,11 @@
+/data.rdf
+/models
 /agents
 /controllers
+<<<<<<< HEAD
 /models
 /forms
+=======
+>>>>>>> vita_merg
 /exceptions
 /views
