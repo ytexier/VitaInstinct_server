@@ -1,7 +1,5 @@
 package agents;
 
-import com.hp.hpl.jena.rdf.model.Model;
-
 import models.Amniote;
 import models.Animal;
 import models.Bird;
@@ -25,7 +23,6 @@ import models.picking.PickingEvent;
 
 public abstract class AgentManager {
 	
-	public abstract Model spy(User user);
 	
 	public abstract void spy(HuntingActivity huntingActivity);
 	public abstract void spy(PickingActivity pickingActivity);
