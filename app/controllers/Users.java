@@ -1,6 +1,8 @@
 package controllers;
 
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
@@ -16,7 +18,18 @@ import org.mongodb.morphia.query.UpdateResults;
 
 
 
+
+
+
+
+
+
+
+import com.hp.hpl.jena.query.Dataset;
+import com.hp.hpl.jena.query.ReadWrite;
 import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.tdb.TDBFactory;
+import com.hp.hpl.jena.util.FileManager;
 
 import agents.AgentJena;
 import forms.AddFriendForm;
@@ -67,12 +80,22 @@ public class Users extends Controller{
             			toDay
             			);
                 MorphiaObject.datastore.save(user);
-                
+               
+                //TESSTT WRITE
+                String directory = "dataset/db.rdf" ;
+                OutputStream os = new FileOutputStream(directory);
                 Model m = user.accept(new AgentJena());
-        		OutputStream os = new FileOutputStream("test/data.rdf");
-        		RDFDataMgr.write(os, m, RDFFormat.RDFXML_ABBREV) ;
-                //user.accept(new AgentJena());
+                RDFDataMgr.write(os, m, RDFFormat.RDFXML_ABBREV) ;
+                os.close();
                 
+                ///TESSTT LOAD
+                Model model = FileManager.get().loadModel(directory);
+                String directory2 = "dataset/db2.rdf" ;
+                OutputStream os2 = new FileOutputStream(directory2);
+                RDFDataMgr.write(os2, model, RDFFormat.RDFXML_ABBREV) ;
+                os.close();
+        		
+                  
                 return redirect(routes.Application.signup());  
         }
     }

@@ -55,6 +55,7 @@ import java.util.Date;
         
         this.setActivities(new ArrayList<AbstractActivity>());
         this.setFriends(new ArrayList<Key<User>>());
+        
     }
     
     public User() {
