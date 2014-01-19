@@ -9,8 +9,6 @@ POST	/									controllers.Activities.newActivity()
 
 # Ontology
 
-GET			/ontology						controllers.VitaCtrl.make()
-
 
 # Application
 

@@ -11,8 +11,6 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
-import com.hp.hpl.jena.rdf.model.Model;
-
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
 
@@ -47,7 +45,6 @@ import java.util.Date;
 		this.setFamilyName(familyName);
 		this.setNickName(nickName);	
 
-		this.setURI(Vita.user_url+familyName);
 		
         this.setEmail(email);
         this.setPassword(password);
@@ -74,9 +71,6 @@ import java.util.Date;
     	
 	}
     
-	public Model accept(AgentManager v){
-		return v.spy(this);
-	}
     
     public static User findById(String id){
     	User user = MorphiaObject.datastore.find(User.class)
