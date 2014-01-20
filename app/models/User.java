@@ -47,7 +47,7 @@ import java.util.Date;
 		this.setFamilyName(familyName);
 		this.setNickName(nickName);	
 
-		this.setURI(Vita.user_url+familyName);
+		this.setURI(Vita.getURI()+familyName);
 		
         this.setEmail(email);
         this.setPassword(password);
@@ -75,8 +75,8 @@ import java.util.Date;
     	
 	}
     
-	public Model accept(AgentManager v){
-		return v.spy(this);
+	public void accept(AgentManager v){
+		v.spy(this);
 	}
     
     public static User findById(String id){

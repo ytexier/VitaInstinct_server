@@ -25,7 +25,7 @@ import models.picking.PickingEvent;
 
 public abstract class AgentManager {
 	
-	public abstract Model spy(User user);
+	public abstract void spy(User user);
 	
 	public abstract void spy(HuntingActivity huntingActivity);
 	public abstract void spy(PickingActivity pickingActivity);
@@ -43,7 +43,7 @@ public abstract class AgentManager {
 	public abstract void spy(PickingAccessory pickingAccessory);
 	public abstract void spy(FishingAccessory fishingAccessory);
 	
-	public abstract Model spy(Organism organism);
+	public abstract void spy(Organism organism);
 
 	
 }

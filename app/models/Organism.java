@@ -21,8 +21,8 @@ public abstract class Organism {
 	
 	private String URI;
     
-	public Model accept(AgentManager v){
-		return v.spy(this);
+	public void accept(AgentManager v){
+		v.spy(this);
 	}
 	
 	

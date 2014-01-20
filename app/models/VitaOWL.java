@@ -181,7 +181,7 @@ public class VitaOWL {
 		classes.addAll(properties);
 		return classes.toString();
 	}
-	
+/*	
 	public void write(OutputStream output) {
         if (mediaType.equals(MediaType.APPLICATION_RDF_XML))
             //jenaModel.write(output,"RDF/XML");  //this is faster
@@ -194,5 +194,6 @@ public class VitaOWL {
             jenaModel.write(output,"N-TRIPLE");    
         else
             jenaModel.write(output,"RDF/XML-ABBREV");    
-};
+	};
+	*/
 }

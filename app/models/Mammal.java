@@ -8,7 +8,7 @@ public class Mammal extends Amniote{
 	public Mammal(){}
 	public Mammal(String specie){
 		super(specie);
-		url = Vita.organism_url + "mammal/" + specie;
+		url = Vita.getURI() + "organism/mammal/" + specie;
 		super.setURI(url);
 	}
 	public Mammal(String specie, Sex sex) {
