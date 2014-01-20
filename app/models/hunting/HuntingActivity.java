@@ -11,16 +11,14 @@ import models.factory.AbstractActivity;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 import controllers.MorphiaObject;
+import agents.AgentJena;
 import agents.AgentManager;
 
 @Entity
 public class HuntingActivity extends AbstractActivity{
-
-	public void accept(AgentManager v){
-		v.spy(this);
-	}
-	
 
     public static HuntingActivity findById(String id){
     	HuntingActivity activity = MorphiaObject.datastore.find(HuntingActivity.class)
@@ -51,6 +49,14 @@ public class HuntingActivity extends AbstractActivity{
 	public void setAmountOfOrganism(Integer _amountOfOrganism){
 		super.setAmountOfOrganism(_amountOfOrganism);
 	}
+
+
+	@Override
+	public void accept(AgentJena agent) {
+		agent.spy(this);
+	}
+
+
 	
 	
 

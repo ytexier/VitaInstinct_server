@@ -12,10 +12,13 @@ import org.apache.jena.riot.RDFFormat;
 
 
 
+
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.VCARD;
+
 
 
 import models.Organism;
@@ -37,7 +40,7 @@ import models.picking.PickingEvent;
 public class AgentJena extends AgentManager{
 	
 	private String db = "db/vita.rdf";
-	private Model model;
+	
 
 	/**
 	 * USER
@@ -46,7 +49,7 @@ public class AgentJena extends AgentManager{
 	
 	@Override
 	public Model spy(User user) {
-		model = ModelFactory.createDefaultModel();
+		Model model = ModelFactory.createDefaultModel();
 		
 		Vita.rscUser = model.createResource(user.getURI())
 		    .addProperty(VCARD.FN,user.getFullName())
@@ -64,15 +67,20 @@ public class AgentJena extends AgentManager{
 
 	@Override
 	public void spy(HuntingActivity huntingActivity) {
-
+		
+		Model model = ModelFactory.createDefaultModel();
+		
 		//TODO
 		///TESTTTT
-		Model model_activity = ModelFactory.createDefaultModel();
+		//Model model_activity = ModelFactory.createDefaultModel();
 		Model model_creator = User.findById(huntingActivity.getCreator().getId().toString())
 				.accept(new AgentJena());
 		Model model_organism = huntingActivity.getOrganism()
 				.accept(new AgentJena());
- 		model = ModelFactory.createUnion(model_creator, model_organism);
+		//model.add(model_creator);
+		model.add(model_organism);
+ 		//model = ModelFactory.createUnion(model_creator, model_organism);
+
 		this.writeRDF(model);
 		///TESTTTT
 		
@@ -80,8 +88,8 @@ public class AgentJena extends AgentManager{
 
 	@Override
 	public void spy(PickingActivity pickingActivity) {
-		
-		model = ModelFactory.createDefaultModel();
+		Model model = ModelFactory.createDefaultModel();
+
 		
 		///TODO
 		
@@ -92,7 +100,7 @@ public class AgentJena extends AgentManager{
 	@Override
 	public void spy(FishingActivity fishingActivity) {
 		
-		model = ModelFactory.createDefaultModel();
+		Model model = ModelFactory.createDefaultModel();
 		
 		///TODO
 		
@@ -154,9 +162,9 @@ public class AgentJena extends AgentManager{
 	
 	@Override
 	public Model spy(Organism organism) {
-		model = ModelFactory.createDefaultModel();
+		Model model = ModelFactory.createDefaultModel();
 		
-		Vita.rscUser = model.createResource(organism.getURI())
+		Vita.rscOrganism = model.createResource(organism.getURI())
 				.addProperty(VCARD.NICKNAME, organism.getSpecie());
 		
 		

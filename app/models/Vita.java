@@ -9,8 +9,10 @@ public class Vita {
 	
 	public static Model omVita = ModelFactory.createDefaultModel();
 	
-	public static final String vita_src ="http://vita-instinct.herokuapp.com";
-	public static final String vita_ns = vita_src + "#";
+	protected static final String _NS ="http://vita-instinct.herokuapp.com/api/1.1#%s";
+	public static final String NS = String.format(_NS,"");
+	public static String getURI() {return NS;}
+	public static final Resource NAMESPACE = omVita.createResource(NS);
 	
 	/**
 	 * URLs
@@ -49,17 +51,17 @@ public class Vita {
 	 */
 	
 	//Domain : Activity
-	public static Property prtUsedEquipment 	= omVita.createProperty(vita_ns+"usedEquipment");
-	public static Property prtTargetedOrganism 	= omVita.createProperty(vita_ns+"targetedOrganism");
-	public static Property prtIsRelatedToEvent 	= omVita.createProperty(vita_ns+"isRelatedToEvent");
+	public static Property prtUsedEquipment 	= omVita.createProperty(_NS+"usedEquipment");
+	public static Property prtTargetedOrganism 	= omVita.createProperty(_NS+"targetedOrganism");
+	public static Property prtIsRelatedToEvent 	= omVita.createProperty(_NS+"isRelatedToEvent");
 	
 	//Domain : Activity, Equipement, Event, Organim
-	public static Property prtHasShowcase 		= omVita.createProperty(vita_ns+"hasShowcase");
+	public static Property prtHasShowcase 		= omVita.createProperty(_NS+"hasShowcase");
 	
 	//Domain : Showcase
-	public static Property prtHasPicture 		= omVita.createProperty(vita_ns+"hasPicture");
-	public static Property prtHasDescription 	= omVita.createProperty(vita_ns+"hasDescription");
-	public static Property prtHasLocation 		= omVita.createProperty(vita_ns+"hasLocation");
+	public static Property prtHasPicture 		= omVita.createProperty(_NS+"hasPicture");
+	public static Property prtHasDescription 	= omVita.createProperty(_NS+"hasDescription");
+	public static Property prtHasLocation 		= omVita.createProperty(_NS+"hasLocation");
 	
 
 	

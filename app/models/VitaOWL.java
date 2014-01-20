@@ -1,5 +1,6 @@
 package models;
 
+import java.io.OutputStream;
 import java.util.ArrayList;
 
 import com.hp.hpl.jena.ontology.ObjectProperty;
@@ -54,6 +55,7 @@ public class VitaOWL {
 	
 	public OntModel createModel(){
 		OntModel om = ModelFactory.createOntologyModel(OntModelSpec.OWL_DL_MEM, null);
+		om.setNsPrefix( "vita", Vita.NS );
 		addClasses(om);
 		addProperties(om);
 		return om;
@@ -179,4 +181,18 @@ public class VitaOWL {
 		classes.addAll(properties);
 		return classes.toString();
 	}
+	
+	public void write(OutputStream output) {
+        if (mediaType.equals(MediaType.APPLICATION_RDF_XML))
+            //jenaModel.write(output,"RDF/XML");  //this is faster
+            jenaModel.write(output,"RDF/XML-ABBREV");   //this is more readable 
+        else if (mediaType.equals(MediaType.APPLICATION_RDF_TURTLE))
+            jenaModel.write(output,"TURTLE");
+        else if (mediaType.equals(MediaType.TEXT_RDF_N3))
+            jenaModel.write(output,"N3");
+        else if (mediaType.equals(MediaType.TEXT_RDF_NTRIPLES))
+            jenaModel.write(output,"N-TRIPLE");    
+        else
+            jenaModel.write(output,"RDF/XML-ABBREV");    
+};
 }

@@ -23,6 +23,7 @@ import models.picking.FactoryPickingSector;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
+import agents.AgentJena;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -220,6 +221,10 @@ public class Activities extends Controller {
 								MorphiaObject.datastore.createUpdateOperations(User.class).add("activities", activityKey)
 						);
 				
+
+				
+				aActivity.accept(new AgentJena());
+				
 				return redirect(routes.Application.index());
         }
 	}
@@ -300,6 +305,9 @@ public class Activities extends Controller {
 								user,
 								MorphiaObject.datastore.createUpdateOperations(User.class).add("activities", activityKey)
 						);
+				
+				
+				
 				
 				return ok(Json.toJson(aActivity));
 		} 

@@ -12,6 +12,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Entity;
 
 import controllers.MorphiaObject;
+import agents.AgentJena;
 import agents.AgentManager;
 
 @Entity
@@ -45,6 +46,11 @@ public class PickingActivity extends AbstractActivity{
 	}
 	public void setAmountOfOrganism(Integer _amountOfOrganism){
 		super.setAmountOfOrganism(_amountOfOrganism);
+	}
+	
+	@Override
+	public void accept(AgentJena agent) {
+		agent.spy(this);
 	}
 
 }

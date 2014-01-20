@@ -13,6 +13,10 @@ import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
 
+import agents.AgentJena;
+
+import com.hp.hpl.jena.rdf.model.Model;
+
 import controllers.MorphiaObject;
 
 public abstract class AbstractActivity {
@@ -36,7 +40,7 @@ public abstract class AbstractActivity {
 	public AbstractActivity() {
 	}
 	
-	
+	public abstract void accept(AgentJena agent);
 
     public ObjectId getId() {
 		return id;
