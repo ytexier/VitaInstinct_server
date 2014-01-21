@@ -6,8 +6,13 @@
   <ul>
     @for(activity <- activities) {
 
+<<<<<<< HEAD
 		<li class="@activity.getSector()">@activity.getSector() | @activity.getDate() | @activity.getOrganism().getSpecie()</li>
     	@if(activity.getSector()=="hunting"){
+=======
+		<li class="@activity.getSectorName()">@activity.getSectorName() | @activity.getDate()</li>
+    	@if(activity.getSectorName()=="hunting"){
+>>>>>>> sparql
 			@form(routes.Activities.deleteHunting(activity.getId().toString())) { 
 				<input type="submit" value="Delete"> 
 			}

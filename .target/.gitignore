@@ -1,5 +1,14 @@
+/ApplicationTest.class
+/Global.class
+/IntegrationTest$1.class
+/IntegrationTest.class
 /agents
-/models
 /controllers
+<<<<<<< HEAD
 /views
 /forms
+=======
+/exceptions
+/forms
+/models
+>>>>>>> sparql
