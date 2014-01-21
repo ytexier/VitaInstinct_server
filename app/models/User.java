@@ -13,6 +13,7 @@ import org.mongodb.morphia.annotations.Reference;
 
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
+import play.db.ebean.Model;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,7 +27,7 @@ import java.util.Date;
     @Required @Email 	private String email;
     @Required 			private String password;
     
-    					private String URI;
+    					//private String URI;
     					
     					private String fullName;
     					private String givenName;
@@ -45,7 +46,7 @@ import java.util.Date;
 		this.setFamilyName(familyName);
 		this.setNickName(nickName);	
 
-		this.setURI(Vita.getURI()+familyName);
+		//this.setURI(Vita.getURI()+familyName);
 		
         this.setEmail(email);
         this.setPassword(password);
@@ -58,7 +59,7 @@ import java.util.Date;
     
     public User() {
     	
-    	this.setURI("");
+    	//this.setURI("");
     	
     	this.setFullName("");
     	this.setGivenName("");
@@ -150,7 +151,7 @@ import java.util.Date;
 	public void setFriends(ArrayList<Key<User>> friends) {
 		this.friends = friends;
 	}
-
+/*
 	public String getURI() {
 		return URI;
 	}
@@ -158,6 +159,7 @@ import java.util.Date;
 	public void setURI(String uRI) {
 		URI = uRI;
 	}
+	*/
 
 	public String getFullName() {
 		return fullName;

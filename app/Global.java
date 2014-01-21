@@ -21,8 +21,8 @@ import controllers.MorphiaObject;
 public class Global extends GlobalSettings {
 	
 	@Override
-	public void onStart(Application _application) {
-		super.beforeStart(_application);
+	public void onStart(Application application) {
+		super.beforeStart(application);
 		Logger.debug("** onStart **");
 		Properties prop = new Properties();
 

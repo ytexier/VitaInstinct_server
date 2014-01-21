@@ -27,13 +27,9 @@ public abstract class AbstractActivity {
 	private ActivityEnding activityEnding;
 	@Embedded
 	private Key<User> creator;
-	private String creatorName;
-	
-
-
 	
 	public AbstractActivity() {
-		creatorName = User.findById(creator.getId().toString()).getFamilyName();
+		
 	}
 	
 	public abstract void accept(AgentJena agent);
@@ -88,15 +84,6 @@ public abstract class AbstractActivity {
 	public void setSector(String sector){
 		this.sector = sector;
 	}
-
-	public String getCreatorName() {
-		return creatorName;
-	}
-
-	public void setCreatorName(String creatorName) {
-		this.creatorName = creatorName;
-	}
-	
-    
+ 
 	
 }

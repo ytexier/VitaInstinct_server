@@ -1,31 +1,27 @@
 package models.hunting;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import models.ActivityEnding;
-import models.Amniote;
-import models.Fish;
+
+
 import models.Location;
 import models.Mammal;
-import models.Organism;
+
 import models.User;
 import models.factory.AbstractActivity;
-import models.factory.AbstractEquipment;
-import models.factory.AbstractEvent;
-import models.fishing.FishingEquipment;
-import models.fishing.FishingEvent;
+
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
-import com.hp.hpl.jena.rdf.model.Model;
+
 
 import controllers.MorphiaObject;
 import agents.AgentJena;
-import agents.AgentManager;
+
 
 @Entity
 public class HuntingActivity extends AbstractActivity{
