@@ -35,6 +35,8 @@ import com.hp.hpl.jena.vocabulary.VCARD;
 
 
 
+
+import models.Mammal;
 import models.Organism;
 import models.User;
 import models.Vita;
@@ -101,9 +103,9 @@ public class AgentJena extends AgentManager{
 	public void spy(HuntingActivity huntingActivity) {
 	
 		User _user = User.findById(huntingActivity.getCreator().getId().toString());
-		Organism _organism = huntingActivity.getOrganism();
-		HuntingEvent event = huntingActivity.getEvent();
-		ArrayList<HuntingEquipment> equipements = huntingActivity.getEquipments();
+		Mammal _organism = huntingActivity.getOrganism();
+		HuntingEvent _event = huntingActivity.getEvent();
+		ArrayList<HuntingEquipment> _equipements = huntingActivity.getEquipments();
 		
 		Individual dataset = jenaModel
 				.createIndividual(Vita.getURI()+"dbActivities", jenaModel.getOntClass(Vita.VitaClass.Dataset.getNS()));
@@ -143,6 +145,8 @@ public class AgentJena extends AgentManager{
 		//equipments
 		Individual equipment = jenaModel.createIndividual(Vita.getURI()+"equipment",Vita.VitaClass.Equipment.getOntClass(jenaModel));		
 		organism.addLiteral(Vita.value,jenaModel.createTypedLiteral(_organism.getSpecie(),XSDDatatype.XSDstring));		
+		
+		
 		
 		activity.addProperty(Vita.sector, sector);
 		activity.addProperty(Vita.creator, creator);

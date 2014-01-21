@@ -6,6 +6,7 @@ import java.util.Date;
 import models.ActivityEnding;
 import models.Fish;
 import models.Location;
+import models.Plant;
 import models.factory.AbstractActivity;
 import models.hunting.HuntingActivity;
 import models.hunting.HuntingEquipment;
@@ -22,6 +23,8 @@ import agents.AgentManager;
 @Entity
 public class FishingActivity extends AbstractActivity{
 	
+	@Embedded
+	private Fish organism;
 	@Embedded
 	private FishingEvent event;
 	@Embedded
@@ -41,7 +44,7 @@ public class FishingActivity extends AbstractActivity{
     	return activity;
     }
 	
-	public void setFish(Fish fish){
+	public void setOrganism(Fish fish){
 		super.setOrganism(fish);
 	}
 	public void setDate(String date) {
@@ -77,6 +80,11 @@ public class FishingActivity extends AbstractActivity{
 	public void setEquipments(ArrayList<FishingEquipment> equipments) {
 		this.equipments = equipments;
 	}
+	
+    public Fish getOrganism(){
+    	return organism;
+    }
+
 	
 	
 

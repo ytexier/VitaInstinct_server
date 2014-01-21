@@ -5,7 +5,9 @@ import java.util.Date;
 
 import models.ActivityEnding;
 import models.Amniote;
+import models.Fish;
 import models.Location;
+import models.Mammal;
 import models.User;
 import models.factory.AbstractActivity;
 import models.factory.AbstractEquipment;
@@ -24,6 +26,8 @@ import agents.AgentManager;
 @Entity
 public class HuntingActivity extends AbstractActivity{
 	
+	@Embedded
+	private Mammal organism;
 	@Embedded
 	private HuntingEvent event;
 	@Embedded
@@ -45,8 +49,12 @@ public class HuntingActivity extends AbstractActivity{
     	return activity;
     }
     
-	public void setOrganism(Amniote _amniote){
-		super.setOrganism(_amniote);
+    public Mammal getOrganism(){
+    	return organism;
+    }
+    
+	public void setOrganism(Mammal mammal){
+		super.setOrganism(mammal);
 	}
 
 	public void setDate(String _date) {

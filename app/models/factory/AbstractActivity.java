@@ -78,8 +78,8 @@ public abstract class AbstractActivity {
 	public Organism getOrganism() {
 		return organism;
 	}
-	public void setOrganism(Organism _organism){
-		organism = _organism;
+	public void setOrganism(Organism organism){
+		organism = organism;
 	}
 	public Key<User> getCreator() {
 		return creator;

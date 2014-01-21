@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import models.ActivityEnding;
+import models.Fish;
 import models.Location;
+import models.Mammal;
 import models.Plant;
 import models.factory.AbstractActivity;
 import models.fishing.FishingEquipment;
@@ -23,11 +25,14 @@ import agents.AgentManager;
 public class PickingActivity extends AbstractActivity{
 	
 	@Embedded
+	private Plant organism;
+	@Embedded
 	private PickingEvent event;
 	@Embedded
 	private ArrayList<PickingEquipment> equipments;
 	
-	
+
+    
 	@Override
 	public void accept(AgentJena agent) {
 		agent.spy(this);
@@ -44,9 +49,11 @@ public class PickingActivity extends AbstractActivity{
 	
 	
 	
-	public void setPlant(Plant _plant){
-		super.setOrganism(_plant);
+    
+	public void setOrganism(Plant plant){
+		super.setOrganism(plant);
 	}
+	
 	public void setDate(String _date) {
 		super.setDate(_date);		
 	}
@@ -80,6 +87,9 @@ public class PickingActivity extends AbstractActivity{
 		this.equipments = equipments;
 	}
 	
+    public Plant getOrganism(){
+    	return organism;
+    }
 
 
 	
