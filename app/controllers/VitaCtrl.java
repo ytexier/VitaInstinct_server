@@ -8,11 +8,8 @@ import com.hp.hpl.jena.query.QueryExecutionFactory;
 import com.hp.hpl.jena.query.ReadWrite;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
-<<<<<<< HEAD
-=======
 import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.sparql.engine.http.QueryExceptionHTTP;
->>>>>>> sparql
 import com.hp.hpl.jena.tdb.TDBFactory;
 
 import models.VitaOWL;
