@@ -32,9 +32,10 @@ public abstract class AgentManager {
 	public abstract void spy(PickingEvent pickingEvent);
 	public abstract void spy(FishingEvent fishingEvent);
 	
-	public abstract void spy(HuntingAccessory huntingAccessory);
-	public abstract void spy(PickingAccessory pickingAccessory);
-	public abstract void spy(FishingAccessory fishingAccessory);
+	//next time
+	//public abstract void spy(HuntingAccessory huntingAccessory);
+	//public abstract void spy(PickingAccessory pickingAccessory);
+	//public abstract void spy(FishingAccessory fishingAccessory);
 	
 	public abstract void spy(Organism organism);
 

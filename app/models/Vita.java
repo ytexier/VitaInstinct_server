@@ -9,15 +9,15 @@ import com.hp.hpl.jena.rdf.model.Resource;
 
 public class Vita {
 	
+	/** VitaClass make easely the Ontology classes */
 	public enum VitaClass {
-		Dataset,
-		User,
 		Activity,
-		Sector,
-		Location,
-		Organism,
+		Event,
 		Equipment,
-		Event;
+		User,
+		Organism,
+		Location,
+		;
 		public String getNS() {
 			return String.format(_NS, toString());
 		}
@@ -30,7 +30,6 @@ public class Vita {
 		public Property createProperty(OntModel model) {
 			return model.createProperty(getNS());
 		}			
-
 	};
 	
 	
@@ -46,27 +45,27 @@ public class Vita {
 	
 	/** Namespace of vocablary as resource */
 	public static final Resource NS_r = vita_m.createResource(NS);
-	
 
 	 /**
      * Object properties
      */
-    public static final Property activity = vita_m.createProperty(String.format(_NS, "activity"));
-    public static final Property sector = vita_m.createProperty(String.format(_NS, "sector"));
-    public static final Property creator = vita_m.createProperty(String.format(_NS, "creator"));
+    public static final Property activities = vita_m.createProperty(String.format(_NS, "activities"));
+    public static final Property events = vita_m.createProperty(String.format(_NS, "events"));
+    public static final Property equipments = vita_m.createProperty(String.format(_NS, "equipments"));  
+    
+   
+    //public static final Property creator = vita_m.createProperty(String.format(_NS, "creator"));
     public static final Property targetOrganism = vita_m.createProperty(String.format(_NS, "targetOrganism"));
     public static final Property location = vita_m.createProperty(String.format(_NS, "location"));
-    public static final Property equipments = vita_m.createProperty(String.format(_NS, "equipments"));
-    public static final Property isRelatedToEvent = vita_m.createProperty(String.format(_NS, "isRelatedToEvent"));
-    public static final Property registrers = vita_m.createProperty(String.format(_NS, "registrers"));
+    public static final Property isRelatedTo = vita_m.createProperty(String.format(_NS, "isRelatedTo"));
     
     /**
      * Data properties
      */
-    public static final Property value = vita_m.createProperty(String.format(_NS, "value"));
     public static final Property latitude = vita_m.createProperty(String.format(_NS, "latitude"));
     public static final Property longitude = vita_m.createProperty(String.format(_NS, "longitude"));
 
-	
+	//ResourceFactory.createTypedLiteral("2012-03-11", XSDDatatype.XSDdate)
+    //DC.creator : Nom, identifiant
 	
 }

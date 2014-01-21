@@ -23,8 +23,10 @@ import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.VCARD;
+
 
 
 
@@ -191,6 +193,12 @@ public class AgentJena extends AgentManager{
 
 	@Override
 	public void spy(HuntingEvent huntingEvent) {
+		/*User user = huntingEvent.getCreator();
+		Resource creator = jenaModel.createResource()
+				.addProperty(DC.creator, user.getFullName());
+		Individual comment = jenaModel.createIndividual()
+				.addProperty(RDFS.label, jenaModel.createLiteral(huntingEvent.getLabel(), "en"));
+		*/
 	}
 
 	@Override
@@ -204,7 +212,7 @@ public class AgentJena extends AgentManager{
 	/**
 	 * ACCESSORY
 	 */
-	
+	/*
 	@Override
 	public void spy(HuntingAccessory huntingAccessory) {
 	}
@@ -216,7 +224,7 @@ public class AgentJena extends AgentManager{
 	@Override
 	public void spy(FishingAccessory fishingAccessory) {
 	}
-
+	*/
 	/**
 	 * ORGANISM
 	 */
