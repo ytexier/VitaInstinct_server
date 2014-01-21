@@ -1,5 +1,20 @@
+/ApplicationTest.class
+/Global.class
+/IntegrationTest$1.class
+/IntegrationTest.class
 /agents
-/models
 /controllers
+<<<<<<< HEAD
+<<<<<<< HEAD
 /views
 /forms
+=======
+/exceptions
+/forms
+/models
+>>>>>>> sparql
+=======
+/exceptions
+/forms
+/models
+>>>>>>> vita_inprogress

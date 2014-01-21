@@ -7,7 +7,12 @@
     @for(activity <- activities) {
 
 		<li class="@activity.getSector()">@activity.getSector() | @activity.getDate() | @activity.getOrganism().getSpecie()</li>
+		
     	@if(activity.getSector()=="hunting"){
+    	
+		<li class="@activity.getSector()">@activity.getSector() | @activity.getDate()</li>
+    	@if(activity.getSector()=="hunting"){
+
 			@form(routes.Activities.deleteHunting(activity.getId().toString())) { 
 				<input type="submit" value="Delete"> 
 			}
@@ -25,6 +30,6 @@
 			}
     	}
 
-     
+     }
     }
   </ul>
