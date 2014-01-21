@@ -1,5 +1,7 @@
 package agents;
 
+import org.restlet.data.MediaType;
+
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -13,9 +15,7 @@ import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.DC;
 import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
-
-
-
+import com.hp.hpl.jena.vocabulary.LocationMappingVocab;
 
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.ontology.Individual;
@@ -37,10 +37,12 @@ import com.hp.hpl.jena.vocabulary.VCARD;
 
 
 
+
 import models.Mammal;
 import models.Organism;
 import models.User;
 import models.Vita;
+import models.factory.AbstractEquipment;
 import models.fishing.FishingAccessory;
 import models.fishing.FishingActivity;
 import models.fishing.FishingEquipment;
@@ -75,6 +77,7 @@ public class AgentJena extends AgentManager{
 		jenaModel.setNsPrefix( "vita", Vita.NS );
 		jenaModel.setNsPrefix( "owl", OWL.NS );
 		jenaModel.setNsPrefix( "dc", DC.NS );
+		jenaModel.setNsPrefix( "wgs84_pos", "http://www.w3.org/2003/01/geo/wgs84_pos#");
 		return jenaModel;
 	}
 	
@@ -84,22 +87,25 @@ public class AgentJena extends AgentManager{
 	
 	@Override
 	public void spy(User user) {
-
 		/*
+		model = ModelFactory.createDefaultModel();
+		
 		Vita.rscUser = model.createResource(user.getURI())
 		    .addProperty(VCARD.FN,user.getFullName())
 			.addProperty(VCARD.Given,user.getGivenName())
 			.addProperty(VCARD.Family,user.getFamilyName())
 			.addProperty(VCARD.NICKNAME, user.getNickName())
 			.addProperty(VCARD.EMAIL, user.getEmail());
+		
+		return model;
 		*/
-
 	}
+
 	
 	/**
 	 * ACTIVITY
 	 */
-
+/*
 	@Override
 	public void spy(HuntingActivity activity) {
 	
@@ -158,8 +164,47 @@ public class AgentJena extends AgentManager{
 		
 		this.writeRDF(jenaModel, db_activities);
 		
-	}
+	}*/
 	
+	
+	/**
+	 * ACTIVITY
+	 */
+
+	@Override
+	public void spy(HuntingActivity activity) {
+		
+		User user = User.findById(activity.getCreator().getId().toString());
+		Organism organism = activity.getOrganism();
+		String idActivity = activity.getId().toString();
+
+		Resource _activity = jenaModel.createResource(activity.getURL() + idActivity);
+		_activity.addProperty(RDFS.label, activity.getLabel());
+		_activity.addProperty(DC.creator, user.getFullName());
+		
+		Vita.VitaClass.Organism.createOntClass(jenaModel);
+		Individual _organism = jenaModel.createIndividual(organism.getURI(), Vita.VitaClass.Organism.getOntClass(jenaModel));
+		
+		Vita.VitaClass.Location.createOntClass(jenaModel);
+		Individual _location = jenaModel.createIndividual(Vita.getURL()+"location/"+idActivity, Vita.VitaClass.Location.getOntClass(jenaModel));		
+		_location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(activity.getLocation().getLatPos(),XSDDatatype.XSDstring));
+		_location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(activity.getLocation().getLongPos(),XSDDatatype.XSDstring));
+	
+		ArrayList<Individual> _equipments = new ArrayList<Individual>();
+		for(AbstractEquipment aEquipment : activity.getEquipments())
+			_equipments.add(jenaModel.createIndividual(Vita.getURL()+"equipment/", Vita.VitaClass.Location.getOntClass(jenaModel)));
+			//_equipments.add(jenaModel.createIndividual(Vita.getURL()+"equipment/"+aEquipment.getId(), Vita.VitaClass.Location.getOntClass(jenaModel)));		
+		
+		_activity.addProperty(Vita.targetOrganism, _organism);
+		_activity.addProperty(Vita.location, _location);
+		
+		for(Individual i : _equipments)
+			_activity.addProperty(Vita.equipments, i);
+		
+		this.writeRDF(jenaModel, db_activities);
+		
+	}
+
 
 	@Override
 	public void spy(PickingActivity pickingActivity) {
@@ -193,6 +238,11 @@ public class AgentJena extends AgentManager{
 
 	@Override
 	public void spy(HuntingEvent huntingEvent) {
+		/*
+		jenaModel.createResource(Vita.getURL()+"sector/hunting/")
+		.addProperty(RDFS.label, huntingActivity.getLabel());
+		*/
+		
 		/*User user = huntingEvent.getCreator();
 		Resource creator = jenaModel.createResource()
 				.addProperty(DC.creator, user.getFullName());
@@ -233,6 +283,9 @@ public class AgentJena extends AgentManager{
 	public void spy(Organism organism) {
 
 	}
+	
+	
+	
 
 
 	
@@ -263,12 +316,11 @@ public class AgentJena extends AgentManager{
 		model = ModelFactory.createUnion(model_loaded, model);
 		writeOutput(model, db);
 	}
+
+
 	
-	//TODO
-	//TODO
-	/*
-	import org.restlet.data.MediaType;
-    
+
+    /*
 	public void write(OutputStream output) {
 	        if (mediaType.equals(MediaType.APPLICATION_RDF_XML))
 	            //jenaModel.write(output,"RDF/XML");  //this is faster

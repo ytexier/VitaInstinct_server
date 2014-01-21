@@ -93,6 +93,10 @@ public abstract class AbstractActivity {
 	public void setSector(String sector){
 		this.sector = sector;
 	}
+	
+	public String getLabel(){
+		return sector+"|"+date+"|"+organism.getSpecie();
+	}
  
 	
 }

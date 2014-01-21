@@ -32,6 +32,7 @@ import java.util.Date;
     					private String givenName;
     					private String familyName;
     					private String nickName;
+    					private String urlName;
     					
     					private Date registration;
     					

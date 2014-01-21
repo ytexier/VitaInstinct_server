@@ -7,8 +7,12 @@ import models.ActivityEnding;
 
 import models.Location;
 import models.Mammal;
+import models.Organism;
 import models.User;
+import models.Vita;
 import models.factory.AbstractActivity;
+
+
 
 
 
@@ -44,6 +48,13 @@ public class HuntingActivity extends AbstractActivity{
 		event = new HuntingEvent();
 	}
 	
+	public String getURL(){
+		return Vita.getURL()+"sector/hunting/activity/";
+	}
+	
+	public Organism getOrganism(){
+		return super.getOrganism();
+	}
 
 
 	@Override
