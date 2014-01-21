@@ -6,6 +6,8 @@
 GET     /                           		controllers.Application.index()
 POST	/									controllers.Activities.newActivity()
 
+POST / 										controllers.Events.addEvent()
+
 # Application
 
 GET			/signup							controllers.Application.signup()
