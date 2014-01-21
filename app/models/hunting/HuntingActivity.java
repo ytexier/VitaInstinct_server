@@ -8,12 +8,16 @@ import models.Amniote;
 import models.Fish;
 import models.Location;
 import models.Mammal;
+import models.Organism;
 import models.User;
 import models.factory.AbstractActivity;
 import models.factory.AbstractEquipment;
 import models.factory.AbstractEvent;
+import models.fishing.FishingEquipment;
+import models.fishing.FishingEvent;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
@@ -32,6 +36,18 @@ public class HuntingActivity extends AbstractActivity{
 	private HuntingEvent event;
 	@Embedded
 	private ArrayList<HuntingEquipment> equipments;
+	
+	public HuntingActivity(Mammal mammal, int amountOfOrganism, String date, Location location, Key<User> creator){
+		
+		organism = mammal;
+		equipments = new ArrayList<HuntingEquipment>();
+		event = new HuntingEvent();
+		super.setCreator(creator);
+		super.setAmountOfOrganism(amountOfOrganism);
+		super.setLocation(location);
+		super.setSector("hunting");
+		super.setDate(date);
+	}
 	
 
 
@@ -94,10 +110,9 @@ public class HuntingActivity extends AbstractActivity{
 	public void setEquipments(ArrayList<HuntingEquipment> equipments) {
 		this.equipments = equipments;
 	}
-	
 
 
-	
+
 	
 
 }

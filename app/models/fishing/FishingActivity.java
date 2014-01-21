@@ -1,24 +1,20 @@
 package models.fishing;
 
 import java.util.ArrayList;
-import java.util.Date;
 
 import models.ActivityEnding;
 import models.Fish;
 import models.Location;
-import models.Plant;
+import models.User;
 import models.factory.AbstractActivity;
-import models.hunting.HuntingActivity;
-import models.hunting.HuntingEquipment;
-import models.hunting.HuntingEvent;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
 import controllers.MorphiaObject;
 import agents.AgentJena;
-import agents.AgentManager;
 
 @Entity
 public class FishingActivity extends AbstractActivity{
@@ -29,6 +25,19 @@ public class FishingActivity extends AbstractActivity{
 	private FishingEvent event;
 	@Embedded
 	private ArrayList<FishingEquipment> equipments;
+
+	
+	public FishingActivity(Fish fish, int amountOfOrganism, String date, Location location, Key<User> creator){
+		
+		organism = fish;
+		equipments = new ArrayList<FishingEquipment>();
+		event = new FishingEvent();
+		super.setCreator(creator);
+		super.setAmountOfOrganism(amountOfOrganism);
+		super.setLocation(location);
+		super.setSector("fishing");
+		super.setDate(date);
+	}
 	
 	
 	@Override
@@ -85,7 +94,7 @@ public class FishingActivity extends AbstractActivity{
     	return organism;
     }
 
-	
+
 	
 
 }

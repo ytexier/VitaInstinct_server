@@ -1,6 +1,5 @@
 package models;
 
-import java.io.OutputStream;
 import java.util.ArrayList;
 
 import com.hp.hpl.jena.ontology.ObjectProperty;

@@ -1,14 +1,7 @@
 package agents;
 
-import com.hp.hpl.jena.rdf.model.Model;
 
-import models.Amniote;
-import models.Animal;
-import models.Bird;
-import models.Fish;
-import models.Mammal;
 import models.Organism;
-import models.Plant;
 import models.User;
 import models.fishing.FishingAccessory;
 import models.fishing.FishingActivity;

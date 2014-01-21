@@ -1,43 +1,15 @@
 package controllers;
 
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.ObjectInputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.apache.jena.riot.RDFDataMgr;
-import org.apache.jena.riot.RDFFormat;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-import com.hp.hpl.jena.query.Dataset;
-import com.hp.hpl.jena.query.ReadWrite;
-import com.hp.hpl.jena.rdf.model.Model;
-import com.hp.hpl.jena.tdb.TDBFactory;
-import com.hp.hpl.jena.util.FileManager;
-
-import agents.AgentJena;
 import forms.AddFriendForm;
 import forms.Secured;
 import models.User;
-import models.Vita;
 import models.factory.AbstractActivity;
 import play.data.Form;
 import play.libs.Json;

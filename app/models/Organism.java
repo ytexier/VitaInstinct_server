@@ -8,8 +8,6 @@ import org.mongodb.morphia.annotations.Property;
 
 import agents.AgentManager;
 
-import com.hp.hpl.jena.rdf.model.Model;
-
 
 public abstract class Organism {
 	@Id

@@ -47,7 +47,6 @@ public class Vita {
 	public static final Resource NS_r = vita_m.createResource(NS);
 	
 
-	
 	 /**
      * Object properties
      */
@@ -59,12 +58,13 @@ public class Vita {
     public static final Property equipments = vita_m.createProperty(String.format(_NS, "equipments"));
     public static final Property isRelatedToEvent = vita_m.createProperty(String.format(_NS, "isRelatedToEvent"));
     public static final Property registrers = vita_m.createProperty(String.format(_NS, "registrers"));
+    
     /**
      * Data properties
      */
     public static final Property value = vita_m.createProperty(String.format(_NS, "value"));
-    public static final Property latitude = vita_m.createProperty(String.format(_NS, "value"));
-    public static final Property longitude = vita_m.createProperty(String.format(_NS, "value"));
+    public static final Property latitude = vita_m.createProperty(String.format(_NS, "latitude"));
+    public static final Property longitude = vita_m.createProperty(String.format(_NS, "longitude"));
 
 	
 	

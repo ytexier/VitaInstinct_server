@@ -23,7 +23,6 @@ import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.util.FileManager;
 import com.hp.hpl.jena.vocabulary.VCARD;
 
@@ -135,7 +134,7 @@ public class AgentJena extends AgentManager{
 		
 		//organism
 		Individual organism = jenaModel.createIndividual(Vita.getURI()+"organism",Vita.VitaClass.Organism.getOntClass(jenaModel));		
-		organism.addLiteral(Vita.value,jenaModel.createTypedLiteral(_organism.getSpecie(),XSDDatatype.XSDstring));
+		organism.addLiteral(Vita.value,jenaModel.createTypedLiteral("osef",XSDDatatype.XSDstring));
 		
 		//organism
 		Individual location = jenaModel.createIndividual(Vita.getURI()+"location",Vita.VitaClass.Location.getOntClass(jenaModel));		
@@ -144,7 +143,7 @@ public class AgentJena extends AgentManager{
 		
 		//equipments
 		Individual equipment = jenaModel.createIndividual(Vita.getURI()+"equipment",Vita.VitaClass.Equipment.getOntClass(jenaModel));		
-		organism.addLiteral(Vita.value,jenaModel.createTypedLiteral(_organism.getSpecie(),XSDDatatype.XSDstring));		
+		organism.addLiteral(Vita.value,jenaModel.createTypedLiteral("osef", XSDDatatype.XSDstring));		
 		
 		
 		

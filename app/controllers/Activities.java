@@ -151,68 +151,43 @@ public class Activities extends Controller {
         }
         else {
         	
-	        	SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yy");
-	        	
+        		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
+        	
 				String sector = filledForm.get().sector;
+				Date date =	filledForm.get().date;
+				int amountOfOrganism = Integer.parseInt(filledForm.get().amountOfOrganism);
+				String specie = filledForm.get().organism;
+				String sex = filledForm.get().sex;
+				String activityEnding = filledForm.get().activityEnding;
 				
-				
-				Date date =	filledForm.get().date;			
-				String strLatitude = filledForm.get().latitude;
-				String strLongitude = filledForm.get().longitude;
-				String strAmountOfOrganism = filledForm.get().amountOfOrganism;
-				String strOrganism = filledForm.get().organism;
-				String strSex = filledForm.get().sex;
-				String strActivityEnding = filledForm.get().activityEnding;
-				
-				Location myLocation = new Location(strLongitude, strLatitude);
+				Location location = new Location(filledForm.get().longitude, filledForm.get().latitude);
 				
 				FactorySector factorySector = null;
-				
 				AbstractActivity aActivity = null;
-				Organism organism = null;
-				
 				
 				if(sector.equals("hunting")){
 					factorySector = new FactoryHuntingSector();
-					organism = new Mammal(strOrganism);
 				}else if(sector.equals("fishing")){
 					factorySector = new FactoryFishingSector();
-					organism = new Fish(strOrganism);
 				}else if(sector.equals("picking")){
 					factorySector = new FactoryPickingSector();
-					organism = new Plant(strOrganism);
 				}
-				
-				aActivity = factorySector.createActivity();
-				aActivity.setSectorName(sector);
-
-				
-				if(Sex.contains(strSex))
-					organism.setSex(Enum.valueOf(Sex.class, strSex));
-				
-				aActivity.setOrganism(organism);
 				
 				String formattedDate = dateFormatter.format(date);
 				
-				aActivity.setDate(formattedDate);
-				
-				
-				aActivity.setLocation(myLocation);
-				
-			    try { 
-			    	aActivity.setAmountOfOrganism(Integer.parseInt(strAmountOfOrganism));
-			    } catch(NumberFormatException e) { 
-			    	aActivity.setAmountOfOrganism(1);
-			    }
-
-				if(ActivityEnding.contains(strActivityEnding))
-						aActivity.setActivityEnding(Enum.valueOf(ActivityEnding.class, strActivityEnding));
-
 				User user = User.findByEmail(request().username());
+				Key<User> creatorKey = MorphiaObject.datastore.getKey(user);
+						
+				aActivity = factorySector.createActivity(specie, amountOfOrganism, formattedDate, location, creatorKey);
+
 				
-				aActivity.setCreator(MorphiaObject.datastore.getKey(user));
-				aActivity.setCreatorName(user.getFullName());
-				
+				if(Sex.contains(sex))
+					aActivity.getOrganism().setSex(Enum.valueOf(Sex.class, sex));
+
+				if(ActivityEnding.contains(activityEnding))
+						aActivity.setActivityEnding(Enum.valueOf(ActivityEnding.class, activityEnding));
+
+			
 				Key<AbstractActivity> activityKey = MorphiaObject.datastore.save(aActivity);
 
 				UpdateResults<User> res =
@@ -242,60 +217,36 @@ public class Activities extends Controller {
 	        	
 				String sector = filledForm.get().sector;
 				Date date =	filledForm.get().date;
-				String strLatitude = filledForm.get().latitude;
-				String strLongitude = filledForm.get().longitude;
-				String strAmountOfOrganism = filledForm.get().amountOfOrganism;
-				String strOrganism = filledForm.get().organism;
-				String strSex = filledForm.get().sex;
-				String strActivityEnding = filledForm.get().activityEnding;
+				int amountOfOrganism = Integer.parseInt(filledForm.get().amountOfOrganism);
+				String specie = filledForm.get().organism;
+				String sex = filledForm.get().sex;
+				String activityEnding = filledForm.get().activityEnding;
 				
-				Location myLocation = new Location(strLongitude, strLatitude);
+				Location location = new Location(filledForm.get().longitude, filledForm.get().latitude);
 				
 				FactorySector factorySector = null;
-				
 				AbstractActivity aActivity = null;
-				Organism organism = null;
 				
 				if(sector.equals("hunting")){
 					factorySector = new FactoryHuntingSector();
-					organism = new Mammal(strOrganism);
 				}else if(sector.equals("fishing")){
 					factorySector = new FactoryFishingSector();
-					organism = new Fish(strOrganism);
 				}else if(sector.equals("picking")){
 					factorySector = new FactoryPickingSector();
-					organism = new Plant(strOrganism);
 				}
 				
-				aActivity = factorySector.createActivity();
-				aActivity.setSectorName(sector);
-
-				
-				if(Sex.contains(strSex))
-					organism.setSex(Enum.valueOf(Sex.class, strSex));
-				
-				aActivity.setOrganism(organism);
-				
 				String formattedDate = dateFormatter.format(date);
+				User user = User.findByEmail(request().username());
+				Key<User> creatorKey = MorphiaObject.datastore.getKey(user);
 				
-				aActivity.setDate(formattedDate);
-				
-				
-				aActivity.setLocation(myLocation);
-				
-			    try { 
-			    	aActivity.setAmountOfOrganism(Integer.parseInt(strAmountOfOrganism));
-			    } catch(NumberFormatException e) { 
-			    	aActivity.setAmountOfOrganism(1);
-			    }
+				aActivity = factorySector.createActivity(specie, amountOfOrganism, formattedDate, location, creatorKey);
 
-				if(ActivityEnding.contains(strActivityEnding))
-						aActivity.setActivityEnding(Enum.valueOf(ActivityEnding.class, strActivityEnding));
-
-				User user = User.findById(user_id);
 				
-				aActivity.setCreator(MorphiaObject.datastore.getKey(user));
-				aActivity.setCreatorName(user.getFullName());
+				if(Sex.contains(sex))
+					aActivity.getOrganism().setSex(Enum.valueOf(Sex.class, sex));
+				
+				if(ActivityEnding.contains(activityEnding))
+						aActivity.setActivityEnding(Enum.valueOf(ActivityEnding.class, activityEnding));
 
 				
 				Key<AbstractActivity> activityKey = MorphiaObject.datastore.save(aActivity);

@@ -1,6 +1,5 @@
 package forms;
 
-import controllers.Users;
 import models.User;
 
 public class LoginForm {

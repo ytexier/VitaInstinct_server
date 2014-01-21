@@ -1,13 +1,9 @@
 package models.factory;
 
-import java.util.ArrayList;
-import java.util.Date;
-
 import models.ActivityEnding;
 import models.Location;
 import models.Organism;
 import models.User;
-import models.hunting.HuntingActivity;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
@@ -16,16 +12,12 @@ import org.mongodb.morphia.annotations.Id;
 
 import agents.AgentJena;
 
-import com.hp.hpl.jena.rdf.model.Model;
-
-import controllers.MorphiaObject;
-
 public abstract class AbstractActivity {
 	
 	@Id 
 	private ObjectId id;
 	private String date;
-	private String sectorName;
+	private String sector;
 	
 	@Embedded 
 	private Location location;
@@ -41,6 +33,7 @@ public abstract class AbstractActivity {
 
 	
 	public AbstractActivity() {
+		creatorName = User.findById(creator.getId().toString()).getFamilyName();
 	}
 	
 	public abstract void accept(AgentJena agent);
@@ -79,7 +72,7 @@ public abstract class AbstractActivity {
 		return organism;
 	}
 	public void setOrganism(Organism organism){
-		organism = organism;
+		this.organism = organism;
 	}
 	public Key<User> getCreator() {
 		return creator;
@@ -88,12 +81,12 @@ public abstract class AbstractActivity {
 		this.creator = creator;
 	}
 
-	public String getSectorName() {
-		return sectorName;
-	}
+	public String getSector(){
+		return sector;
+	};
 
-	public void setSectorName(String sectorName) {
-		this.sectorName = sectorName;
+	public void setSector(String sector){
+		this.sector = sector;
 	}
 
 	public String getCreatorName() {

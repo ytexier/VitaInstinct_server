@@ -6,20 +6,20 @@
   <ul>
     @for(activity <- activities) {
 
-		<li class="@activity.getSectorName()">@activity.getSectorName() | @activity.getDate() | @activity.getOrganism().getSpecie()</li>
-    	@if(activity.getSectorName()=="hunting"){
+		<li class="@activity.getSector()">@activity.getSector() | @activity.getDate() | @activity.getOrganism().getSpecie()</li>
+    	@if(activity.getSector()=="hunting"){
 			@form(routes.Activities.deleteHunting(activity.getId().toString())) { 
 				<input type="submit" value="Delete"> 
 			}
     	}
     	
-    	@if(activity.getSectorName()=="picking"){
+    	@if(activity.getSector()=="picking"){
 			@form(routes.Activities.deletePicking(activity.getId().toString())) { 
 		         <input type="submit" value="Delete"> 
 			}
     	}
     	
-    	@if(activity.getSectorName()=="fishing"){
+    	@if(activity.getSector()=="fishing"){
 			@form(routes.Activities.deleteFishing(activity.getId().toString())) { 
 		         <input type="submit" value="Delete"> 
 			}

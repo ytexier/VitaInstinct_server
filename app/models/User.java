@@ -11,8 +11,6 @@ import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
-import com.hp.hpl.jena.rdf.model.Model;
-
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
 

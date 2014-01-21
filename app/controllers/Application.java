@@ -9,7 +9,6 @@ import forms.Secured;
 import models.User;
 import models.factory.AbstractActivity;
 import views.html.*;
-import play.Logger;
 import play.data.*;
 import play.libs.Json;
 import play.mvc.*;

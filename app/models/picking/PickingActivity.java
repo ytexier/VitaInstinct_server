@@ -8,12 +8,14 @@ import models.Fish;
 import models.Location;
 import models.Mammal;
 import models.Plant;
+import models.User;
 import models.factory.AbstractActivity;
 import models.fishing.FishingEquipment;
 import models.fishing.FishingEvent;
 import models.hunting.HuntingActivity;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
@@ -31,7 +33,16 @@ public class PickingActivity extends AbstractActivity{
 	@Embedded
 	private ArrayList<PickingEquipment> equipments;
 	
-
+	public PickingActivity(Plant plant, int amountOfOrganism, String date, Location location, Key<User> creator){
+		organism = plant;
+		equipments = new ArrayList<PickingEquipment>();
+		event = new PickingEvent();
+		super.setCreator(creator);
+		super.setAmountOfOrganism(amountOfOrganism);
+		super.setLocation(location);
+		super.setSector("picking");
+		super.setDate(date);
+	}
     
 	@Override
 	public void accept(AgentJena agent) {
