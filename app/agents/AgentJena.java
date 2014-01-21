@@ -99,12 +99,12 @@ public class AgentJena extends AgentManager{
 	 */
 
 	@Override
-	public void spy(HuntingActivity huntingActivity) {
+	public void spy(HuntingActivity activity) {
 	
-		User _user = User.findById(huntingActivity.getCreator().getId().toString());
-		Mammal _organism = huntingActivity.getOrganism();
-		HuntingEvent _event = huntingActivity.getEvent();
-		ArrayList<HuntingEquipment> _equipements = huntingActivity.getEquipments();
+		User user = User.findById(activity.getCreator().getId().toString());
+		Organism organism = activity.getOrganism();
+		HuntingEvent event = activity.getEvent();
+		ArrayList<HuntingEquipment> equipements = activity.getEquipments();
 		
 		Individual dataset = jenaModel
 				.createIndividual(Vita.getURI()+"dbActivities", jenaModel.getOntClass(Vita.VitaClass.Dataset.getNS()));
@@ -116,41 +116,42 @@ public class AgentJena extends AgentManager{
 		Vita.VitaClass.Equipment.createOntClass(jenaModel);
 		Vita.VitaClass.Event.createOntClass(jenaModel);
 		
-		Individual activity = jenaModel.createIndividual(Vita.VitaClass.Activity.getOntClass(jenaModel));
+		Individual _activity = jenaModel.createIndividual(Vita.VitaClass.Activity.getOntClass(jenaModel));
 		
-		dataset.addProperty(Vita.activity, activity);
+		dataset.addProperty(Vita.activity, _activity);
 		
 		//sector
-		Individual sector = jenaModel.createIndividual(Vita.getURI()+"sector",Vita.VitaClass.Sector.getOntClass(jenaModel));
-		sector.addLiteral(Vita.value,jenaModel.createTypedLiteral("hunting",XSDDatatype.XSDstring));
+		Individual _sector = jenaModel.createIndividual(Vita.getURI()+"sector", Vita.VitaClass.Sector.getOntClass(jenaModel));
+		_sector.addLiteral(Vita.value,jenaModel.createTypedLiteral("hunting", XSDDatatype.XSDstring));
 		
 		//creator
-		Individual creator = jenaModel.createIndividual(Vita.getURI()+"user",Vita.VitaClass.User.getOntClass(jenaModel));		
-		creator.addProperty(VCARD.FN, _user.getFullName())
-			.addProperty(VCARD.Given, _user.getGivenName())
-			.addProperty(VCARD.Family, _user.getFamilyName())
-			.addProperty(VCARD.NICKNAME, _user.getNickName())
-			.addProperty(VCARD.EMAIL, _user.getEmail());
+		Individual _creator = jenaModel.createIndividual(Vita.getURI()+"user",Vita.VitaClass.User.getOntClass(jenaModel));		
+		_creator.addProperty(VCARD.FN, user.getFullName())
+			.addProperty(VCARD.Given, user.getGivenName())
+			.addProperty(VCARD.Family, user.getFamilyName())
+			.addProperty(VCARD.NICKNAME, user.getNickName())
+			.addProperty(VCARD.EMAIL, user.getEmail());
 		
 		//organism
-		Individual organism = jenaModel.createIndividual(Vita.getURI()+"organism",Vita.VitaClass.Organism.getOntClass(jenaModel));		
-		organism.addLiteral(Vita.value,jenaModel.createTypedLiteral("osef",XSDDatatype.XSDstring));
+		Individual _organism = jenaModel.createIndividual(Vita.getURI()+"organism", Vita.VitaClass.Organism.getOntClass(jenaModel));		
+		_organism.addLiteral(Vita.value,jenaModel.createTypedLiteral("osef", XSDDatatype.XSDstring));
 		
 		//organism
-		Individual location = jenaModel.createIndividual(Vita.getURI()+"location",Vita.VitaClass.Location.getOntClass(jenaModel));		
-		location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(huntingActivity.getLocation().getLatPos(),XSDDatatype.XSDstring));
-		location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(huntingActivity.getLocation().getLongPos(),XSDDatatype.XSDstring));
+		Individual _location = jenaModel.createIndividual(Vita.getURI()+"location", Vita.VitaClass.Location.getOntClass(jenaModel));		
+		_location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(activity.getLocation().getLatPos(),XSDDatatype.XSDstring));
+		_location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(activity.getLocation().getLongPos(),XSDDatatype.XSDstring));
 		
 		//equipments
-		Individual equipment = jenaModel.createIndividual(Vita.getURI()+"equipment",Vita.VitaClass.Equipment.getOntClass(jenaModel));		
-		organism.addLiteral(Vita.value,jenaModel.createTypedLiteral("osef", XSDDatatype.XSDstring));		
+		Individual _equipment = jenaModel.createIndividual(Vita.getURI()+"equipment", Vita.VitaClass.Equipment.getOntClass(jenaModel));		
+		_equipment.addLiteral(Vita.value,jenaModel.createTypedLiteral("osef", XSDDatatype.XSDstring));		
 		
 		
 		
-		activity.addProperty(Vita.sector, sector);
-		activity.addProperty(Vita.creator, creator);
-		activity.addProperty(Vita.targetOrganism, organism);
-		activity.addProperty(Vita.location, location);
+		_activity.addProperty(Vita.sector, _sector);
+		_activity.addProperty(Vita.creator, _creator);
+		_activity.addProperty(Vita.targetOrganism, _organism);
+		_activity.addProperty(Vita.location, _location);
+		_activity.addProperty(Vita.equipments, _equipment);
 		
 		
 		this.writeRDF(jenaModel, db_activities);

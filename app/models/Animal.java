@@ -2,10 +2,10 @@ package models;
 
 public abstract class Animal extends Organism {
 	public Animal(){}
-	public Animal(String _specie) {
-		super(_specie);
+	public Animal(String specie, String url) {
+		super(specie, "animal/" + url);
 	}
-	public Animal(String _specie, Sex _sex) {
-		super(_specie, _sex);
+	public Animal(String specie, Sex sex) {
+		super(specie, sex);
 	}
 }

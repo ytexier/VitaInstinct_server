@@ -6,12 +6,12 @@ import org.mongodb.morphia.annotations.Entity;
 public class Plant extends Organism{
 
 	public Plant(){}
-	public Plant(String _specie) {
-		super(_specie);
+	public Plant(String specie) {
+		super(specie, "plant");
 	}
 	
-	public Plant(String _specie, Sex _sex) {
-		super(_specie, _sex);
+	public Plant(String specie, Sex sex) {
+		super(specie, sex);
 	}
 
 }

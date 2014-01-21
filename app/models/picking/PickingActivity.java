@@ -18,6 +18,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Reference;
 
 import controllers.MorphiaObject;
 import agents.AgentJena;
@@ -27,21 +28,18 @@ import agents.AgentManager;
 public class PickingActivity extends AbstractActivity{
 	
 	@Embedded
-	private Plant organism;
-	@Embedded
 	private PickingEvent event;
-	@Embedded
+	@Reference
 	private ArrayList<PickingEquipment> equipments;
 	
-	public PickingActivity(Plant plant, int amountOfOrganism, String date, Location location, Key<User> creator){
-		organism = plant;
+	public PickingActivity(){
+
+	}
+	
+	public PickingActivity(Plant organism, int amountOfOrganism, String date, Location location, Key<User> creator){
+		super(organism, creator, amountOfOrganism, location, "hunting", date);
 		equipments = new ArrayList<PickingEquipment>();
 		event = new PickingEvent();
-		super.setCreator(creator);
-		super.setAmountOfOrganism(amountOfOrganism);
-		super.setLocation(location);
-		super.setSector("picking");
-		super.setDate(date);
 	}
     
 	@Override
@@ -58,12 +56,6 @@ public class PickingActivity extends AbstractActivity{
     	return activity;
     }
 	
-	
-	
-    
-	public void setOrganism(Plant plant){
-		super.setOrganism(plant);
-	}
 	
 	public void setDate(String _date) {
 		super.setDate(_date);		
@@ -97,11 +89,6 @@ public class PickingActivity extends AbstractActivity{
 	public void setEquipments(ArrayList<PickingEquipment> equipments) {
 		this.equipments = equipments;
 	}
-	
-    public Plant getOrganism(){
-    	return organism;
-    }
-
 
 	
 }

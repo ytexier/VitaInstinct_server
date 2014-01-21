@@ -12,6 +12,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Reference;
 
 import controllers.MorphiaObject;
 import agents.AgentJena;
@@ -20,23 +21,18 @@ import agents.AgentJena;
 public class FishingActivity extends AbstractActivity{
 	
 	@Embedded
-	private Fish organism;
-	@Embedded
 	private FishingEvent event;
-	@Embedded
+	@Reference
 	private ArrayList<FishingEquipment> equipments;
 
+	public FishingActivity(){
+
+	}
 	
-	public FishingActivity(Fish fish, int amountOfOrganism, String date, Location location, Key<User> creator){
-		
-		organism = fish;
+	public FishingActivity(Fish organism, int amountOfOrganism, String date, Location location, Key<User> creator){
+		super(organism, creator, amountOfOrganism, location, "fishing", date);
 		equipments = new ArrayList<FishingEquipment>();
 		event = new FishingEvent();
-		super.setCreator(creator);
-		super.setAmountOfOrganism(amountOfOrganism);
-		super.setLocation(location);
-		super.setSector("fishing");
-		super.setDate(date);
 	}
 	
 	
@@ -53,9 +49,6 @@ public class FishingActivity extends AbstractActivity{
     	return activity;
     }
 	
-	public void setOrganism(Fish fish){
-		super.setOrganism(fish);
-	}
 	public void setDate(String date) {
 		super.setDate(date);		
 	}
@@ -89,11 +82,6 @@ public class FishingActivity extends AbstractActivity{
 	public void setEquipments(ArrayList<FishingEquipment> equipments) {
 		this.equipments = equipments;
 	}
-	
-    public Fish getOrganism(){
-    	return organism;
-    }
-
 
 	
 

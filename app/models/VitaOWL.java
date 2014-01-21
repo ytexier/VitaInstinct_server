@@ -18,13 +18,12 @@ public class VitaOWL {
 	
 	public static final String vita_src ="vita-instinct.herokuapp.com/ontology";
 	
-	public static final String vita_ns = vita_src + "#";
-	
 	private static OntModel omVita;
 	
 	/**
 	 * CLASSES DEF
 	 */	
+	OntClass ocDataset;
 	OntClass ocActivity;
 	OntClass ocUser;
 	OntClass ocOrganism;
@@ -39,14 +38,17 @@ public class VitaOWL {
 	/**
 	 * PROPERTIES DEF
 	 */	
-	ObjectProperty opTargetedOrganism;
-	ObjectProperty opUsedEquipment;
-	ObjectProperty opIsRelatedToEvent;
-	ObjectProperty opHasLocation;
-	ObjectProperty opHasDescription;
-	ObjectProperty opHasPicture;
-	ObjectProperty opHasSector;
-	ObjectProperty opHasShowcase;
+	ObjectProperty activity;
+	ObjectProperty sector;
+	ObjectProperty creator;
+	ObjectProperty targetOrganism;
+	ObjectProperty location;
+	ObjectProperty equipments;
+	ObjectProperty isRelatedToEvent;
+	ObjectProperty registrers;
+	ObjectProperty value;
+	ObjectProperty latitude;
+	ObjectProperty longitude;
 
 	public VitaOWL() {
 			omVita = createModel();
@@ -59,69 +61,94 @@ public class VitaOWL {
 		addProperties(om);
 		return om;
 	}
-	
+
 	public void addClasses(OntModel om) {
-		ocActivity 		= om.createClass( vita_ns + "Activity" 	);
-		ocUser			= om.createClass( vita_ns + "User"		);
-		ocOrganism 		= om.createClass( vita_ns + "Organism" 	);
-		ocEquipment 	= om.createClass( vita_ns + "Equipment" );
-		ocEvent 		= om.createClass( vita_ns + "Event" 	);
-		ocLocation 		= om.createClass( vita_ns + "Location" 	);
-		ocShowcase 		= om.createClass( vita_ns + "Showcase" 	);
-		ocDescription 	= om.createClass( vita_ns + "Description" );
-		ocPicture 		= om.createClass( vita_ns + "Picture" 	);
-		ocSector 		= om.createClass( vita_ns + "Sector" 	);
+		ocDataset		= om.createClass( Vita.getURI() + "Dataset" 	);
+		ocActivity 		= om.createClass( Vita.getURI() + "Activity" 	);
+		ocUser			= om.createClass( Vita.getURI() + "User"		);
+		ocOrganism 		= om.createClass( Vita.getURI() + "Organism" 	);
+		ocEquipment 	= om.createClass( Vita.getURI() + "Equipment" );
+		ocEvent 		= om.createClass( Vita.getURI() + "Event" 	);
+		ocLocation 		= om.createClass( Vita.getURI() + "Location" 	);
+		ocSector 		= om.createClass( Vita.getURI() + "Sector" 	);
 	}
 
 	public void addProperties(OntModel om) {
 		
-		/**
-		 * PROPERTIES : Domain ACTIVITY
-		 */	
 		
-		opTargetedOrganism = om.createObjectProperty(vita_ns+"targetedOrganism");
-		opTargetedOrganism.addRange(ocOrganism);
-		opTargetedOrganism.addDomain(ocActivity);
-
-		opUsedEquipment = om.createObjectProperty(vita_ns+"usedEquipment");
-		opUsedEquipment.addRange(ocEquipment);
-		opUsedEquipment.addDomain(ocActivity);
+	
+		 /**
+	     * Object properties
+	     */
 		
-		opIsRelatedToEvent = om.createObjectProperty( vita_ns + "isRelatedToEvent" );
-		opIsRelatedToEvent.addRange(ocEvent);
-		opIsRelatedToEvent.addDomain(ocActivity);
+		activity = om.createObjectProperty(Vita.NS +"activity");
+		activity.addRange(ocActivity);
+		activity.addDomain(ocDataset);
 
-		/**
-		 * PROPERTIES : DOMAIN Showcase
-		 */	
+		sector = om.createObjectProperty(Vita.NS +"sector");
+		sector.addRange(ocSector);
+		sector.addDomain(ocActivity);
 		
-		opHasLocation = om.createObjectProperty( vita_ns + "hasLocation" );
-		opHasLocation.addRange(ocLocation);
-		opHasLocation.addDomain(ocShowcase);
-			
-		opHasDescription = om.createObjectProperty( vita_ns + "hasDescription" );
-		opHasDescription.addRange(ocDescription);
-		opHasDescription.addDomain(ocShowcase);
-		opHasDescription.addIsDefinedBy(RDFS.Literal);
-			
-		opHasPicture = om.createObjectProperty( vita_ns + "hasPicture" );
-		opHasPicture.addRange(ocPicture);
-		opHasPicture.addDomain(ocShowcase);
-			
-		opHasSector = om.createObjectProperty( vita_ns + "hasPicture" );
-		opHasSector.addRange(ocSector);
-		opHasSector.addDomain(ocShowcase);
+		creator = om.createObjectProperty(Vita.NS + "creator" );
+		creator.addRange(ocUser);
+		creator.addDomain(ocActivity);
 
-		/**
-		 * PROPERTIES : RANGE Showcase
-		 */	
+		targetOrganism = om.createObjectProperty(Vita.NS + "targetOrganism" );
+		targetOrganism.addRange(ocOrganism);
+		targetOrganism.addDomain(ocActivity);
 			
-		opHasShowcase = om.createObjectProperty( vita_ns + "hasShowcase" );
-		opHasShowcase.addRange(ocShowcase);
-		opHasShowcase.addDomain(ocActivity);
-		opHasShowcase.addDomain(ocEquipment);
-		opHasShowcase.addDomain(ocOrganism);
-		opHasShowcase.addDomain(ocEvent);
+		location = om.createObjectProperty(Vita.NS + "location" );
+		location.addRange(ocLocation);
+		location.addDomain(ocActivity);
+			
+		equipments = om.createObjectProperty(Vita.NS + "equipment" );
+		equipments.addRange(ocEquipment);
+		equipments.addDomain(ocActivity);
+			
+		isRelatedToEvent = om.createObjectProperty(Vita.NS + "isRelatedToEvent" );
+		isRelatedToEvent.addRange(ocEvent);
+		isRelatedToEvent.addDomain(ocActivity);
+		
+		registrers = om.createObjectProperty(Vita.NS + "registrers" );
+		registrers.addRange(ocUser);
+		registrers.addDomain(ocEvent);
+		
+	    /**
+	     * Data properties
+	     */	
+		
+		value = om.createObjectProperty(Vita.NS + "value" );
+		value.addIsDefinedBy(RDFS.Literal);
+		value.addRange(ocSector);
+		value.addDomain(ocSector);
+		
+		value = om.createObjectProperty(Vita.NS + "value" );
+		value.addIsDefinedBy(RDFS.Literal);
+		value.addRange(ocEquipment);
+		value.addDomain(ocEquipment);
+		
+		value = om.createObjectProperty(Vita.NS + "value" );
+		value.addIsDefinedBy(RDFS.Literal);
+		value.addRange(ocEvent);
+		value.addDomain(ocEvent);
+		
+		
+		value = om.createObjectProperty(Vita.NS + "description" );
+		value.addIsDefinedBy(RDFS.Literal);
+		value.addRange(ocEvent);
+		value.addDomain(ocEvent);
+		
+		
+		latitude = om.createObjectProperty(Vita.NS + "latitude" );
+		latitude.addIsDefinedBy(RDFS.Literal);
+		latitude.addRange(ocLocation);
+		latitude.addDomain(ocLocation);
+		
+		longitude = om.createObjectProperty(Vita.NS + "longitude" );
+		longitude.addIsDefinedBy(RDFS.Literal);
+		longitude.addRange(ocLocation);
+		longitude.addDomain(ocLocation);
+
 		
 	 }
 	

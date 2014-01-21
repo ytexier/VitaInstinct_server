@@ -28,8 +28,17 @@ public abstract class AbstractActivity {
 	@Embedded
 	private Key<User> creator;
 	
-	public AbstractActivity() {
+	public AbstractActivity(){
 		
+	}
+	
+	public AbstractActivity(Organism organism, Key<User> creator, int amountOfOrganism, Location location, String sector, String date) {
+		this.organism = organism;
+		this.creator = creator;
+		this.amountOfOrganism = amountOfOrganism;
+		this.location = location;
+		this.sector = sector;
+		this.date = date;
 	}
 	
 	public abstract void accept(AgentJena agent);

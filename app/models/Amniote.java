@@ -1,12 +1,12 @@
 package models;
 
-public class Amniote extends Animal{
+public abstract class Amniote extends Animal{
 	public Amniote() {}
-	public Amniote(String _specie) {
-		super(_specie);
+	public Amniote(String specie, String url) {
+		super(specie, "amniote/" + url);
 	}
-	public Amniote(String _specie, Sex _sex) {
-		super(_specie, _sex);
+	public Amniote(String specie, Sex sex) {
+		super(specie, sex);
 	}
 
 }

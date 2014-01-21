@@ -25,13 +25,13 @@ public abstract class Organism {
 	
 	
 	public Organism(){}
-	public Organism(String _specie){
-		specie = _specie;
+	public Organism(String specie){
+		this.specie = specie;
 	}
 	
-	public Organism(String _specie, String url){
-		specie = _specie;
-		setURI(url + specie);
+	public Organism(String specie, String url){
+		this.specie = specie;
+		setURI(url + "#" + specie);
 	}
 	
 	public Organism(String _specie, Sex _sex){
@@ -65,7 +65,7 @@ public abstract class Organism {
 	}
 
 
-	public void setURI(String uRI) {
-		URI = uRI;
+	public void setURI(String url) {
+		URI = Vita.getURL() + "organism/" + url;
 	}
 }

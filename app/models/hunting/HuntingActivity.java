@@ -7,9 +7,9 @@ import models.ActivityEnding;
 
 import models.Location;
 import models.Mammal;
-
 import models.User;
 import models.factory.AbstractActivity;
+
 
 
 import org.bson.types.ObjectId;
@@ -19,6 +19,8 @@ import org.mongodb.morphia.annotations.Entity;
 
 
 
+import org.mongodb.morphia.annotations.Reference;
+
 import controllers.MorphiaObject;
 import agents.AgentJena;
 
@@ -27,22 +29,19 @@ import agents.AgentJena;
 public class HuntingActivity extends AbstractActivity{
 	
 	@Embedded
-	private Mammal organism;
-	@Embedded
 	private HuntingEvent event;
-	@Embedded
+	@Reference
 	private ArrayList<HuntingEquipment> equipments;
+
 	
-	public HuntingActivity(Mammal mammal, int amountOfOrganism, String date, Location location, Key<User> creator){
-		
-		organism = mammal;
+	public HuntingActivity(){
+
+	}
+	
+	public HuntingActivity(Mammal organism, int amountOfOrganism, String date, Location location, Key<User> creator){
+		super(organism, creator, amountOfOrganism, location, "hunting", date);	
 		equipments = new ArrayList<HuntingEquipment>();
 		event = new HuntingEvent();
-		super.setCreator(creator);
-		super.setAmountOfOrganism(amountOfOrganism);
-		super.setLocation(location);
-		super.setSector("hunting");
-		super.setDate(date);
 	}
 	
 
@@ -61,13 +60,6 @@ public class HuntingActivity extends AbstractActivity{
     	return activity;
     }
     
-    public Mammal getOrganism(){
-    	return organism;
-    }
-    
-	public void setOrganism(Mammal mammal){
-		super.setOrganism(mammal);
-	}
 
 	public void setDate(String _date) {
 		super.setDate(_date);		
