@@ -10,6 +10,7 @@ POST	/									controllers.Activities.newActivity()
 # Ontology
 
 GET			/ontology						controllers.VitaCtrl.make()
+GET			/jena/:organism					controllers.VitaCtrl.test(organism: String)
 
 
 # Application
