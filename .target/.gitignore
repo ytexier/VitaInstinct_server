@@ -5,6 +5,7 @@
 /agents
 /controllers
 <<<<<<< HEAD
+<<<<<<< HEAD
 /views
 /forms
 =======
@@ -12,3 +13,8 @@
 /forms
 /models
 >>>>>>> sparql
+=======
+/exceptions
+/forms
+/models
+>>>>>>> vita_inprogress
