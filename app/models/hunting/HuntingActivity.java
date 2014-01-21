@@ -1,5 +1,6 @@
 package models.hunting;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import models.ActivityEnding;
@@ -7,8 +8,11 @@ import models.Amniote;
 import models.Location;
 import models.User;
 import models.factory.AbstractActivity;
+import models.factory.AbstractEquipment;
+import models.factory.AbstractEvent;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
 import com.hp.hpl.jena.rdf.model.Model;
@@ -19,7 +23,20 @@ import agents.AgentManager;
 
 @Entity
 public class HuntingActivity extends AbstractActivity{
+	
+	@Embedded
+	private HuntingEvent event;
+	@Embedded
+	private ArrayList<HuntingEquipment> equipments;
+	
 
+
+	@Override
+	public void accept(AgentJena agent) {
+		agent.spy(this);
+	}
+
+	
     public static HuntingActivity findById(String id){
     	HuntingActivity activity = MorphiaObject.datastore.find(HuntingActivity.class)
     			.field("_id")
@@ -51,10 +68,25 @@ public class HuntingActivity extends AbstractActivity{
 	}
 
 
-	@Override
-	public void accept(AgentJena agent) {
-		agent.spy(this);
+	public HuntingEvent getEvent() {
+		return event;
 	}
+
+
+	public void setEvent(HuntingEvent event) {
+		this.event = event;
+	}
+
+
+	public ArrayList<HuntingEquipment> getEquipments() {
+		return equipments;
+	}
+
+
+	public void setEquipments(ArrayList<HuntingEquipment> equipments) {
+		this.equipments = equipments;
+	}
+	
 
 
 	

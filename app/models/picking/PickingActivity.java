@@ -1,14 +1,18 @@
 package models.picking;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import models.ActivityEnding;
 import models.Location;
 import models.Plant;
 import models.factory.AbstractActivity;
+import models.fishing.FishingEquipment;
+import models.fishing.FishingEvent;
 import models.hunting.HuntingActivity;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
 import controllers.MorphiaObject;
@@ -18,9 +22,17 @@ import agents.AgentManager;
 @Entity
 public class PickingActivity extends AbstractActivity{
 	
-	public void accept(AgentManager v){
-		v.spy(this);
-	}	
+	@Embedded
+	private PickingEvent event;
+	@Embedded
+	private ArrayList<PickingEquipment> equipments;
+	
+	
+	@Override
+	public void accept(AgentJena agent) {
+		agent.spy(this);
+	}
+	
 	
     public static PickingActivity findById(String id){
     	PickingActivity activity = MorphiaObject.datastore.find(PickingActivity.class)
@@ -47,10 +59,28 @@ public class PickingActivity extends AbstractActivity{
 	public void setAmountOfOrganism(Integer _amountOfOrganism){
 		super.setAmountOfOrganism(_amountOfOrganism);
 	}
-	
-	@Override
-	public void accept(AgentJena agent) {
-		agent.spy(this);
+
+
+	public PickingEvent getEvent() {
+		return event;
 	}
 
+
+	public void setEvent(PickingEvent event) {
+		this.event = event;
+	}
+
+
+	public ArrayList<PickingEquipment> getEquipments() {
+		return equipments;
+	}
+
+
+	public void setEquipments(ArrayList<PickingEquipment> equipments) {
+		this.equipments = equipments;
+	}
+	
+
+
+	
 }

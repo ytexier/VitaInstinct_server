@@ -4,6 +4,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
@@ -33,6 +34,7 @@ import com.hp.hpl.jena.vocabulary.VCARD;
 
 
 
+
 import models.Organism;
 import models.User;
 import models.Vita;
@@ -53,7 +55,7 @@ public class AgentJena extends AgentManager{
 	
 	OntModel jenaModel;
 	
-	private String db_activities = "db/vita_activities.rdf";
+	private String db_activities = "db/dbActivities.rdf";
 	
 	public AgentJena(){
 		try {
@@ -98,6 +100,11 @@ public class AgentJena extends AgentManager{
 	@Override
 	public void spy(HuntingActivity huntingActivity) {
 	
+		User _user = User.findById(huntingActivity.getCreator().getId().toString());
+		Organism _organism = huntingActivity.getOrganism();
+		HuntingEvent event = huntingActivity.getEvent();
+		ArrayList<HuntingEquipment> equipements = huntingActivity.getEquipments();
+		
 		Individual dataset = jenaModel
 				.createIndividual(Vita.getURI()+"dbActivities", jenaModel.getOntClass(Vita.VitaClass.Dataset.getNS()));
 		
@@ -112,10 +119,36 @@ public class AgentJena extends AgentManager{
 		
 		dataset.addProperty(Vita.activity, activity);
 		
+		//sector
 		Individual sector = jenaModel.createIndividual(Vita.getURI()+"sector",Vita.VitaClass.Sector.getOntClass(jenaModel));
 		sector.addLiteral(Vita.value,jenaModel.createTypedLiteral("hunting",XSDDatatype.XSDstring));
 		
+		//creator
+		Individual creator = jenaModel.createIndividual(Vita.getURI()+"user",Vita.VitaClass.User.getOntClass(jenaModel));		
+		creator.addProperty(VCARD.FN, _user.getFullName())
+			.addProperty(VCARD.Given, _user.getGivenName())
+			.addProperty(VCARD.Family, _user.getFamilyName())
+			.addProperty(VCARD.NICKNAME, _user.getNickName())
+			.addProperty(VCARD.EMAIL, _user.getEmail());
+		
+		//organism
+		Individual organism = jenaModel.createIndividual(Vita.getURI()+"organism",Vita.VitaClass.Organism.getOntClass(jenaModel));		
+		organism.addLiteral(Vita.value,jenaModel.createTypedLiteral(_organism.getSpecie(),XSDDatatype.XSDstring));
+		
+		//organism
+		Individual location = jenaModel.createIndividual(Vita.getURI()+"location",Vita.VitaClass.Location.getOntClass(jenaModel));		
+		location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(huntingActivity.getLocation().getLatPos(),XSDDatatype.XSDstring));
+		location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(huntingActivity.getLocation().getLongPos(),XSDDatatype.XSDstring));
+		
+		//equipments
+		Individual equipment = jenaModel.createIndividual(Vita.getURI()+"equipment",Vita.VitaClass.Equipment.getOntClass(jenaModel));		
+		organism.addLiteral(Vita.value,jenaModel.createTypedLiteral(_organism.getSpecie(),XSDDatatype.XSDstring));		
+		
 		activity.addProperty(Vita.sector, sector);
+		activity.addProperty(Vita.creator, creator);
+		activity.addProperty(Vita.targetOrganism, organism);
+		activity.addProperty(Vita.location, location);
+		
 		
 		this.writeRDF(jenaModel, db_activities);
 		

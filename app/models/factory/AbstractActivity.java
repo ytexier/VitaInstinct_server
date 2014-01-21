@@ -1,5 +1,6 @@
 package models.factory;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 import models.ActivityEnding;
@@ -35,6 +36,8 @@ public abstract class AbstractActivity {
 	@Embedded
 	private Key<User> creator;
 	private String creatorName;
+	
+
 
 	
 	public AbstractActivity() {

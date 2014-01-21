@@ -14,6 +14,7 @@ public class Vita {
 		User,
 		Activity,
 		Sector,
+		Location,
 		Organism,
 		Equipment,
 		Event;
@@ -62,6 +63,8 @@ public class Vita {
      * Data properties
      */
     public static final Property value = vita_m.createProperty(String.format(_NS, "value"));
+    public static final Property latitude = vita_m.createProperty(String.format(_NS, "value"));
+    public static final Property longitude = vita_m.createProperty(String.format(_NS, "value"));
 
 	
 	
