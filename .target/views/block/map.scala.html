@@ -64,6 +64,25 @@
 
     }
 
+    function initializeViewerMap() {
+        var user_id = document.cookie.split("=")[1];
+        var myLatlng = new google.maps.LatLng(44, 3.5);
+
+        var myOptions = {
+            zoom: 10,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+        $.get("/users/"+user_id+"/activities", function(data) {
+            $(".result").json(data);
+            
+        });
+
+    }
+
 	function addMarker(location) {
 	   	var marker = new google.maps.Marker({
 	     	position: location,

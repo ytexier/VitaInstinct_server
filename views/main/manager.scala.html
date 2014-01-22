@@ -1,35 +1,20 @@
-@(
-	activities		: List[models.factory.AbstractActivity], 
-	user			: User,
-    activityForm : Form[forms.AbstractActivityForm],
-    eventForm : Form[forms.AddEventForm],
-    equipmentForm : Form[forms.AddEquipmentForm],
-	addFriendForm	: Form[forms.AddFriendForm]
-	)
-	
+@(user	: User,
+activityForm : Form[forms.AbstractActivityForm],
+eventForm : Form[forms.AddEventForm],
+addFriendForm: Form[forms.AddFriendForm])
 
-	
 	<script>
 		$(function() {
 
-			//$("p").html("hunting");
-			//if(isEmpty($("#sector"))){
-				//alert("lol");
-				$("#menu_action").hide();
-			//}
-
-				//if(isEmpty($("#sector").val()){
-				//	alert("lol");
-				//}
+			$("p").html("hunting");
+			$("#menu_action").hide();
 			
 			hideAll();
 			
 			$("#hunting").click(function() {
 				hideAll();
 				$("#menu_action").hide();
-				$("#sector").val('hunting');
-                $("#eventSector").val('hunting');
-                $("#equipmentSector").val('hunting');
+				$("#sector").val('0')
 				$("#menu_action").show("");
 				$("#menu_action").css('background', 'darkkhaki');
 				$(this).css('background', 'darkkhaki');
@@ -40,9 +25,7 @@
 			$("#fishing").click(function() {
 				hideAll();
 				$("#menu_action").hide();
-				$("#sector").val('fishing');
-                $("#eventSector").val('fishing');
-                $("#equipmentSector").val('fishing');
+				$("#sector").val('1')
 				$("#menu_action").show("");
 				$("#menu_action").css('background', 'Turquoise');
 				$(this).css('background', 'Turquoise');
@@ -53,9 +36,7 @@
 			$("#picking").click(function() {
 				hideAll();
 				$("#menu_action").hide();
-				$("#sector").val('picking');
-                $("#eventSector").val('picking');
-                $("#equipmentSector").val('picking');
+				$("#sector").val('2')
 				$("#menu_action").show("");
 				$("#menu_action").css('background', 'springgreen');
 				$(this).css('background', 'springgreen');
@@ -68,11 +49,7 @@
 			});
 
             $("#btNewEvent").click(function() {
-                showNewEventForm();
-            });
-
-            $("#btNewEquipment").click(function() {
-                showNewEquipmentForm();
+                showNewActivityForm();
             });
 		  
 			$("#btEquipments").click(function() {
@@ -90,7 +67,6 @@
 			$("aside").hide();
 			$("#newActivityForm").hide();
             $("#newEventForm").hide();
-            $("#newEquipmentForm").hide();
 			$("#equipments").hide();
 			$("#viewer").hide();
 			$("#map").hide();
@@ -101,22 +77,15 @@
 			$("aside").show();
 			$("#newActivityForm").show("");
 			$("#map").show();
-			initializeActivityMap();
+			initializeActiityMap();
 		}
 
-        function showNewEventForm () {
+        function showNewEventForm() {
             hideAll();
             $("aside").show();
             $("#newEventForm").show("");
             $("#map").show();
             initializeEventMap();
-        }
-
-        function showNewEquipmentForm () {
-            hideAll();
-            $("aside").show();
-            $("#newEquipmentForm").show("");
-            $("#map").show();
         }
 		
 		function showEquipments(){
@@ -130,14 +99,10 @@
 			$("aside").show("");
 			$("#viewer").show("");
 			$("#map").show();
-			initializeViewerMap();
+			initializeMap();
 		}
 		
 	</script>
-		
-		
-		
-		
 					
 	<header>
 		@header(user, addFriendForm)
@@ -148,10 +113,9 @@
 	<article>
 	
 		<aside>
-            <div id="newActivityForm">@block.newActivityForm(user, activityForm)</div>
+			<div id="newActivityForm">@block.newActivityForm(user, activityForm)</div>
             <div id="newEventForm">@block.newEventForm(user, eventForm)</div>
-            <div id="newEquipmentForm">@block.newEquipmentForm(user, equipmentForm)</div>
-			<div id="viewer">@block.viewer(activities)</div>
+			<div id="viewer">@block.viewer(user, activityForm)</div>
 			<div id="equipments">@block.equipments(user, activityForm)</div>
 		</aside>
 		
@@ -162,11 +126,4 @@
 	<footer>
 		@footer(user)
 	</footer>
-	
-	
-	
-	
-	
-	
-	
 
