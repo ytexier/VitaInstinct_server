@@ -11,43 +11,27 @@ import org.apache.jena.riot.RDFFormat;
 
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.DC;
-import com.hp.hpl.jena.vocabulary.RDF;
 import com.hp.hpl.jena.vocabulary.RDFS;
-
-
-
-
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.util.FileManager;
-import com.hp.hpl.jena.vocabulary.VCARD;
 
-
-
-
-
-
-
-
-
-
-import models.Mammal;
+import models.Location;
 import models.Organism;
 import models.User;
 import models.Vita;
-import models.fishing.FishingAccessory;
+import models.factory.AbstractEquipment;
 import models.fishing.FishingActivity;
 import models.fishing.FishingEquipment;
 import models.fishing.FishingEvent;
-import models.hunting.HuntingAccessory;
 import models.hunting.HuntingActivity;
 import models.hunting.HuntingEquipment;
 import models.hunting.HuntingEvent;
-import models.picking.PickingAccessory;
 import models.picking.PickingActivity;
 import models.picking.PickingEquipment;
 import models.picking.PickingEvent;
@@ -76,97 +60,91 @@ public class AgentJena extends AgentManager{
 		return jenaModel;
 	}
 	
+	
+	
 	/**
 	 * USER
 	 */
 	
 	@Override
 	public void spy(User user) {
-
 		/*
+		model = ModelFactory.createDefaultModel();
+		
 		Vita.rscUser = model.createResource(user.getURI())
 		    .addProperty(VCARD.FN,user.getFullName())
 			.addProperty(VCARD.Given,user.getGivenName())
 			.addProperty(VCARD.Family,user.getFamilyName())
 			.addProperty(VCARD.NICKNAME, user.getNickName())
 			.addProperty(VCARD.EMAIL, user.getEmail());
+		
+		return model;
 		*/
-
 	}
+
+	
 	
 	/**
 	 * ACTIVITY
 	 */
 
 	@Override
-	public void spy(HuntingActivity activity) {
+	public Model spy(HuntingActivity activity) {
 	
-		User user = User.findById(activity.getCreator().getId().toString());
-		Organism organism = activity.getOrganism();
-		HuntingEvent event = activity.getEvent();
-		ArrayList<HuntingEquipment> equipements = (ArrayList<HuntingEquipment>) activity.getEquipments();
-		
-		Individual dataset = jenaModel
-				.createIndividual(Vita.getURI()+"dbActivities", jenaModel.getOntClass(Vita.VitaClass.Dataset.getNS()));
-		
-		Vita.VitaClass.Activity.createOntClass(jenaModel);
-		Vita.VitaClass.Sector.createOntClass(jenaModel);
-		Vita.VitaClass.User.createOntClass(jenaModel);
+		String 			idActivity = activity.getId().toString();	
+		User 			creator = User.findById(activity.getCreator().getId().toString());
+		Organism 		organism = activity.getOrganism();
+		String 			label = activity.getLabel();
+		HuntingEvent	event = activity.getEvent();
+
+		//Resource Activity
+		Resource _activity = jenaModel.createResource(activity.getURI());
+	
+		//Organism : targetOrganism
 		Vita.VitaClass.Organism.createOntClass(jenaModel);
-		Vita.VitaClass.Equipment.createOntClass(jenaModel);
-		Vita.VitaClass.Event.createOntClass(jenaModel);
+		Individual _organism = jenaModel.createIndividual(organism.getURI(), Vita.VitaClass.Organism.getOntClass(jenaModel));
 		
-		Individual _activity = jenaModel.createIndividual(Vita.VitaClass.Activity.getOntClass(jenaModel));
-		
-		dataset.addProperty(Vita.activity, _activity);
-		
-		//sector
-		Individual _sector = jenaModel.createIndividual(Vita.getURI()+"sector", Vita.VitaClass.Sector.getOntClass(jenaModel));
-		_sector.addLiteral(Vita.value,jenaModel.createTypedLiteral("hunting", XSDDatatype.XSDstring));
-		
-		//creator
-		Individual _creator = jenaModel.createIndividual(Vita.getURI()+"user",Vita.VitaClass.User.getOntClass(jenaModel));		
-		_creator.addProperty(VCARD.FN, user.getFullName())
-			.addProperty(VCARD.Given, user.getGivenName())
-			.addProperty(VCARD.Family, user.getFamilyName())
-			.addProperty(VCARD.NICKNAME, user.getNickName())
-			.addProperty(VCARD.EMAIL, user.getEmail());
-		
-		//organism
-		Individual _organism = jenaModel.createIndividual(Vita.getURI()+"organism", Vita.VitaClass.Organism.getOntClass(jenaModel));		
-		_organism.addLiteral(Vita.value,jenaModel.createTypedLiteral("osef", XSDDatatype.XSDstring));
-		
-		//organism
-		Individual _location = jenaModel.createIndividual(Vita.getURI()+"location", Vita.VitaClass.Location.getOntClass(jenaModel));		
+		//Location : location
+		Vita.VitaClass.Location.createOntClass(jenaModel);
+		Individual _location = jenaModel.createIndividual(Vita.getURL()+"location/"+idActivity, Vita.VitaClass.Location.getOntClass(jenaModel));		
 		_location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(activity.getLocation().getLatPos(),XSDDatatype.XSDstring));
 		_location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(activity.getLocation().getLongPos(),XSDDatatype.XSDstring));
+	
+		//List Equipment : equipments
+		Vita.VitaClass.Equipment.createOntClass(jenaModel);
+		ArrayList<Individual> _equipments = new ArrayList<Individual>();
+		//for(AbstractEquipment equipment : activity.getEquipments())
+			//_equipments.add(jenaModel.createIndividual(equipment.getURI(), Vita.VitaClass.Equipment.getOntClass(jenaModel)));		
 		
-		//equipments
-		Individual _equipment = jenaModel.createIndividual(Vita.getURI()+"equipment", Vita.VitaClass.Equipment.getOntClass(jenaModel));		
-		_equipment.addLiteral(Vita.value,jenaModel.createTypedLiteral("osef", XSDDatatype.XSDstring));		
+		//Event : isRelatedTo
+		Vita.VitaClass.Event.createOntClass(jenaModel);
+		Individual _event = jenaModel.createIndividual(event.getURI(), Vita.VitaClass.Organism.getOntClass(jenaModel));	
 		
-		
-		
-		_activity.addProperty(Vita.sector, _sector);
-		_activity.addProperty(Vita.creator, _creator);
+		//Add Properties
+		_activity.addProperty(RDFS.label, label);
+		_activity.addProperty(DC.creator, creator.getFullName());
 		_activity.addProperty(Vita.targetOrganism, _organism);
 		_activity.addProperty(Vita.location, _location);
-		_activity.addProperty(Vita.equipments, _equipment);
-		
+		for(Individual e : _equipments)
+			_activity.addProperty(Vita.equipments, e);
+		_activity.addProperty(Vita.isRelatedTo, _event);
 		
 		this.writeRDF(jenaModel, db_activities);
-		
-	}
 	
+		return jenaModel;
+	
+	}
+
+
 
 	@Override
-	public void spy(PickingActivity pickingActivity) {
-		
+	public Model spy(PickingActivity activity) {
+		return jenaModel;
 	}
 
 	@Override
-	public void spy(FishingActivity fishingActivity) {
-		
+	public Model spy(FishingActivity activity) {
+		return jenaModel;
 	}
 	
 	/**
@@ -174,15 +152,32 @@ public class AgentJena extends AgentManager{
 	 */
 
 	@Override
-	public void spy(HuntingEquipment huntingEquipment) {
+	public Model spy(HuntingEquipment equipment) {
+		
+		String 			idEquipment = equipment.getId().toString();	
+		User 			creator = User.findById(equipment.getCreator().getId().toString());
+		String 			label = equipment.getLabel();
+		String 			comment = equipment.getComment();
+		
+		//Resource Equipment
+		Resource _equipment = jenaModel.createResource(equipment.getURI());
+		
+		//Add Properties
+		_equipment.addProperty(RDFS.label, label);
+		_equipment.addProperty(DC.creator, creator.getFullName());
+		_equipment.addProperty(RDFS.comment, comment);	
+	
+		return jenaModel;
 	}
 
 	@Override
-	public void spy(PickingEquipment pickingEquipment) {
+	public Model spy(PickingEquipment equipment) {
+		return jenaModel;
 	}
 
 	@Override
-	public void spy(FishingEquipment fishingEquipment) {
+	public Model spy(FishingEquipment equipment) {
+		return jenaModel;
 	}
 	
 	/**
@@ -190,21 +185,65 @@ public class AgentJena extends AgentManager{
 	 */
 
 	@Override
-	public void spy(HuntingEvent huntingEvent) {
+	public Model spy(HuntingEvent event) {
+	
+		String		idEvent = event.getId().toString();
+		User 		creator = User.findById(event.getCreator().getId().toString());
+		String 		label = event.getLabel();
+		String 		comment = event.getComment();
+		String 		date = event.getDate();
+		Location	location = event.getLocation();
+		
+		ArrayList<HuntingActivity> 	activities = event.getActivities();
+		ArrayList<User> 			registers = event.getRegisters();	
+		
+		//Resource Event
+		Resource _event = jenaModel.createResource(event.getURI());
+		
+		//Location
+		Vita.VitaClass.Location.createOntClass(jenaModel);
+		Individual _location = jenaModel.createIndividual(event.getURI()+"/location", Vita.VitaClass.Location.getOntClass(jenaModel));		
+		_location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(event.getLocation().getLatPos(),XSDDatatype.XSDstring));
+		_location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(event.getLocation().getLongPos(),XSDDatatype.XSDstring));
+	
+		//Activities
+		ArrayList<Individual> _activities = new ArrayList<Individual>();
+		for(HuntingActivity activity : activities)
+			_activities.add(jenaModel.createIndividual(Vita.getURL()+"activity/"+activity.getId().toString(), Vita.VitaClass.Location.getOntClass(jenaModel)));		
+		
+		//Registers
+		ArrayList<Individual> _registers = new ArrayList<Individual>();
+		for(User register : registers)
+			_registers.add(jenaModel.createIndividual(Vita.getURL()+"user/"+register.getId().toString(), Vita.VitaClass.Location.getOntClass(jenaModel)));		
+		
+		//Add properties
+		_event.addProperty(RDFS.label,label);
+		_event.addProperty(DC.creator, creator.getFullName());
+		_event.addProperty(RDFS.comment, comment);	
+		for(Individual e : _activities)
+			_event.addProperty(Vita.activities, e);
+		for(Individual r : _registers)
+			_event.addProperty(Vita.registers, r);
+		
+		this.writeRDF(jenaModel, db_activities);
+		
+		return jenaModel;
 	}
 
 	@Override
-	public void spy(PickingEvent pickingEvent) {
+	public Model spy(PickingEvent event) {
+		return jenaModel;
 	}
 
 	@Override
-	public void spy(FishingEvent fishingEvent) {
+	public Model spy(FishingEvent event) {
+		return jenaModel;
 	}
 
 	/**
 	 * ACCESSORY
 	 */
-	
+	/*
 	@Override
 	public void spy(HuntingAccessory huntingAccessory) {
 	}
@@ -216,15 +255,18 @@ public class AgentJena extends AgentManager{
 	@Override
 	public void spy(FishingAccessory fishingAccessory) {
 	}
-
+	*/
 	/**
 	 * ORGANISM
 	 */
 	
 	@Override
-	public void spy(Organism organism) {
-
+	public Model spy(Organism organism) {
+		return jenaModel;
 	}
+	
+	
+	
 
 
 	
@@ -255,12 +297,11 @@ public class AgentJena extends AgentManager{
 		model = ModelFactory.createUnion(model_loaded, model);
 		writeOutput(model, db);
 	}
+
+
 	
-	//TODO
-	//TODO
-	/*
-	import org.restlet.data.MediaType;
-    
+
+    /*
 	public void write(OutputStream output) {
 	        if (mediaType.equals(MediaType.APPLICATION_RDF_XML))
 	            //jenaModel.write(output,"RDF/XML");  //this is faster

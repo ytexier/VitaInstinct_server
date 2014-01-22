@@ -36,26 +36,52 @@ GET			/users/:user_id/activities			controllers.Users.activities(user_id: String)
 GET			/users/:user_id/friends				controllers.Users.friends(user_id: String)
 
 
-POST		/users/:user_id						controllers.Activities.add(user_id: String)
+#POST		/users/:user_id						controllers.Activities.add(user_id: String)
 
 
 
 
 POST    	/addFriend                  		controllers.Users.addFriend()
 
-# Activities
+#
+#GET	OBJECTS
+#
+GET		/sector/hunting/activity/:id			controllers.Activities.get(id: String, sector = "hunting")
+GET		/sector/fishing/activity/:id			controllers.Activities.get(id: String, sector = "fishing")
+GET		/sector/picking/activity/:id			controllers.Activities.get(id: String, sector = "picking")
 
-GET			/activities/hunting/:activity_id	controllers.Activities.getFromHunt(activity_id: String)
-GET			/activities/picking/:activity_id	controllers.Activities.getFromPick(activity_id: String)
-GET			/activities/fishing/:activity_id	controllers.Activities.getFromFish(activity_id: String)
+#GET		/sector/hunting/event/:id				controllers.Events.get(id: String, sector = "hunting")
+#GET		/sector/fishing/event/:id				controllers.Events.get(id: String, sector = "fishing")
+#GET		/sector/picking/event/:id				controllers.Events.get(id: String, sector = "picking")
+
+#GET		/sector/hunting/equipment/:id			controllers.Equipments.get(id: String, sector = "hunting")
+#GET		/sector/fishing/equipment/:id			controllers.Equipments.get(id: String, sector = "fishing")
+#GET		/sector/picking/equipment/:id			controllers.Equipments.get(id: String, sector = "picking")
+
+#GET		/organism/amniote/:id					controllers.Organisms.get(id: String, sector = "hunting")
+#GET		/organism/fish/:id						controllers.Organisms.get(id: String, sector = "fishing")
+#GET		/organism/plant/:id						controllers.Organisms.get(id: String, sector = "picking")
+
+#GET		/sector/hunting/activity/:id/location	controllers.Activities.getLocation(id: String, sector = "hunting")
+#GET		/sector/fishing/activity/:id/location	controllers.Activities.getLocation(id: String, sector = "fishing")
+#GET		/sector/picking/activity/:id/location	controllers.Activities.getLocation(id: String, sector = "picking")
+
+#GET		/sector/hunting/event/:id/location		controllers.Events.getLocation(id: String, sector = "hunting")
+#GET		/sector/fishing/event/:id/location		controllers.Events.getLocation(id: String, sector = "fishing")
+#GET		/sector/picking/event/:id/location		controllers.Events.getLocation(id: String, sector = "picking")
+
+
+
+
 
 GET			/activities/hunting/:activity_id/creator controllers.Activities.creator(activity_id: String, sector = "hunting")
 GET			/activities/picking/:activity_id/creator controllers.Activities.creator(activity_id: String, sector = "picking")
 GET			/activities/fishing/:activity_id/creator controllers.Activities.creator(activity_id: String, sector = "fishing")
 
-POST    	/activities/hunting/:id/delete         controllers.Activities.deleteHunting(id: String)
-POST    	/activities/picking/:id/delete         controllers.Activities.deleteFishing(id: String)
-POST    	/activities/fishing/:id/delete         controllers.Activities.deletePicking(id: String)
+POST		/sector/hunting/activity/:id/delete		controllers.Activities.delete(id: String, sector = "hunting")
+POST		/sector/hunting/activity/:id/delete		controllers.Activities.delete(id: String, sector = "fishing")
+POST		/sector/hunting/activity/:id/delete		controllers.Activities.delete(id: String, sector = "picking")
+
 
 # Comments
 #GET		/:object_id/comment		controllers.Comments.list(object_id: String)

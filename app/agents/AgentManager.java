@@ -1,6 +1,8 @@
 package agents;
 
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 import models.Organism;
 import models.User;
 import models.fishing.FishingAccessory;
@@ -20,23 +22,24 @@ public abstract class AgentManager {
 	
 	public abstract void spy(User user);
 	
-	public abstract void spy(HuntingActivity huntingActivity);
-	public abstract void spy(PickingActivity pickingActivity);
-	public abstract void spy(FishingActivity fishingActivity);
+	public abstract Model spy(HuntingActivity activity);
+	public abstract Model spy(PickingActivity activity);
+	public abstract Model spy(FishingActivity activity);
 	
-	public abstract void spy(HuntingEquipment huntingEquipment);
-	public abstract void spy(PickingEquipment pickingEquipment);
-	public abstract void spy(FishingEquipment fishingEquipment);
+	public abstract Model spy(HuntingEquipment equipment);
+	public abstract Model spy(PickingEquipment equipment);
+	public abstract Model spy(FishingEquipment equipment);
 	
-	public abstract void spy(HuntingEvent huntingEvent);
-	public abstract void spy(PickingEvent pickingEvent);
-	public abstract void spy(FishingEvent fishingEvent);
+	public abstract Model spy(HuntingEvent event);
+	public abstract Model spy(PickingEvent event);
+	public abstract Model spy(FishingEvent event);
 	
-	public abstract void spy(HuntingAccessory huntingAccessory);
-	public abstract void spy(PickingAccessory pickingAccessory);
-	public abstract void spy(FishingAccessory fishingAccessory);
+	//next time
+	//public abstract void spy(HuntingAccessory huntingAccessory);
+	//public abstract void spy(PickingAccessory pickingAccessory);
+	//public abstract void spy(FishingAccessory fishingAccessory);
 	
-	public abstract void spy(Organism organism);
+	public abstract Model spy(Organism organism);
 
 	
 }

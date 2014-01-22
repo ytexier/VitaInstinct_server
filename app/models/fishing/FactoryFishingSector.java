@@ -12,8 +12,8 @@ import models.factory.FactorySector;
 public class FactoryFishingSector extends FactorySector{
 
 	@Override
-	public FishingActivity createActivity(String organism, int amountOfOrganism, String date, Location location, Key<User> creator) {
-		return (new FishingActivity(new Fish(organism), amountOfOrganism, date, location, creator));
+	public FishingActivity createActivity(String organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment) {
+		return new FishingActivity(organism, amountOfOrganism, date, location, creator, event, equipment);
 	}
 
 	@Override
@@ -35,6 +35,7 @@ public class FactoryFishingSector extends FactorySector{
 		// TODO Auto-generated method stub
 		return new FishingEvent(label, date, comment, location, creator);
 	}
+
 
 	
 

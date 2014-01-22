@@ -11,8 +11,8 @@ import models.User;
 import models.factory.AbstractActivity;
 
 
-
-import models.fishing.FishingEquipment;
+import models.factory.AbstractEquipment;
+import models.factory.AbstractEvent;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
@@ -23,6 +23,8 @@ import org.mongodb.morphia.annotations.Entity;
 
 import org.mongodb.morphia.annotations.Reference;
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 import controllers.MorphiaObject;
 import agents.AgentJena;
 
@@ -30,27 +32,24 @@ import agents.AgentJena;
 @Entity
 public class HuntingActivity extends AbstractActivity{
 	
-	@Embedded
-	private HuntingEvent event;
-	@Reference
-	private ArrayList<HuntingEquipment> equipments;
+	@Embedded	private HuntingEvent event;
+	@Embedded	private HuntingEquipment equipment;
 
 	
 	public HuntingActivity(){
 
 	}
 	
-	public HuntingActivity(Mammal organism, int amountOfOrganism, String date, Location location, Key<User> creator){
+	public HuntingActivity(Mammal organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
 		super(organism, creator, amountOfOrganism, location, "hunting", date);	
-		equipments = new ArrayList<HuntingEquipment>();
-		event = new HuntingEvent();
+		this.equipment = (HuntingEquipment) equipment;
+		this.event = (HuntingEvent) event;
 	}
 	
 	@Override
-	public void accept(AgentJena agent) {
-		agent.spy(this);
+	public Model accept(AgentJena agent) {
+		return agent.spy(this);
 	}
-
 	
     public static HuntingActivity findById(String id){
     	HuntingActivity activity = MorphiaObject.datastore.find(HuntingActivity.class)
@@ -89,12 +88,12 @@ public class HuntingActivity extends AbstractActivity{
 		this.event = event;
 	}
 
-	public ArrayList<HuntingEquipment> getEquipments() {
-		return equipments;
+	public HuntingEquipment getEquipment() {
+		return equipment;
 	}
 
-	public void setEquipments(ArrayList<HuntingEquipment> equipments) {
-		this.equipments = equipments;
+	public void setEquipment(HuntingEquipment equipment) {
+		this.equipment = equipment;
 	}
 
 	

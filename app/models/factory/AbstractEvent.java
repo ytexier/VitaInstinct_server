@@ -5,12 +5,15 @@ import java.util.List;
 
 import models.Location;
 import models.User;
+import models.Vita;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
+
+import com.hp.hpl.jena.rdf.model.Model;
 
 import agents.AgentJena;
 
@@ -25,8 +28,10 @@ public abstract class AbstractEvent {
 	private Location location;
 	@Embedded
 	private Key<User> creator;
+	private String uri;
 	
 	@Reference private ArrayList<User> registers;
+
 	
 	public AbstractEvent() {}
 	
@@ -38,6 +43,7 @@ public abstract class AbstractEvent {
 		this.date = date;
 		this.comment = comment;
 		this.location = location;
+		this.setURI(Vita.getURL() + "sector/" + sector + "/event/" + id);
 		this.creator = creator;
 		this.registers = new ArrayList<User>();
 	}
@@ -46,7 +52,7 @@ public abstract class AbstractEvent {
 		this.registers.add(user);
 	}	
 	
-	public abstract void accept(AgentJena agentJena);
+	public abstract Model accept(AgentJena agent);
 
 	public ObjectId getId() {
 		return id;
@@ -87,7 +93,7 @@ public abstract class AbstractEvent {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-	
+
 	public Key<User> getCreator() {
 		return creator;
 	}
@@ -96,7 +102,7 @@ public abstract class AbstractEvent {
 		this.creator = creator;
 	}
 	
-	public List<User> getRegisters() {
+	public ArrayList<User> getRegisters() {
 		return registers;
 	}
 	
@@ -110,6 +116,14 @@ public abstract class AbstractEvent {
 	
 	public void setLabel(String label) {
 		this.label = label;
+	}
+
+	public String getURI() {
+		return uri;
+	}
+
+	public void setURI(String uri) {
+		this.uri = uri;
 	}
 
 }

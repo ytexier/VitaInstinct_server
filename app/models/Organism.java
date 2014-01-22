@@ -31,7 +31,7 @@ public abstract class Organism {
 	
 	public Organism(String specie, String url){
 		this.specie = specie;
-		setURI(url + "#" + specie);
+		setURI(url + specie);
 	}
 	
 	public Organism(String _specie, Sex _sex){

@@ -7,12 +7,16 @@ import models.ActivityEnding;
 import models.Location;
 import models.Organism;
 import models.User;
+import models.Vita;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
+
+import com.hp.hpl.jena.rdf.model.Model;
+import com.sun.org.apache.xml.internal.utils.URI;
 
 import agents.AgentJena;
 
@@ -22,6 +26,7 @@ public abstract class AbstractActivity {
 	private ObjectId id;
 	private String date;
 	private String sector;
+	private String uri;
 	
 	@Embedded 
 	private Location location;
@@ -32,7 +37,7 @@ public abstract class AbstractActivity {
 	@Embedded
 	private Key<User> creator;
 	
-	@Reference
+	@Embedded
 	private AbstractEvent event;
 	
 	public AbstractActivity(){
@@ -46,9 +51,10 @@ public abstract class AbstractActivity {
 		this.location = location;
 		this.sector = sector;
 		this.date = date;
+		this.uri = Vita.getURL() + "sector/" + sector + "/activity/" + id;
 	}
 	
-	public abstract void accept(AgentJena agent);
+	public abstract Model accept(AgentJena agent);
 
     public ObjectId getId() {
 		return id;
@@ -99,6 +105,18 @@ public abstract class AbstractActivity {
 
 	public void setSector(String sector){
 		this.sector = sector;
+	}
+	
+	public String getLabel(){
+		return sector+"|"+date+"|"+organism.getSpecie();
+	}
+
+	public String getURI() {
+		return uri;
+	}
+
+	public void setURI(String uri) {
+		this.uri = uri;
 	}
 
 	public AbstractEvent getEvent() {

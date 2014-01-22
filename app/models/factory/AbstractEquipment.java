@@ -1,10 +1,13 @@
 package models.factory;
 
 import models.User;
+import models.Vita;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Id;
+
+import com.hp.hpl.jena.rdf.model.Model;
 
 import agents.AgentJena;
 
@@ -15,10 +18,11 @@ public abstract class AbstractEquipment {
 	private String sector;
 	private String label;
 	private String comment;
+	private String uri;
 
 	private Key<User> creator;
 	
-	public abstract void accept(AgentJena agentJena);
+	public abstract Model accept(AgentJena agent);
 	
 	public AbstractEquipment() {}
 
@@ -29,8 +33,8 @@ public abstract class AbstractEquipment {
 		this.label = label;
 		this.comment = comment;
 		this.creator = creator;
+		this.uri = Vita.getURL() + "sector/" + sector + "/equipment/" + id;
 	}
-	
 	
 
 	public ObjectId getId() {
@@ -71,5 +75,13 @@ public abstract class AbstractEquipment {
 
 	public void setCreator(Key<User> creator) {
 		this.creator = creator;
+	}
+
+	public String getURI() {
+		return uri;
+	}
+
+	public void setURI(String uri) {
+		this.uri = uri;
 	}
 }

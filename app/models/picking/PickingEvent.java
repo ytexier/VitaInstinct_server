@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 import agents.AgentJena;
 import agents.AgentManager;
 import models.Location;
@@ -17,6 +19,7 @@ import models.hunting.HuntingActivity;
 @Entity
 public class PickingEvent extends AbstractEvent {
 	
+
 	private ArrayList<PickingActivity> activities;
 	
 	public PickingEvent() {
@@ -35,13 +38,16 @@ public class PickingEvent extends AbstractEvent {
 		this.activities.add(activity);
 	}
 
-	public void accept(AgentManager v){
-		v.spy(this);
+	@Override
+	public Model accept(AgentJena agent) {
+		return agent.spy(this);
+	}
+	
+	public ArrayList<PickingActivity> getActivities() {
+		return activities;
 	}
 
-	@Override
-	public void accept(AgentJena agentJena) {
-		// TODO Auto-generated method stub
-		
-	}	
+	public void setActivities(ArrayList<PickingActivity> activities) {
+		this.activities = activities;
+	}
 }
