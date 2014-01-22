@@ -23,11 +23,11 @@
         </vita:sector>
         <vita:creator>
           <vita:User rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#user">
-            <vcard:EMAIL>yohan.texier@gmail.com</vcard:EMAIL>
-            <vcard:NICKNAME>das</vcard:NICKNAME>
-            <vcard:Family>texier</vcard:Family>
-            <vcard:Given>yohan</vcard:Given>
             <vcard:FN>yohan texier</vcard:FN>
+            <vcard:Given>yohan</vcard:Given>
+            <vcard:Family>texier</vcard:Family>
+            <vcard:NICKNAME>das</vcard:NICKNAME>
+            <vcard:EMAIL>yohan.texier@gmail.com</vcard:EMAIL>
           </vita:User>
         </vita:creator>
         <vita:targetOrganism>
@@ -39,17 +39,21 @@
         <vita:location>
           <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#location">
             <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >43.88777945210311</vita:latitude>
-            <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >2.46917724609375</vita:longitude>
-            <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >3.5760498046875</vita:longitude>
-            <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >44.30244506946567</vita:latitude>
+            >44.09371890662973</vita:latitude>
             <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
             >3.083038330078125</vita:longitude>
             <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >44.09371890662973</vita:latitude>
+            >44.30244506946567</vita:latitude>
+            <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >3.5760498046875</vita:longitude>
+            <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >2.46917724609375</vita:longitude>
+            <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >43.88777945210311</vita:latitude>
+            <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >3.60626220703125</vita:longitude>
+            <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+            >43.98018550553001</vita:latitude>
           </rdf:Description>
         </vita:location>
         <vita:equipments>
@@ -58,6 +62,15 @@
             >osef</vita:value>
           </vita:Equipment>
         </vita:equipments>
+      </vita:Activity>
+    </vita:activity>
+    <vita:activity>
+      <vita:Activity>
+        <vita:sector rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#sector"/>
+        <vita:creator rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#user"/>
+        <vita:targetOrganism rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#organism"/>
+        <vita:location rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#location"/>
+        <vita:equipments rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#equipment"/>
       </vita:Activity>
     </vita:activity>
     <vita:activity>

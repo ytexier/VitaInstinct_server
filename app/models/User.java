@@ -91,6 +91,14 @@ import java.util.Date;
 				.get();
 		return user;
 	}
+	
+	public ArrayList<AbstractEquipment> getEquipments() {
+		return this.equipments;
+	}
+	
+	public ArrayList<AbstractEvent> getEvents() {
+		return this.events;
+	}
    
 	
 	

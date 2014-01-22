@@ -152,7 +152,8 @@ public class Activities extends Controller {
         else {
         	
         		SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
-        	
+        		String eventId = filledForm.get().eventId;
+        		String equipmentId = filledForm.get().equipmentId;
 				String sector = filledForm.get().sector;
 				Date date =	filledForm.get().date;
 				int amountOfOrganism = Integer.parseInt(filledForm.get().amountOfOrganism);
@@ -177,6 +178,12 @@ public class Activities extends Controller {
 				
 				User user = User.findByEmail(request().username());
 				Key<User> creatorKey = MorphiaObject.datastore.getKey(user);
+				
+				/*
+				 * MORPHIA REQUESTS 
+				 * GET EVENT BY ID
+				 * GET EQUIPMENT BY ID
+				 */
 						
 				aActivity = factorySector.createActivity(specie, amountOfOrganism, formattedDate, location, creatorKey);
 

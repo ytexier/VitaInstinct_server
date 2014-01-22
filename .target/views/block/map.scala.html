@@ -66,6 +66,7 @@
 
     function initializeViewerMap() {
 
+        markers = [];
         var user_id = document.cookie.split("=")[1];
         console.log(document.cookie);
         var myLatlng = new google.maps.LatLng(44, 3.5);
@@ -80,6 +81,9 @@
 
         $.getJSON("/users/"+user_id+"/activities", function(data) {
            console.log(data);
+            for(var i in data) {
+                addViewerMarker(data[i]);
+            }
         });
 
     }
@@ -91,6 +95,59 @@
 	   	});
 	   	markers.push(marker);
  	}
+
+    function addViewerMarker(activity) {
+
+        var infoWindow = new google.maps.InfoWindow();
+        var activityLatLng = new google.maps.LatLng(activity.location.latPos, activity.location.longPos);
+        var organism = activity.organism.specie;
+        var contentString = activity.amountOfOrganism+" "+organism+" "+activity.activityEnding+"(s)"
+                +" le "+activity.date+" aux alentours de ";
+        var iconColor = "";
+        if(activity.sector == "hunting" ) {
+            iconColor = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";
+        }
+        else if(activity.sector == "fishing") {
+            iconColor = "http://maps.google.com/mapfiles/ms/icons/blue-dot.png";
+        }
+        else if(activity.sector == "picking") {
+            iconColor = "http://maps.google.com/mapfiles/ms/icons/green-dot.png";
+        }
+        else {
+            iconColor = "http://maps.google.com/mapfiles/ms/icons/purple-dot.png";
+        }
+        var marker = new google.maps.Marker();
+        /*
+        var marker = new google.maps.Marker({
+            position: activityLatLng,
+            map: map,
+            title: organism
+        });
+        */
+        var geocoder = new google.maps.Geocoder();
+        geocoder.geocode({'latLng': activityLatLng}, function(results, status) {
+            if(status == google.maps.GeocoderStatus.OK) {
+                if(results[1]) {
+                    marker = new google.maps.Marker({
+                        position: activityLatLng,
+                        map: map,
+                        title: organism,
+                        icon: iconColor
+                    });
+                    infoWindow.setContent(contentString+results[1].formatted_address);
+                    google.maps.event.addListener(marker, 'click', function() {
+                        infoWindow.open(map,marker);
+                    });
+                }
+            }
+        });
+
+
+
+
+
+        markers.push(marker);
+    }
 
 	function setAllMap(map) {
 		for (var i = 0; i < markers.length; i++) {
