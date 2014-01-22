@@ -172,7 +172,7 @@ public class AgentJena extends AgentManager{
 	 */
 
 	@Override
-	public void spy(HuntingActivity activity) {
+	public Model spy(HuntingActivity activity) {
 		
 		User user = User.findById(activity.getCreator().getId().toString());
 		Organism organism = activity.getOrganism();
@@ -201,19 +201,21 @@ public class AgentJena extends AgentManager{
 		for(Individual i : _equipments)
 			_activity.addProperty(Vita.equipments, i);
 		
-		this.writeRDF(jenaModel, db_activities);
+		return jenaModel;
+		//this.writeRDF(jenaModel, db_activities);
 		
 	}
 
 
+
 	@Override
-	public void spy(PickingActivity pickingActivity) {
-		
+	public Model spy(PickingActivity pickingActivity) {
+		return jenaModel;
 	}
 
 	@Override
-	public void spy(FishingActivity fishingActivity) {
-		
+	public Model spy(FishingActivity fishingActivity) {
+		return jenaModel;
 	}
 	
 	/**

@@ -16,6 +16,7 @@ import models.factory.AbstractActivity;
 
 
 
+
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
@@ -24,6 +25,8 @@ import org.mongodb.morphia.annotations.Entity;
 
 
 import org.mongodb.morphia.annotations.Reference;
+
+import com.hp.hpl.jena.rdf.model.Model;
 
 import controllers.MorphiaObject;
 import agents.AgentJena;
@@ -58,10 +61,9 @@ public class HuntingActivity extends AbstractActivity{
 
 
 	@Override
-	public void accept(AgentJena agent) {
-		agent.spy(this);
+	public Model accept(AgentJena agent) {
+		return agent.spy(this);
 	}
-
 	
     public static HuntingActivity findById(String id){
     	HuntingActivity activity = MorphiaObject.datastore.find(HuntingActivity.class)

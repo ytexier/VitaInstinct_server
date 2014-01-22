@@ -37,11 +37,11 @@ public class Vita {
 	public static Model vita_m = ModelFactory.createDefaultModel();
 	
 	/** Namespace as a string */
-	protected static final String _NS ="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#%s";
+	protected static final String _NS ="http://vita-instinct.herokuapp.com/rdf-syntax-ns#%s";
 	public static final String NS = String.format(_NS,"");
 	
 	public static String getURI() {return NS;}
-	public static String getURL() {return "http://vita-instinct.herokuapp.com/api/1.1/";}
+	public static String getURL() {return "http://vita-instinct.herokuapp.com/";}
 	
 	/** Namespace of vocablary as resource */
 	public static final Resource NS_r = vita_m.createResource(NS);

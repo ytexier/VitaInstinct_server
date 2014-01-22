@@ -14,6 +14,8 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Reference;
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 import controllers.MorphiaObject;
 import agents.AgentJena;
 
@@ -37,8 +39,8 @@ public class FishingActivity extends AbstractActivity{
 	
 	
 	@Override
-	public void accept(AgentJena agent) {
-		agent.spy(this);
+	public Model accept(AgentJena agent) {
+		return agent.spy(this);
 	}
 	
     public static FishingActivity findById(String id){

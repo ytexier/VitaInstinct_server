@@ -42,6 +42,11 @@ POST    	/addFriend                  		controllers.Users.addFriend()
 
 # Activities
 
+#GET			/sector/hunting/activity/:id		controllers.Activities.get(id: String, sector = "hunting")
+#GET			/sector/fishing/activity/:id		controllers.Activities.get(id: String, sector = "fishing")
+#GET			/sector/picking/activity/:id		controllers.Activities.get(id: String, sector = "picking")
+
+
 GET			/activities/hunting/:activity_id	controllers.Activities.getFromHunt(activity_id: String)
 GET			/activities/picking/:activity_id	controllers.Activities.getFromPick(activity_id: String)
 GET			/activities/fishing/:activity_id	controllers.Activities.getFromFish(activity_id: String)

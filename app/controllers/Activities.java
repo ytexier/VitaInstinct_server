@@ -1,5 +1,7 @@
 package controllers;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -39,6 +41,36 @@ public class Activities extends Controller {
 	
 	static Form<AbstractActivityForm> abstractActivityForm = Form.form(AbstractActivityForm.class);
 
+
+	public Result get(String id, String sector){
+		
+    	AbstractActivity activityFound = null;
+    	
+    	if(sector.equals("hunting"))
+    		activityFound = HuntingActivity.findById(id);
+     	if(sector.equals("picking"))
+    		activityFound = PickingActivity.findById(id);
+     	if(sector.equals("fishing"))
+    		activityFound = FishingActivity.findById(id);
+    	
+
+   		if(request().accepts("text/html")){
+   			return ok(views.model.activity.render(activityFound));
+   		}
+   		
+   		else if(request().accepts("application/json"))
+            return ok(Json.toJson(activityFound));
+   		
+   		else if (request().accepts("application/rdf+xml")){
+   			OutputStream out = new ByteArrayOutputStream();
+   			activityFound.accept(new AgentJena()).write(out, "RDF/XML-ABBREV");
+   		}
+
+		return ok(Json.toJson(activityFound.getCreator()));
+	}
+
+	
+	
 	
     public static Result creator(String id, String sector) throws Exception{
     	AbstractActivity activityFound = null;

@@ -20,6 +20,8 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Reference;
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 import controllers.MorphiaObject;
 import agents.AgentJena;
 import agents.AgentManager;
@@ -43,8 +45,8 @@ public class PickingActivity extends AbstractActivity{
 	}
     
 	@Override
-	public void accept(AgentJena agent) {
-		agent.spy(this);
+	public Model accept(AgentJena agent) {
+		return agent.spy(this);
 	}
 	
 	
