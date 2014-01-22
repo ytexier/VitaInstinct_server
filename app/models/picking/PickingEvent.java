@@ -11,11 +11,16 @@ import models.Location;
 import models.User;
 import models.factory.AbstractEvent;
 import models.fishing.FishingActivity;
+import models.hunting.HuntingActivity;
 
 
 @Entity
 public class PickingEvent extends AbstractEvent {
 	
+<<<<<<< HEAD
+=======
+	private ArrayList<PickingActivity> activities;
+>>>>>>> dimql
 	
 	public PickingEvent() {
 		super();
@@ -25,12 +30,12 @@ public class PickingEvent extends AbstractEvent {
 	public PickingEvent(String label, String date, String comment,
 			Location location, Key<User> creator) {
 		super("picking", label, date, comment, location, creator);
-		super.setActivities(new ArrayList<PickingActivity>());
+		this.activities = new ArrayList<PickingActivity>();
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void addActivity(PickingActivity activity) {
-		((ArrayList<PickingActivity>)super.getActivities()).add(activity);
+		this.activities.add(activity);
 	}
 
 	public void accept(AgentManager v){

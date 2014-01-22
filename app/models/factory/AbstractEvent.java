@@ -28,9 +28,13 @@ public abstract class AbstractEvent {
 	private Key<User> creator;
 	private String uri;
 	
+<<<<<<< HEAD
 	@Reference private ArrayList<AbstractActivity> activities;
 	@Reference private ArrayList<User> registers;
 
+=======
+	@Reference private ArrayList<User> registers;
+>>>>>>> dimql
 	
 	public AbstractEvent() {}
 	
@@ -88,10 +92,11 @@ public abstract class AbstractEvent {
 	public Location getLocation() {
 		return location;
 	}
-
+	
 	public void setLocation(Location location) {
 		this.location = location;
 	}
+<<<<<<< HEAD
 
 
 	public List<User> getRegisters() {
@@ -113,20 +118,34 @@ public abstract class AbstractEvent {
 
 	public void setActivities(ArrayList<AbstractActivity> activities) {
 		this.activities = activities;
+=======
+	
+	public Key<User> getCreator() {
+		return creator;
 	}
-
-
-
+	
+	public void setCreator(Key<User> creator) {
+		this.creator = creator;
+	}
+	
+	public List<User> getRegisters() {
+		return registers;
+	}
+	
+	public void setRegisters(ArrayList<User> users) {
+		this.registers = users;
+>>>>>>> dimql
+	}
+	
 	public String getLabel() {
 		return label;
 	}
-
-
-
+	
 	public void setLabel(String label) {
 		this.label = label;
 	}
 
+<<<<<<< HEAD
 
 
 	public Key<User> getCreator() {
@@ -149,4 +168,6 @@ public abstract class AbstractEvent {
 
 
 	
+=======
+>>>>>>> dimql
 }

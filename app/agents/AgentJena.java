@@ -84,7 +84,7 @@ public class AgentJena extends AgentManager{
 		User user = User.findById(activity.getCreator().getId().toString());
 		Organism organism = activity.getOrganism();
 		HuntingEvent event = activity.getEvent();
-		ArrayList<HuntingEquipment> equipements = (ArrayList<HuntingEquipment>) activity.getEquipment();
+		ArrayList<HuntingEquipment> equipements = (ArrayList<HuntingEquipment>) activity.getEquipments();
 		
 		Individual dataset = jenaModel
 				.createIndividual(Vita.getURI()+"dbActivities", jenaModel.getOntClass(Vita.VitaClass.Dataset.getNS()));

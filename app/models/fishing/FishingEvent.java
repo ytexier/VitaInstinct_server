@@ -15,6 +15,12 @@ import models.factory.AbstractEvent;
 @Entity
 public class FishingEvent extends AbstractEvent {
 	
+<<<<<<< HEAD
+=======
+	private Key<User> creator;
+	private ArrayList<FishingActivity> activities;
+	
+>>>>>>> dimql
 	public FishingEvent() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -23,12 +29,12 @@ public class FishingEvent extends AbstractEvent {
 	public FishingEvent(String label, String date, String comment,
 			Location location, Key<User> creator) {
 		super("fishing", label, date, comment, location, creator);
-		super.setActivities(new ArrayList<FishingActivity>());
+		this.activities = new ArrayList<FishingActivity>();
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void addActivity(FishingActivity activity) {
-		((ArrayList<FishingActivity>)super.getActivities()).add(activity);
+		this.activities.add(activity);
 	}
 
 	public void accept(AgentManager v){
@@ -39,5 +45,13 @@ public class FishingEvent extends AbstractEvent {
 	public void accept(AgentJena agentJena) {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public ArrayList<FishingActivity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(ArrayList<FishingActivity> activities) {
+		this.activities = activities;
 	}
 }
