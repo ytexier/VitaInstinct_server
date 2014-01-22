@@ -1,6 +1,8 @@
 @(
 	activities		: List[models.factory.AbstractActivity], 
-	user			: User, activityForm : Form[forms.AbstractActivityForm], 
+	user			: User,
+    activityForm : Form[forms.AbstractActivityForm],
+    eventForm : Form[forms.AddEventForm],
 	addFriendForm	: Form[forms.AddFriendForm]
 	)
 	
@@ -57,6 +59,10 @@
 			$("#btNewActivity").click(function() {
 				showNewActivityForm();
 			});
+
+            $("#btNewEvent").click(function() {
+                showNewActivityForm();
+            });
 		  
 			$("#btEquipments").click(function() {
 				showEquipments();
@@ -84,6 +90,14 @@
 			$("#map").show();
 			initializeMap();
 		}
+
+        function showNewEventForm () {
+            hideAll();
+            $("aside").show();
+            $("#newEventForm").show("");
+            $("#map").show();
+            initializeMap();
+        }
 		
 		function showEquipments(){
 			hideAll();
@@ -114,7 +128,8 @@
 	<article>
 	
 		<aside>
-			<div id="newActivityForm">@block.newActivityForm(user, activityForm)</div>
+			<div id="newEventForm">@block.newActivityForm(user, activityForm)</div>
+            <div id="newActivityForm">@block.newActivityForm(user, activityForm)</div>
 			<div id="viewer">@block.viewer(activities)</div>
 			<div id="equipments">@block.equipments(user, activityForm)</div>
 		</aside>

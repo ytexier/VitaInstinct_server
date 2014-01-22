@@ -51,31 +51,20 @@ public class Events extends Controller {
 
 			FactorySector factorySector = null;
 			AbstractEvent aEvent = null;
-			String sss = ""+sector+" "+comment;
 
 			if(sector.equals("hunting")){
 				factorySector = new FactoryHuntingSector();
-				sss += 1;
 			}else if(sector.equals("fishing")){
 				factorySector = new FactoryFishingSector();
-				sss += 2;
 			}else if(sector.equals("picking")){
 				factorySector = new FactoryPickingSector();
-				sss += 3;
 			}
 
 			String formattedDate = dateFormatter.format(date);
-			sss += formattedDate;
 			User user = User.findByEmail(request().username());
 			Key<User> creatorKey = MorphiaObject.datastore.getKey(user);
 
-			try {
-				aEvent = factorySector.createEvent(formattedDate, comment, location);
-			}
-			catch(Exception e) {
-				e.printStackTrace();
-				return ok(sss);
-			}
+			aEvent = factorySector.createEvent(formattedDate, comment, location);
 
 			Key<AbstractEvent> eventKey = MorphiaObject.datastore.save(aEvent);
 

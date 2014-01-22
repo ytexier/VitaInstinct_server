@@ -26,8 +26,10 @@ public class FactoryFishingSector extends FactorySector{
 	}
 
 	@Override
-	public AbstractEvent createEvent() {
-		return (new FishingEvent());
+	public AbstractEvent createEvent(String date, String comment,
+			Location location) {
+		// TODO Auto-generated method stub
+		return new FishingEvent(date, comment, location);
 	}
 
 	

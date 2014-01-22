@@ -1,0 +1,15 @@
+@(user	: User, eventForm : Form[forms.AddEventForm])
+@import helper._
+
+
+
+@form(routes.Events.addEvent()) {
+
+<input id="sector" type="hidden" name="sector" />
+@inputDate(eventForm("date"), 'id -> "eventDate")
+@inputText(eventForm("latitude"), 'id -> "eventLatitude")
+@inputText(eventForm("longitude"), 'id -> "eventLongitude")
+@inputText(eventForm("comment"), 'id -> "eventComment")
+<input type="submit" id="btAddEvent" value="Create">
+
+}

@@ -6,6 +6,8 @@
 GET     /                           		controllers.Application.index()
 POST	/									controllers.Activities.newActivity()
 
+POST /events 								controllers.Events.addEvent()
+
 
 # Ontology
 
