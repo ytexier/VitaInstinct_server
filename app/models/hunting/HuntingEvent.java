@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 import agents.AgentJena;
-import agents.AgentManager;
 import models.Location;
 import models.User;
 import models.factory.AbstractEvent;
@@ -24,22 +25,25 @@ public class HuntingEvent extends AbstractEvent {
 		// TODO Auto-generated constructor stub
 	}
 	
-<<<<<<< HEAD
 	public HuntingEvent() {
 		// TODO Auto-generated constructor stub
-=======
+	}
+
 	public void addActivity(HuntingActivity activity) {
 		this.activities.add(activity);
->>>>>>> dimql
 	}
 
-	public void addActivity(HuntingActivity activity) {
-		((ArrayList<HuntingActivity>)super.getActivities()).add(activity);
-	}
 
 	@Override
-	public void accept(AgentJena agentJena) {
-		// TODO Auto-generated method stub
-		
+	public Model accept(AgentJena agent) {
+		return agent.spy(this);
+	}
+	
+	public ArrayList<HuntingActivity> getActivities() {
+		return activities;
+	}
+
+	public void setActivities(ArrayList<HuntingActivity> activities) {
+		this.activities = activities;
 	}
 }

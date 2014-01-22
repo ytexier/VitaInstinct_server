@@ -4,19 +4,28 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
+
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
 
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.DC;
+import com.hp.hpl.jena.vocabulary.RDFS;
+import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
+import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
+import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.util.FileManager;
+
+import models.Location;
 import models.Organism;
 import models.User;
 import models.Vita;
+import models.factory.AbstractEquipment;
 import models.fishing.FishingActivity;
 import models.fishing.FishingEquipment;
 import models.fishing.FishingEvent;
@@ -74,70 +83,6 @@ public class AgentJena extends AgentManager{
 	}
 
 	
-	/**
-	 * ACTIVITY
-	 */
-/*
-	@Override
-	public void spy(HuntingActivity activity) {
-	
-		User user = User.findById(activity.getCreator().getId().toString());
-		Organism organism = activity.getOrganism();
-		HuntingEvent event = activity.getEvent();
-		ArrayList<HuntingEquipment> equipements = (ArrayList<HuntingEquipment>) activity.getEquipments();
-		
-		Individual dataset = jenaModel
-				.createIndividual(Vita.getURI()+"dbActivities", jenaModel.getOntClass(Vita.VitaClass.Dataset.getNS()));
-		
-		Vita.VitaClass.Activity.createOntClass(jenaModel);
-		Vita.VitaClass.Sector.createOntClass(jenaModel);
-		Vita.VitaClass.User.createOntClass(jenaModel);
-		Vita.VitaClass.Organism.createOntClass(jenaModel);
-		Vita.VitaClass.Equipment.createOntClass(jenaModel);
-		Vita.VitaClass.Event.createOntClass(jenaModel);
-		
-		Individual _activity = jenaModel.createIndividual(Vita.VitaClass.Activity.getOntClass(jenaModel));
-		
-		dataset.addProperty(Vita.activity, _activity);
-		
-		//sector
-		Individual _sector = jenaModel.createIndividual(Vita.getURI()+"sector", Vita.VitaClass.Sector.getOntClass(jenaModel));
-		_sector.addLiteral(Vita.value,jenaModel.createTypedLiteral("hunting", XSDDatatype.XSDstring));
-		
-		//creator
-		Individual _creator = jenaModel.createIndividual(Vita.getURI()+"user",Vita.VitaClass.User.getOntClass(jenaModel));		
-		_creator.addProperty(VCARD.FN, user.getFullName())
-			.addProperty(VCARD.Given, user.getGivenName())
-			.addProperty(VCARD.Family, user.getFamilyName())
-			.addProperty(VCARD.NICKNAME, user.getNickName())
-			.addProperty(VCARD.EMAIL, user.getEmail());
-		
-		//organism
-		Individual _organism = jenaModel.createIndividual(Vita.getURI()+"organism", Vita.VitaClass.Organism.getOntClass(jenaModel));		
-		_organism.addLiteral(Vita.value,jenaModel.createTypedLiteral("osef", XSDDatatype.XSDstring));
-		
-		//organism
-		Individual _location = jenaModel.createIndividual(Vita.getURI()+"location", Vita.VitaClass.Location.getOntClass(jenaModel));		
-		_location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(activity.getLocation().getLatPos(),XSDDatatype.XSDstring));
-		_location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(activity.getLocation().getLongPos(),XSDDatatype.XSDstring));
-		
-		//equipments
-		Individual _equipment = jenaModel.createIndividual(Vita.getURI()+"equipment", Vita.VitaClass.Equipment.getOntClass(jenaModel));		
-		_equipment.addLiteral(Vita.value,jenaModel.createTypedLiteral("osef", XSDDatatype.XSDstring));		
-		
-		
-		
-		_activity.addProperty(Vita.sector, _sector);
-		_activity.addProperty(Vita.creator, _creator);
-		_activity.addProperty(Vita.targetOrganism, _organism);
-		_activity.addProperty(Vita.location, _location);
-		_activity.addProperty(Vita.equipments, _equipment);
-		
-		
-		this.writeRDF(jenaModel, db_activities);
-		
-	}*/
-	
 	
 	/**
 	 * ACTIVITY
@@ -145,7 +90,7 @@ public class AgentJena extends AgentManager{
 
 	@Override
 	public Model spy(HuntingActivity activity) {
-	/*	
+	
 		String 			idActivity = activity.getId().toString();	
 		User 			creator = User.findById(activity.getCreator().getId().toString());
 		Organism 		organism = activity.getOrganism();
@@ -185,7 +130,7 @@ public class AgentJena extends AgentManager{
 		_activity.addProperty(Vita.isRelatedTo, _event);
 		
 		this.writeRDF(jenaModel, db_activities);
-	*/
+	
 		return jenaModel;
 	
 	}
@@ -208,7 +153,7 @@ public class AgentJena extends AgentManager{
 
 	@Override
 	public Model spy(HuntingEquipment equipment) {
-	/*	
+		
 		String 			idEquipment = equipment.getId().toString();	
 		User 			creator = User.findById(equipment.getCreator().getId().toString());
 		String 			label = equipment.getLabel();
@@ -221,7 +166,7 @@ public class AgentJena extends AgentManager{
 		_equipment.addProperty(RDFS.label, label);
 		_equipment.addProperty(DC.creator, creator.getFullName());
 		_equipment.addProperty(RDFS.comment, comment);	
-	*/	
+	
 		return jenaModel;
 	}
 
@@ -241,7 +186,7 @@ public class AgentJena extends AgentManager{
 
 	@Override
 	public Model spy(HuntingEvent event) {
-	/*	
+	
 		String		idEvent = event.getId().toString();
 		User 		creator = User.findById(event.getCreator().getId().toString());
 		String 		label = event.getLabel();
@@ -249,8 +194,8 @@ public class AgentJena extends AgentManager{
 		String 		date = event.getDate();
 		Location	location = event.getLocation();
 		
-		ArrayList<HuntingActivity> 	activities = (ArrayList<HuntingActivity>) event.getActivities();
-		ArrayList<User> 			registers = (ArrayList<User>) event.getRegisters();	
+		ArrayList<HuntingActivity> 	activities = event.getActivities();
+		ArrayList<User> 			registers = event.getRegisters();	
 		
 		//Resource Event
 		Resource _event = jenaModel.createResource(event.getURI());
@@ -281,7 +226,7 @@ public class AgentJena extends AgentManager{
 			_event.addProperty(Vita.registers, r);
 		
 		this.writeRDF(jenaModel, db_activities);
-	*/	
+		
 		return jenaModel;
 	}
 

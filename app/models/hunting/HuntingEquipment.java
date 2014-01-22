@@ -3,6 +3,8 @@ package models.hunting;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 import agents.AgentJena;
 import agents.AgentManager;
 import models.User;
@@ -23,8 +25,7 @@ public class HuntingEquipment extends AbstractEquipment {
 	}
 
 	@Override
-	public void accept(AgentJena agentJena) {
-		// TODO Auto-generated method stub
-		
+	public Model accept(AgentJena agent) {
+		return agent.spy(this);
 	}
 }

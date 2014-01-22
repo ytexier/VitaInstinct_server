@@ -133,13 +133,8 @@ public abstract class AbstractActivity {
 		return equipments;
 	}
 
-<<<<<<< HEAD
-	public void setEquipment(ArrayList<? extends AbstractEquipment> equipments) {
-		this.equipments = equipments;
-=======
 	public void setEquipments(ArrayList<? extends AbstractEquipment> equipment) {
 		this.equipments = equipment;
->>>>>>> dimql
 	}
  
 	

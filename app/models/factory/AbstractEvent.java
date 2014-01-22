@@ -13,6 +13,8 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 import agents.AgentJena;
 
 public abstract class AbstractEvent {
@@ -28,13 +30,8 @@ public abstract class AbstractEvent {
 	private Key<User> creator;
 	private String uri;
 	
-<<<<<<< HEAD
-	@Reference private ArrayList<AbstractActivity> activities;
 	@Reference private ArrayList<User> registers;
 
-=======
-	@Reference private ArrayList<User> registers;
->>>>>>> dimql
 	
 	public AbstractEvent() {}
 	
@@ -46,7 +43,7 @@ public abstract class AbstractEvent {
 		this.date = date;
 		this.comment = comment;
 		this.location = location;
-		this.uri = Vita.getURL() + "sector/" + sector + "/event/" + id;
+		this.setURI(Vita.getURL() + "sector/" + sector + "/event/" + id);
 		this.creator = creator;
 		this.registers = new ArrayList<User>();
 	}
@@ -55,7 +52,7 @@ public abstract class AbstractEvent {
 		this.registers.add(user);
 	}	
 	
-	public abstract void accept(AgentJena agentJena);
+	public abstract Model accept(AgentJena agent);
 
 	public ObjectId getId() {
 		return id;
@@ -96,30 +93,7 @@ public abstract class AbstractEvent {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-<<<<<<< HEAD
 
-
-	public List<User> getRegisters() {
-		return registers;
-	}
-
-
-	public void setRegisters(ArrayList<User> users) {
-		this.registers = users;
-	}
-
-
-
-	public ArrayList<? extends AbstractActivity> getActivities() {
-		return activities;
-	}
-
-
-
-	public void setActivities(ArrayList<AbstractActivity> activities) {
-		this.activities = activities;
-=======
-	
 	public Key<User> getCreator() {
 		return creator;
 	}
@@ -128,13 +102,12 @@ public abstract class AbstractEvent {
 		this.creator = creator;
 	}
 	
-	public List<User> getRegisters() {
+	public ArrayList<User> getRegisters() {
 		return registers;
 	}
 	
 	public void setRegisters(ArrayList<User> users) {
 		this.registers = users;
->>>>>>> dimql
 	}
 	
 	public String getLabel() {
@@ -145,19 +118,6 @@ public abstract class AbstractEvent {
 		this.label = label;
 	}
 
-<<<<<<< HEAD
-
-
-	public Key<User> getCreator() {
-		return creator;
-	}
-
-
-
-	public void setCreator(Key<User> creator) {
-		this.creator = creator;
-	}
-	
 	public String getURI() {
 		return uri;
 	}
@@ -166,8 +126,4 @@ public abstract class AbstractEvent {
 		this.uri = uri;
 	}
 
-
-	
-=======
->>>>>>> dimql
 }

@@ -6,6 +6,8 @@ import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 import agents.AgentJena;
 import agents.AgentManager;
 import models.Location;
@@ -15,12 +17,8 @@ import models.factory.AbstractEvent;
 @Entity
 public class FishingEvent extends AbstractEvent {
 	
-<<<<<<< HEAD
-=======
-	private Key<User> creator;
 	private ArrayList<FishingActivity> activities;
 	
->>>>>>> dimql
 	public FishingEvent() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -37,14 +35,9 @@ public class FishingEvent extends AbstractEvent {
 		this.activities.add(activity);
 	}
 
-	public void accept(AgentManager v){
-		v.spy(this);
-	}
-
 	@Override
-	public void accept(AgentJena agentJena) {
-		// TODO Auto-generated method stub
-		
+	public Model accept(AgentJena agent) {
+		return agent.spy(this);
 	}
 
 	public ArrayList<FishingActivity> getActivities() {

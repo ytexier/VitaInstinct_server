@@ -7,6 +7,8 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Id;
 
+import com.hp.hpl.jena.rdf.model.Model;
+
 import agents.AgentJena;
 
 
@@ -20,7 +22,7 @@ public abstract class AbstractEquipment {
 
 	private Key<User> creator;
 	
-	public abstract void accept(AgentJena agentJena);
+	public abstract Model accept(AgentJena agent);
 	
 	public AbstractEquipment() {}
 
@@ -33,7 +35,6 @@ public abstract class AbstractEquipment {
 		this.creator = creator;
 		this.uri = Vita.getURL() + "sector/" + sector + "/equipment/" + id;
 	}
-	
 	
 
 	public ObjectId getId() {
