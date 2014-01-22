@@ -1,5 +1,7 @@
 package models.picking;
 
+import java.util.ArrayList;
+
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
 
@@ -8,6 +10,7 @@ import agents.AgentManager;
 import models.Location;
 import models.User;
 import models.factory.AbstractEvent;
+import models.fishing.FishingActivity;
 
 
 @Entity
@@ -23,7 +26,12 @@ public class PickingEvent extends AbstractEvent {
 	public PickingEvent(String date, String comment,
 			Location location, Key<User> creator) {
 		super("picking", date, comment, location, creator);
+		super.setActivities(new ArrayList<PickingActivity>());
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void addActivity(PickingActivity activity) {
+		((ArrayList<PickingActivity>)super.getActivities()).add(activity);
 	}
 
 	public void accept(AgentManager v){

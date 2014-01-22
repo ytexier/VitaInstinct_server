@@ -1,5 +1,8 @@
 package models.factory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import models.Location;
 import models.User;
 
@@ -19,7 +22,8 @@ public abstract class AbstractEvent {
 	
 	private Key<User> creator;
 	
-	
+	private ArrayList<? extends AbstractActivity> activities;
+	private ArrayList<User> users;
 	
 	public AbstractEvent() {}
 	
@@ -33,8 +37,12 @@ public abstract class AbstractEvent {
 		this.comment = comment;
 		this.location = location;
 		this.creator = creator;
+		this.users = new ArrayList<User>();
 	}
 	
+	public void addUser(User user) {
+		this.users.add(user);
+	}	
 	
 	public abstract void accept(AgentJena agentJena);
 
@@ -76,6 +84,39 @@ public abstract class AbstractEvent {
 
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+	
+	public Key<User> getCreator() {
+		return creator;
+	}
+
+
+
+	public void setCreator(Key<User> creator) {
+		this.creator = creator;
+	}
+
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+
+
+	public void setUsers(ArrayList<User> users) {
+		this.users = users;
+	}
+
+
+
+	public ArrayList<? extends AbstractActivity> getActivities() {
+		return activities;
+	}
+
+
+
+	public void setActivities(ArrayList<? extends AbstractActivity> activities) {
+		this.activities = activities;
 	}
 
 
