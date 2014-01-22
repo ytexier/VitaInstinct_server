@@ -37,7 +37,7 @@ public abstract class AbstractActivity {
 	@Embedded
 	private Key<User> creator;
 	
-	@Reference
+	@Embedded
 	private AbstractEvent event;
 	@Reference
 	private ArrayList<? extends AbstractEquipment> equipments;

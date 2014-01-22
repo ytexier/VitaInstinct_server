@@ -17,7 +17,6 @@ import models.fishing.FishingActivity;
 public class PickingEvent extends AbstractEvent {
 	
 	
-	
 	public PickingEvent() {
 		super();
 		// TODO Auto-generated constructor stub

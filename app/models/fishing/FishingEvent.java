@@ -3,6 +3,7 @@ package models.fishing;
 import java.util.ArrayList;
 
 import org.mongodb.morphia.Key;
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 
 import agents.AgentJena;
@@ -13,8 +14,6 @@ import models.factory.AbstractEvent;
 
 @Entity
 public class FishingEvent extends AbstractEvent {
-	
-	private Key<User> creator;
 	
 	public FishingEvent() {
 		super();

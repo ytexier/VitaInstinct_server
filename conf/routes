@@ -50,25 +50,25 @@ GET		/sector/hunting/activity/:id			controllers.Activities.get(id: String, secto
 GET		/sector/fishing/activity/:id			controllers.Activities.get(id: String, sector = "fishing")
 GET		/sector/picking/activity/:id			controllers.Activities.get(id: String, sector = "picking")
 
-GET		/sector/hunting/event/:id				controllers.Events.get(id: String, sector = "hunting")
-GET		/sector/fishing/event/:id				controllers.Events.get(id: String, sector = "fishing")
-GET		/sector/picking/event/:id				controllers.Events.get(id: String, sector = "picking")
+#GET		/sector/hunting/event/:id				controllers.Events.get(id: String, sector = "hunting")
+#GET		/sector/fishing/event/:id				controllers.Events.get(id: String, sector = "fishing")
+#GET		/sector/picking/event/:id				controllers.Events.get(id: String, sector = "picking")
 
-GET		/sector/hunting/equipment/:id			controllers.Equipments.get(id: String, sector = "hunting")
-GET		/sector/fishing/equipment/:id			controllers.Equipments.get(id: String, sector = "fishing")
-GET		/sector/picking/equipment/:id			controllers.Equipments.get(id: String, sector = "picking")
+#GET		/sector/hunting/equipment/:id			controllers.Equipments.get(id: String, sector = "hunting")
+#GET		/sector/fishing/equipment/:id			controllers.Equipments.get(id: String, sector = "fishing")
+#GET		/sector/picking/equipment/:id			controllers.Equipments.get(id: String, sector = "picking")
 
-GET		/organism/amniote/:id					controllers.Organisms.get(id: String, sector = "hunting")
-GET		/organism/fish/:id						controllers.Organisms.get(id: String, sector = "fishing")
-GET		/organism/plant/:id						controllers.Organisms.get(id: String, sector = "picking")
+#GET		/organism/amniote/:id					controllers.Organisms.get(id: String, sector = "hunting")
+#GET		/organism/fish/:id						controllers.Organisms.get(id: String, sector = "fishing")
+#GET		/organism/plant/:id						controllers.Organisms.get(id: String, sector = "picking")
 
-GET		/sector/hunting/activity/:id/location	controllers.Activities.getLocation(id: String, sector = "hunting")
-GET		/sector/fishing/activity/:id/location	controllers.Activities.getLocation(id: String, sector = "fishing")
-GET		/sector/picking/activity/:id/location	controllers.Activities.getLocation(id: String, sector = "picking")
+#GET		/sector/hunting/activity/:id/location	controllers.Activities.getLocation(id: String, sector = "hunting")
+#GET		/sector/fishing/activity/:id/location	controllers.Activities.getLocation(id: String, sector = "fishing")
+#GET		/sector/picking/activity/:id/location	controllers.Activities.getLocation(id: String, sector = "picking")
 
-GET		/sector/hunting/event/:id/location		controllers.Events.getLocation(id: String, sector = "hunting")
-GET		/sector/fishing/event/:id/location		controllers.Events.getLocation(id: String, sector = "fishing")
-GET		/sector/picking/event/:id/location		controllers.Events.getLocation(id: String, sector = "picking")
+#GET		/sector/hunting/event/:id/location		controllers.Events.getLocation(id: String, sector = "hunting")
+#GET		/sector/fishing/event/:id/location		controllers.Events.getLocation(id: String, sector = "fishing")
+#GET		/sector/picking/event/:id/location		controllers.Events.getLocation(id: String, sector = "picking")
 
 
 

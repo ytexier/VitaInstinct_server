@@ -1,58 +1,28 @@
 package agents;
 
-import org.restlet.data.MediaType;
-
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.ArrayList;
-
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
 
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.DC;
-import com.hp.hpl.jena.vocabulary.RDF;
-import com.hp.hpl.jena.vocabulary.RDFS;
-import com.hp.hpl.jena.vocabulary.LocationMappingVocab;
-import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
-import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntModel;
 import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.util.FileManager;
-import com.hp.hpl.jena.vocabulary.VCARD;
-
-
-
-
-
-
-
-
-
-
-
-
-
-import models.Location;
-import models.Mammal;
 import models.Organism;
 import models.User;
 import models.Vita;
-import models.factory.AbstractEquipment;
-import models.fishing.FishingAccessory;
 import models.fishing.FishingActivity;
 import models.fishing.FishingEquipment;
 import models.fishing.FishingEvent;
-import models.hunting.HuntingAccessory;
 import models.hunting.HuntingActivity;
 import models.hunting.HuntingEquipment;
 import models.hunting.HuntingEvent;
-import models.picking.PickingAccessory;
 import models.picking.PickingActivity;
 import models.picking.PickingEquipment;
 import models.picking.PickingEvent;
@@ -175,7 +145,7 @@ public class AgentJena extends AgentManager{
 
 	@Override
 	public Model spy(HuntingActivity activity) {
-		
+	/*	
 		String 			idActivity = activity.getId().toString();	
 		User 			creator = User.findById(activity.getCreator().getId().toString());
 		Organism 		organism = activity.getOrganism();
@@ -215,7 +185,7 @@ public class AgentJena extends AgentManager{
 		_activity.addProperty(Vita.isRelatedTo, _event);
 		
 		this.writeRDF(jenaModel, db_activities);
-	
+	*/
 		return jenaModel;
 	
 	}
@@ -238,7 +208,7 @@ public class AgentJena extends AgentManager{
 
 	@Override
 	public Model spy(HuntingEquipment equipment) {
-		
+	/*	
 		String 			idEquipment = equipment.getId().toString();	
 		User 			creator = User.findById(equipment.getCreator().getId().toString());
 		String 			label = equipment.getLabel();
@@ -251,7 +221,7 @@ public class AgentJena extends AgentManager{
 		_equipment.addProperty(RDFS.label, label);
 		_equipment.addProperty(DC.creator, creator.getFullName());
 		_equipment.addProperty(RDFS.comment, comment);	
-		
+	*/	
 		return jenaModel;
 	}
 
@@ -271,7 +241,7 @@ public class AgentJena extends AgentManager{
 
 	@Override
 	public Model spy(HuntingEvent event) {
-		
+	/*	
 		String		idEvent = event.getId().toString();
 		User 		creator = User.findById(event.getCreator().getId().toString());
 		String 		label = event.getLabel();
@@ -311,7 +281,7 @@ public class AgentJena extends AgentManager{
 			_event.addProperty(Vita.registers, r);
 		
 		this.writeRDF(jenaModel, db_activities);
-		
+	*/	
 		return jenaModel;
 	}
 

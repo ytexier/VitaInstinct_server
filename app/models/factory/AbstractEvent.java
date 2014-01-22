@@ -28,7 +28,7 @@ public abstract class AbstractEvent {
 	private Key<User> creator;
 	private String uri;
 	
-	@Reference private ArrayList<? extends AbstractActivity> activities;
+	@Reference private ArrayList<AbstractActivity> activities;
 	@Reference private ArrayList<User> registers;
 
 	
@@ -111,7 +111,7 @@ public abstract class AbstractEvent {
 
 
 
-	public void setActivities(ArrayList<? extends AbstractActivity> activities) {
+	public void setActivities(ArrayList<AbstractActivity> activities) {
 		this.activities = activities;
 	}
 
