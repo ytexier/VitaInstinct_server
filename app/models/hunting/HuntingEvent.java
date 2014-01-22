@@ -15,7 +15,7 @@ import models.fishing.FishingActivity;
 @Entity
 public class HuntingEvent extends AbstractEvent {
 	
-	
+	private ArrayList<HuntingActivity> activities;
 	
 	public HuntingEvent() {
 		super();
@@ -25,12 +25,12 @@ public class HuntingEvent extends AbstractEvent {
 	public HuntingEvent(String label, String date, String comment,
 			Location location, Key<User> creator) {
 		super("hunting", label, date, comment, location, creator);
-		super.setActivities(new ArrayList<HuntingActivity>());
+		this.activities = new ArrayList<HuntingActivity>();
 		// TODO Auto-generated constructor stub
 	}
 	
 	public void addActivity(HuntingActivity activity) {
-		((ArrayList<HuntingActivity>)super.getActivities()).add(activity);
+		this.activities.add(activity);
 	}
 
 	public void accept(AgentManager v){

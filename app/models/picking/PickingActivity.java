@@ -36,7 +36,7 @@ public class PickingActivity extends AbstractActivity{
 	
 	public PickingActivity(Plant organism, int amountOfOrganism, String date, Location location, Key<User> creator){
 		super(organism, creator, amountOfOrganism, location, "hunting", date);
-		super.setEquipment(new ArrayList<PickingEquipment>());
+		super.setEquipments(new ArrayList<PickingEquipment>());
 		event = new PickingEvent();
 	}
     

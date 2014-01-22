@@ -29,7 +29,7 @@ public class FishingActivity extends AbstractActivity{
 	
 	public FishingActivity(Fish organism, int amountOfOrganism, String date, Location location, Key<User> creator){
 		super(organism, creator, amountOfOrganism, location, "fishing", date);
-		super.setEquipment(new ArrayList<FishingEquipment>());
+		super.setEquipments(new ArrayList<FishingEquipment>());
 		event = new FishingEvent();
 	}
 	

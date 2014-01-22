@@ -38,7 +38,7 @@ public class HuntingActivity extends AbstractActivity{
 	
 	public HuntingActivity(Mammal organism, int amountOfOrganism, String date, Location location, Key<User> creator){
 		super(organism, creator, amountOfOrganism, location, "hunting", date);	
-		super.setEquipment(new ArrayList<HuntingEquipment>());
+		super.setEquipments(new ArrayList<HuntingEquipment>());
 		event = new HuntingEvent();
 	}
 	

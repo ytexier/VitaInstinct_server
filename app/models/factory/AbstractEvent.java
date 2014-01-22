@@ -26,8 +26,7 @@ public abstract class AbstractEvent {
 	@Embedded
 	private Key<User> creator;
 	
-	@Reference private ArrayList<? extends AbstractActivity> activities;
-	@Reference private ArrayList<User> register;
+	@Reference private ArrayList<User> registers;
 	
 	public AbstractEvent() {}
 	
@@ -40,11 +39,11 @@ public abstract class AbstractEvent {
 		this.comment = comment;
 		this.location = location;
 		this.creator = creator;
-		this.register = new ArrayList<User>();
+		this.registers = new ArrayList<User>();
 	}
 	
 	public void addUser(User user) {
-		this.register.add(user);
+		this.registers.add(user);
 	}	
 	
 	public abstract void accept(AgentJena agentJena);
@@ -84,7 +83,7 @@ public abstract class AbstractEvent {
 	public Location getLocation() {
 		return location;
 	}
-
+	
 	public void setLocation(Location location) {
 		this.location = location;
 	}
@@ -92,49 +91,25 @@ public abstract class AbstractEvent {
 	public Key<User> getCreator() {
 		return creator;
 	}
-
-
-
+	
 	public void setCreator(Key<User> creator) {
 		this.creator = creator;
 	}
-
-
+	
 	public List<User> getRegisters() {
-		return register;
+		return registers;
 	}
-
-
-
+	
 	public void setRegisters(ArrayList<User> users) {
-		this.register = users;
+		this.registers = users;
 	}
-
-
-
-	public ArrayList<? extends AbstractActivity> getActivities() {
-		return activities;
-	}
-
-
-
-	public void setActivities(ArrayList<? extends AbstractActivity> activities) {
-		this.activities = activities;
-	}
-
-
-
+	
 	public String getLabel() {
 		return label;
 	}
-
-
-
+	
 	public void setLabel(String label) {
 		this.label = label;
 	}
 
-
-
-	
 }
