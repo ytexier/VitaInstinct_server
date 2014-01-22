@@ -34,13 +34,12 @@ import java.util.Date;
     					private String givenName;
     					private String familyName;
     					private String nickName;
-    					private String urlName;
     					
     					private Date registration;
     					
-    @Reference 			private ArrayList<AbstractActivity> activities; 
-    @Reference			private ArrayList<AbstractEvent> events;
-    @Reference			private ArrayList<AbstractEquipment> equipments;
+    @Embedded  			private ArrayList<AbstractActivity> activities; 
+    @Embedded  			private ArrayList<AbstractEvent> events;
+    @Embedded 			private ArrayList<AbstractEquipment> equipments;
     @Embedded 			private ArrayList<Key<User>> friends;
 
 	public User(String givenName, String familyName, String nickName, String email, String password, Date registration){

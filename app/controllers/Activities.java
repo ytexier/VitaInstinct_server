@@ -172,14 +172,8 @@ public class Activities extends Controller {
 				AbstractEvent event = factorySector.createEvent("event", formattedDate, "comment", location, creatorKey);
 				AbstractEquipment equipment = factorySector.createEquipment("equi", "comment", creatorKey);
 						
-<<<<<<< HEAD
-				aActivity = factorySector.createActivity(specie, amountOfOrganism, formattedDate, location, creatorKey);
-				
-				String eventId = filledForm.get().eventId;
-        		String equipmentId = filledForm.get().equipmentId;
-=======
+
 				aActivity = factorySector.createActivity(specie, amountOfOrganism, formattedDate, location, creatorKey, event, equipment);
->>>>>>> vita_220114
 
 				
 				if(Sex.contains(sex))

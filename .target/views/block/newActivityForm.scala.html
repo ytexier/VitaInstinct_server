@@ -19,9 +19,11 @@ equipmentsList : List[models.factory.AbstractEquipment]
 	<div id="eventsDiv">
 	<select name="event">
 		<option value="">---</option>
+		*{
 		@for(event <- eventsList) {
 			<option value="@event.getId()">@event.getLabel()</option>
 		}
+		}*
 	</select>
 		
 	</div>

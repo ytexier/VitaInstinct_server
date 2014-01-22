@@ -7,12 +7,22 @@
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
   <owl:Class rdf:about="http://vita-instinct.herokuapp.com/rdf-syntax-ns#Location"/>
   <vita:Location rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/null/location">
+    <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >44.238312212932016</vita:latitude>
+    <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >3.9897751808166504</vita:longitude>
     <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >3.3824554650345817</vita:longitude>
     <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >44.284632233055845</vita:latitude>
+    <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >3.0737900733947754</vita:longitude>
+    <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >44.268804788566165</vita:latitude>
   </vita:Location>
   <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/null">
+    <rdfs:label>salut</rdfs:label>
+    <rdfs:comment>wesh</rdfs:comment>
     <rdfs:comment>balles explosive</rdfs:comment>
     <dc:creator>yohan texier</dc:creator>
     <rdfs:label>Grosse chasse</rdfs:label>
