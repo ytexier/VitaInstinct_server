@@ -240,6 +240,8 @@ public class AgentJena extends AgentManager{
 
 	@Override
 	public void spy(HuntingEvent huntingEvent) {
+		
+
 		/*
 		jenaModel.createResource(Vita.getURL()+"sector/hunting/")
 		.addProperty(RDFS.label, huntingActivity.getLabel());

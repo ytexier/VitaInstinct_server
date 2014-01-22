@@ -32,7 +32,7 @@ public abstract class AbstractEvent {
 		this.date = date;
 		this.comment = comment;
 		this.location = location;
-		this.creator = creator;
+		this.setCreator(creator);
 	}
 	
 	
@@ -76,6 +76,18 @@ public abstract class AbstractEvent {
 
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+
+
+
+	public Key<User> getCreator() {
+		return creator;
+	}
+
+
+
+	public void setCreator(Key<User> creator) {
+		this.creator = creator;
 	}
 
 

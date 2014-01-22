@@ -25,10 +25,6 @@ public class HuntingEvent extends AbstractEvent {
 		// TODO Auto-generated constructor stub
 	}
 
-	public void accept(AgentManager v){
-		v.spy(this);
-	}
-
 	@Override
 	public void accept(AgentJena agentJena) {
 		// TODO Auto-generated method stub
