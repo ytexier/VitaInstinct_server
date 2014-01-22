@@ -1,0 +1,13 @@
+@(user	: User, equipmentForm : Form[forms.AddEquipmentForm])
+@import helper._
+
+
+
+@form(routes.Equipments.addEquipment()) {
+
+<input id="equipmentSector" type="hidden" name="sector" />
+@inputText(equipmentForm("label"), 'id -> "equipmentLabel")
+@inputText(equipmentForm("comment"), 'id -> "equipmentComment")
+<input type="submit" id="btAddEvent" value="Create">
+
+}

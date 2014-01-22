@@ -3,6 +3,8 @@ package models;
 import agents.AgentManager;
 import controllers.MorphiaObject;
 import models.factory.AbstractActivity;
+import models.factory.AbstractEquipment;
+import models.factory.AbstractEvent;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
@@ -37,6 +39,8 @@ import java.util.Date;
     					private Date registration;
     					
     @Reference 			private ArrayList<AbstractActivity> activities; 
+    @Reference			private ArrayList<AbstractEvent> events;
+    @Reference			private ArrayList<AbstractEquipment> equipments;
     @Embedded 			private ArrayList<Key<User>> friends;
 
 	public User(String givenName, String familyName, String nickName, String email, String password, Date registration){

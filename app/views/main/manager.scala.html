@@ -1,6 +1,9 @@
 @(
 	activities		: List[models.factory.AbstractActivity], 
-	user			: User, activityForm : Form[forms.AbstractActivityForm], 
+	user			: User,
+    activityForm : Form[forms.AbstractActivityForm],
+    eventForm : Form[forms.AddEventForm],
+    equipmentForm : Form[forms.AddEquipmentForm],
 	addFriendForm	: Form[forms.AddFriendForm]
 	)
 	
@@ -25,6 +28,11 @@
 				hideAll();
 				$("#menu_action").hide();
 				$("#sector").val('hunting');
+<<<<<<< HEAD
+=======
+                $("#eventSector").val('hunting');
+                $("#equipmentSector").val('hunting');
+>>>>>>> dimql
 				$("#menu_action").show("");
 				$("#menu_action").css('background', 'darkkhaki');
 				$(this).css('background', 'darkkhaki');
@@ -36,6 +44,11 @@
 				hideAll();
 				$("#menu_action").hide();
 				$("#sector").val('fishing');
+<<<<<<< HEAD
+=======
+                $("#eventSector").val('fishing');
+                $("#equipmentSector").val('fishing');
+>>>>>>> dimql
 				$("#menu_action").show("");
 				$("#menu_action").css('background', 'Turquoise');
 				$(this).css('background', 'Turquoise');
@@ -47,6 +60,11 @@
 				hideAll();
 				$("#menu_action").hide();
 				$("#sector").val('picking');
+<<<<<<< HEAD
+=======
+                $("#eventSector").val('picking');
+                $("#equipmentSector").val('picking');
+>>>>>>> dimql
 				$("#menu_action").show("");
 				$("#menu_action").css('background', 'springgreen');
 				$(this).css('background', 'springgreen');
@@ -57,6 +75,14 @@
 			$("#btNewActivity").click(function() {
 				showNewActivityForm();
 			});
+
+            $("#btNewEvent").click(function() {
+                showNewEventForm();
+            });
+
+            $("#btNewEquipment").click(function() {
+                showNewEquipmentForm();
+            });
 		  
 			$("#btEquipments").click(function() {
 				showEquipments();
@@ -72,6 +98,7 @@
 		function hideAll(){
 			$("aside").hide();
 			$("#newActivityForm").hide();
+            $("#newEventForm").hide();
 			$("#equipments").hide();
 			$("#viewer").hide();
 			$("#map").hide();
@@ -82,8 +109,23 @@
 			$("aside").show();
 			$("#newActivityForm").show("");
 			$("#map").show();
-			initializeMap();
+			initializeActivityMap();
 		}
+
+        function showNewEventForm () {
+            hideAll();
+            $("aside").show();
+            $("#newEventForm").show("");
+            $("#map").show();
+            initializeEventMap();
+        }
+
+        function showNewEquipmentForm () {
+            hideAll();
+            $("aside").show();
+            $("#newEquipmentForm").show("");
+            $("#map").show();
+        }
 		
 		function showEquipments(){
 			hideAll();
@@ -114,7 +156,9 @@
 	<article>
 	
 		<aside>
-			<div id="newActivityForm">@block.newActivityForm(user, activityForm)</div>
+            <div id="newActivityForm">@block.newActivityForm(user, activityForm)</div>
+            <div id="newEventForm">@block.newEventForm(user, eventForm)</div>
+            <div id="newEquipmentForm">@block.newEquipmentForm(user, equipmentForm)</div>
 			<div id="viewer">@block.viewer(activities)</div>
 			<div id="equipments">@block.equipments(user, activityForm)</div>
 		</aside>

@@ -16,3 +16,4 @@ dist
 /modules
 /tmp
 /lib
+/.target

@@ -5,6 +5,7 @@ import org.mongodb.morphia.Key;
 import models.Location;
 import models.Plant;
 import models.User;
+import models.factory.AbstractEvent;
 import models.factory.FactorySector;
 
 public class FactoryPickingSector extends FactorySector {
@@ -15,18 +16,21 @@ public class FactoryPickingSector extends FactorySector {
 	}
 
 	@Override
-	public PickingEquipment createEquipment() {
-		return (new PickingEquipment());
+	public PickingEquipment createEquipment(String label, String comment, Key<User> creator) {
+		return (new PickingEquipment(label, comment, creator));
 	}
 
 	@Override
-	public PickingAccessory createAccessory() {
-		return (new PickingAccessory());
+	public PickingAccessory createAccessory(String label, String comment, Key<User> creator) {
+		return (new PickingAccessory(label, comment, creator));
 	}
 
 	@Override
-	public PickingEvent createEvent() {
-		return (new PickingEvent());
+	public AbstractEvent createEvent(String date, String comment,
+			Location location, Key<User> creator) {
+		// TODO Auto-generated method stub
+		return new PickingEvent(date, comment, location, creator);
 	}
+
 
 }
