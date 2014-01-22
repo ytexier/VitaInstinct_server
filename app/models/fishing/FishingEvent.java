@@ -14,7 +14,6 @@ import models.factory.AbstractEvent;
 @Entity
 public class FishingEvent extends AbstractEvent {
 	
-	private Key<User> creator;
 	private ArrayList<FishingActivity> activities;
 	
 	public FishingEvent() {

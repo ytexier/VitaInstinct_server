@@ -1,15 +1,15 @@
 @(
 user	: User,
-activityForm : Form[forms.AbstractActivityForm],
+activityForm : play.data.Form[forms.AbstractActivityForm],
 eventsList : List[models.factory.AbstractEvent],
 equipmentsList : List[models.factory.AbstractEquipment]
 )
 @import helper._
 
 <style type="text/css">
-#eventsDiv{height:50pt;overflow:auto}
+#eventsDiv{height:20pt;overflow:auto}
 #equipmentDiv{height:50pt;overflow:auto}
-#separator{height:20pt}
+#separator{height:10pt}
 </style>
 
   @form(routes.Activities.newActivity()) {
@@ -17,9 +17,10 @@ equipmentsList : List[models.factory.AbstractEquipment]
 	<input id="sector" type="hidden" name="sector" />
 	<h3>Events</h3>
 	<div id="eventsDiv">
-	<select name="eventSelect">
+	<select name="event">
+		<option value="">---</option>
 		@for(event <- eventsList) {
-			<option value="@event.getId()">@event.getComment</option>
+			<option value="@event.getId()">@event.getLabel()</option>
 		}
 	</select>
 		
@@ -29,7 +30,7 @@ equipmentsList : List[models.factory.AbstractEquipment]
 	<h3>Equipments</h3>
 	<div id="equipmentDiv">
 		@for(equipment <- equipmentsList) {
-			<input type="checkbox" name="@equipment.getLabel()" boxValue="@equipment.getId()">@equipment.getLabel()<br>
+			<input type="checkbox" name="@equipment.getLabel()" boxValue="@equipment.getId()">@equipment.getLabel() : @equipment.getComment()<br>
 		}
 	</div>
     @inputDate(activityForm("date"), 'id -> "itDate")  

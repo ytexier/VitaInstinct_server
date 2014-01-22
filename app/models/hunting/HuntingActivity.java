@@ -12,6 +12,8 @@ import models.factory.AbstractActivity;
 
 
 
+import models.fishing.FishingEquipment;
+
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
@@ -30,6 +32,8 @@ public class HuntingActivity extends AbstractActivity{
 	
 	@Embedded
 	private HuntingEvent event;
+	@Reference
+	private ArrayList<HuntingEquipment> equipments;
 
 	
 	public HuntingActivity(){
@@ -38,12 +42,10 @@ public class HuntingActivity extends AbstractActivity{
 	
 	public HuntingActivity(Mammal organism, int amountOfOrganism, String date, Location location, Key<User> creator){
 		super(organism, creator, amountOfOrganism, location, "hunting", date);	
-		super.setEquipments(new ArrayList<HuntingEquipment>());
+		equipments = new ArrayList<HuntingEquipment>();
 		event = new HuntingEvent();
 	}
 	
-
-
 	@Override
 	public void accept(AgentJena agent) {
 		agent.spy(this);
@@ -87,7 +89,13 @@ public class HuntingActivity extends AbstractActivity{
 		this.event = event;
 	}
 
+	public ArrayList<HuntingEquipment> getEquipments() {
+		return equipments;
+	}
 
+	public void setEquipments(ArrayList<HuntingEquipment> equipments) {
+		this.equipments = equipments;
+	}
 
 	
 

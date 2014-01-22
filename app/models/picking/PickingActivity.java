@@ -29,6 +29,8 @@ public class PickingActivity extends AbstractActivity{
 	
 	@Embedded
 	private PickingEvent event;
+	@Reference
+	private ArrayList<PickingEquipment> equipments;
 	
 	public PickingActivity(){
 
@@ -36,7 +38,7 @@ public class PickingActivity extends AbstractActivity{
 	
 	public PickingActivity(Plant organism, int amountOfOrganism, String date, Location location, Key<User> creator){
 		super(organism, creator, amountOfOrganism, location, "hunting", date);
-		super.setEquipments(new ArrayList<PickingEquipment>());
+		equipments = new ArrayList<PickingEquipment>();
 		event = new PickingEvent();
 	}
     
@@ -68,7 +70,6 @@ public class PickingActivity extends AbstractActivity{
 		super.setAmountOfOrganism(_amountOfOrganism);
 	}
 
-
 	public PickingEvent getEvent() {
 		return event;
 	}
@@ -78,5 +79,11 @@ public class PickingActivity extends AbstractActivity{
 		this.event = event;
 	}
 
-	
+	public ArrayList<PickingEquipment> getEquipments() {
+		return equipments;
+	}
+
+	public void setEquipments(ArrayList<PickingEquipment> equipments) {
+		this.equipments = equipments;
+	}
 }
