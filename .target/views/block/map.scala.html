@@ -12,7 +12,7 @@
     var markers = [];
     var markerExist=false;
     
-    function initializeMap() {
+    function initializeActivityMap() {
         
     	var myLatlng = new google.maps.LatLng(44, 3.5);
         
@@ -34,6 +34,32 @@
           	document.getElementById("itLatitude").value=event.latLng.lat().toString();
           	document.getElementById("itLongitude").value=event.latLng.lng().toString();
           	
+        });
+
+    }
+
+    function initializeEventMap() {
+
+        var myLatlng = new google.maps.LatLng(44, 3.5);
+
+        var myOptions = {
+            zoom: 10,
+            center: myLatlng,
+            mapTypeId: google.maps.MapTypeId.ROADMAP
+        }
+
+        map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+
+        google.maps.event.addListener(map, 'click', function(event) {
+            if(markerExist){
+                clearMarkers();
+                markerExist=false;
+            }
+            addMarker(event.latLng);
+            markerExist=true;
+            document.getElementById("eventLatitude").value=event.latLng.lat().toString();
+            document.getElementById("eventLongitude").value=event.latLng.lng().toString();
+
         });
 
     }
