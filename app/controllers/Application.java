@@ -64,6 +64,7 @@ public class Application extends Controller {
 				try{
 					session().clear();
 					session("email", filledForm.get().getEmail());
+					response().setCookie("userid", User.findByEmail(filledForm.get().getEmail()).getId().toString());
 					return redirect(
 							routes.Application.index()
 							);

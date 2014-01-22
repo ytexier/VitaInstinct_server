@@ -65,7 +65,9 @@
     }
 
     function initializeViewerMap() {
+
         var user_id = document.cookie.split("=")[1];
+        console.log(document.cookie);
         var myLatlng = new google.maps.LatLng(44, 3.5);
 
         var myOptions = {
@@ -76,9 +78,8 @@
 
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
-        $.get("/users/"+user_id+"/activities", function(data) {
-            $(".result").json(data);
-            
+        $.getJSON("/users/"+user_id+"/activities", function(data) {
+           console.log(data);
         });
 
     }
@@ -117,6 +118,6 @@
         addMarker(CentralPark);
     }
     
-    initializeMap();
+    //initializeMap();
     
     </script>
