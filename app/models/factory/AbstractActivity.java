@@ -28,16 +28,12 @@ public abstract class AbstractActivity {
 	private String sector;
 	private String uri;
 	
-	@Embedded 
 	private Location location;
 	private Integer amountOfOrganism;
- 	@Embedded
 	private Organism organism;
 	private ActivityEnding activityEnding;
-	@Embedded
 	private Key<User> creator;
 	
-	@Embedded
 	private AbstractEvent event;
 	
 	public AbstractActivity(){

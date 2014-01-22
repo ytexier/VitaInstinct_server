@@ -14,7 +14,6 @@ public abstract class Organism {
 	@Property("id")
 	private ObjectId id;
 	private String specie;
-	@Embedded
 	private Sex sex;
 	
 	private String URI;

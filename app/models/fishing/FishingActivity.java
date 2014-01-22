@@ -23,48 +23,48 @@ import agents.AgentJena;
 
 @Entity
 public class FishingActivity extends AbstractActivity{
-	
-	@Embedded	private FishingEvent event;
-	@Reference	private FishingEquipment equipment;
+
+	private FishingEvent event;
+	private FishingEquipment equipment;
 
 	public FishingActivity(){
 
 	}
-	
+
 	public FishingActivity(String organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
 		super(new Fish(organism), creator, amountOfOrganism, location, "fishing", date);
 		this.equipment = (FishingEquipment) equipment;
 		this.event = (FishingEvent) event;
 	}
-	
-	
+
+
 	@Override
 	public Model accept(AgentJena agent) {
 		return agent.spy(this);
 	}
-	
-    public static FishingActivity findById(String id){
-    	FishingActivity activity = MorphiaObject.datastore.find(FishingActivity.class)
-    			.field("_id")
-    			.equal(new ObjectId(id))
-    			.get();
-    	return activity;
-    }
-	
+
+	public static FishingActivity findById(String id){
+		FishingActivity activity = MorphiaObject.datastore.find(FishingActivity.class)
+				.field("_id")
+				.equal(new ObjectId(id))
+				.get();
+		return activity;
+	}
+
 	public void setDate(String date) {
 		super.setDate(date);		
 	}
-	
+
 	public void setLocation(Location location) {
 		super.setLocation(location);		
 	}
-	
-	
+
+
 	public void setActivityEnding(ActivityEnding activityEnding) {
 		super.setActivityEnding(activityEnding);		
 	}
-	
-	
+
+
 	public void setAmountOfOrganism(Integer _amountOfOrganism){
 		super.setAmountOfOrganism(_amountOfOrganism);
 	}
@@ -76,7 +76,7 @@ public class FishingActivity extends AbstractActivity{
 	public void setEvent(FishingEvent event) {
 		this.event = event;
 	}
-	
+
 	public FishingEquipment getEquipment() {
 		return equipment;
 	}
@@ -85,6 +85,6 @@ public class FishingActivity extends AbstractActivity{
 		this.equipment = equipment;
 	}
 
-	
+
 
 }

@@ -24,13 +24,11 @@ public abstract class AbstractEvent {
 	private String label;
 	private String date;
 	private String comment;
-	@Embedded
 	private Location location;
-	@Embedded
 	private Key<User> creator;
 	private String uri;
 	
-	@Reference private ArrayList<User> registers;
+	private ArrayList<Key<User>> registers;
 
 	
 	public AbstractEvent() {}
@@ -45,10 +43,10 @@ public abstract class AbstractEvent {
 		this.location = location;
 		this.setURI(Vita.getURL() + "sector/" + sector + "/event/" + id);
 		this.creator = creator;
-		this.registers = new ArrayList<User>();
+		this.registers = new ArrayList<Key<User>>();
 	}
 	
-	public void addUser(User user) {
+	public void addUser(Key<User> user) {
 		this.registers.add(user);
 	}	
 	
@@ -102,11 +100,11 @@ public abstract class AbstractEvent {
 		this.creator = creator;
 	}
 	
-	public ArrayList<User> getRegisters() {
+	public ArrayList<Key<User>> getRegisters() {
 		return registers;
 	}
 	
-	public void setRegisters(ArrayList<User> users) {
+	public void setRegisters(ArrayList<Key<User>> users) {
 		this.registers = users;
 	}
 	

@@ -22,69 +22,69 @@ import java.util.Date;
 
 @Entity public class User{
 
-	
+
 	@Id 				private ObjectId id;
-	
-    @Required @Email 	private String email;
-    @Required 			private String password;
-    
-    					private String URI;
-    					
-    					private String fullName;
-    					private String givenName;
-    					private String familyName;
-    					private String nickName;
-    					
-    					private Date registration;
-    					
-    @Embedded  			private ArrayList<AbstractActivity> activities; 
-    @Embedded  			private ArrayList<AbstractEvent> events;
-    @Embedded 			private ArrayList<AbstractEquipment> equipments;
-    @Embedded 			private ArrayList<Key<User>> friends;
+
+	@Required @Email 	private String email;
+	@Required 			private String password;
+
+	private String URI;
+
+	private String fullName;
+	private String givenName;
+	private String familyName;
+	private String nickName;
+
+	private Date registration;
+
+	private ArrayList<AbstractActivity> activities; 
+	private ArrayList<AbstractEvent> events;
+	private ArrayList<AbstractEquipment> equipments;
+	private ArrayList<Key<User>> friends;
 
 	public User(String givenName, String familyName, String nickName, String email, String password, Date registration){
-		
+
 		this.setFullName(givenName + " " + familyName);
 		this.setGivenName(givenName);
 		this.setFamilyName(familyName);
 		this.setNickName(nickName);	
 
 		this.setURI(Vita.getURL()+"user/"+givenName+"."+familyName);
-		
-        this.setEmail(email);
-        this.setPassword(password);
-        this.setRegistration(registration);
-        
-        this.setActivities(new ArrayList<AbstractActivity>());
-        this.setEvents(new ArrayList<AbstractEvent>());
-        this.setEquipments(new ArrayList<AbstractEquipment>());
-        this.setFriends(new ArrayList<Key<User>>());
-        
-    }
-    
-    public User() {
-    	
+
+		this.setEmail(email);
+		this.setPassword(password);
+		this.setRegistration(registration);
+
+		this.setActivities(new ArrayList<AbstractActivity>());
+		this.setEvents(new ArrayList<AbstractEvent>());
+		this.setEquipments(new ArrayList<AbstractEquipment>());
+		this.setFriends(new ArrayList<Key<User>>());
+
 	}
-    
+
+	public User() {
+
+	}
+
 	public void accept(AgentManager v){
 		v.spy(this);
 	}
-    
-    public static User findById(String id){
-    	User user = MorphiaObject.datastore.find(User.class)
-    			.field("_id")
-    			.equal(new ObjectId(id))
-    			.get();
-    	return user;
-    }
-    
-    public static User findByEmail(String email){
-   		User user = MorphiaObject.datastore.find(User.class)
-   				.field("email")
-            	.equal(email)
-            	.get();
-    	return user;
-    }
+
+	public static User findById(String id){
+		User user = MorphiaObject.datastore.find(User.class)
+				.field("_id")
+				.equal(new ObjectId(id))
+				.get();
+		return user;
+	}
+
+	public static User findByEmail(String email){
+		User user = MorphiaObject.datastore.find(User.class)
+				.field("email")
+				.equal(email)
+				.get();
+		return user;
+	}
 
 	public static User authenticate(String email, String password) {
 		User user = MorphiaObject.datastore.find(User.class)
@@ -93,8 +93,8 @@ import java.util.Date;
 				.get();
 		return user;
 	}
-	
-	
+
+
 	public ObjectId getId() {
 		return id;
 	}
@@ -113,7 +113,7 @@ import java.util.Date;
 	public void setPassword(String password) {
 		this.password = password;
 	}
-    public Date getRegistration() {
+	public Date getRegistration() {
 		return registration;
 	}
 	public void setRegistration(Date registration) {
@@ -139,7 +139,7 @@ import java.util.Date;
 	public void setURI(String uRI) {
 		URI = uRI;
 	}
-	
+
 
 	public String getFullName() {
 		return fullName;
@@ -172,7 +172,7 @@ import java.util.Date;
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	
+
 	public void setEvents(ArrayList<AbstractEvent> events) {
 		this.events = events;
 	}
@@ -180,11 +180,11 @@ import java.util.Date;
 	public void setEquipments(ArrayList<AbstractEquipment> equipments) {
 		this.equipments = equipments;
 	}
-	
+
 	public ArrayList<AbstractEquipment> getEquipments() {
 		return this.equipments;
 	}
-	
+
 	public ArrayList<AbstractEvent> getEvents() {
 		return this.events;
 	}

@@ -6,6 +6,7 @@ import models.Vita;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Reference;
 
 import com.hp.hpl.jena.rdf.model.Model;
 

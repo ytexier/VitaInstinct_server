@@ -21,35 +21,35 @@ import agents.AgentJena;
 
 @Entity
 public class PickingActivity extends AbstractActivity{
-	
-	@Embedded	private PickingEvent event;
-	@Reference	private PickingEquipment equipment;
-	
+
+	private PickingEvent event;
+	private PickingEquipment equipment;
+
 	public PickingActivity(){
 
 	}
-	
+
 	public PickingActivity(Plant organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
 		super(organism, creator, amountOfOrganism, location, "hunting", date);
 		this.equipment = (PickingEquipment) equipment;
 		this.event = (PickingEvent) event;
 	}
-    
+
 	@Override
 	public Model accept(AgentJena agent) {
 		return agent.spy(this);
 	}
-	
-	
-    public static PickingActivity findById(String id){
-    	PickingActivity activity = MorphiaObject.datastore.find(PickingActivity.class)
-    			.field("_id")
-    			.equal(new ObjectId(id))
-    			.get();
-    	return activity;
-    }
-	
-	
+
+
+	public static PickingActivity findById(String id){
+		PickingActivity activity = MorphiaObject.datastore.find(PickingActivity.class)
+				.field("_id")
+				.equal(new ObjectId(id))
+				.get();
+		return activity;
+	}
+
+
 	public void setDate(String _date) {
 		super.setDate(_date);		
 	}

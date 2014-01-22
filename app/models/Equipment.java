@@ -17,7 +17,7 @@ public class Equipment {
 	private String label;
 	private String comment;
 	private String uri;
-	@Embedded  private Key<User> creator;
+	private Key<User> creator;
 	
 	public Equipment(){
 	}

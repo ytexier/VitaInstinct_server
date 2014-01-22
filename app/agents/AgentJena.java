@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
+import org.mongodb.morphia.Key;
 
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.DC;
@@ -195,7 +196,7 @@ public class AgentJena extends AgentManager{
 		Location	location = event.getLocation();
 		
 		ArrayList<HuntingActivity> 	activities = event.getActivities();
-		ArrayList<User> 			registers = event.getRegisters();	
+		ArrayList<Key<User>> 			registers = event.getRegisters();	
 		
 		//Resource Event
 		Resource _event = jenaModel.createResource(event.getURI());
@@ -213,7 +214,7 @@ public class AgentJena extends AgentManager{
 		
 		//Registers
 		ArrayList<Individual> _registers = new ArrayList<Individual>();
-		for(User register : registers)
+		for(Key<User> register : registers)
 			_registers.add(jenaModel.createIndividual(Vita.getURL()+"user/"+register.getId().toString(), Vita.VitaClass.Location.getOntClass(jenaModel)));		
 		
 		//Add properties

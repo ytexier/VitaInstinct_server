@@ -31,49 +31,49 @@ import agents.AgentJena;
 
 @Entity
 public class HuntingActivity extends AbstractActivity{
-	
-	@Embedded	private HuntingEvent event;
-	@Embedded	private HuntingEquipment equipment;
 
-	
+	private HuntingEvent event;
+	private HuntingEquipment equipment;
+
+
 	public HuntingActivity(){
 
 	}
-	
+
 	public HuntingActivity(Mammal organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
 		super(organism, creator, amountOfOrganism, location, "hunting", date);	
 		this.equipment = (HuntingEquipment) equipment;
 		this.event = (HuntingEvent) event;
 	}
-	
+
 	@Override
 	public Model accept(AgentJena agent) {
 		return agent.spy(this);
 	}
-	
-    public static HuntingActivity findById(String id){
-    	HuntingActivity activity = MorphiaObject.datastore.find(HuntingActivity.class)
-    			.field("_id")
-    			.equal(new ObjectId(id))
-    			.get();
-    	return activity;
-    }
-    
+
+	public static HuntingActivity findById(String id){
+		HuntingActivity activity = MorphiaObject.datastore.find(HuntingActivity.class)
+				.field("_id")
+				.equal(new ObjectId(id))
+				.get();
+		return activity;
+	}
+
 
 	public void setDate(String _date) {
 		super.setDate(_date);		
 	}
-	
+
 	public void setLocation(Location _location) {
 		super.setLocation(_location);		
 	}
-	
-	
+
+
 	public void setActivityEnding(ActivityEnding _ActivityEnding) {
 		super.setActivityEnding(_ActivityEnding);		
 	}
-	
-	
+
+
 	public void setAmountOfOrganism(Integer _amountOfOrganism){
 		super.setAmountOfOrganism(_amountOfOrganism);
 	}
@@ -96,6 +96,6 @@ public class HuntingActivity extends AbstractActivity{
 		this.equipment = equipment;
 	}
 
-	
+
 
 }
