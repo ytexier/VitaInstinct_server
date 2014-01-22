@@ -38,7 +38,6 @@ public class Events extends Controller {
 
 			SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
 
-			String label = filledForm.get().label;
 			String sector = filledForm.get().sector;
 			String label = filledForm.get().label;
 			String comment = filledForm.get().comment;
