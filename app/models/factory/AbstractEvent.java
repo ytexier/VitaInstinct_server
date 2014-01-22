@@ -26,7 +26,7 @@ public abstract class AbstractEvent {
 	private Key<User> creator;
 	
 	private ArrayList<? extends AbstractActivity> activities;
-	private ArrayList<User> users;
+	private ArrayList<User> registers;
 	
 	public AbstractEvent() {}
 	
@@ -40,17 +40,13 @@ public abstract class AbstractEvent {
 		this.date = date;
 		this.comment = comment;
 		this.location = location;
-<<<<<<< HEAD
-		this.setCreator(creator);
 		this.uri = Vita.getURL() + "sector/" + sector + "/event/" + id;
-=======
 		this.creator = creator;
-		this.users = new ArrayList<User>();
->>>>>>> dimql
+		this.registers = new ArrayList<User>();
 	}
 	
 	public void addUser(User user) {
-		this.users.add(user);
+		this.registers.add(user);
 	}	
 	
 	public abstract void accept(AgentJena agentJena);
@@ -94,26 +90,15 @@ public abstract class AbstractEvent {
 	public void setLocation(Location location) {
 		this.location = location;
 	}
-	
-	public Key<User> getCreator() {
-		return creator;
+
+	public List<User> getRegisters() {
+		return registers;
 	}
 
 
 
-	public void setCreator(Key<User> creator) {
-		this.creator = creator;
-	}
-
-
-	public List<User> getUsers() {
-		return users;
-	}
-
-
-
-	public void setUsers(ArrayList<User> users) {
-		this.users = users;
+	public void setRegisters(ArrayList<User> registers) {
+		this.registers = registers;
 	}
 
 

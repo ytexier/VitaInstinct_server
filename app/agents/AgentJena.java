@@ -78,9 +78,10 @@ public class AgentJena extends AgentManager{
 		jenaModel.setNsPrefix( "vita", Vita.NS );
 		jenaModel.setNsPrefix( "owl", OWL.NS );
 		jenaModel.setNsPrefix( "dc", DC.NS );
-		jenaModel.setNsPrefix( "wgs84_pos", "http://www.w3.org/2003/01/geo/wgs84_pos#");
 		return jenaModel;
 	}
+	
+	
 	
 	/**
 	 * USER
@@ -237,7 +238,20 @@ public class AgentJena extends AgentManager{
 
 	@Override
 	public Model spy(HuntingEquipment equipment) {
-	
+		
+		String 			idEquipment = equipment.getId().toString();	
+		User 			creator = User.findById(equipment.getCreator().getId().toString());
+		String 			label = equipment.getLabel();
+		String 			comment = equipment.getComment();
+		
+		//Resource Equipment
+		Resource _equipment = jenaModel.createResource(equipment.getURI());
+		
+		//Add Properties
+		_equipment.addProperty(RDFS.label, label);
+		_equipment.addProperty(DC.creator, creator.getFullName());
+		_equipment.addProperty(RDFS.comment, comment);	
+		
 		return jenaModel;
 	}
 
@@ -265,8 +279,8 @@ public class AgentJena extends AgentManager{
 		String 		date = event.getDate();
 		Location	location = event.getLocation();
 		
-		ArrayList<HuntingActivity> 	activities = event.getActivities();
-		ArrayList<User> 			registers = event.getRegisters();	
+		ArrayList<HuntingActivity> 	activities = (ArrayList<HuntingActivity>) event.getActivities();
+		ArrayList<User> 			registers = (ArrayList<User>) event.getRegisters();	
 		
 		//Resource Event
 		Resource _event = jenaModel.createResource(event.getURI());
@@ -303,13 +317,11 @@ public class AgentJena extends AgentManager{
 
 	@Override
 	public Model spy(PickingEvent event) {
-		
 		return jenaModel;
 	}
 
 	@Override
 	public Model spy(FishingEvent event) {
-		
 		return jenaModel;
 	}
 
@@ -335,7 +347,6 @@ public class AgentJena extends AgentManager{
 	
 	@Override
 	public Model spy(Organism organism) {
-		
 		return jenaModel;
 	}
 	

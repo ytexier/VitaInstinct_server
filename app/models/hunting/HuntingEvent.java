@@ -17,11 +17,6 @@ public class HuntingEvent extends AbstractEvent {
 	
 	
 	
-	public HuntingEvent() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-
 	public HuntingEvent(String label, String date, String comment,
 			Location location, Key<User> creator) {
 		super("hunting", label, date, comment, location, creator);
@@ -29,6 +24,10 @@ public class HuntingEvent extends AbstractEvent {
 		// TODO Auto-generated constructor stub
 	}
 	
+	public HuntingEvent() {
+		// TODO Auto-generated constructor stub
+	}
+
 	public void addActivity(HuntingActivity activity) {
 		((ArrayList<HuntingActivity>)super.getActivities()).add(activity);
 	}

@@ -38,6 +38,7 @@ public class Events extends Controller {
 
 			SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
 
+			String label = filledForm.get().label;
 			String sector = filledForm.get().sector;
 			String comment = filledForm.get().comment;
 			Date date =	filledForm.get().date;
@@ -60,7 +61,7 @@ public class Events extends Controller {
 			Key<User> creatorKey = MorphiaObject.datastore.getKey(user);
 
 			aEvent =
-					factorySector.createEvent(formattedDate, comment, location, creatorKey);
+					factorySector.createEvent(label, formattedDate, comment, location, creatorKey);
 
 			Key<AbstractEvent> eventKey = MorphiaObject.datastore.save(aEvent);
 

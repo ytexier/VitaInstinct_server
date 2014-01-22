@@ -107,7 +107,6 @@ public abstract class AbstractActivity {
 	public void setSector(String sector){
 		this.sector = sector;
 	}
-<<<<<<< HEAD
 	
 	public String getLabel(){
 		return sector+"|"+date+"|"+organism.getSpecie();
@@ -119,7 +118,7 @@ public abstract class AbstractActivity {
 
 	public void setURI(String uri) {
 		this.uri = uri;
-=======
+	}
 
 	public AbstractEvent getEvent() {
 		return event;
@@ -135,7 +134,6 @@ public abstract class AbstractActivity {
 
 	public void setEquipment(ArrayList<? extends AbstractEquipment> equipment) {
 		this.equipment = equipment;
->>>>>>> dimql
 	}
  
 	
