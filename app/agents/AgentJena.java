@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
+import org.mongodb.morphia.Key;
 
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.DC;
@@ -21,11 +22,11 @@ import com.hp.hpl.jena.rdf.model.ModelFactory;
 import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.util.FileManager;
 
+import models.Amniote;
 import models.Location;
 import models.Organism;
 import models.User;
 import models.Vita;
-import models.factory.AbstractEquipment;
 import models.fishing.FishingActivity;
 import models.fishing.FishingEquipment;
 import models.fishing.FishingEvent;
@@ -93,12 +94,12 @@ public class AgentJena extends AgentManager{
 	
 		String 			idActivity = activity.getId().toString();	
 		User 			creator = User.findById(activity.getCreator().getId().toString());
-		Organism 		organism = activity.getOrganism();
-		String 			label = activity.getLabel();
+		Amniote 		organism = (Amniote) activity.getOrganism();
+		String 			label = "TODO";
 		HuntingEvent	event = activity.getEvent();
 
 		//Resource Activity
-		Resource _activity = jenaModel.createResource(activity.getURI());
+		Resource _activity = jenaModel.createResource(activity.getURI()+idActivity);
 	
 		//Organism : targetOrganism
 		Vita.VitaClass.Organism.createOntClass(jenaModel);
@@ -113,8 +114,8 @@ public class AgentJena extends AgentManager{
 		//List Equipment : equipments
 		Vita.VitaClass.Equipment.createOntClass(jenaModel);
 		ArrayList<Individual> _equipments = new ArrayList<Individual>();
-		//for(AbstractEquipment equipment : activity.getEquipments())
-			//_equipments.add(jenaModel.createIndividual(equipment.getURI(), Vita.VitaClass.Equipment.getOntClass(jenaModel)));		
+		//for(Equipment equipment : activity.getEquipments())
+		//	_equipments.add(jenaModel.createIndividual(equipment.getURI()+equipment.getId(), Vita.VitaClass.Equipment.getOntClass(jenaModel)));		
 		
 		//Event : isRelatedTo
 		Vita.VitaClass.Event.createOntClass(jenaModel);
@@ -160,26 +161,33 @@ public class AgentJena extends AgentManager{
 		String 			comment = equipment.getComment();
 		
 		//Resource Equipment
-		Resource _equipment = jenaModel.createResource(equipment.getURI());
+		Resource _equipment = jenaModel.createResource(equipment.getURI()+idEquipment);
 		
 		//Add Properties
 		_equipment.addProperty(RDFS.label, label);
 		_equipment.addProperty(DC.creator, creator.getFullName());
 		_equipment.addProperty(RDFS.comment, comment);	
 	
+		this.writeRDF(jenaModel, db_activities);
+		
 		return jenaModel;
 	}
+
 
 	@Override
 	public Model spy(PickingEquipment equipment) {
-		return jenaModel;
+		// TODO Auto-generated method stub
+		return null;
 	}
+
 
 	@Override
 	public Model spy(FishingEquipment equipment) {
-		return jenaModel;
+		// TODO Auto-generated method stub
+		return null;
 	}
-	
+
+
 	/**
 	 * EVENT
 	 */
@@ -195,14 +203,14 @@ public class AgentJena extends AgentManager{
 		Location	location = event.getLocation();
 		
 		ArrayList<HuntingActivity> 	activities = event.getActivities();
-		ArrayList<User> 			registers = event.getRegisters();	
+		ArrayList<Key<User>> 		registers = event.getRegisters();	
 		
 		//Resource Event
-		Resource _event = jenaModel.createResource(event.getURI());
+		Resource _event = jenaModel.createResource(event.getURI()+idEvent);
 		
 		//Location
 		Vita.VitaClass.Location.createOntClass(jenaModel);
-		Individual _location = jenaModel.createIndividual(event.getURI()+"/location", Vita.VitaClass.Location.getOntClass(jenaModel));		
+		Individual _location = jenaModel.createIndividual(event.getURI()+"location/", Vita.VitaClass.Location.getOntClass(jenaModel));		
 		_location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(event.getLocation().getLatPos(),XSDDatatype.XSDstring));
 		_location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(event.getLocation().getLongPos(),XSDDatatype.XSDstring));
 	
@@ -213,11 +221,12 @@ public class AgentJena extends AgentManager{
 		
 		//Registers
 		ArrayList<Individual> _registers = new ArrayList<Individual>();
-		for(User register : registers)
+		for(Key<User> register : registers)
 			_registers.add(jenaModel.createIndividual(Vita.getURL()+"user/"+register.getId().toString(), Vita.VitaClass.Location.getOntClass(jenaModel)));		
 		
 		//Add properties
-		_event.addProperty(RDFS.label,label);
+		_event.addProperty(Vita.location, _location);
+		_event.addProperty(RDFS.label, label);
 		_event.addProperty(DC.creator, creator.getFullName());
 		_event.addProperty(RDFS.comment, comment);	
 		for(Individual e : _activities)
@@ -297,6 +306,8 @@ public class AgentJena extends AgentManager{
 		model = ModelFactory.createUnion(model_loaded, model);
 		writeOutput(model, db);
 	}
+
+
 
 
 	

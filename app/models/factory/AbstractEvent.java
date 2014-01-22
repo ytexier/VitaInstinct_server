@@ -1,7 +1,6 @@
 package models.factory;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import models.Location;
 import models.User;
@@ -9,28 +8,27 @@ import models.Vita;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
-import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
-import org.mongodb.morphia.annotations.Reference;
+import org.mongodb.morphia.annotations.Property;
 
 import com.hp.hpl.jena.rdf.model.Model;
 
 import agents.AgentJena;
 
+
 public abstract class AbstractEvent {
-	@Id 
+	
+	@Id
+	@Property("id") 
 	private ObjectId id;
 	private String sector;
 	private String label;
 	private String date;
 	private String comment;
-	@Embedded
 	private Location location;
-	@Embedded
 	private Key<User> creator;
 	private String uri;
-	
-	@Reference private ArrayList<User> registers;
+	private ArrayList<Key<User>> registers;
 
 	
 	public AbstractEvent() {}
@@ -43,12 +41,12 @@ public abstract class AbstractEvent {
 		this.date = date;
 		this.comment = comment;
 		this.location = location;
-		this.setURI(Vita.getURL() + "sector/" + sector + "/event/" + id);
+		this.setURI(Vita.getURL() + "sector/" + sector + "/event/");
 		this.creator = creator;
-		this.registers = new ArrayList<User>();
+		this.registers = new ArrayList<Key<User>>();
 	}
 	
-	public void addUser(User user) {
+	public void addUser(Key<User> user) {
 		this.registers.add(user);
 	}	
 	
@@ -102,11 +100,11 @@ public abstract class AbstractEvent {
 		this.creator = creator;
 	}
 	
-	public ArrayList<User> getRegisters() {
+	public ArrayList<Key<User>> getRegisters() {
 		return registers;
 	}
 	
-	public void setRegisters(ArrayList<User> users) {
+	public void setRegisters(ArrayList<Key<User>> users) {
 		this.registers = users;
 	}
 	

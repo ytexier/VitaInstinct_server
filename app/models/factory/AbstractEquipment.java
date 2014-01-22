@@ -33,7 +33,7 @@ public abstract class AbstractEquipment {
 		this.label = label;
 		this.comment = comment;
 		this.creator = creator;
-		this.uri = Vita.getURL() + "sector/" + sector + "/equipment/" + id;
+		this.uri = Vita.getURL() + "sector/" + sector + "/equipment/";
 	}
 	
 

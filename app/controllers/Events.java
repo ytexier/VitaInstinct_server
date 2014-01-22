@@ -1,20 +1,30 @@
 package controllers;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import models.Location;
 import models.User;
+import models.factory.AbstractActivity;
 import models.factory.AbstractEvent;
 import models.factory.FactorySector;
 import models.fishing.FactoryFishingSector;
+import models.fishing.FishingActivity;
+import models.fishing.FishingEvent;
 import models.hunting.FactoryHuntingSector;
+import models.hunting.HuntingActivity;
+import models.hunting.HuntingEvent;
 import models.picking.FactoryPickingSector;
+import models.picking.PickingActivity;
+import models.picking.PickingEvent;
 
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
 import play.data.Form;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
@@ -25,6 +35,34 @@ import forms.Secured;
 public class Events extends Controller {
 
 	static Form<AddEventForm> eventForm = Form.form(AddEventForm.class);
+	
+	public static Result get(String id, String sector){
+		
+    	AbstractEvent eventFound = null;
+    	
+    	if(sector.equals("hunting"))
+    		eventFound = HuntingEvent.findById(id);
+     	if(sector.equals("picking"))
+     		eventFound = PickingEvent.findById(id);
+     	if(sector.equals("fishing"))
+     		eventFound = FishingEvent.findById(id);
+    	
+
+   		if(request().accepts("text/html")){
+   			return ok();
+   		}
+   		
+   		else if(request().accepts("application/json"))
+            return ok(Json.toJson(eventFound));
+   		
+   		else if (request().accepts("application/rdf+xml")){
+   			OutputStream out = new ByteArrayOutputStream();
+   			eventFound.accept(new AgentJena()).write(out, "RDF/XML-ABBREV");
+   			return ok(out.toString());
+   		}
+
+		return ok(Json.toJson(eventFound.getCreator()));
+	}
 
 	@Security.Authenticated(Secured.class)
 	public static Result addEvent() throws Exception {
@@ -70,8 +108,6 @@ public class Events extends Controller {
 							user,
 							MorphiaObject.datastore.createUpdateOperations(User.class).add("events", eventKey)
 							);
-
-
 
 			aEvent.accept(new AgentJena());
 

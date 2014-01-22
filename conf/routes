@@ -44,19 +44,37 @@ GET			/users/:user_id/friends				controllers.Users.friends(user_id: String)
 POST    	/addFriend                  		controllers.Users.addFriend()
 
 #
-#GET	OBJECTS
+#ACTIVITY
 #
 GET		/sector/hunting/activity/:id			controllers.Activities.get(id: String, sector = "hunting")
 GET		/sector/fishing/activity/:id			controllers.Activities.get(id: String, sector = "fishing")
 GET		/sector/picking/activity/:id			controllers.Activities.get(id: String, sector = "picking")
+POST	/sector/hunting/activity/:id/delete		controllers.Activities.delete(id: String, sector = "hunting")
+POST	/sector/hunting/activity/:id/delete		controllers.Activities.delete(id: String, sector = "fishing")
+POST	/sector/hunting/activity/:id/delete		controllers.Activities.delete(id: String, sector = "picking")
 
-#GET		/sector/hunting/event/:id				controllers.Events.get(id: String, sector = "hunting")
-#GET		/sector/fishing/event/:id				controllers.Events.get(id: String, sector = "fishing")
-#GET		/sector/picking/event/:id				controllers.Events.get(id: String, sector = "picking")
+#
+#EVENT
+#
+GET		/sector/hunting/event/:id				controllers.Events.get(id: String, sector = "hunting")
+GET		/sector/fishing/event/:id				controllers.Events.get(id: String, sector = "fishing")
+GET		/sector/picking/event/:id				controllers.Events.get(id: String, sector = "picking")
 
-#GET		/sector/hunting/equipment/:id			controllers.Equipments.get(id: String, sector = "hunting")
-#GET		/sector/fishing/equipment/:id			controllers.Equipments.get(id: String, sector = "fishing")
-#GET		/sector/picking/equipment/:id			controllers.Equipments.get(id: String, sector = "picking")
+#
+#EQUIPMENT
+#
+GET		/sector/hunting/equipment/:id			controllers.Equipments.get(id: String, sector = "hunting")
+GET		/sector/fishing/equipment/:id			controllers.Equipments.get(id: String, sector = "fishing")
+GET		/sector/picking/equipment/:id			controllers.Equipments.get(id: String, sector = "picking")
+
+#
+#RDF
+#
+GET		/sector/hunting							controllers.VitaCtrl.get(sector = "hunting")
+GET		/sector/fishing							controllers.VitaCtrl.get(sector = "fishing")
+GET		/sector/picking							controllers.VitaCtrl.get(sector = "picking")
+
+
 
 #GET		/organism/amniote/:id					controllers.Organisms.get(id: String, sector = "hunting")
 #GET		/organism/fish/:id						controllers.Organisms.get(id: String, sector = "fishing")
@@ -78,9 +96,7 @@ GET			/activities/hunting/:activity_id/creator controllers.Activities.creator(ac
 GET			/activities/picking/:activity_id/creator controllers.Activities.creator(activity_id: String, sector = "picking")
 GET			/activities/fishing/:activity_id/creator controllers.Activities.creator(activity_id: String, sector = "fishing")
 
-POST		/sector/hunting/activity/:id/delete		controllers.Activities.delete(id: String, sector = "hunting")
-POST		/sector/hunting/activity/:id/delete		controllers.Activities.delete(id: String, sector = "fishing")
-POST		/sector/hunting/activity/:id/delete		controllers.Activities.delete(id: String, sector = "picking")
+
 
 
 # Comments

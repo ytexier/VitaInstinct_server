@@ -182,7 +182,9 @@ public class Activities extends Controller {
 				if(ActivityEnding.contains(activityEnding))
 						aActivity.setActivityEnding(Enum.valueOf(ActivityEnding.class, activityEnding));
 
-			
+		
+				aActivity.accept(new AgentJena());
+				
 				Key<AbstractActivity> activityKey = MorphiaObject.datastore.save(aActivity);
 
 				UpdateResults<User> res =
@@ -193,7 +195,6 @@ public class Activities extends Controller {
 				
 
 				
-				aActivity.accept(new AgentJena());
 				
 				return redirect(routes.Application.index());
         }

@@ -63,7 +63,7 @@ public class Users extends Controller{
     public static Result addFriend() throws Exception{
     	Form<AddFriendForm> filledForm = addFriendFrom.bindFromRequest();
         if(filledForm.hasErrors()) {
-        	//TODO
+        	return ok("Error : Friend does not exist.");
 	    }
 	    else {
 	    	String friend_email = filledForm.get().getEmail();

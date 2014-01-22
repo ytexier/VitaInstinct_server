@@ -6,15 +6,27 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
   <owl:Class rdf:about="http://vita-instinct.herokuapp.com/rdf-syntax-ns#Location"/>
-  <vita:Location rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/null/location">
-    <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >3.3824554650345817</vita:longitude>
-    <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-    >44.284632233055845</vita:latitude>
-  </vita:Location>
-  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/null">
-    <rdfs:comment>balles explosive</rdfs:comment>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/52e03ff4844143d11fcbf506">
+    <rdfs:comment>gratuit</rdfs:comment>
     <dc:creator>yohan texier</dc:creator>
     <rdfs:label>Grosse chasse</rdfs:label>
+    <vita:location>
+      <vita:Location rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/location/">
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >44.299377056436825</vita:latitude>
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >3.2506195275345817</vita:longitude>
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >3.3948150841752067</vita:longitude>
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >44.2934795713103</vita:latitude>
+      </vita:Location>
+    </vita:location>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/52e03c5d844143d11fcbf504">
+    <vita:location rdf:resource="http://vita-instinct.herokuapp.com/sector/hunting/event/location/"/>
+    <rdfs:label>Grosse chasse</rdfs:label>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:comment>gratuit</rdfs:comment>
   </rdf:Description>
 </rdf:RDF>

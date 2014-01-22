@@ -1,15 +1,17 @@
 package controllers;
 
+import java.io.ByteArrayOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
 
-import agents.AgentJena;
-
+import com.hp.hpl.jena.ontology.OntModel;
+import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
@@ -17,15 +19,15 @@ import com.hp.hpl.jena.query.ReadWrite;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.rdf.model.ModelFactory;
-import com.hp.hpl.jena.rdf.model.Resource;
 import com.hp.hpl.jena.sparql.engine.http.QueryExceptionHTTP;
 import com.hp.hpl.jena.tdb.TDBFactory;
 import com.hp.hpl.jena.util.FileManager;
+import com.hp.hpl.jena.vocabulary.DC;
+import com.hp.hpl.jena.vocabulary.OWL;
 
+import models.Vita;
 import models.VitaOWL;
-import models.fishing.FishingActivity;
-import models.hunting.HuntingActivity;
-import models.picking.PickingActivity;
+import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 
@@ -35,6 +37,43 @@ public class VitaCtrl extends Controller{
 	public static String db_fishing = "db/fishingSector.rdf";
 	public static String db_picking = "db/pickingSector.rdf";
 
+	public static Result get(String sector){
+		
+		Model model = ModelFactory.createDefaultModel();
+		InputStream in = null;
+		String db = "";
+		
+      	if(sector.equals("hunting"))
+      		db=db_hunting;
+      	
+     	if(sector.equals("picking"))
+     		db=db_hunting;
+     	
+     	if(sector.equals("fishing"))
+     		db=db_hunting;
+     	
+     	in = FileManager.get().open( db );
+	    if (in == null)
+	    	throw new IllegalArgumentException( "File: " + db + " not found");
+     
+	    // read the RDF/XML file
+	    model.read(in, "");
+
+   		if(request().accepts("text/html")){
+   			return ok();
+   		}
+ 
+   		else if(request().accepts("application/json"))
+            return ok(Json.toJson(""));
+   		
+   		else if (request().accepts("application/rdf+xml")){
+   			OutputStream out = new ByteArrayOutputStream();
+   			model.write(out, "RDF/XML-ABBREV");
+   			return ok(out.toString());
+  		}
+
+		return ok(Json.toJson(""));
+	}
 
 	public static Result make() throws FileNotFoundException{
 
@@ -90,6 +129,14 @@ public class VitaCtrl extends Controller{
 		Model model_loaded = FileManager.get().loadModel(db);
 		model = ModelFactory.createUnion(model_loaded, model);
 		writeOutput(model, db);
+	}
+	
+	public static OntModel createModel() throws Exception {
+		OntModel jenaModel = ModelFactory.createOntologyModel( OntModelSpec.OWL_DL_MEM,null);
+		jenaModel.setNsPrefix( "vita", Vita.NS );
+		jenaModel.setNsPrefix( "owl", OWL.NS );
+		jenaModel.setNsPrefix( "dc", DC.NS );
+		return jenaModel;
 	}
 	
 

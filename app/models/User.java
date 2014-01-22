@@ -34,14 +34,13 @@ import java.util.Date;
     					private String givenName;
     					private String familyName;
     					private String nickName;
-    					private String urlName;
     					
     					private Date registration;
     					
     @Reference 			private ArrayList<AbstractActivity> activities; 
     @Reference			private ArrayList<AbstractEvent> events;
     @Reference			private ArrayList<AbstractEquipment> equipments;
-    @Embedded 			private ArrayList<Key<User>> friends;
+     					private ArrayList<Key<User>> friends;
 
 	public User(String givenName, String familyName, String nickName, String email, String password, Date registration){
 		
@@ -173,7 +172,6 @@ import java.util.Date;
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
 	}
-	
 	public void setEvents(ArrayList<AbstractEvent> events) {
 		this.events = events;
 	}

@@ -1,8 +1,5 @@
 package models.factory;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import models.ActivityEnding;
 import models.Location;
 import models.Organism;
@@ -13,16 +10,16 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
-import org.mongodb.morphia.annotations.Reference;
+import org.mongodb.morphia.annotations.Property;
 
 import com.hp.hpl.jena.rdf.model.Model;
-import com.sun.org.apache.xml.internal.utils.URI;
 
 import agents.AgentJena;
 
 public abstract class AbstractActivity {
 	
-	@Id 
+	@Id
+	@Property("id") 
 	private ObjectId id;
 	private String date;
 	private String sector;
@@ -51,7 +48,7 @@ public abstract class AbstractActivity {
 		this.location = location;
 		this.sector = sector;
 		this.date = date;
-		this.uri = Vita.getURL() + "sector/" + sector + "/activity/" + id;
+		this.uri = Vita.getURL() + "sector/" + sector + "/activity/";
 	}
 	
 	public abstract Model accept(AgentJena agent);

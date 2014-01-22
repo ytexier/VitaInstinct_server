@@ -2,11 +2,13 @@ package models.hunting;
 
 import java.util.ArrayList;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
 
 import com.hp.hpl.jena.rdf.model.Model;
 
+import controllers.MorphiaObject;
 import agents.AgentJena;
 import models.Location;
 import models.User;
@@ -46,4 +48,12 @@ public class HuntingEvent extends AbstractEvent {
 	public void setActivities(ArrayList<HuntingActivity> activities) {
 		this.activities = activities;
 	}
+	
+    public static HuntingEvent findById(String id){
+    	HuntingEvent event = MorphiaObject.datastore.find(HuntingEvent.class)
+    			.field("_id")
+    			.equal(new ObjectId(id))
+    			.get();
+    	return event;
+    }
 }
