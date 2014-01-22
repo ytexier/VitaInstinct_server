@@ -18,11 +18,11 @@ equipmentsList : List[models.factory.AbstractEquipment]
 	<h3>Events</h3>
 	<div id="eventsDiv">
 	<select name="eventSelect">
-		
-	</select>
 		@for(event <- eventsList) {
-			<input type="checkbox" name="@event.getComment()" boxValue="@event.getId()">@event.getComment()<br>
+			<option value="@event.getId()">@event.getComment</option>
 		}
+	</select>
+		
 	</div>
 	<div id="separator">
 	</div>

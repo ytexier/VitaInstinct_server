@@ -40,6 +40,7 @@ public class Events extends Controller {
 
 			String label = filledForm.get().label;
 			String sector = filledForm.get().sector;
+			String label = filledForm.get().label;
 			String comment = filledForm.get().comment;
 			Date date =	filledForm.get().date;
 

@@ -1,4 +1,4 @@
-@(user	: User, eventForm : Form[forms.AddEventForm])
+@(user	: User, eventForm : play.data.Form[forms.AddEventForm])
 @import helper._
 
 
@@ -7,6 +7,7 @@
 
 <input id="eventSector" type="hidden" name="sector" />
 @inputDate(eventForm("date"), 'id -> "eventDate")
+@inputText(eventForm("label"), 'id -> "eventLabel")
 @inputText(eventForm("latitude"), 'id -> "eventLatitude")
 @inputText(eventForm("longitude"), 'id -> "eventLongitude")
 @inputText(eventForm("comment"), 'id -> "eventComment")
