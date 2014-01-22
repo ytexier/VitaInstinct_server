@@ -42,7 +42,7 @@ public class Activities extends Controller {
 	static Form<AbstractActivityForm> abstractActivityForm = Form.form(AbstractActivityForm.class);
 
 
-	public Result get(String id, String sector){
+	public static Result get(String id, String sector){
 		
     	AbstractActivity activityFound = null;
     	
@@ -64,7 +64,9 @@ public class Activities extends Controller {
    		else if (request().accepts("application/rdf+xml")){
    			OutputStream out = new ByteArrayOutputStream();
    			activityFound.accept(new AgentJena()).write(out, "RDF/XML-ABBREV");
-   		}
+   			return ok(out.toString());
+   			
+    		}
 
 		return ok(Json.toJson(activityFound.getCreator()));
 	}

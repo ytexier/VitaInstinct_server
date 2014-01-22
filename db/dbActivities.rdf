@@ -9,18 +9,18 @@
   <owl:Class rdf:about="http://vita-instinct.herokuapp.com/rdf-syntax-ns#Organism"/>
   <owl:Class rdf:about="http://vita-instinct.herokuapp.com/rdf-syntax-ns#Location"/>
   <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/activity/52df1a4f10c81d1c615f86b0">
-    <vita:location>
-      <vita:Location rdf:about="http://vita-instinct.herokuapp.com/location/52df1a4f10c81d1c615f86b0">
-        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >3.265986442565918</vita:longitude>
-        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >44.09744824027575</vita:latitude>
-      </vita:Location>
-    </vita:location>
+    <rdfs:label>hunting|16-01-2014|Dimitri</rdfs:label>
+    <dc:creator>yohan texier</dc:creator>
     <vita:targetOrganism>
       <vita:Organism rdf:about="http://vita-instinct.herokuapp.com/organism/animal/amniote/mammal/Dimitri"/>
     </vita:targetOrganism>
-    <dc:creator>yohan texier</dc:creator>
-    <rdfs:label>hunting|16-01-2014|Dimitri</rdfs:label>
+    <vita:location>
+      <vita:Location rdf:about="http://vita-instinct.herokuapp.com/location/52df1a4f10c81d1c615f86b0">
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >44.09744824027575</vita:latitude>
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >3.265986442565918</vita:longitude>
+      </vita:Location>
+    </vita:location>
   </rdf:Description>
 </rdf:RDF>
