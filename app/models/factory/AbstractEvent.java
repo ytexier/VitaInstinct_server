@@ -1,5 +1,8 @@
 package models.factory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import models.Location;
 import models.User;
 import models.Vita;
@@ -14,6 +17,7 @@ public abstract class AbstractEvent {
 	@Id 
 	private ObjectId id;
 	private String sector;
+	private String label;
 	private String date;
 	private String comment;
 	private Location location;
@@ -21,23 +25,33 @@ public abstract class AbstractEvent {
 	
 	private Key<User> creator;
 	
-	
+	private ArrayList<? extends AbstractActivity> activities;
+	private ArrayList<User> users;
 	
 	public AbstractEvent() {}
 	
 	
 	
-	public AbstractEvent(String sector, String date, String comment,
+	public AbstractEvent(String sector, String label, String date, String comment,
 			Location location, Key<User> creator) {
 		super();
 		this.sector = sector;
+		this.label = label;
 		this.date = date;
 		this.comment = comment;
 		this.location = location;
+<<<<<<< HEAD
 		this.setCreator(creator);
 		this.uri = Vita.getURL() + "sector/" + sector + "/event/" + id;
+=======
+		this.creator = creator;
+		this.users = new ArrayList<User>();
+>>>>>>> dimql
 	}
 	
+	public void addUser(User user) {
+		this.users.add(user);
+	}	
 	
 	public abstract void accept(AgentJena agentJena);
 
@@ -79,6 +93,51 @@ public abstract class AbstractEvent {
 
 	public void setLocation(Location location) {
 		this.location = location;
+	}
+	
+	public Key<User> getCreator() {
+		return creator;
+	}
+
+
+
+	public void setCreator(Key<User> creator) {
+		this.creator = creator;
+	}
+
+
+	public List<User> getUsers() {
+		return users;
+	}
+
+
+
+	public void setUsers(ArrayList<User> users) {
+		this.users = users;
+	}
+
+
+
+	public ArrayList<? extends AbstractActivity> getActivities() {
+		return activities;
+	}
+
+
+
+	public void setActivities(ArrayList<? extends AbstractActivity> activities) {
+		this.activities = activities;
+	}
+
+
+
+	public String getLabel() {
+		return label;
+	}
+
+
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 

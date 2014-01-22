@@ -37,8 +37,6 @@ public class HuntingActivity extends AbstractActivity{
 	
 	@Embedded
 	private HuntingEvent event;
-	@Reference
-	private ArrayList<HuntingEquipment> equipments;
 
 	
 	public HuntingActivity(){
@@ -47,7 +45,7 @@ public class HuntingActivity extends AbstractActivity{
 	
 	public HuntingActivity(Mammal organism, int amountOfOrganism, String date, Location location, Key<User> creator){
 		super(organism, creator, amountOfOrganism, location, "hunting", date);	
-		equipments = new ArrayList<HuntingEquipment>();
+		super.setEquipment(new ArrayList<HuntingEquipment>());
 		event = new HuntingEvent();
 	}
 	
@@ -100,16 +98,6 @@ public class HuntingActivity extends AbstractActivity{
 
 	public void setEvent(HuntingEvent event) {
 		this.event = event;
-	}
-
-
-	public ArrayList<HuntingEquipment> getEquipments() {
-		return equipments;
-	}
-
-
-	public void setEquipments(ArrayList<HuntingEquipment> equipments) {
-		this.equipments = equipments;
 	}
 
 

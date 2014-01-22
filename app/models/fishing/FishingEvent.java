@@ -1,5 +1,7 @@
 package models.fishing;
 
+import java.util.ArrayList;
+
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
 
@@ -19,10 +21,15 @@ public class FishingEvent extends AbstractEvent {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FishingEvent(String date, String comment,
+	public FishingEvent(String label, String date, String comment,
 			Location location, Key<User> creator) {
-		super("fishing", date, comment, location, creator);
+		super("fishing", label, date, comment, location, creator);
+		super.setActivities(new ArrayList<FishingActivity>());
 		// TODO Auto-generated constructor stub
+	}
+	
+	public void addActivity(FishingActivity activity) {
+		((ArrayList<FishingActivity>)super.getActivities()).add(activity);
 	}
 
 	public void accept(AgentManager v){

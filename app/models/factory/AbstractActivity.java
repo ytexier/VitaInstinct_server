@@ -1,5 +1,6 @@
 package models.factory;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import models.ActivityEnding;
@@ -38,7 +39,7 @@ public abstract class AbstractActivity {
 	@Embedded
 	private AbstractEvent event;
 	@Embedded
-	private List<AbstractEquipment> equipment;
+	private ArrayList<? extends AbstractEquipment> equipment;
 	
 	public AbstractActivity(){
 		
@@ -106,6 +107,7 @@ public abstract class AbstractActivity {
 	public void setSector(String sector){
 		this.sector = sector;
 	}
+<<<<<<< HEAD
 	
 	public String getLabel(){
 		return sector+"|"+date+"|"+organism.getSpecie();
@@ -117,6 +119,23 @@ public abstract class AbstractActivity {
 
 	public void setURI(String uri) {
 		this.uri = uri;
+=======
+
+	public AbstractEvent getEvent() {
+		return event;
+	}
+
+	public void setEvent(AbstractEvent event) {
+		this.event = event;
+	}
+
+	public ArrayList<? extends AbstractEquipment> getEquipment() {
+		return equipment;
+	}
+
+	public void setEquipment(ArrayList<? extends AbstractEquipment> equipment) {
+		this.equipment = equipment;
+>>>>>>> dimql
 	}
  
 	
