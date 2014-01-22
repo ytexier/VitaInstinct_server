@@ -1,0 +1,25 @@
+@(users: List[User], userForm: Form[User]) 
+
+@import helper._
+
+  
+  <h1>@users.size() user(s)</h1>
+  
+  <ul>
+    @for(user <- users) {
+      <li>@user.getRegistration() | @user.getPseudo() / @user.getEmail() / @user.getPassword()
+      @form(routes.Users.delete(user.getId().toString())) { 
+         <input type="submit" value="Delete"> 
+      }
+      </li>
+    }
+  </ul>
+  
+  <h2>Add a new User</h2>
+  
+  @form(routes.Users.newUser()) {
+     @inputText(userForm("pseudo")) 
+     @inputText(userForm("email")) 
+     @inputText(userForm("password"))
+     <input type="submit" value="Create">
+  } 
