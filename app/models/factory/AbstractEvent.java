@@ -16,6 +16,7 @@ public abstract class AbstractEvent {
 	@Id 
 	private ObjectId id;
 	private String sector;
+	private String label;
 	private String date;
 	private String comment;
 	private Location location;
@@ -29,10 +30,11 @@ public abstract class AbstractEvent {
 	
 	
 	
-	public AbstractEvent(String sector, String date, String comment,
+	public AbstractEvent(String sector, String label, String date, String comment,
 			Location location, Key<User> creator) {
 		super();
 		this.sector = sector;
+		this.label = label;
 		this.date = date;
 		this.comment = comment;
 		this.location = location;
@@ -117,6 +119,18 @@ public abstract class AbstractEvent {
 
 	public void setActivities(ArrayList<? extends AbstractActivity> activities) {
 		this.activities = activities;
+	}
+
+
+
+	public String getLabel() {
+		return label;
+	}
+
+
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 
 

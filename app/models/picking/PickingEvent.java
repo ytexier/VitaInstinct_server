@@ -23,9 +23,9 @@ public class PickingEvent extends AbstractEvent {
 		// TODO Auto-generated constructor stub
 	}
 
-	public PickingEvent(String date, String comment,
+	public PickingEvent(String label, String date, String comment,
 			Location location, Key<User> creator) {
-		super("picking", date, comment, location, creator);
+		super("picking", label, date, comment, location, creator);
 		super.setActivities(new ArrayList<PickingActivity>());
 		// TODO Auto-generated constructor stub
 	}

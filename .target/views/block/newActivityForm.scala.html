@@ -17,6 +17,9 @@ equipmentsList : List[models.factory.AbstractEquipment]
 	<input id="sector" type="hidden" name="sector" />
 	<h3>Events</h3>
 	<div id="eventsDiv">
+	<select name="eventSelect">
+		
+	</select>
 		@for(event <- eventsList) {
 			<input type="checkbox" name="@event.getComment()" boxValue="@event.getId()">@event.getComment()<br>
 		}

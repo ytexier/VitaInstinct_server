@@ -21,9 +21,9 @@ public class FishingEvent extends AbstractEvent {
 		// TODO Auto-generated constructor stub
 	}
 
-	public FishingEvent(String date, String comment,
+	public FishingEvent(String label, String date, String comment,
 			Location location, Key<User> creator) {
-		super("fishing", date, comment, location, creator);
+		super("fishing", label, date, comment, location, creator);
 		super.setActivities(new ArrayList<FishingActivity>());
 		// TODO Auto-generated constructor stub
 	}
