@@ -39,8 +39,6 @@ public abstract class AbstractActivity {
 	
 	@Embedded
 	private AbstractEvent event;
-	@Reference
-	private ArrayList<? extends AbstractEquipment> equipments;
 	
 	public AbstractActivity(){
 		
@@ -127,14 +125,6 @@ public abstract class AbstractActivity {
 
 	public void setEvent(AbstractEvent event) {
 		this.event = event;
-	}
-
-	public ArrayList<? extends AbstractEquipment> getEquipments() {
-		return equipments;
-	}
-
-	public void setEquipments(ArrayList<? extends AbstractEquipment> equipment) {
-		this.equipments = equipment;
 	}
  
 	

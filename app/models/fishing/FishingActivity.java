@@ -7,6 +7,7 @@ import models.Fish;
 import models.Location;
 import models.User;
 import models.factory.AbstractActivity;
+import models.factory.AbstractEquipment;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
@@ -24,6 +25,8 @@ public class FishingActivity extends AbstractActivity{
 	
 	@Embedded
 	private FishingEvent event;
+	@Reference
+	private ArrayList<FishingEquipment> equipments;
 
 	public FishingActivity(){
 
@@ -31,7 +34,7 @@ public class FishingActivity extends AbstractActivity{
 	
 	public FishingActivity(Fish organism, int amountOfOrganism, String date, Location location, Key<User> creator){
 		super(organism, creator, amountOfOrganism, location, "fishing", date);
-		super.setEquipments(new ArrayList<FishingEquipment>());
+		equipments = new ArrayList<FishingEquipment>();
 		event = new FishingEvent();
 	}
 	
@@ -73,6 +76,14 @@ public class FishingActivity extends AbstractActivity{
 
 	public void setEvent(FishingEvent event) {
 		this.event = event;
+	}
+	
+	public ArrayList<FishingEquipment> getEquipments() {
+		return equipments;
+	}
+
+	public void setEquipments(ArrayList<FishingEquipment> equipments) {
+		this.equipments = equipments;
 	}
 
 	

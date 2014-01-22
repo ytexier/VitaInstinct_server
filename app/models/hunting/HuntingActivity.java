@@ -14,8 +14,12 @@ import models.factory.AbstractActivity;
 
 
 
+<<<<<<< HEAD
 
 
+=======
+import models.fishing.FishingEquipment;
+>>>>>>> dimql
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
@@ -37,6 +41,8 @@ public class HuntingActivity extends AbstractActivity{
 	
 	@Embedded
 	private HuntingEvent event;
+	@Reference
+	private ArrayList<HuntingEquipment> equipments;
 
 	
 	public HuntingActivity(){
@@ -45,10 +51,11 @@ public class HuntingActivity extends AbstractActivity{
 	
 	public HuntingActivity(Mammal organism, int amountOfOrganism, String date, Location location, Key<User> creator){
 		super(organism, creator, amountOfOrganism, location, "hunting", date);	
-		super.setEquipments(new ArrayList<HuntingEquipment>());
+		equipments = new ArrayList<HuntingEquipment>();
 		event = new HuntingEvent();
 	}
 	
+<<<<<<< HEAD
 	public String getURL(){
 		return Vita.getURL()+"sector/hunting/activity/";
 	}
@@ -58,6 +65,8 @@ public class HuntingActivity extends AbstractActivity{
 	}
 
 
+=======
+>>>>>>> dimql
 	@Override
 	public Model accept(AgentJena agent) {
 		return agent.spy(this);
@@ -100,7 +109,13 @@ public class HuntingActivity extends AbstractActivity{
 		this.event = event;
 	}
 
+	public ArrayList<HuntingEquipment> getEquipments() {
+		return equipments;
+	}
 
+	public void setEquipments(ArrayList<HuntingEquipment> equipments) {
+		this.equipments = equipments;
+	}
 
 	
 
