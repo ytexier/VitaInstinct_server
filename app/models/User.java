@@ -56,6 +56,8 @@ import java.util.Date;
         this.setRegistration(registration);
         
         this.setActivities(new ArrayList<AbstractActivity>());
+        this.setEvents(new ArrayList<AbstractEvent>());
+        this.setEquipments(new ArrayList<AbstractEquipment>());
         this.setFriends(new ArrayList<Key<User>>());
         
     }
@@ -91,26 +93,6 @@ import java.util.Date;
 				.get();
 		return user;
 	}
-	
-	public ArrayList<AbstractEquipment> getEquipments() {
-		return this.equipments;
-	}
-	
-	public ArrayList<AbstractEvent> getEvents() {
-		return this.events;
-	}
-   
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	public ObjectId getId() {
@@ -189,5 +171,21 @@ import java.util.Date;
 
 	public void setNickName(String nickName) {
 		this.nickName = nickName;
+	}
+	
+	public void setEvents(ArrayList<AbstractEvent> events) {
+		this.events = events;
+	}
+
+	public void setEquipments(ArrayList<AbstractEquipment> equipments) {
+		this.equipments = equipments;
+	}
+	
+	public ArrayList<AbstractEquipment> getEquipments() {
+		return this.equipments;
+	}
+	
+	public ArrayList<AbstractEvent> getEvents() {
+		return this.events;
 	}
 }

@@ -1,12 +1,12 @@
 package models.fishing;
 
+import models.User;
+import models.factory.AbstractEquipment;
+
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
 
 import agents.AgentJena;
-import agents.AgentManager;
-import models.User;
-import models.factory.AbstractEquipment;
 
 @Entity
 public class FishingEquipment extends AbstractEquipment {

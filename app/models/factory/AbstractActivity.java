@@ -12,6 +12,7 @@ import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Reference;
 
 import agents.AgentJena;
 
@@ -31,9 +32,9 @@ public abstract class AbstractActivity {
 	@Embedded
 	private Key<User> creator;
 	
-	@Embedded
+	@Reference
 	private AbstractEvent event;
-	@Embedded
+	@Reference
 	private ArrayList<? extends AbstractEquipment> equipment;
 	
 	public AbstractActivity(){

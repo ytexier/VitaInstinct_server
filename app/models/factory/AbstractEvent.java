@@ -8,7 +8,9 @@ import models.User;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.Reference;
 
 import agents.AgentJena;
 
@@ -19,16 +21,15 @@ public abstract class AbstractEvent {
 	private String label;
 	private String date;
 	private String comment;
+	@Embedded
 	private Location location;
-	
+	@Embedded
 	private Key<User> creator;
 	
-	private ArrayList<? extends AbstractActivity> activities;
-	private ArrayList<User> users;
+	@Reference private ArrayList<? extends AbstractActivity> activities;
+	@Reference private ArrayList<User> register;
 	
 	public AbstractEvent() {}
-	
-	
 	
 	public AbstractEvent(String sector, String label, String date, String comment,
 			Location location, Key<User> creator) {
@@ -39,11 +40,11 @@ public abstract class AbstractEvent {
 		this.comment = comment;
 		this.location = location;
 		this.creator = creator;
-		this.users = new ArrayList<User>();
+		this.register = new ArrayList<User>();
 	}
 	
 	public void addUser(User user) {
-		this.users.add(user);
+		this.register.add(user);
 	}	
 	
 	public abstract void accept(AgentJena agentJena);
@@ -99,14 +100,14 @@ public abstract class AbstractEvent {
 	}
 
 
-	public List<User> getUsers() {
-		return users;
+	public List<User> getRegisters() {
+		return register;
 	}
 
 
 
-	public void setUsers(ArrayList<User> users) {
-		this.users = users;
+	public void setRegisters(ArrayList<User> users) {
+		this.register = users;
 	}
 
 
