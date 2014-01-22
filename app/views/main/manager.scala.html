@@ -1,10 +1,12 @@
 @(
 	activities		: List[models.factory.AbstractActivity], 
 	user			: User,
-    activityForm : Form[forms.AbstractActivityForm],
-    eventForm : Form[forms.AddEventForm],
-    equipmentForm : Form[forms.AddEquipmentForm],
-	addFriendForm	: Form[forms.AddFriendForm]
+	eventsList : List[models.factory.AbstractEvent],
+	equipmentsList : List[models.factory.AbstractEquipment],
+    activityForm : play.data.Form[forms.AbstractActivityForm],
+    eventForm : play.data.Form[forms.AddEventForm],
+    equipmentForm : play.data.Form[forms.AddEquipmentForm],
+	addFriendForm	: play.data.Form[forms.AddFriendForm]
 	)
 	
 
@@ -148,7 +150,7 @@
 	<article>
 	
 		<aside>
-            <div id="newActivityForm">@block.newActivityForm(user, activityForm)</div>
+            <div id="newActivityForm">@block.newActivityForm(user, activityForm, eventsList, equipmentsList)</div>
             <div id="newEventForm">@block.newEventForm(user, eventForm)</div>
             <div id="newEquipmentForm">@block.newEquipmentForm(user, equipmentForm)</div>
 			<div id="viewer">@block.viewer(activities)</div>

@@ -1,5 +1,7 @@
 package models.factory;
 
+import java.util.List;
+
 import models.ActivityEnding;
 import models.Location;
 import models.Organism;
@@ -29,6 +31,11 @@ public abstract class AbstractActivity {
 	private ActivityEnding activityEnding;
 	@Embedded
 	private Key<User> creator;
+	
+	@Embedded
+	private AbstractEvent event;
+	@Embedded
+	private List<AbstractEquipment> equipment;
 	
 	public AbstractActivity(){
 		

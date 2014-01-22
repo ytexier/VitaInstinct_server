@@ -10,6 +10,8 @@ import forms.LoginForm;
 import forms.Secured;
 import models.User;
 import models.factory.AbstractActivity;
+import models.factory.AbstractEquipment;
+import models.factory.AbstractEvent;
 import views.html.*;
 import play.data.*;
 import play.libs.Json;
@@ -28,9 +30,11 @@ public class Application extends Controller {
 	@Security.Authenticated(Secured.class)
 	public static Result index() throws Exception {
 		User userFound = User.findByEmail(request().username());
+		List<AbstractEvent> userEvents = userFound.getEvents();
 		List<AbstractActivity> activities = userFound.getActivities();
+		List<AbstractEquipment> userEquipments = userFound.getEquipments();
 	    return ok(
-	    	index.render(activities, userFound, activityFrom, eventForm, equipmentForm, addFriendForm)
+	    	index.render(activities, userFound, userEvents, userEquipments, activityFrom, eventForm, equipmentForm, addFriendForm)
 	    );
 	}
 	
@@ -64,6 +68,7 @@ public class Application extends Controller {
 				try{
 					session().clear();
 					session("email", filledForm.get().getEmail());
+					response().setCookie("userid", User.findByEmail(filledForm.get().getEmail()).getId().toString());
 					return redirect(
 							routes.Application.index()
 							);

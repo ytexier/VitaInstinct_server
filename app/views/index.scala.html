@@ -1,10 +1,12 @@
 @(
 	activities	: List[models.factory.AbstractActivity], 
 	user		: User,
-	activityForm: Form[forms.AbstractActivityForm],
-    eventForm : Form[forms.AddEventForm],
-    equipmentForm : Form[forms.AddEquipmentForm],
-	addUserForm	: Form[forms.AddFriendForm]
+	eventsList : List[models.factory.AbstractEvent],
+	equipmentsList : List[models.factory.AbstractEquipment],
+	activityForm: play.data.Form[forms.AbstractActivityForm],
+    eventForm : play.data.Form[forms.AddEventForm],
+    equipmentForm : play.data.Form[forms.AddEquipmentForm],
+	addUserForm	: play.data.Form[forms.AddFriendForm]
 	)
 
 <html>
@@ -16,7 +18,7 @@
    </head>
    
    	<body>
-   		@main.manager(activities, user, activityForm, eventForm, equipmentForm, addUserForm)
+   		@main.manager(activities, user, eventsList, equipmentsList, activityForm, eventForm, equipmentForm, addUserForm)
    	</body>
     
     
