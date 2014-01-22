@@ -36,7 +36,7 @@ GET			/users/:user_id/activities			controllers.Users.activities(user_id: String)
 GET			/users/:user_id/friends				controllers.Users.friends(user_id: String)
 
 
-POST		/users/:user_id						controllers.Activities.add(user_id: String)
+#POST		/users/:user_id						controllers.Activities.add(user_id: String)
 
 
 

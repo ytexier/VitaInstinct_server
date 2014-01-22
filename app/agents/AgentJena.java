@@ -113,8 +113,8 @@ public class AgentJena extends AgentManager{
 		//List Equipment : equipments
 		Vita.VitaClass.Equipment.createOntClass(jenaModel);
 		ArrayList<Individual> _equipments = new ArrayList<Individual>();
-		for(AbstractEquipment equipment : activity.getEquipments())
-			_equipments.add(jenaModel.createIndividual(equipment.getURI(), Vita.VitaClass.Equipment.getOntClass(jenaModel)));		
+		//for(AbstractEquipment equipment : activity.getEquipments())
+			//_equipments.add(jenaModel.createIndividual(equipment.getURI(), Vita.VitaClass.Equipment.getOntClass(jenaModel)));		
 		
 		//Event : isRelatedTo
 		Vita.VitaClass.Event.createOntClass(jenaModel);

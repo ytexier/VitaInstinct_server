@@ -14,6 +14,8 @@ import models.Plant;
 import models.Sex;
 import models.User;
 import models.factory.AbstractActivity;
+import models.factory.AbstractEquipment;
+import models.factory.AbstractEvent;
 import models.factory.FactorySector;
 import models.fishing.FishingActivity;
 import models.fishing.FactoryFishingSector;
@@ -167,8 +169,11 @@ public class Activities extends Controller {
 				 * GET EVENT BY ID
 				 * GET EQUIPMENT BY ID
 				 */
+				
+				AbstractEvent event = factorySector.createEvent("event", formattedDate, "comment", location, creatorKey);
+				AbstractEquipment equipment = factorySector.createEquipment("equi", "comment", creatorKey);
 						
-				aActivity = factorySector.createActivity(specie, amountOfOrganism, formattedDate, location, creatorKey);
+				aActivity = factorySector.createActivity(specie, amountOfOrganism, formattedDate, location, creatorKey, event, equipment);
 
 				
 				if(Sex.contains(sex))
@@ -193,7 +198,7 @@ public class Activities extends Controller {
 				return redirect(routes.Application.index());
         }
 	}
-	
+/*
 	public static Result add(String user_id) throws Exception{
         
 		Form<AbstractActivityForm> filledForm = abstractActivityForm.bindFromRequest();
@@ -253,6 +258,6 @@ public class Activities extends Controller {
 				return ok(Json.toJson(aActivity));
 		} 
 		
-	}
+	}*/
 	
 }

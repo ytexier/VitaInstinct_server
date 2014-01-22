@@ -4,143 +4,17 @@
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-<<<<<<< HEAD
-    xmlns:wgs84_pos="http://www.w3.org/2003/01/geo/wgs84_pos#">
-  <owl:Class rdf:about="http://vita-instinct.herokuapp.com/rdf-syntax-ns#Organism"/>
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
   <owl:Class rdf:about="http://vita-instinct.herokuapp.com/rdf-syntax-ns#Location"/>
-  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/activity/52dfb5ee43982dba47ba0c12">
-    <rdfs:label>hunting|17-01-2014|sanglier</rdfs:label>
+  <vita:Location rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/null/location">
+    <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >3.3824554650345817</vita:longitude>
+    <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >44.284632233055845</vita:latitude>
+  </vita:Location>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/null">
+    <rdfs:comment>balles explosive</rdfs:comment>
     <dc:creator>yohan texier</dc:creator>
-    <vita:targetOrganism>
-      <vita:Organism rdf:about="http://vita-instinct.herokuapp.com/organism/animal/amniote/mammal/sanglier"/>
-    </vita:targetOrganism>
-    <vita:location>
-      <vita:Location rdf:about="http://vita-instinct.herokuapp.com/location/52dfb5ee43982dba47ba0c12">
-        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >43.89164545729095</vita:latitude>
-        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >3.50738525390625</vita:longitude>
-      </vita:Location>
-    </vita:location>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/activity/52dfb68743982dba47ba0c13">
-    <vita:location>
-      <vita:Location rdf:about="http://vita-instinct.herokuapp.com/location/52dfb68743982dba47ba0c13">
-        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >3.83148193359375</vita:longitude>
-        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >43.8540263059296</vita:latitude>
-      </vita:Location>
-    </vita:location>
-    <vita:targetOrganism>
-      <vita:Organism rdf:about="http://vita-instinct.herokuapp.com/organism/animal/amniote/mammal/lapin"/>
-    </vita:targetOrganism>
-    <dc:creator>yohan texier</dc:creator>
-    <rdfs:label>hunting|03-01-2014|lapin</rdfs:label>
-=======
-    xmlns:vita="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#">
-  <owl:Class rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#Sector"/>
-  <owl:Class rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#Activity"/>
-  <owl:Class rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#User"/>
-  <owl:Class rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#Event"/>
-  <owl:Class rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#Organism"/>
-  <owl:Class rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#Equipment"/>
-  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#dbActivities">
-    <vita:activity>
-      <vita:Activity>
-        <vita:sector>
-          <vita:Sector rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#sector">
-            <vita:value rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >hunting</vita:value>
-          </vita:Sector>
-        </vita:sector>
-        <vita:creator>
-          <vita:User rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#user">
-            <vcard:EMAIL>yohan.texier@gmail.com</vcard:EMAIL>
-            <vcard:NICKNAME>das</vcard:NICKNAME>
-            <vcard:Family>texier</vcard:Family>
-            <vcard:Given>yohan</vcard:Given>
-            <vcard:FN>yohan texier</vcard:FN>
-          </vita:User>
-        </vita:creator>
-        <vita:targetOrganism>
-          <vita:Organism rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#organism">
-            <vita:value rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >osef</vita:value>
-          </vita:Organism>
-        </vita:targetOrganism>
-        <vita:location>
-          <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#location">
-            <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >43.98018550553001</vita:latitude>
-            <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >3.60626220703125</vita:longitude>
-            <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >43.88777945210311</vita:latitude>
-            <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >2.46917724609375</vita:longitude>
-            <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >3.5760498046875</vita:longitude>
-            <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >44.30244506946567</vita:latitude>
-            <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >3.083038330078125</vita:longitude>
-            <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >44.09371890662973</vita:latitude>
-            <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >3.10089111328125</vita:longitude>
-            <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >44.20112800998374</vita:latitude>
-          </rdf:Description>
-        </vita:location>
-        <vita:equipments>
-          <vita:Equipment rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#equipment">
-            <vita:value rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-            >osef</vita:value>
-          </vita:Equipment>
-        </vita:equipments>
-      </vita:Activity>
-    </vita:activity>
-    <vita:activity>
-      <vita:Activity>
-        <vita:sector rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#sector"/>
-        <vita:creator rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#user"/>
-        <vita:targetOrganism rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#organism"/>
-        <vita:location rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#location"/>
-        <vita:equipments rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#equipment"/>
-      </vita:Activity>
-    </vita:activity>
-    <vita:activity>
-      <vita:Activity>
-        <vita:equipments rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#equipment"/>
-        <vita:location rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#location"/>
-        <vita:targetOrganism rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#organism"/>
-        <vita:creator rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#user"/>
-        <vita:sector rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#sector"/>
-      </vita:Activity>
-    </vita:activity>
-    <vita:activity>
-      <vita:Activity>
-        <vita:equipments rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#equipment"/>
-        <vita:location rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#location"/>
-        <vita:targetOrganism rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#organism"/>
-        <vita:creator rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#user"/>
-        <vita:sector rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#sector"/>
-      </vita:Activity>
-    </vita:activity>
-<<<<<<< HEAD
->>>>>>> dimql
-=======
-    <vita:activity>
-      <vita:Activity>
-        <vita:equipments rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#equipment"/>
-        <vita:location rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#location"/>
-        <vita:targetOrganism rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#organism"/>
-        <vita:creator rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#user"/>
-        <vita:sector rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#sector"/>
-      </vita:Activity>
-    </vita:activity>
->>>>>>> dimql
+    <rdfs:label>Grosse chasse</rdfs:label>
   </rdf:Description>
 </rdf:RDF>
