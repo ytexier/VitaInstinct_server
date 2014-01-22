@@ -80,14 +80,10 @@
         map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
 
         $.getJSON("/users/"+user_id+"/activities", function(data) {
-<<<<<<< HEAD
-           Console.log(data);
-=======
            console.log(data);
             for(var i in data) {
                 addViewerMarker(data[i]);
             }
->>>>>>> dimql
         });
 
     }

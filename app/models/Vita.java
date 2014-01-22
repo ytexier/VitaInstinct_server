@@ -52,6 +52,7 @@ public class Vita {
     public static final Property activities = vita_m.createProperty(String.format(_NS, "activities"));
     public static final Property events = vita_m.createProperty(String.format(_NS, "events"));
     public static final Property equipments = vita_m.createProperty(String.format(_NS, "equipments"));  
+    public static final Property registers = vita_m.createProperty(String.format(_NS, "registers"));  
     
    
     //public static final Property creator = vita_m.createProperty(String.format(_NS, "creator"));

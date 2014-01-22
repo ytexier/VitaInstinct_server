@@ -2,6 +2,7 @@ package models.factory;
 
 import models.Location;
 import models.User;
+import models.Vita;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
@@ -16,6 +17,7 @@ public abstract class AbstractEvent {
 	private String date;
 	private String comment;
 	private Location location;
+	private String uri;
 	
 	private Key<User> creator;
 	
@@ -33,6 +35,7 @@ public abstract class AbstractEvent {
 		this.comment = comment;
 		this.location = location;
 		this.setCreator(creator);
+		this.uri = Vita.getURL() + "sector/" + sector + "/event/" + id;
 	}
 	
 	
@@ -89,7 +92,14 @@ public abstract class AbstractEvent {
 	public void setCreator(Key<User> creator) {
 		this.creator = creator;
 	}
+	
+	public String getURI() {
+		return uri;
+	}
 
+	public void setURI(String uri) {
+		this.uri = uri;
+	}
 
 
 	
