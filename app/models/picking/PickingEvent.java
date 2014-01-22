@@ -1,10 +1,12 @@
 package models.picking;
 
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
 
 import agents.AgentJena;
 import agents.AgentManager;
 import models.Location;
+import models.User;
 import models.factory.AbstractEvent;
 
 
@@ -19,8 +21,8 @@ public class PickingEvent extends AbstractEvent {
 	}
 
 	public PickingEvent(String date, String comment,
-			Location location) {
-		super("picking", date, comment, location);
+			Location location, Key<User> creator) {
+		super("picking", date, comment, location, creator);
 		// TODO Auto-generated constructor stub
 	}
 

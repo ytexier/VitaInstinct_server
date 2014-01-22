@@ -3,11 +3,8 @@ package controllers;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import models.ActivityEnding;
 import models.Location;
-import models.Sex;
 import models.User;
-import models.factory.AbstractActivity;
 import models.factory.AbstractEvent;
 import models.factory.FactorySector;
 import models.fishing.FactoryFishingSector;
@@ -17,15 +14,13 @@ import models.picking.FactoryPickingSector;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
-import agents.AgentJena;
-import forms.AbstractActivityForm;
-import forms.AddEventForm;
-import forms.Secured;
-import play.Logger;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
+import agents.AgentJena;
+import forms.AddEventForm;
+import forms.Secured;
 
 public class Events extends Controller {
 
@@ -64,7 +59,8 @@ public class Events extends Controller {
 			User user = User.findByEmail(request().username());
 			Key<User> creatorKey = MorphiaObject.datastore.getKey(user);
 
-			aEvent = factorySector.createEvent(formattedDate, comment, location);
+			aEvent =
+					factorySector.createEvent(formattedDate, comment, location, creatorKey);
 
 			Key<AbstractEvent> eventKey = MorphiaObject.datastore.save(aEvent);
 

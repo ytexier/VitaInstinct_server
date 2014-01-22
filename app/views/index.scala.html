@@ -3,6 +3,7 @@
 	user		: User,
 	activityForm: Form[forms.AbstractActivityForm],
     eventForm : Form[forms.AddEventForm],
+    equipmentForm : Form[forms.AddEquipmentForm],
 	addUserForm	: Form[forms.AddFriendForm]
 	)
 
@@ -15,7 +16,7 @@
    </head>
    
    	<body>
-   		@main.manager(activities, user, activityForm, eventForm, addUserForm)
+   		@main.manager(activities, user, activityForm, eventForm, equipmentForm, addUserForm)
    	</body>
     
     

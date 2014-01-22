@@ -6,6 +6,7 @@
   @form(routes.Activities.newActivity()) {
   
 	<input id="sector" type="hidden" name="sector" />
+    
     @inputDate(activityForm("date"), 'id -> "itDate")  
     @inputText(activityForm("latitude"), 'id -> "itLatitude") 
     @inputText(activityForm("longitude"), 'id -> "itLongitude") 

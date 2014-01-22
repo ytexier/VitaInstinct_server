@@ -16,20 +16,20 @@ public class FactoryPickingSector extends FactorySector {
 	}
 
 	@Override
-	public PickingEquipment createEquipment() {
-		return (new PickingEquipment());
+	public PickingEquipment createEquipment(String label, String comment, Key<User> creator) {
+		return (new PickingEquipment(label, comment, creator));
 	}
 
 	@Override
-	public PickingAccessory createAccessory() {
-		return (new PickingAccessory());
+	public PickingAccessory createAccessory(String label, String comment, Key<User> creator) {
+		return (new PickingAccessory(label, comment, creator));
 	}
 
 	@Override
 	public AbstractEvent createEvent(String date, String comment,
-			Location location) {
+			Location location, Key<User> creator) {
 		// TODO Auto-generated method stub
-		return new PickingEvent(date, comment, location);
+		return new PickingEvent(date, comment, location, creator);
 	}
 
 

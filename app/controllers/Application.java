@@ -3,6 +3,7 @@ package controllers;
 import java.util.List;
 
 import forms.AbstractActivityForm;
+import forms.AddEquipmentForm;
 import forms.AddEventForm;
 import forms.AddFriendForm;
 import forms.LoginForm;
@@ -21,6 +22,7 @@ public class Application extends Controller {
 	static Form<AddFriendForm> addFriendForm = Form.form(AddFriendForm.class);
 	static Form<AbstractActivityForm> activityFrom = Form.form(AbstractActivityForm.class);
 	static Form<AddEventForm> eventForm = Form.form(AddEventForm.class);
+	static Form<AddEquipmentForm> equipmentForm = Form.form(AddEquipmentForm.class);
 	
 	
 	@Security.Authenticated(Secured.class)
@@ -28,7 +30,7 @@ public class Application extends Controller {
 		User userFound = User.findByEmail(request().username());
 		List<AbstractActivity> activities = userFound.getActivities();
 	    return ok(
-	    	index.render(activities, userFound, activityFrom, eventForm, addFriendForm)
+	    	index.render(activities, userFound, activityFrom, eventForm, equipmentForm, addFriendForm)
 	    );
 	}
 	

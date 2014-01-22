@@ -22,7 +22,7 @@ public class Users extends Controller{
 	
 	static Form<User> userForm = Form.form(User.class);
 	static Form<AddFriendForm> addFriendFrom = Form.form(AddFriendForm.class);
-	
+		
     public static Result delete(String id) throws Exception{
         User user = User.findById(id);
         if (user != null)

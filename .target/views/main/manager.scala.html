@@ -26,7 +26,9 @@
 			$("#hunting").click(function() {
 				hideAll();
 				$("#menu_action").hide();
-				$("#sector").val('hunting')
+				$("#sector").val('hunting');
+                $("#eventSector").val('hunting');
+                $("#equipmentSector").val('hunting');
 				$("#menu_action").show("");
 				$("#menu_action").css('background', 'darkkhaki');
 				$(this).css('background', 'darkkhaki');
@@ -37,7 +39,9 @@
 			$("#fishing").click(function() {
 				hideAll();
 				$("#menu_action").hide();
-				$("#sector").val('fishing')
+				$("#sector").val('fishing');
+                $("#eventSector").val('fishing');
+                $("#equipmentSector").val('fishing');
 				$("#menu_action").show("");
 				$("#menu_action").css('background', 'Turquoise');
 				$(this).css('background', 'Turquoise');
@@ -48,7 +52,9 @@
 			$("#picking").click(function() {
 				hideAll();
 				$("#menu_action").hide();
-				$("#sector").val('picking')
+				$("#sector").val('picking');
+                $("#eventSector").val('picking');
+                $("#equipmentSector").val('picking');
 				$("#menu_action").show("");
 				$("#menu_action").css('background', 'springgreen');
 				$(this).css('background', 'springgreen');
@@ -61,7 +67,7 @@
 			});
 
             $("#btNewEvent").click(function() {
-                showNewActivityForm();
+                showNewEventForm();
             });
 		  
 			$("#btEquipments").click(function() {
@@ -78,6 +84,7 @@
 		function hideAll(){
 			$("aside").hide();
 			$("#newActivityForm").hide();
+            $("#newEventForm").hide();
 			$("#equipments").hide();
 			$("#viewer").hide();
 			$("#map").hide();
@@ -88,7 +95,7 @@
 			$("aside").show();
 			$("#newActivityForm").show("");
 			$("#map").show();
-			initializeMap();
+			initializeActivityMap();
 		}
 
         function showNewEventForm () {
@@ -96,7 +103,7 @@
             $("aside").show();
             $("#newEventForm").show("");
             $("#map").show();
-            initializeMap();
+            initializeEventMap();
         }
 		
 		function showEquipments(){
@@ -128,8 +135,8 @@
 	<article>
 	
 		<aside>
-			<div id="newEventForm">@block.newActivityForm(user, activityForm)</div>
             <div id="newActivityForm">@block.newActivityForm(user, activityForm)</div>
+            <div id="newEventForm">@block.newEventForm(user, eventForm)</div>
 			<div id="viewer">@block.viewer(activities)</div>
 			<div id="equipments">@block.equipments(user, activityForm)</div>
 		</aside>

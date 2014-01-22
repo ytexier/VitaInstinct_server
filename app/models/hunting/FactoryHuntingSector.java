@@ -16,20 +16,20 @@ public class FactoryHuntingSector extends FactorySector{
 	}
 
 	@Override
-	public HuntingEquipment createEquipment() {
-		return (new HuntingEquipment());
+	public HuntingEquipment createEquipment(String label, String comment, Key<User> creator) {
+		return new HuntingEquipment(label, comment, creator);
 	}
 
 	@Override
-	public HuntingAccessory createAccessory() {
-		return (new HuntingAccessory());
+	public HuntingAccessory createAccessory(String label, String comment, Key<User> creator) {
+		return (new HuntingAccessory(label, comment, creator));
 	}
 
 	@Override
 	public AbstractEvent createEvent(String date, String comment,
-			Location location) {
+			Location location, Key<User> creator) {
 		// TODO Auto-generated method stub
-		return new HuntingEvent(date, comment, location);
+		return new HuntingEvent(date, comment, location, creator);
 	}
 
 }

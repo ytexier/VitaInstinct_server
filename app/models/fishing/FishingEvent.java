@@ -1,15 +1,18 @@
 package models.fishing;
 
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
 
 import agents.AgentJena;
 import agents.AgentManager;
 import models.Location;
+import models.User;
 import models.factory.AbstractEvent;
 
 @Entity
 public class FishingEvent extends AbstractEvent {
 	
+	private Key<User> creator;
 	
 	public FishingEvent() {
 		super();
@@ -17,8 +20,8 @@ public class FishingEvent extends AbstractEvent {
 	}
 
 	public FishingEvent(String date, String comment,
-			Location location) {
-		super("fishing", date, comment, location);
+			Location location, Key<User> creator) {
+		super("fishing", date, comment, location, creator);
 		// TODO Auto-generated constructor stub
 	}
 

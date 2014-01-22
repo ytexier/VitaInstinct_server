@@ -3,6 +3,7 @@
 	user			: User,
     activityForm : Form[forms.AbstractActivityForm],
     eventForm : Form[forms.AddEventForm],
+    equipmentForm : Form[forms.AddEquipmentForm],
 	addFriendForm	: Form[forms.AddFriendForm]
 	)
 	
@@ -26,7 +27,9 @@
 			$("#hunting").click(function() {
 				hideAll();
 				$("#menu_action").hide();
-				$("#sector").val('hunting')
+				$("#sector").val('hunting');
+                $("#eventSector").val('hunting');
+                $("#equipmentSector").val('hunting');
 				$("#menu_action").show("");
 				$("#menu_action").css('background', 'darkkhaki');
 				$(this).css('background', 'darkkhaki');
@@ -37,7 +40,9 @@
 			$("#fishing").click(function() {
 				hideAll();
 				$("#menu_action").hide();
-				$("#sector").val('fishing')
+				$("#sector").val('fishing');
+                $("#eventSector").val('fishing');
+                $("#equipmentSector").val('fishing');
 				$("#menu_action").show("");
 				$("#menu_action").css('background', 'Turquoise');
 				$(this).css('background', 'Turquoise');
@@ -48,7 +53,9 @@
 			$("#picking").click(function() {
 				hideAll();
 				$("#menu_action").hide();
-				$("#sector").val('picking')
+				$("#sector").val('picking');
+                $("#eventSector").val('picking');
+                $("#equipmentSector").val('picking');
 				$("#menu_action").show("");
 				$("#menu_action").css('background', 'springgreen');
 				$(this).css('background', 'springgreen');
@@ -62,6 +69,10 @@
 
             $("#btNewEvent").click(function() {
                 showNewEventForm();
+            });
+
+            $("#btNewEquipment").click(function() {
+                showNewEquipmentForm();
             });
 		  
 			$("#btEquipments").click(function() {
@@ -99,6 +110,13 @@
             $("#map").show();
             initializeEventMap();
         }
+
+        function showNewEquipmentForm () {
+            hideAll();
+            $("aside").show();
+            $("#newEquipmentForm").show("");
+            $("#map").show();
+        }
 		
 		function showEquipments(){
 			hideAll();
@@ -131,6 +149,7 @@
 		<aside>
             <div id="newActivityForm">@block.newActivityForm(user, activityForm)</div>
             <div id="newEventForm">@block.newEventForm(user, eventForm)</div>
+            <div id="newEquipmentForm">@block.newEquipmentForm(user, equipmentForm)</div>
 			<div id="viewer">@block.viewer(activities)</div>
 			<div id="equipments">@block.equipments(user, activityForm)</div>
 		</aside>

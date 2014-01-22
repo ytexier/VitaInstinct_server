@@ -4,9 +4,10 @@
 
 # Home page
 GET     /                           		controllers.Application.index()
-POST	/									controllers.Activities.newActivity()
+POST	/						controllers.Activities.newActivity()
 
-POST /events 								controllers.Events.addEvent()
+POST /events					controllers.Events.addEvent()
+POST /equipments				controllers.Equipments.addEquipment()
 
 
 # Ontology

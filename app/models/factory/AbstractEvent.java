@@ -1,8 +1,10 @@
 package models.factory;
 
 import models.Location;
+import models.User;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Id;
 
 import agents.AgentJena;
@@ -15,6 +17,8 @@ public abstract class AbstractEvent {
 	private String comment;
 	private Location location;
 	
+	private Key<User> creator;
+	
 	
 	
 	public AbstractEvent() {}
@@ -22,12 +26,13 @@ public abstract class AbstractEvent {
 	
 	
 	public AbstractEvent(String sector, String date, String comment,
-			Location location) {
+			Location location, Key<User> creator) {
 		super();
 		this.sector = sector;
 		this.date = date;
 		this.comment = comment;
 		this.location = location;
+		this.creator = creator;
 	}
 	
 	

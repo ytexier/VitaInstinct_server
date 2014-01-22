@@ -5,7 +5,7 @@
 
 @form(routes.Events.addEvent()) {
 
-<input id="sector" type="hidden" name="sector" />
+<input id="eventSector" type="hidden" name="sector" />
 @inputDate(eventForm("date"), 'id -> "eventDate")
 @inputText(eventForm("latitude"), 'id -> "eventLatitude")
 @inputText(eventForm("longitude"), 'id -> "eventLongitude")

@@ -1,9 +1,16 @@
 package models.hunting;
 
-import agents.AgentManager;
+import models.User;
+
+import org.mongodb.morphia.Key;
+
 
 public class HuntingAccessory extends HuntingEquipment{
-	public void accept(AgentManager v){
-		super.accept(v);
+
+	public HuntingAccessory(String label, String comment, Key<User> creator) {
+		super(label, comment, creator);
+		// TODO Auto-generated constructor stub
 	}
+
+	
 }
