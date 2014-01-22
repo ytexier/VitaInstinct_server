@@ -65,8 +65,7 @@ public class Activities extends Controller {
    			OutputStream out = new ByteArrayOutputStream();
    			activityFound.accept(new AgentJena()).write(out, "RDF/XML-ABBREV");
    			return ok(out.toString());
-   			
-    		}
+   		}
 
 		return ok(Json.toJson(activityFound.getCreator()));
 	}
@@ -75,18 +74,14 @@ public class Activities extends Controller {
 	
 	
     public static Result creator(String id, String sector) throws Exception{
+    	
     	AbstractActivity activityFound = null;
-    	if(sector.equals("hunting")){
+    	if(sector.equals("hunting"))
     		activityFound = HuntingActivity.findById(id);
-    	}
-    	
-    	if(sector.equals("picking")){
+    	if(sector.equals("picking"))
     		activityFound = PickingActivity.findById(id);
-    	}
-    	
-    	if(sector.equals("fishing")){
+     	if(sector.equals("fishing"))
     		activityFound = FishingActivity.findById(id);
-    	}
 
    		if(request().accepts("text/html")){
    			//TODO
@@ -103,8 +98,17 @@ public class Activities extends Controller {
     }
     
     
-	public static Result deleteHunting(String activity_id) throws Exception {
-		AbstractActivity activityFound = HuntingActivity.findById(activity_id);
+    public static Result delete(String id, String sector) throws Exception {
+    	
+    	AbstractActivity activityFound = null;
+    	if(sector.equals("hunting"))
+    		activityFound = HuntingActivity.findById(id);
+     	if(sector.equals("picking"))
+    		activityFound = PickingActivity.findById(id);
+     	if(sector.equals("fishing"))
+    		activityFound = FishingActivity.findById(id);
+    	
+
 		Key<User> userKey = activityFound.getCreator();
 		User creator = User.findById(userKey.getId().toString());
 		
@@ -115,65 +119,10 @@ public class Activities extends Controller {
 				);
         if (activityFound != null)
         	MorphiaObject.datastore.delete(activityFound);
-        return redirect(routes.Application.index());
-	}
-	
-	public static Result deletePicking(String activity_id) throws Exception {
-		AbstractActivity activityFound = PickingActivity.findById(activity_id);
-        if (activityFound != null)
-        	MorphiaObject.datastore.delete(activityFound);
-        return redirect(routes.Application.index());
-	}
-	
-	public static Result deleteFishing(String activity_id) throws Exception {
-		AbstractActivity activityFound = FishingActivity.findById(activity_id);
-        if (activityFound != null)
-        	MorphiaObject.datastore.delete(activityFound);
-        return redirect(routes.Application.index());
-	}
-	
-	
-	public static Result getFromHunt(String activity_id) throws Exception {
-		AbstractActivity activityFound = HuntingActivity.findById(activity_id);
-   		if(request().accepts("text/html")){
-   			//TODO
-   		}
-   		else if(request().accepts("application/json"))
-            return ok(Json.toJson(activityFound));
-   		else if (request().accepts("application/rdf+xml")){
-   			//TODO
-   		}
-   		return ok(Json.toJson(activityFound));
-	}
-	
-	public static Result getFromPick(String activity_id) throws Exception {
-		AbstractActivity activityFound = PickingActivity.findById(activity_id);
-   		if(request().accepts("text/html")){
-   			//TODO
-   		}
-   		else if(request().accepts("application/json"))
-            return ok(Json.toJson(activityFound));
-   		else if (request().accepts("application/rdf+xml")){
-   			//TODO
-   		}
-   		return ok(Json.toJson(activityFound));
-	}
-	
-	public static Result getFromFish(String activity_id) throws Exception {
-		AbstractActivity activityFound = FishingActivity.findById(activity_id);
-   		if(request().accepts("text/html")){
-   			//TODO
-   		}
-   		else if(request().accepts("application/json"))
-            return ok(Json.toJson(activityFound));
-   		else if (request().accepts("application/rdf+xml")){
-   			//TODO
-   		}
-   		return ok(Json.toJson(activityFound));
-	}
-	
-	
 
+        return redirect(routes.Application.index());
+    }
+    
 	
 	@Security.Authenticated(Secured.class)
 	public static Result newActivity() throws Exception{
