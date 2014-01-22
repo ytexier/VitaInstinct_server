@@ -1,39 +1,26 @@
 <rdf:RDF
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:vita="http://vita-instinct.herokuapp.com/rdf-syntax-ns#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    xmlns:wgs84_pos="http://www.w3.org/2003/01/geo/wgs84_pos#"
-    xmlns:vita="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#">
-  <owl:Class rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#Location"/>
-  <owl:Class rdf:about="http://vita-instinct.herokuapp.com/api/1.1/rdf-syntax-ns#Organism"/>
-  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/api/1.1/sector/hunting/activity/52defc7110c8329b8a818326">
-    <rdfs:label>hunting|17-01-2014|sanglier</rdfs:label>
-    <dc:creator>Yohan Texier</dc:creator>
+    xmlns:wgs84_pos="http://www.w3.org/2003/01/geo/wgs84_pos#">
+  <owl:Class rdf:about="http://vita-instinct.herokuapp.com/rdf-syntax-ns#Organism"/>
+  <owl:Class rdf:about="http://vita-instinct.herokuapp.com/rdf-syntax-ns#Location"/>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/activity/52df1a4f10c81d1c615f86b0">
+    <vita:location>
+      <vita:Location rdf:about="http://vita-instinct.herokuapp.com/location/52df1a4f10c81d1c615f86b0">
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >3.265986442565918</vita:longitude>
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >44.09744824027575</vita:latitude>
+      </vita:Location>
+    </vita:location>
     <vita:targetOrganism>
-      <vita:Organism rdf:about="http://vita-instinct.herokuapp.com/api/1.1/organism/animal/amniote/mammal/sanglier"/>
+      <vita:Organism rdf:about="http://vita-instinct.herokuapp.com/organism/animal/amniote/mammal/Dimitri"/>
     </vita:targetOrganism>
-    <vita:location>
-      <vita:Location rdf:about="http://vita-instinct.herokuapp.com/api/1.1/location/52defc7110c8329b8a818326">
-        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >43.92658275623612</vita:latitude>
-        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >3.134150505065918</vita:longitude>
-      </vita:Location>
-    </vita:location>
-  </rdf:Description>
-  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/api/1.1/sector/hunting/activity/52df149410c8b753a19369ec">
-    <vita:location>
-      <vita:Location rdf:about="http://vita-instinct.herokuapp.com/api/1.1/location/52df149410c8b753a19369ec">
-        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >3.255000114440918</vita:longitude>
-        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >44.125056482685146</vita:latitude>
-      </vita:Location>
-    </vita:location>
-    <vita:targetOrganism rdf:resource="http://vita-instinct.herokuapp.com/api/1.1/organism/animal/amniote/mammal/sanglier"/>
     <dc:creator>yohan texier</dc:creator>
-    <rdfs:label>hunting|23-01-2014|sanglier</rdfs:label>
+    <rdfs:label>hunting|16-01-2014|Dimitri</rdfs:label>
   </rdf:Description>
 </rdf:RDF>

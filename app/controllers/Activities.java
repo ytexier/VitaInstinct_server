@@ -55,7 +55,7 @@ public class Activities extends Controller {
     	
 
    		if(request().accepts("text/html")){
-   			return ok(views.model.activity.render(activityFound));
+   			return ok();
    		}
    		
    		else if(request().accepts("application/json"))

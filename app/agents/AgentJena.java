@@ -201,9 +201,9 @@ public class AgentJena extends AgentManager{
 		for(Individual i : _equipments)
 			_activity.addProperty(Vita.equipments, i);
 		
+		this.writeRDF(jenaModel, db_activities);
 		return jenaModel;
-		//this.writeRDF(jenaModel, db_activities);
-		
+	
 	}
 
 
