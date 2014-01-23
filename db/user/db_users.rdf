@@ -1,0 +1,44 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:vita="http://vita-instinct.herokuapp.com/rdf-syntax-ns#"
+    xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/user/52e060788441b5f2e111d0fe">
+    <vcard:FN>yohan texier</vcard:FN>
+    <vcard:Given>yohan</vcard:Given>
+    <vcard:Family>texier</vcard:Family>
+    <vcard:NICKNAME>das</vcard:NICKNAME>
+    <vcard:EMAIL>yohan.texier@gmail.com</vcard:EMAIL>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/user/52e06ebd844162f8d65014ff">
+    <vcard:EMAIL>yohan.texier@gmail.com</vcard:EMAIL>
+    <vcard:NICKNAME>das</vcard:NICKNAME>
+    <vcard:Family>texier</vcard:Family>
+    <vcard:Given>yohan</vcard:Given>
+    <vcard:FN>yohan texier</vcard:FN>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/user/52e054288441b5f2e111d0ee">
+    <vcard:EMAIL>user1@gmail.com</vcard:EMAIL>
+    <vcard:NICKNAME>dqsdqs</vcard:NICKNAME>
+    <vcard:Family>sdsqdqsdqsd</vcard:Family>
+    <vcard:Given>qsdqd</vcard:Given>
+    <vcard:FN>qsdqd sdsqdqsdqsd</vcard:FN>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/user/test.varet">
+    <vcard:FN>test varet</vcard:FN>
+    <vcard:Given>test</vcard:Given>
+    <vcard:Family>varet</vcard:Family>
+    <vcard:NICKNAME>luckybanana</vcard:NICKNAME>
+    <vcard:EMAIL>yohan.texier@live.fr</vcard:EMAIL>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/user/yohan.varet">
+    <vcard:EMAIL>yohan.texier@gmail.com</vcard:EMAIL>
+    <vcard:NICKNAME>qdqsdqd</vcard:NICKNAME>
+    <vcard:Family>varet</vcard:Family>
+    <vcard:Given>yohan</vcard:Given>
+    <vcard:FN>yohan varet</vcard:FN>
+  </rdf:Description>
+</rdf:RDF>

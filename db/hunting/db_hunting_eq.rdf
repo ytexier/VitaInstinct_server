@@ -1,0 +1,23 @@
+<rdf:RDF
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:vita="http://vita-instinct.herokuapp.com/rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/equipment/52e06f5c844162f8d6501501">
+    <vita:owner>http://vita-instinct.herokuapp.com/user/52e06ebd844162f8d65014ff</vita:owner>
+    <rdfs:comment>Parfait pour tuer de la galinette.</rdfs:comment>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:label>Uzi Model B</rdfs:label>
+    <vita:sector rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >hunting</vita:sector>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/equipment/52e060a78441b5f2e111d0ff">
+    <vita:sector rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >hunting</vita:sector>
+    <rdfs:label>AK-47</rdfs:label>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:comment>Balles explosives</rdfs:comment>
+  </rdf:Description>
+</rdf:RDF>

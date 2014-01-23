@@ -17,7 +17,7 @@ public abstract class Organism {
 	@Embedded
 	private Sex sex;
 	
-	private String URI;
+	private String uri;
     
 	public void accept(AgentManager v){
 		v.spy(this);
@@ -25,13 +25,10 @@ public abstract class Organism {
 	
 	
 	public Organism(){}
+	
 	public Organism(String specie){
 		this.specie = specie;
-	}
-	
-	public Organism(String specie, String url){
-		this.specie = specie;
-		setURI(url + specie);
+		this.uri = Vita.getURL() + "organism/";
 	}
 	
 	public Organism(String _specie, Sex _sex){
@@ -61,11 +58,11 @@ public abstract class Organism {
 
 
 	public String getURI() {
-		return URI;
+		return uri;
 	}
 
 
 	public void setURI(String url) {
-		URI = Vita.getURL() + "organism/" + url;
+		uri = url;
 	}
 }

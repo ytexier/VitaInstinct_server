@@ -7,7 +7,7 @@ public class Plant extends Organism{
 
 	public Plant(){}
 	public Plant(String specie) {
-		super(specie, "plant");
+		super(specie);
 	}
 	
 	public Plant(String specie, Sex sex) {
