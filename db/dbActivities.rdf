@@ -8,10 +8,65 @@
     xmlns:vita="http://localhost:9000/rdf-syntax-ns#">
   <owl:Class rdf:about="http://localhost:9000/rdf-syntax-ns#Location"/>
   <owl:Class rdf:about="http://vita-instinct.herokuapp.com/rdf-syntax-ns#Location"/>
+<<<<<<< HEAD
   <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/equipment/52e04edf8441b5f2e111d0e9">
+=======
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/52e10057b924573a0efe7de3">
+    <vita:location>
+      <vita:Location rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/location/">
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >3.4442535607377067</vita:longitude>
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >44.17118761204784</vita:latitude>
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2.9141632287064567</vita:longitude>
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >3.3948150841752067</vita:longitude>
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >44.2934795713103</vita:latitude>
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >3.2506195275345817</vita:longitude>
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >44.29839418338124</vita:latitude>
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >44.299377056436825</vita:latitude>
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2.9787079064408317</vita:longitude>
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >44.27676681360149</vita:latitude>
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >44.34064286762803</vita:latitude>
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >44.173339873464684</vita:latitude>
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2.7378273010253906</vita:longitude>
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2.7749061584472656</vita:longitude>
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >3.3865753380814567</vita:longitude>
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >44.19303602884215</vita:latitude>
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >3.0990028381347656</vita:longitude>
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >44.11914151643737</vita:latitude>
+      </vita:Location>
+    </vita:location>
+    <rdfs:label>Balade en foret</rdfs:label>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:comment>Depart 10h</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/equipment/52e04edf8441b5f2e111d0e9">
+    <rdfs:label>Grosse chasse</rdfs:label>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:comment>gratuit</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/52e03ff4844143d11fcbf506">
+>>>>>>> lastchance
     <rdfs:comment>gratuit</rdfs:comment>
     <dc:creator>yohan texier</dc:creator>
     <rdfs:label>Grosse chasse</rdfs:label>
+    <vita:location rdf:resource="http://vita-instinct.herokuapp.com/sector/hunting/event/location/"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/52e03ff4844143d11fcbf506">
     <j.0:location>
@@ -47,6 +102,7 @@
     <rdfs:comment>gratuit</rdfs:comment>
   </rdf:Description>
   <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/equipment/52e04cf58441b5f2e111d0e8">
+<<<<<<< HEAD
     <rdfs:label>Grosse chasse</rdfs:label>
     <dc:creator>yohan texier</dc:creator>
     <rdfs:comment>gratuit</rdfs:comment>
@@ -73,21 +129,48 @@
     <dc:creator>yohan texier</dc:creator>
     <rdfs:label>Grosse chasse</rdfs:label>
     <j.0:location rdf:resource="http://vita-instinct.herokuapp.com/sector/hunting/event/location/"/>
+=======
+    <rdfs:comment>gratuit</rdfs:comment>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:label>Grosse chasse</rdfs:label>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/52e03c5d844143d11fcbf504">
+    <vita:location rdf:resource="http://vita-instinct.herokuapp.com/sector/hunting/event/location/"/>
+    <rdfs:label>Grosse chasse</rdfs:label>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:comment>gratuit</rdfs:comment>
+>>>>>>> lastchance
   </rdf:Description>
   <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/equipment/52e04b668441b5f2e111d0e6">
-    <rdfs:label>arc à poulies</rdfs:label>
-    <dc:creator>yohan texier</dc:creator>
     <rdfs:comment>balles explosive</rdfs:comment>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:label>arc à poulies</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/52e04c088441b5f2e111d0e7">
+<<<<<<< HEAD
     <rdfs:comment>gratuit</rdfs:comment>
     <dc:creator>yohan texier</dc:creator>
     <rdfs:label>Grosse chasse</rdfs:label>
     <j.0:location rdf:resource="http://vita-instinct.herokuapp.com/sector/hunting/event/location/"/>
   </rdf:Description>
   <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/52e04a5d8441b5f2e111d0e5">
-    <rdfs:comment>gratuit</rdfs:comment>
+=======
+    <vita:location rdf:resource="http://vita-instinct.herokuapp.com/sector/hunting/event/location/"/>
+    <rdfs:label>Grosse chasse</rdfs:label>
     <dc:creator>yohan texier</dc:creator>
+    <rdfs:comment>gratuit</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/52e04a5d8441b5f2e111d0e5">
+    <vita:location rdf:resource="http://vita-instinct.herokuapp.com/sector/hunting/event/location/"/>
+    <rdfs:label>test</rdfs:label>
+    <dc:creator>yohan texier</dc:creator>
+>>>>>>> lastchance
+    <rdfs:comment>gratuit</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/52e0fd7cb924573a0efe7de0">
+    <rdfs:comment>Depart 10h</rdfs:comment>
+    <dc:creator>yohan texier</dc:creator>
+<<<<<<< HEAD
     <rdfs:label>test</rdfs:label>
     <j.0:location rdf:resource="http://vita-instinct.herokuapp.com/sector/hunting/event/location/"/>
   </rdf:Description>
@@ -102,16 +185,39 @@
     <dc:creator>yohan texier</dc:creator>
     <rdfs:label>Grosse chasse</rdfs:label>
     <j.0:location rdf:resource="http://vita-instinct.herokuapp.com/sector/hunting/event/location/"/>
+=======
+    <rdfs:label>Balade en foret</rdfs:label>
+    <vita:location rdf:resource="http://vita-instinct.herokuapp.com/sector/hunting/event/location/"/>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/52e107e8b924f76983d95f21">
+    <rdfs:comment>Depart 10h</rdfs:comment>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:label>Balade en foret</rdfs:label>
+    <vita:location rdf:resource="http://vita-instinct.herokuapp.com/sector/hunting/event/location/"/>
+>>>>>>> lastchance
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/52e062a28441b5f2e111d100">
+    <vita:location rdf:resource="http://vita-instinct.herokuapp.com/sector/hunting/event/location/"/>
+    <rdfs:label>Grosse chasse</rdfs:label>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:comment>gratuit</rdfs:comment>
   </rdf:Description>
   <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/equipment/52e055b18441b5f2e111d0ef">
-    <rdfs:label>dsqsdqsdqsd</rdfs:label>
-    <dc:creator>yohan texier</dc:creator>
     <rdfs:comment>dsqdsqd</rdfs:comment>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:label>dsqsdqsdqsd</rdfs:label>
   </rdf:Description>
   <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/52e06f17844162f8d6501500">
+<<<<<<< HEAD
     <rdfs:comment>Lachée de galinettes cendrées</rdfs:comment>
     <dc:creator>yohan texier</dc:creator>
     <rdfs:label>La grande lachée</rdfs:label>
     <j.0:location rdf:resource="http://vita-instinct.herokuapp.com/sector/hunting/event/location/"/>
+=======
+    <vita:location rdf:resource="http://vita-instinct.herokuapp.com/sector/hunting/event/location/"/>
+    <rdfs:label>La grande lachée</rdfs:label>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:comment>Lachée de galinettes cendrées</rdfs:comment>
+>>>>>>> lastchance
   </rdf:Description>
 </rdf:RDF>

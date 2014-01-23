@@ -11,8 +11,8 @@ import models.factory.FactorySector;
 public class FactoryPickingSector extends FactorySector {
 
 	@Override
-	public PickingActivity createActivity(String organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment) {
-		return new PickingActivity(organism, amountOfOrganism, date, location, creator, event, equipment);
+	public PickingActivity createActivity(String organism, String thumbnail, String _abstract, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment) {
+		return new PickingActivity(organism, thumbnail, _abstract,amountOfOrganism, date, location, creator, event, equipment);
 	}
 
 	@Override

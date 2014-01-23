@@ -11,8 +11,8 @@ import models.factory.FactorySector;
 public class FactoryFishingSector extends FactorySector{
 
 	@Override
-	public FishingActivity createActivity(String organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment) {
-		return new FishingActivity(organism, amountOfOrganism, date, location, creator, event, equipment);
+	public FishingActivity createActivity(String organism, String thumbnail, String _abstract, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment) {
+		return new FishingActivity(organism, thumbnail, _abstract, amountOfOrganism, date, location, creator, event, equipment);
 	}
 
 	@Override

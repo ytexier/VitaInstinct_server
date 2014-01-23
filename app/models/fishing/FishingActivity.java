@@ -34,8 +34,9 @@ public class FishingActivity extends AbstractActivity{
 
 	}
 	
-	public FishingActivity(String organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
-		super(new Fish(organism), creator, amountOfOrganism, location, "fishing", date, (FishingEvent) event, (FishingEquipment) equipment);
+	public FishingActivity(String organism, String thumbnail, String _abstract,
+			int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
+		super(new Fish(organism, thumbnail, _abstract), creator, amountOfOrganism, location, "fishing", date, (FishingEvent) event, (FishingEquipment) equipment);
 	}
 	
 	public static FishingActivity findById(String id){

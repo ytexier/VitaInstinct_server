@@ -40,8 +40,8 @@ public class HuntingActivity extends AbstractActivity{
 
 	}
 	
-	public HuntingActivity(String organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
-		super(new Mammal(organism), creator, amountOfOrganism, location, "fishing", date, (HuntingEvent) event, (HuntingEquipment) equipment);
+	public HuntingActivity(String organism, String thumbnail, String _abstract, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
+		super(new Mammal(organism, thumbnail, _abstract), creator, amountOfOrganism, location, "fishing", date, (HuntingEvent) event, (HuntingEquipment) equipment);
 	}
 	
 

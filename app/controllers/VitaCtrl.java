@@ -15,6 +15,7 @@ import com.hp.hpl.jena.ontology.OntModelSpec;
 import com.hp.hpl.jena.query.Dataset;
 import com.hp.hpl.jena.query.QueryExecution;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
+import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ReadWrite;
 import com.hp.hpl.jena.query.ResultSet;
 import com.hp.hpl.jena.rdf.model.Model;
@@ -141,8 +142,7 @@ public class VitaCtrl extends Controller{
 	
 
 	public static Result test(String organism) {
-		Model model = ModelFactory.createDefaultModel();
-		String result = "Sanglier\n";
+		String str = "Sanglier\n";
 		try {
 			String service = "http://fr.dbpedia.org/sparql";
 			String query = ""
@@ -158,7 +158,10 @@ public class VitaCtrl extends Controller{
 			try {
 				ResultSet results = qe.execSelect();
 				for (; results.hasNext();) {
-					result += results.next().toString()+"\n";
+					QuerySolution qs = results.next();
+					String thumbnail = qs.get("image").toString();
+					String _abstract = qs.get("resume").toString();
+					return ok(str);
 					// Result processing is done here.
 				}
 			} catch (QueryExceptionHTTP e) {
@@ -170,13 +173,10 @@ public class VitaCtrl extends Controller{
 
 		}
 		catch(Exception e) {
-			String sss = e.getMessage();
-			for(StackTraceElement el : e.getStackTrace()) {
-				sss += "\n"+el.toString();
-			}
-			return ok(sss);
+			e.printStackTrace();
 		}
+		
+		return null;
 
-		return ok(result);
-	} 
+	}
 }

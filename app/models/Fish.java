@@ -5,11 +5,11 @@ import org.mongodb.morphia.annotations.Entity;
 @Entity
 public class Fish extends Animal {
 	public Fish(){}
-	public Fish(String specie){
-		super(specie, "fish/");
+	public Fish(String specie, String thumbnail, String _abstract){
+		super(specie, thumbnail, _abstract);
 	}
-	public Fish(String specie, Sex sex) {
-		super(specie, sex);
+	public Fish(String specie, String thumbnail, String _abstract, Sex sex) {
+		super(specie, thumbnail, _abstract, sex);
 	}
 
 }

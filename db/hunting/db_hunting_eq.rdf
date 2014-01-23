@@ -1,3 +1,51 @@
 <rdf:RDF
+<<<<<<< HEAD
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+=======
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:vita="http://vita-instinct.herokuapp.com/rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/equipment/52e107f5b924f76983d95f22">
+    <vita:owner>http://vita-instinct.herokuapp.com/user/52e107d6b924f76983d95f20</vita:owner>
+    <rdfs:comment>Calibre 22</rdfs:comment>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:label>Fusil</rdfs:label>
+    <vita:sector rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >hunting</vita:sector>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/equipment/52e06f5c844162f8d6501501">
+    <vita:sector rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >hunting</vita:sector>
+    <rdfs:label>Uzi Model B</rdfs:label>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:comment>Parfait pour tuer de la galinette.</rdfs:comment>
+    <vita:owner>http://vita-instinct.herokuapp.com/user/52e06ebd844162f8d65014ff</vita:owner>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/equipment/52e0fd9ab924573a0efe7de1">
+    <vita:owner>http://vita-instinct.herokuapp.com/user/52e0fb67b924573a0efe7ddf</vita:owner>
+    <rdfs:comment>Calibre 22</rdfs:comment>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:label>Fusil</rdfs:label>
+    <vita:sector rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >hunting</vita:sector>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/equipment/52e10066b924573a0efe7de4">
+    <vita:sector rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >hunting</vita:sector>
+    <rdfs:label>Fusil</rdfs:label>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:comment>Calibre 22</rdfs:comment>
+    <vita:owner>http://localhost:9000/user/52e0fe223adcfb33640f566b</vita:owner>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/equipment/52e060a78441b5f2e111d0ff">
+    <rdfs:comment>Balles explosives</rdfs:comment>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:label>AK-47</rdfs:label>
+    <vita:sector rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >hunting</vita:sector>
+  </rdf:Description>
+>>>>>>> lastchance
 </rdf:RDF>
