@@ -8,51 +8,46 @@ import models.Vita;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
-import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
-import org.mongodb.morphia.annotations.Property;
-
 import com.hp.hpl.jena.rdf.model.Model;
 
 import agents.AgentJena;
+import agents.AgentWriter;
 
 public abstract class AbstractActivity {
 	
-	@Id
-	@Property("id") 
-	private ObjectId id;
-	private String date;
-	private String sector;
-	private String uri;
+	@Id	private ObjectId id;
+		private String date;
+		private String sector;
+		private String uri;
 	
-	@Embedded 
-	private Location location;
-	private Integer amountOfOrganism;
- 	@Embedded
-	private Organism organism;
-	private ActivityEnding activityEnding;
-	@Embedded
-	private Key<User> creator;
+		private Location location;
+		private Integer amountOfOrganism;
+		private Organism organism;
+		private ActivityEnding activityEnding;
+		private Key<User> creator;
+		private AbstractEvent event;
+		private AbstractEquipment equipment;
 	
-	@Embedded
-	private AbstractEvent event;
+	public abstract Model accept(AgentJena agent);
+	public abstract Model accept(AgentWriter agent);
 	
 	public AbstractActivity(){
 		
 	}
 	
-	public AbstractActivity(Organism organism, Key<User> creator, int amountOfOrganism, Location location, String sector, String date) {
+	public AbstractActivity(Organism organism, Key<User> creator, int amountOfOrganism, Location location, String sector, String date, AbstractEvent event, AbstractEquipment equipment) {
 		this.organism = organism;
 		this.creator = creator;
 		this.amountOfOrganism = amountOfOrganism;
 		this.location = location;
 		this.sector = sector;
 		this.date = date;
+		this.event = event;
+		this.setEquipment(equipment);
 		this.uri = Vita.getURL() + "sector/" + sector + "/activity/";
 	}
 	
-	public abstract Model accept(AgentJena agent);
-
     public ObjectId getId() {
 		return id;
 	}
@@ -123,6 +118,13 @@ public abstract class AbstractActivity {
 	public void setEvent(AbstractEvent event) {
 		this.event = event;
 	}
+	public AbstractEquipment getEquipment() {
+		return equipment;
+	}
+	public void setEquipment(AbstractEquipment equipment) {
+		this.equipment = equipment;
+	}
+	
  
 	
 }

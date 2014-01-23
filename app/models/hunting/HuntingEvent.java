@@ -10,10 +10,10 @@ import com.hp.hpl.jena.rdf.model.Model;
 
 import controllers.MorphiaObject;
 import agents.AgentJena;
+import agents.AgentWriter;
 import models.Location;
 import models.User;
 import models.factory.AbstractEvent;
-import models.fishing.FishingActivity;
 
 @Entity
 public class HuntingEvent extends AbstractEvent {
@@ -35,12 +35,6 @@ public class HuntingEvent extends AbstractEvent {
 		this.activities.add(activity);
 	}
 
-
-	@Override
-	public Model accept(AgentJena agent) {
-		return agent.spy(this);
-	}
-	
 	public ArrayList<HuntingActivity> getActivities() {
 		return activities;
 	}
@@ -56,4 +50,13 @@ public class HuntingEvent extends AbstractEvent {
     			.get();
     	return event;
     }
+    
+	@Override
+	public Model accept(AgentJena agent) {
+		return agent.spy(this);
+	}
+	@Override
+	public Model accept(AgentWriter agent) {
+		return agent.spy(this);
+	}
 }

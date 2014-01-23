@@ -6,10 +6,6 @@ import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
-import com.hp.hpl.jena.rdf.model.Model;
-
-import agents.AgentManager;
-
 @Entity
 public class Equipment {
 	

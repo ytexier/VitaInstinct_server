@@ -2,7 +2,6 @@ package models.fishing;
 
 import org.mongodb.morphia.Key;
 
-import models.Fish;
 import models.Location;
 import models.User;
 import models.factory.AbstractEquipment;
@@ -26,7 +25,7 @@ public class FactoryFishingSector extends FactorySector{
 	@Override
 	public FishingAccessory createAccessory(String label, String comment,
 			Key<User> creator) {
-		return (new FishingAccessory(label, comment, creator));
+		return new FishingAccessory(label, comment, creator);
 	}
 
 	@Override

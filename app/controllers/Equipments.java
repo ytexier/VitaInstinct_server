@@ -29,6 +29,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import agents.AgentJena;
+import agents.AgentWriter;
 import forms.AddEquipmentForm;
 import forms.AddEventForm;
 import forms.Secured;
@@ -63,7 +64,7 @@ public class Equipments extends Controller {
    			return ok(out.toString());
    		}
 
-		return ok(Json.toJson(equipmentFound.getCreator()));
+		return ok(Json.toJson(equipmentFound));
 	}
 	
 
@@ -105,10 +106,8 @@ public class Equipments extends Controller {
 							user,
 							MorphiaObject.datastore.createUpdateOperations(User.class).add("equipments", eventKey)
 							);
-
-
-
-			aEquipment.accept(new AgentJena());
+			
+			aEquipment.accept(new AgentWriter());
 
 			return redirect(routes.Application.index());
 		}

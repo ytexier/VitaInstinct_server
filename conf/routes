@@ -3,11 +3,13 @@
 # ~~~~
 
 # Home page
-GET     /                           		controllers.Application.index()
-POST	/						controllers.Activities.newActivity()
 
-POST /events					controllers.Events.addEvent()
-POST /equipments				controllers.Equipments.addEquipment()
+GET     /                           controllers.Application.index()
+POST	/							controllers.Activities.newActivity()
+
+POST 	/events						controllers.Events.addEvent()
+POST 	/equipments					controllers.Equipments.addEquipment()
+POST 	/addFriend                 	controllers.Users.addFriend()
 
 
 # Ontology
@@ -29,7 +31,6 @@ GET     	/logout                     	controllers.Application.logout()
 
 # Users 
 
-GET			/users/:user_id						controllers.Users.get(user_id: String)
 GET			/users/:user_id/timeLine			controllers.Users.timeLine(user_id: String)
 GET			/users/:user_id/activities			controllers.Users.activities(user_id: String)
 
@@ -37,14 +38,15 @@ GET			/users/:user_id/friends				controllers.Users.friends(user_id: String)
 
 
 #POST		/users/:user_id						controllers.Activities.add(user_id: String)
-
-
-
-
 POST    	/addFriend                  		controllers.Users.addFriend()
 
 #
-#ACTIVITY
+# Users
+# 
+GET			/user/:id							controllers.Users.get(id: String)
+
+#
+# ACTIVITY
 #
 GET		/sector/hunting/activity/:id			controllers.Activities.get(id: String, sector = "hunting")
 GET		/sector/fishing/activity/:id			controllers.Activities.get(id: String, sector = "fishing")
@@ -54,21 +56,21 @@ POST	/sector/hunting/activity/:id/delete		controllers.Activities.delete(id: Stri
 POST	/sector/hunting/activity/:id/delete		controllers.Activities.delete(id: String, sector = "picking")
 
 #
-#EVENT
+# EVENT
 #
 GET		/sector/hunting/event/:id				controllers.Events.get(id: String, sector = "hunting")
 GET		/sector/fishing/event/:id				controllers.Events.get(id: String, sector = "fishing")
 GET		/sector/picking/event/:id				controllers.Events.get(id: String, sector = "picking")
 
 #
-#EQUIPMENT
+# EQUIPMENT
 #
 GET		/sector/hunting/equipment/:id			controllers.Equipments.get(id: String, sector = "hunting")
 GET		/sector/fishing/equipment/:id			controllers.Equipments.get(id: String, sector = "fishing")
 GET		/sector/picking/equipment/:id			controllers.Equipments.get(id: String, sector = "picking")
 
 #
-#RDF
+# RDF
 #
 GET		/sector/hunting							controllers.VitaCtrl.get(sector = "hunting")
 GET		/sector/fishing							controllers.VitaCtrl.get(sector = "fishing")

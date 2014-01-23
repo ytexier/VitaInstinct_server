@@ -8,39 +8,37 @@ import models.factory.AbstractActivity;
 import models.factory.AbstractEquipment;
 import models.factory.AbstractEvent;
 
+
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
-import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Reference;
 
 import com.hp.hpl.jena.rdf.model.Model;
 
 import controllers.MorphiaObject;
 import agents.AgentJena;
+import agents.AgentWriter;
 
 @Entity
 public class PickingActivity extends AbstractActivity{
 	
-	@Embedded	private PickingEvent event;
-	@Reference	private PickingEquipment equipment;
+	@Override
+	public Model accept(AgentJena agent) {
+		return agent.spy(this);
+	}
+	@Override
+	public Model accept(AgentWriter agent) {
+		return agent.spy(this);
+	}
 	
 	public PickingActivity(){
 
 	}
 	
-	public PickingActivity(Plant organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
-		super(organism, creator, amountOfOrganism, location, "hunting", date);
-		this.equipment = (PickingEquipment) equipment;
-		this.event = (PickingEvent) event;
+	public PickingActivity(String organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
+		super(new Plant(organism), creator, amountOfOrganism, location, "fishing", date, (PickingEvent) event, (PickingEquipment) equipment);
 	}
     
-	@Override
-	public Model accept(AgentJena agent) {
-		return agent.spy(this);
-	}
-	
-	
     public static PickingActivity findById(String id){
     	PickingActivity activity = MorphiaObject.datastore.find(PickingActivity.class)
     			.field("_id")
@@ -49,7 +47,10 @@ public class PickingActivity extends AbstractActivity{
     	return activity;
     }
 	
-	
+    public PickingEvent getEvent(){
+    	return (PickingEvent) super.getEvent();
+    }
+    
 	public void setDate(String _date) {
 		super.setDate(_date);		
 	}
@@ -63,20 +64,4 @@ public class PickingActivity extends AbstractActivity{
 		super.setAmountOfOrganism(_amountOfOrganism);
 	}
 
-	public PickingEvent getEvent() {
-		return event;
-	}
-
-
-	public void setEvent(PickingEvent event) {
-		this.event = event;
-	}
-
-	public PickingEquipment getEquipment() {
-		return equipment;
-	}
-
-	public void setEquipment(PickingEquipment equipment) {
-		this.equipment = equipment;
-	}
 }

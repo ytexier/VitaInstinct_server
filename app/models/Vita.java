@@ -55,7 +55,7 @@ public class Vita {
     public static final Property registers = vita_m.createProperty(String.format(_NS, "registers"));  
     
    
-    //public static final Property creator = vita_m.createProperty(String.format(_NS, "creator"));
+    public static final Property owner = vita_m.createProperty(String.format(_NS, "owner"));
     public static final Property targetOrganism = vita_m.createProperty(String.format(_NS, "targetOrganism"));
     public static final Property location = vita_m.createProperty(String.format(_NS, "location"));
     public static final Property isRelatedTo = vita_m.createProperty(String.format(_NS, "isRelatedTo"));
@@ -65,7 +65,8 @@ public class Vita {
      */
     public static final Property latitude = vita_m.createProperty(String.format(_NS, "latitude"));
     public static final Property longitude = vita_m.createProperty(String.format(_NS, "longitude"));
-
+    public static final Property sector = vita_m.createProperty(String.format(_NS, "sector"));
+    
 	//ResourceFactory.createTypedLiteral("2012-03-11", XSDDatatype.XSDdate)
     //DC.creator : Nom, identifiant
 	

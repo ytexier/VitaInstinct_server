@@ -1,10 +1,6 @@
 package forms;
 
 import java.util.Date;
-import java.util.List;
-
-import models.factory.AbstractEquipment;
-import models.factory.AbstractEvent;
 
 public class AbstractActivityForm {
 	

@@ -1,7 +1,5 @@
 package models.fishing;
 
-import java.util.ArrayList;
-
 import models.ActivityEnding;
 import models.Fish;
 import models.Location;
@@ -12,43 +10,44 @@ import models.factory.AbstractEvent;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
-import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
-import org.mongodb.morphia.annotations.Reference;
 
 import com.hp.hpl.jena.rdf.model.Model;
 
 import controllers.MorphiaObject;
 import agents.AgentJena;
+import agents.AgentWriter;
 
 @Entity
 public class FishingActivity extends AbstractActivity{
-	
-	@Embedded	private FishingEvent event;
-	@Reference	private FishingEquipment equipment;
+
+	@Override
+	public Model accept(AgentJena agent) {
+		return agent.spy(this);
+	}
+	@Override
+	public Model accept(AgentWriter agent) {
+		return agent.spy(this);
+	}
 
 	public FishingActivity(){
 
 	}
 	
 	public FishingActivity(String organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
-		super(new Fish(organism), creator, amountOfOrganism, location, "fishing", date);
-		this.equipment = (FishingEquipment) equipment;
-		this.event = (FishingEvent) event;
+		super(new Fish(organism), creator, amountOfOrganism, location, "fishing", date, (FishingEvent) event, (FishingEquipment) equipment);
 	}
 	
-	
-	@Override
-	public Model accept(AgentJena agent) {
-		return agent.spy(this);
-	}
-	
-    public static FishingActivity findById(String id){
+	public static FishingActivity findById(String id){
     	FishingActivity activity = MorphiaObject.datastore.find(FishingActivity.class)
     			.field("_id")
     			.equal(new ObjectId(id))
     			.get();
     	return activity;
+    }
+	
+    public FishingEvent getEvent(){
+    	return (FishingEvent) super.getEvent();
     }
 	
 	public void setDate(String date) {
@@ -69,21 +68,6 @@ public class FishingActivity extends AbstractActivity{
 		super.setAmountOfOrganism(_amountOfOrganism);
 	}
 
-	public FishingEvent getEvent() {
-		return event;
-	}
-
-	public void setEvent(FishingEvent event) {
-		this.event = event;
-	}
-	
-	public FishingEquipment getEquipment() {
-		return equipment;
-	}
-
-	public void setEquipment(FishingEquipment equipment) {
-		this.equipment = equipment;
-	}
 
 	
 

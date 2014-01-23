@@ -10,19 +10,20 @@ import org.mongodb.morphia.annotations.Id;
 import com.hp.hpl.jena.rdf.model.Model;
 
 import agents.AgentJena;
+import agents.AgentWriter;
 
 
 public abstract class AbstractEquipment {
-	@Id 
-	private ObjectId id;
-	private String sector;
-	private String label;
-	private String comment;
-	private String uri;
-
-	private Key<User> creator;
+	
+	@Id private ObjectId id;
+		private String sector;
+		private String label;
+		private String comment;
+		private String uri;
+		private Key<User> creator;
 	
 	public abstract Model accept(AgentJena agent);
+	public abstract Model accept(AgentWriter agent);
 	
 	public AbstractEquipment() {}
 

@@ -7,6 +7,7 @@ import java.util.List;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
+import agents.AgentWriter;
 import forms.AddFriendForm;
 import forms.Secured;
 import models.User;
@@ -54,7 +55,7 @@ public class Users extends Controller{
             			toDay
             			);
                 MorphiaObject.datastore.save(user);
-                
+                user.accept(new AgentWriter());
                 return redirect(routes.Application.signup());  
         }
     }

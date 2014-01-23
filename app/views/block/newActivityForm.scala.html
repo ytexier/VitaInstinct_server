@@ -17,10 +17,10 @@ equipmentsList : List[models.factory.AbstractEquipment]
 	<input id="sector" type="hidden" name="sector" />
 	<h3>Events</h3>
 	<div id="eventsDiv">
-	<select name="event">
+	<select name="eventId">
 		<option value="">---</option>
 		@for(event <- eventsList) {
-			<option value="@event.getId()">@event.getLabel()</option>
+			<option value="@event.getId().toString()">@event.getLabel()</option>
 		}
 	</select>
 		
@@ -29,9 +29,12 @@ equipmentsList : List[models.factory.AbstractEquipment]
 	</div>
 	<h3>Equipments</h3>
 	<div id="equipmentDiv">
-		@for(equipment <- equipmentsList) {
-			<input type="checkbox" name="@equipment.getLabel()" boxValue="@equipment.getId()">@equipment.getLabel() : @equipment.getComment()<br>
-		}
+		<select name="equipmentId">
+			<option value="">---</option>
+			@for(equipment <- equipmentsList) {
+				<option value="@equipment.getId().toString()">@equipment.getLabel()</option>
+			}
+		</select>
 	</div>
     @inputDate(activityForm("date"), 'id -> "itDate")  
     @inputText(activityForm("latitude"), 'id -> "itLatitude") 

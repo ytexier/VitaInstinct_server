@@ -1,6 +1,7 @@
 package models;
 
-import agents.AgentManager;
+import agents.AgentJena;
+import agents.AgentWriter;
 import controllers.MorphiaObject;
 import models.factory.AbstractActivity;
 import models.factory.AbstractEquipment;
@@ -8,10 +9,11 @@ import models.factory.AbstractEvent;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
-import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 import org.mongodb.morphia.annotations.Reference;
+
+import com.hp.hpl.jena.rdf.model.Model;
 
 import play.data.validation.Constraints.Email;
 import play.data.validation.Constraints.Required;
@@ -49,7 +51,7 @@ import java.util.Date;
 		this.setFamilyName(familyName);
 		this.setNickName(nickName);	
 
-		this.setURI(Vita.getURL()+"user/"+givenName+"."+familyName);
+		this.setURI(Vita.getURL()+"user/");
 		
         this.setEmail(email);
         this.setPassword(password);
@@ -66,9 +68,6 @@ import java.util.Date;
     	
 	}
     
-	public void accept(AgentManager v){
-		v.spy(this);
-	}
     
     public static User findById(String id){
     	User user = MorphiaObject.datastore.find(User.class)
@@ -94,6 +93,12 @@ import java.util.Date;
 		return user;
 	}
 	
+	public Model accept(AgentJena agent) {
+		return agent.spy(this);
+	}
+	public Model accept(AgentWriter agent) {
+		return agent.spy(this);
+	}
 	
 	public ObjectId getId() {
 		return id;

@@ -7,17 +7,13 @@ import java.util.Date;
 
 import models.Location;
 import models.User;
-import models.factory.AbstractActivity;
 import models.factory.AbstractEvent;
 import models.factory.FactorySector;
 import models.fishing.FactoryFishingSector;
-import models.fishing.FishingActivity;
 import models.fishing.FishingEvent;
 import models.hunting.FactoryHuntingSector;
-import models.hunting.HuntingActivity;
 import models.hunting.HuntingEvent;
 import models.picking.FactoryPickingSector;
-import models.picking.PickingActivity;
 import models.picking.PickingEvent;
 
 import org.mongodb.morphia.Key;
@@ -29,6 +25,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import agents.AgentJena;
+import agents.AgentWriter;
 import forms.AddEventForm;
 import forms.Secured;
 
@@ -42,12 +39,11 @@ public class Events extends Controller {
     	
     	if(sector.equals("hunting"))
     		eventFound = HuntingEvent.findById(id);
-     	if(sector.equals("picking"))
-     		eventFound = PickingEvent.findById(id);
      	if(sector.equals("fishing"))
      		eventFound = FishingEvent.findById(id);
-    	
-
+     	if(sector.equals("picking"))
+     		eventFound = PickingEvent.findById(id);
+   	
    		if(request().accepts("text/html")){
    			return ok();
    		}
@@ -61,7 +57,7 @@ public class Events extends Controller {
    			return ok(out.toString());
    		}
 
-		return ok(Json.toJson(eventFound.getCreator()));
+		return ok(Json.toJson(eventFound));
 	}
 
 	@Security.Authenticated(Secured.class)
@@ -110,6 +106,7 @@ public class Events extends Controller {
 							);
 
 			aEvent.accept(new AgentJena());
+			aEvent.accept(new AgentWriter());
 
 			return redirect(routes.Application.index());
 		}

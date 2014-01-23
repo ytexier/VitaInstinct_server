@@ -12,5 +12,4 @@ public class HuntingAccessory extends HuntingEquipment{
 		// TODO Auto-generated constructor stub
 	}
 
-	
 }

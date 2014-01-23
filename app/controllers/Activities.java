@@ -19,10 +19,16 @@ import models.factory.AbstractEvent;
 import models.factory.FactorySector;
 import models.fishing.FishingActivity;
 import models.fishing.FactoryFishingSector;
+import models.fishing.FishingEquipment;
+import models.fishing.FishingEvent;
 import models.hunting.HuntingActivity;
 import models.hunting.FactoryHuntingSector;
+import models.hunting.HuntingEquipment;
+import models.hunting.HuntingEvent;
 import models.picking.PickingActivity;
 import models.picking.FactoryPickingSector;
+import models.picking.PickingEquipment;
+import models.picking.PickingEvent;
 
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
@@ -150,13 +156,21 @@ public class Activities extends Controller {
 				
 				FactorySector factorySector = null;
 				AbstractActivity aActivity = null;
+				AbstractEvent aEvent = null;
+				AbstractEquipment aEquipment = null;
 				
 				if(sector.equals("hunting")){
 					factorySector = new FactoryHuntingSector();
+					aEvent = HuntingEvent.findById(eventId);
+					aEquipment = HuntingEquipment.findById(equipmentId);
 				}else if(sector.equals("fishing")){
 					factorySector = new FactoryFishingSector();
+					aEvent = FishingEvent.findById(equipmentId);
+					aEquipment = FishingEquipment.findById(equipmentId);
 				}else if(sector.equals("picking")){
 					factorySector = new FactoryPickingSector();
+					aEvent = PickingEvent.findById(eventId);
+					aEquipment = PickingEquipment.findById(equipmentId);
 				}
 				
 				String formattedDate = dateFormatter.format(date);
@@ -164,16 +178,8 @@ public class Activities extends Controller {
 				User user = User.findByEmail(request().username());
 				Key<User> creatorKey = MorphiaObject.datastore.getKey(user);
 				
-				/*
-				 * MORPHIA REQUESTS 
-				 * GET EVENT BY ID
-				 * GET EQUIPMENT BY ID
-				 */
 				
-				AbstractEvent event = factorySector.createEvent("event", formattedDate, "comment", location, creatorKey);
-				AbstractEquipment equipment = factorySector.createEquipment("equi", "comment", creatorKey);
-						
-				aActivity = factorySector.createActivity(specie, amountOfOrganism, formattedDate, location, creatorKey, event, equipment);
+				aActivity = factorySector.createActivity(specie, amountOfOrganism, formattedDate, location, creatorKey, aEvent, aEquipment);
 
 				
 				if(Sex.contains(sex))
@@ -183,8 +189,7 @@ public class Activities extends Controller {
 						aActivity.setActivityEnding(Enum.valueOf(ActivityEnding.class, activityEnding));
 
 		
-				aActivity.accept(new AgentJena());
-				
+	
 				Key<AbstractActivity> activityKey = MorphiaObject.datastore.save(aActivity);
 
 				UpdateResults<User> res =
@@ -194,7 +199,7 @@ public class Activities extends Controller {
 						);
 				
 
-				
+				aActivity.accept(new AgentJena());
 				
 				return redirect(routes.Application.index());
         }

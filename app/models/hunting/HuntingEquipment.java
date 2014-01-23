@@ -8,12 +8,22 @@ import com.hp.hpl.jena.rdf.model.Model;
 
 import controllers.MorphiaObject;
 import agents.AgentJena;
-import agents.AgentManager;
+
+import agents.AgentWriter;
 import models.User;
 import models.factory.AbstractEquipment;
 
 @Entity
 public class HuntingEquipment extends AbstractEquipment {
+	
+   	@Override
+	public Model accept(AgentJena agent) {
+		return agent.spy(this);
+	}
+	@Override
+	public Model accept(AgentWriter agent) {
+		return agent.spy(this);
+	}
 	
 	public HuntingEquipment() {
 		super();
@@ -26,11 +36,7 @@ public class HuntingEquipment extends AbstractEquipment {
 		// TODO Auto-generated constructor stub
 	}
 
-	@Override
-	public Model accept(AgentJena agent) {
-		return agent.spy(this);
-	}
-	
+
     public static HuntingEquipment findById(String id){
     	HuntingEquipment equipment = MorphiaObject.datastore.find(HuntingEquipment.class)
     			.field("_id")
