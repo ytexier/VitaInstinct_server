@@ -12,11 +12,12 @@
         text-align:right;
         margin-bottom: 15px;
         padding: 10px;
+        height:220px;
     }
  
     body aside {
         width:20%;
-        height:90%;
+        height:690px;
         background-color:lightgreen;
         float: left;
         padding: 10px;
