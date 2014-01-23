@@ -11,12 +11,13 @@
         background-color:DarkGreen;
         text-align:right;
         margin-bottom: 15px;
+        height: 220px;
         padding: 10px;
     }
  
     body aside {
         width:20%;
-        height:90%;
+        height:690px;
         background-color:lightgreen;
         float: left;
         padding: 10px;

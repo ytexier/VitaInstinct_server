@@ -3,43 +3,40 @@ package controllers;
 import java.io.ByteArrayOutputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import models.ActivityEnding;
-import models.Fish;
 import models.Location;
-import models.Mammal;
 import models.Organism;
-import models.Plant;
 import models.Sex;
 import models.User;
 import models.factory.AbstractActivity;
 import models.factory.AbstractEquipment;
 import models.factory.AbstractEvent;
 import models.factory.FactorySector;
-import models.fishing.FishingActivity;
 import models.fishing.FactoryFishingSector;
+import models.fishing.FishingActivity;
 import models.fishing.FishingEquipment;
 import models.fishing.FishingEvent;
-import models.hunting.HuntingActivity;
 import models.hunting.FactoryHuntingSector;
+import models.hunting.HuntingActivity;
 import models.hunting.HuntingEquipment;
 import models.hunting.HuntingEvent;
-import models.picking.PickingActivity;
 import models.picking.FactoryPickingSector;
+import models.picking.PickingActivity;
 import models.picking.PickingEquipment;
 import models.picking.PickingEvent;
 
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
-import agents.AgentJena;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.block.viewer;
+import agents.AgentJena;
 import forms.AbstractActivityForm;
 import forms.Secured;
 
@@ -178,8 +175,18 @@ public class Activities extends Controller {
 				User user = User.findByEmail(request().username());
 				Key<User> creatorKey = MorphiaObject.datastore.getKey(user);
 				
+				String _abstract = "";
+				String thumbnail = "";
+				ArrayList<String> rdfData = new ArrayList<String>();
+				String organism = org.apache.commons.lang3.StringUtils.capitalize(specie);
+				rdfData = Organism.getInfos(organism);
+				if(rdfData.size() != 0) {
+					thumbnail = rdfData.get(0);
+					_abstract = rdfData.get(1);
+				}
 				
-				aActivity = factorySector.createActivity(specie, amountOfOrganism, formattedDate, location, creatorKey, aEvent, aEquipment);
+				aActivity = factorySector.createActivity(specie, _abstract, thumbnail, amountOfOrganism, 
+						formattedDate, location, creatorKey, aEvent, aEquipment);
 
 				
 				if(Sex.contains(sex))

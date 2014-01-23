@@ -9,6 +9,7 @@ import models.factory.AbstractEquipment;
 import models.factory.AbstractEvent;
 
 
+
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
@@ -35,8 +36,8 @@ public class PickingActivity extends AbstractActivity{
 
 	}
 	
-	public PickingActivity(String organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
-		super(new Plant(organism), creator, amountOfOrganism, location, "fishing", date, (PickingEvent) event, (PickingEquipment) equipment);
+	public PickingActivity(String organism, String thumbnail, String _abstract, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
+		super(new Plant(organism, thumbnail, _abstract), creator, amountOfOrganism, location, "fishing", date, (PickingEvent) event, (PickingEquipment) equipment);
 	}
     
     public static PickingActivity findById(String id){

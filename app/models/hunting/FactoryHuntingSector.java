@@ -11,8 +11,10 @@ import models.factory.FactorySector;
 public class FactoryHuntingSector extends FactorySector{
 
 	@Override
-	public HuntingActivity createActivity(String organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment) {
-		return new HuntingActivity(organism, amountOfOrganism, date, location, creator, event, equipment);
+	public HuntingActivity createActivity(String organism, String thumbnail, String _abstract,
+			 int amountOfOrganism, String date, Location location, Key<User> creator, 
+			AbstractEvent event, AbstractEquipment equipment) {
+		return new HuntingActivity(organism, thumbnail, _abstract, amountOfOrganism, date, location, creator, event, equipment);
 	}
 
 	@Override

@@ -101,8 +101,30 @@
         var infoWindow = new google.maps.InfoWindow();
         var activityLatLng = new google.maps.LatLng(activity.location.latPos, activity.location.longPos);
         var organism = activity.organism.specie;
-        var contentString = activity.amountOfOrganism+" "+organism+" "+activity.activityEnding+"(s)"
-                +" le "+activity.date+" aux alentours de ";
+        var ending = activity.activityEnding;
+        var fin;
+        if(ending == "kill") {
+            fin = "tue(s)";
+        }
+        else if(ending == "sight") {
+            fin = "vu(s)";
+        }
+        else {
+            fin = "pris"
+        }
+		var contentString = '<div id="content">'+
+	      '<div id="siteNotice">'+
+	      '</div>'+
+		  '<h1 id="firstHeading" class="firstHeading">'+organism+'</h1>'+
+		  '<div id="bodyContent">'+
+	      '<p>'+ activity.organism.thumbnail
+	      +'</p>'+
+	      '<img src="'+activity.organism._abstract+'"></img>'+
+	      '<p>'+ activity.amountOfOrganism+' "'+organism+' '+fin
+          +' le '+activity.date+' aux alentours de ';
+        
+        //var contentString = activity.amountOfOrganism+" "+organism+" "+fin
+          //      +" le "+activity.date+" aux alentours de ";
         var iconColor = "";
         if(activity.sector == "hunting" ) {
             iconColor = "http://maps.google.com/mapfiles/ms/icons/yellow-dot.png";

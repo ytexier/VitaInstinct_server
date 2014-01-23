@@ -34,6 +34,20 @@
     <vcard:NICKNAME>luckybanana</vcard:NICKNAME>
     <vcard:EMAIL>yohan.texier@live.fr</vcard:EMAIL>
   </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/user/52e0fb67b924573a0efe7ddf">
+    <vcard:FN>yohan texier</vcard:FN>
+    <vcard:Given>yohan</vcard:Given>
+    <vcard:Family>texier</vcard:Family>
+    <vcard:NICKNAME>das</vcard:NICKNAME>
+    <vcard:EMAIL>yohan.texier@gmail.com</vcard:EMAIL>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/user/52e107d6b924f76983d95f20">
+    <vcard:EMAIL>yohan.texier@gmail.com</vcard:EMAIL>
+    <vcard:NICKNAME>das</vcard:NICKNAME>
+    <vcard:Family>texier</vcard:Family>
+    <vcard:Given>yohan</vcard:Given>
+    <vcard:FN>yohan texier</vcard:FN>
+  </rdf:Description>
   <rdf:Description rdf:about="http://vita-instinct.herokuapp.com/user/yohan.varet">
     <vcard:EMAIL>yohan.texier@gmail.com</vcard:EMAIL>
     <vcard:NICKNAME>qdqsdqd</vcard:NICKNAME>
