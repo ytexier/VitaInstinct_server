@@ -10,8 +10,10 @@ import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
 
 import models.Amniote;
+import models.Fish;
 import models.Location;
 import models.Organism;
+import models.Plant;
 import models.User;
 import models.Vita;
 import models.fishing.FishingActivity;
@@ -133,11 +135,13 @@ public class AgentWriter extends AgentManager{
 
 	@Override
 	public Model spy(PickingActivity activity) {
+
 		String 			idActivity = activity.getId().toString();	
 		User 			creator = User.findById(activity.getCreator().getId().toString());
-		Amniote 		organism = (Amniote) activity.getOrganism();
+		Plant 			organism = (Plant) activity.getOrganism();
 		String 			label = "TODO";
 		PickingEvent	event = activity.getEvent();
+		String 			idEvent = event.getId().toString();
 
 		//Resource Activity
 		Resource _activity = jenaModel.createResource(activity.getURI()+idActivity);
@@ -160,7 +164,7 @@ public class AgentWriter extends AgentManager{
 		
 		//Event : isRelatedTo
 		Vita.VitaClass.Event.createOntClass(jenaModel);
-		Individual _event = jenaModel.createIndividual(event.getURI(), Vita.VitaClass.Organism.getOntClass(jenaModel));	
+		Individual _event = jenaModel.createIndividual(event.getURI()+idEvent, Vita.VitaClass.Event.getOntClass(jenaModel));	
 		
 		//Add Properties
 		_activity.addProperty(RDFS.label, label);
@@ -171,17 +175,20 @@ public class AgentWriter extends AgentManager{
 			_activity.addProperty(Vita.equipments, e);
 		_activity.addProperty(Vita.isRelatedTo, _event);
 		
-		this.writeRDF(jenaModel, db_picking_ac);	
+		this.writeRDF(jenaModel, db_hunting_ac);	
+		
 		return jenaModel;
 	}
 
 	@Override
 	public Model spy(FishingActivity activity) {
+
 		String 			idActivity = activity.getId().toString();	
 		User 			creator = User.findById(activity.getCreator().getId().toString());
-		Amniote 		organism = (Amniote) activity.getOrganism();
+		Fish 			organism = (Fish) activity.getOrganism();
 		String 			label = "TODO";
 		FishingEvent	event = activity.getEvent();
+		String 			idEvent = event.getId().toString();
 
 		//Resource Activity
 		Resource _activity = jenaModel.createResource(activity.getURI()+idActivity);
@@ -204,7 +211,7 @@ public class AgentWriter extends AgentManager{
 		
 		//Event : isRelatedTo
 		Vita.VitaClass.Event.createOntClass(jenaModel);
-		Individual _event = jenaModel.createIndividual(event.getURI(), Vita.VitaClass.Organism.getOntClass(jenaModel));	
+		Individual _event = jenaModel.createIndividual(event.getURI()+idEvent, Vita.VitaClass.Event.getOntClass(jenaModel));	
 		
 		//Add Properties
 		_activity.addProperty(RDFS.label, label);
@@ -215,7 +222,8 @@ public class AgentWriter extends AgentManager{
 			_activity.addProperty(Vita.equipments, e);
 		_activity.addProperty(Vita.isRelatedTo, _event);
 		
-		this.writeRDF(jenaModel, db_fishing_ac);	
+		this.writeRDF(jenaModel, db_hunting_ac);	
+		
 		return jenaModel;
 	}
 
