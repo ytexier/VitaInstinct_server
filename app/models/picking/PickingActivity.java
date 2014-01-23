@@ -1,5 +1,8 @@
 package models.picking;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import models.ActivityEnding;
 import models.Location;
 import models.Plant;
@@ -7,6 +10,7 @@ import models.User;
 import models.factory.AbstractActivity;
 import models.factory.AbstractEquipment;
 import models.factory.AbstractEvent;
+
 
 
 
@@ -35,14 +39,9 @@ public class PickingActivity extends AbstractActivity{
 	public PickingActivity(){
 
 	}
-	
-<<<<<<< HEAD
-	public PickingActivity(String organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
-		super(new Plant(organism), creator, amountOfOrganism, location, "picking", date, (PickingEvent) event, (PickingEquipment) equipment);
-=======
+
 	public PickingActivity(String organism, String thumbnail, String _abstract, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
-		super(new Plant(organism, thumbnail, _abstract), creator, amountOfOrganism, location, "fishing", date, (PickingEvent) event, (PickingEquipment) equipment);
->>>>>>> lastchance
+		super(new Plant(organism, thumbnail, _abstract), creator, amountOfOrganism, location, "piciking", date, (PickingEvent) event, (PickingEquipment) equipment);
 	}
     
     public static PickingActivity findById(String id){
@@ -70,4 +69,12 @@ public class PickingActivity extends AbstractActivity{
 		super.setAmountOfOrganism(_amountOfOrganism);
 	}
 
+	public static List<PickingActivity> all() throws Exception{
+        if (MorphiaObject.datastore != null)
+                return MorphiaObject.datastore
+                		.find(PickingActivity.class).asList();
+        else
+        	return new ArrayList<PickingActivity>();
+    }
+	
 }

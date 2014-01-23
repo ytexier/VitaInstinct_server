@@ -1,5 +1,8 @@
 package models.fishing;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import models.ActivityEnding;
 import models.Fish;
 import models.Location;
@@ -68,6 +71,14 @@ public class FishingActivity extends AbstractActivity{
 	public void setAmountOfOrganism(Integer _amountOfOrganism){
 		super.setAmountOfOrganism(_amountOfOrganism);
 	}
+	
+	public static List<FishingActivity> all() throws Exception{
+        if (MorphiaObject.datastore != null)
+                return MorphiaObject.datastore
+                		.find(FishingActivity.class).asList();
+        else
+        	return new ArrayList<FishingActivity>();
+    }
 
 
 	

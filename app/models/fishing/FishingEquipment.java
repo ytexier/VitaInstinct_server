@@ -1,7 +1,11 @@
 package models.fishing;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import models.User;
 import models.factory.AbstractEquipment;
+import models.hunting.HuntingEvent;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
@@ -45,4 +49,11 @@ public class FishingEquipment extends AbstractEquipment {
 	public Model accept(AgentWriter agent) {
 		return agent.spy(this);
 	}
+	public static List<FishingEquipment> all() throws Exception{
+        if (MorphiaObject.datastore != null)
+                return MorphiaObject.datastore
+                		.find(FishingEquipment.class).asList();
+        else
+        	return new ArrayList<FishingEquipment>();
+    }
 }

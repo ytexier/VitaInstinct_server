@@ -1,12 +1,32 @@
 <rdf:RDF
-<<<<<<< HEAD
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
-=======
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:vita="http://vita-instinct.herokuapp.com/rdf-syntax-ns#"
     xmlns:owl="http://www.w3.org/2002/07/owl#"
     xmlns:dc="http://purl.org/dc/elements/1.1/"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
->>>>>>> lastchance
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:vita="http://localhost:9000/rdf-syntax-ns#">
+  <owl:Class rdf:about="http://localhost:9000/rdf-syntax-ns#Location"/>
+  <rdf:Description rdf:about="http://localhost:9000/sector/hunting/event/52e10fd43adcfb33640f567b">
+    <vita:location>
+      <vita:Location rdf:about="http://localhost:9000/sector/hunting/event/location/">
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >44.05897241123968</vita:latitude>
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >3.4276771266013384</vita:longitude>
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2.9868507105857134</vita:longitude>
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >44.039231511913094</vita:latitude>
+      </vita:Location>
+    </vita:location>
+    <rdfs:label>La grande lachée</rdfs:label>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:comment>Lachée de galinettes cendrées</rdfs:comment>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost:9000/sector/hunting/event/52e111453adcfb33640f567f">
+    <rdfs:comment>Lachée de galinettes cendrées</rdfs:comment>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:label>La grande lachée</rdfs:label>
+    <vita:location rdf:resource="http://localhost:9000/sector/hunting/event/location/"/>
+  </rdf:Description>
 </rdf:RDF>

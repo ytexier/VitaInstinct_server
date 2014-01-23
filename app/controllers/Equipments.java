@@ -69,9 +69,19 @@ public class Equipments extends Controller {
    			return ok();
    		}
    		
-   		else if(request().accepts("application/json"))
-            return ok(Json.toJson(activityFound));
-   		
+   		else if(request().accepts("application/json")){
+   			try { 			
+   	    	  	if(sector.equals("hunting"))
+					return ok(Json.toJson(HuntingEquipment.all()));
+		     	if(sector.equals("picking"))
+	   	     		return ok(Json.toJson(PickingEquipment.all()));
+	   	     	if(sector.equals("fishing"))
+	   	     		return ok(Json.toJson(FishingEquipment.all()));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+   		}
    		else if (request().accepts("application/rdf+xml")){
    			OutputStream out = new ByteArrayOutputStream();
    			model_loaded.write(out, "RDF/XML-ABBREV");

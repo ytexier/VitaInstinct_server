@@ -31,20 +31,16 @@ import models.picking.PickingEvent;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
-<<<<<<< HEAD
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.util.FileManager;
 
-import agents.AgentJena;
-import agents.AgentWriter;
-=======
->>>>>>> lastchance
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import agents.AgentJena;
+import agents.AgentWriter;
 import forms.AbstractActivityForm;
 import forms.Secured;
 
@@ -109,8 +105,19 @@ public class Activities extends Controller {
    			return ok();
    		}
    		
-   		else if(request().accepts("application/json"))
-            return ok(Json.toJson(activityFound));
+   		else if(request().accepts("application/json")){
+   			try { 			
+   	    	  	if(sector.equals("hunting"))
+					return ok(Json.toJson(HuntingActivity.all()));
+		     	if(sector.equals("picking"))
+	   	     		return ok(Json.toJson(PickingActivity.all()));
+	   	     	if(sector.equals("fishing"))
+	   	     		return ok(Json.toJson(FishingActivity.all()));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+   		}
    		
    		else if (request().accepts("application/rdf+xml")){
    			OutputStream out = new ByteArrayOutputStream();

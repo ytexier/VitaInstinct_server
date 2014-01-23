@@ -131,9 +131,13 @@ public class Users extends Controller{
    		}
    		
    		else if(request().accepts("application/json"))
-            return ok(Json.toJson(activityFound));
-   		
-   		else if (request().accepts("application/rdf+xml")){
+			try {
+				return ok(Json.toJson(all()));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		else if (request().accepts("application/rdf+xml")){
    			OutputStream out = new ByteArrayOutputStream();
    			model_loaded.write(out, "RDF/XML-ABBREV");
    			return ok(out.toString());

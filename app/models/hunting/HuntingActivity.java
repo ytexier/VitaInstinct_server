@@ -1,6 +1,10 @@
 package models.hunting;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import models.ActivityEnding;
+import models.Fish;
 import models.Location;
 import models.Mammal;
 import models.User;
@@ -9,6 +13,9 @@ import models.factory.AbstractActivity;
 
 import models.factory.AbstractEquipment;
 import models.factory.AbstractEvent;
+import models.fishing.FishingEquipment;
+import models.fishing.FishingEvent;
+import models.picking.PickingActivity;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
@@ -40,8 +47,9 @@ public class HuntingActivity extends AbstractActivity{
 
 	}
 	
-	public HuntingActivity(String organism, String thumbnail, String _abstract, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
-		super(new Mammal(organism, thumbnail, _abstract), creator, amountOfOrganism, location, "fishing", date, (HuntingEvent) event, (HuntingEquipment) equipment);
+	public HuntingActivity(String organism, String thumbnail, String _abstract,
+			int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
+		super(new Mammal(organism, thumbnail, _abstract), creator, amountOfOrganism, location, "hunting", date, (HuntingEvent) event, (HuntingEquipment) equipment);
 	}
 	
 
@@ -76,5 +84,14 @@ public class HuntingActivity extends AbstractActivity{
 	public void setAmountOfOrganism(Integer _amountOfOrganism){
 		super.setAmountOfOrganism(_amountOfOrganism);
 	}
+	
+	public static List<HuntingActivity> all() throws Exception{
+        if (MorphiaObject.datastore != null)
+                return MorphiaObject.datastore
+                		.find(HuntingActivity.class).asList();
+        else
+        	return new ArrayList<HuntingActivity>();
+    }
+	
 
 }

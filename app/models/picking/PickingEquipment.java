@@ -1,5 +1,8 @@
 package models.picking;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.annotations.Entity;
@@ -41,6 +44,14 @@ public class PickingEquipment extends AbstractEquipment {
     			.equal(new ObjectId(id))
     			.get();
     	return equipment;
+    }
+    
+	public static List<PickingEquipment> all() throws Exception{
+        if (MorphiaObject.datastore != null)
+                return MorphiaObject.datastore
+                		.find(PickingEquipment.class).asList();
+        else
+        	return new ArrayList<PickingEquipment>();
     }
     
 

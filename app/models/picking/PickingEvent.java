@@ -1,6 +1,7 @@
 package models.picking;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
@@ -60,6 +61,14 @@ public class PickingEvent extends AbstractEvent {
     			.equal(new ObjectId(id))
     			.get();
     	return event;
+    }
+
+	public static List<PickingEvent> all() throws Exception{
+        if (MorphiaObject.datastore != null)
+                return MorphiaObject.datastore
+                		.find(PickingEvent.class).asList();
+        else
+        	return new ArrayList<PickingEvent>();
     }
     
 }

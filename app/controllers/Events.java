@@ -60,8 +60,19 @@ public class Events extends Controller {
    			return ok();
    		}
    		
-   		else if(request().accepts("application/json"))
-            return ok(Json.toJson(activityFound));
+   		else if(request().accepts("application/json")){
+   			try { 			
+   	    	  	if(sector.equals("hunting"))
+					return ok(Json.toJson(HuntingEvent.all()));
+		     	if(sector.equals("picking"))
+	   	     		return ok(Json.toJson(PickingEvent.all()));
+	   	     	if(sector.equals("fishing"))
+	   	     		return ok(Json.toJson(FishingEvent.all()));
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+   		}
    		
    		else if (request().accepts("application/rdf+xml")){
    			OutputStream out = new ByteArrayOutputStream();

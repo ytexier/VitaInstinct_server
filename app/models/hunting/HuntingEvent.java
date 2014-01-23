@@ -1,6 +1,7 @@
 package models.hunting;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
@@ -59,4 +60,13 @@ public class HuntingEvent extends AbstractEvent {
 	public Model accept(AgentWriter agent) {
 		return agent.spy(this);
 	}
+	
+	
+	public static List<HuntingEvent> all() throws Exception{
+        if (MorphiaObject.datastore != null)
+                return MorphiaObject.datastore
+                		.find(HuntingEvent.class).asList();
+        else
+        	return new ArrayList<HuntingEvent>();
+    }
 }
