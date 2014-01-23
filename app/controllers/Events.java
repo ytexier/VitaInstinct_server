@@ -7,6 +7,7 @@ import java.util.Date;
 
 import models.Location;
 import models.User;
+import models.factory.AbstractActivity;
 import models.factory.AbstractEvent;
 import models.factory.FactorySector;
 import models.fishing.FactoryFishingSector;
@@ -18,6 +19,9 @@ import models.picking.PickingEvent;
 
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
+
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.util.FileManager;
 
 import play.data.Form;
 import play.libs.Json;
@@ -32,6 +36,41 @@ import forms.Secured;
 public class Events extends Controller {
 
 	static Form<AddEventForm> eventForm = Form.form(AddEventForm.class);
+
+	public static String db_hunting_ev 	= "db/hunting/db_hunting_ev.rdf";
+	public static String db_fishing_ev 	= "db/fishing/db_fishing_ev.rdf";
+	public static String db_picking_ev 	= "db/fishing/db_picking_ev.rdf";
+	
+	public static Result events(String sector){
+		
+		String db = "";
+		
+    	AbstractActivity activityFound = null;
+    	
+    	if(sector.equals("hunting"))
+    		db=db_hunting_ev;
+     	if(sector.equals("picking"))
+     		db=db_picking_ev;
+     	if(sector.equals("fishing"))
+     		db=db_fishing_ev;
+     	
+		Model model_loaded = FileManager.get().loadModel(db);
+
+   		if(request().accepts("text/html")){
+   			return ok();
+   		}
+   		
+   		else if(request().accepts("application/json"))
+            return ok(Json.toJson(activityFound));
+   		
+   		else if (request().accepts("application/rdf+xml")){
+   			OutputStream out = new ByteArrayOutputStream();
+   			model_loaded.write(out, "RDF/XML-ABBREV");
+   			return ok(out.toString());
+   		}
+
+		return ok(Json.toJson(activityFound));
+	}
 	
 	public static Result get(String id, String sector){
 		
@@ -105,7 +144,6 @@ public class Events extends Controller {
 							MorphiaObject.datastore.createUpdateOperations(User.class).add("events", eventKey)
 							);
 
-			aEvent.accept(new AgentJena());
 			aEvent.accept(new AgentWriter());
 
 			return redirect(routes.Application.index());

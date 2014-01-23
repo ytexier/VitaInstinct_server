@@ -7,6 +7,7 @@ import java.util.Date;
 
 import models.Location;
 import models.User;
+import models.factory.AbstractActivity;
 import models.factory.AbstractEquipment;
 import models.factory.AbstractEvent;
 import models.factory.FactorySector;
@@ -23,6 +24,9 @@ import models.picking.PickingEvent;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.util.FileManager;
+
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -36,8 +40,46 @@ import forms.Secured;
 
 public class Equipments extends Controller {
 	
+	
+
+	public static String db_hunting_eq 	= "db/hunting/db_hunting_eq.rdf";
+	public static String db_fishing_eq 	= "db/fishing/db_fishing_eq.rdf";
+	public static String db_picking_eq 	= "db/fishing/db_picking_eq.rdf";
+
+	
+	
 	static Form<AddEquipmentForm> equipementForm = Form.form(AddEquipmentForm.class);
 	
+	public static Result equipments(String sector){
+		
+		String db = "";
+		
+    	AbstractActivity activityFound = null;
+    	
+    	if(sector.equals("hunting"))
+    		db=db_hunting_eq;
+     	if(sector.equals("picking"))
+     		db=db_picking_eq;
+     	if(sector.equals("fishing"))
+     		db=db_fishing_eq;
+     	
+		Model model_loaded = FileManager.get().loadModel(db);
+
+   		if(request().accepts("text/html")){
+   			return ok();
+   		}
+   		
+   		else if(request().accepts("application/json"))
+            return ok(Json.toJson(activityFound));
+   		
+   		else if (request().accepts("application/rdf+xml")){
+   			OutputStream out = new ByteArrayOutputStream();
+   			model_loaded.write(out, "RDF/XML-ABBREV");
+   			return ok(out.toString());
+   		}
+
+		return ok(Json.toJson(activityFound));
+	}
 	
 	public static Result get(String id, String sector){
 		

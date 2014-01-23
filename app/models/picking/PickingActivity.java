@@ -36,7 +36,7 @@ public class PickingActivity extends AbstractActivity{
 	}
 	
 	public PickingActivity(String organism, int amountOfOrganism, String date, Location location, Key<User> creator, AbstractEvent event, AbstractEquipment equipment){
-		super(new Plant(organism), creator, amountOfOrganism, location, "fishing", date, (PickingEvent) event, (PickingEquipment) equipment);
+		super(new Plant(organism), creator, amountOfOrganism, location, "picking", date, (PickingEvent) event, (PickingEquipment) equipment);
 	}
     
     public static PickingActivity findById(String id){

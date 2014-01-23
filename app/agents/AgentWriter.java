@@ -4,10 +4,13 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFFormat;
 
+import models.Amniote;
+import models.Location;
 import models.Organism;
 import models.User;
 import models.Vita;
@@ -83,20 +86,137 @@ public class AgentWriter extends AgentManager{
 
 	@Override
 	public Model spy(HuntingActivity activity) {
-		// TODO Auto-generated method stub
-		return null;
+
+		String 			idActivity = activity.getId().toString();	
+		User 			creator = User.findById(activity.getCreator().getId().toString());
+		Amniote 		organism = (Amniote) activity.getOrganism();
+		String 			label = "TODO";
+		HuntingEvent	event = activity.getEvent();
+		String 			idEvent = event.getId().toString();
+
+		//Resource Activity
+		Resource _activity = jenaModel.createResource(activity.getURI()+idActivity);
+	
+		//Organism : targetOrganism
+		Vita.VitaClass.Organism.createOntClass(jenaModel);
+		Individual _organism = jenaModel.createIndividual(organism.getURI(), Vita.VitaClass.Organism.getOntClass(jenaModel));
+		
+		//Location : location
+		Vita.VitaClass.Location.createOntClass(jenaModel);
+		Individual _location = jenaModel.createIndividual(Vita.getURL()+"location/"+idActivity, Vita.VitaClass.Location.getOntClass(jenaModel));		
+		_location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(activity.getLocation().getLatPos(),XSDDatatype.XSDstring));
+		_location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(activity.getLocation().getLongPos(),XSDDatatype.XSDstring));
+	
+		//List Equipment : equipments
+		Vita.VitaClass.Equipment.createOntClass(jenaModel);
+		ArrayList<Individual> _equipments = new ArrayList<Individual>();
+		//for(Equipment equipment : activity.getEquipments())
+		//	_equipments.add(jenaModel.createIndividual(equipment.getURI()+equipment.getId(), Vita.VitaClass.Equipment.getOntClass(jenaModel)));		
+		
+		//Event : isRelatedTo
+		Vita.VitaClass.Event.createOntClass(jenaModel);
+		Individual _event = jenaModel.createIndividual(event.getURI()+idEvent, Vita.VitaClass.Event.getOntClass(jenaModel));	
+		
+		//Add Properties
+		_activity.addProperty(RDFS.label, label);
+		_activity.addProperty(DC.creator, creator.getFullName());
+		_activity.addProperty(Vita.targetOrganism, _organism);
+		_activity.addProperty(Vita.location, _location);
+		for(Individual e : _equipments)
+			_activity.addProperty(Vita.equipments, e);
+		_activity.addProperty(Vita.isRelatedTo, _event);
+		
+		this.writeRDF(jenaModel, db_hunting_ac);	
+		
+		return jenaModel;
 	}
 
 	@Override
 	public Model spy(PickingActivity activity) {
-		// TODO Auto-generated method stub
-		return null;
+		String 			idActivity = activity.getId().toString();	
+		User 			creator = User.findById(activity.getCreator().getId().toString());
+		Amniote 		organism = (Amniote) activity.getOrganism();
+		String 			label = "TODO";
+		PickingEvent	event = activity.getEvent();
+
+		//Resource Activity
+		Resource _activity = jenaModel.createResource(activity.getURI()+idActivity);
+	
+		//Organism : targetOrganism
+		Vita.VitaClass.Organism.createOntClass(jenaModel);
+		Individual _organism = jenaModel.createIndividual(organism.getURI(), Vita.VitaClass.Organism.getOntClass(jenaModel));
+		
+		//Location : location
+		Vita.VitaClass.Location.createOntClass(jenaModel);
+		Individual _location = jenaModel.createIndividual(Vita.getURL()+"location/"+idActivity, Vita.VitaClass.Location.getOntClass(jenaModel));		
+		_location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(activity.getLocation().getLatPos(),XSDDatatype.XSDstring));
+		_location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(activity.getLocation().getLongPos(),XSDDatatype.XSDstring));
+	
+		//List Equipment : equipments
+		Vita.VitaClass.Equipment.createOntClass(jenaModel);
+		ArrayList<Individual> _equipments = new ArrayList<Individual>();
+		//for(Equipment equipment : activity.getEquipments())
+		//	_equipments.add(jenaModel.createIndividual(equipment.getURI()+equipment.getId(), Vita.VitaClass.Equipment.getOntClass(jenaModel)));		
+		
+		//Event : isRelatedTo
+		Vita.VitaClass.Event.createOntClass(jenaModel);
+		Individual _event = jenaModel.createIndividual(event.getURI(), Vita.VitaClass.Organism.getOntClass(jenaModel));	
+		
+		//Add Properties
+		_activity.addProperty(RDFS.label, label);
+		_activity.addProperty(DC.creator, creator.getFullName());
+		_activity.addProperty(Vita.targetOrganism, _organism);
+		_activity.addProperty(Vita.location, _location);
+		for(Individual e : _equipments)
+			_activity.addProperty(Vita.equipments, e);
+		_activity.addProperty(Vita.isRelatedTo, _event);
+		
+		this.writeRDF(jenaModel, db_picking_ac);	
+		return jenaModel;
 	}
 
 	@Override
 	public Model spy(FishingActivity activity) {
-		// TODO Auto-generated method stub
-		return null;
+		String 			idActivity = activity.getId().toString();	
+		User 			creator = User.findById(activity.getCreator().getId().toString());
+		Amniote 		organism = (Amniote) activity.getOrganism();
+		String 			label = "TODO";
+		FishingEvent	event = activity.getEvent();
+
+		//Resource Activity
+		Resource _activity = jenaModel.createResource(activity.getURI()+idActivity);
+	
+		//Organism : targetOrganism
+		Vita.VitaClass.Organism.createOntClass(jenaModel);
+		Individual _organism = jenaModel.createIndividual(organism.getURI(), Vita.VitaClass.Organism.getOntClass(jenaModel));
+		
+		//Location : location
+		Vita.VitaClass.Location.createOntClass(jenaModel);
+		Individual _location = jenaModel.createIndividual(Vita.getURL()+"location/"+idActivity, Vita.VitaClass.Location.getOntClass(jenaModel));		
+		_location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(activity.getLocation().getLatPos(),XSDDatatype.XSDstring));
+		_location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(activity.getLocation().getLongPos(),XSDDatatype.XSDstring));
+	
+		//List Equipment : equipments
+		Vita.VitaClass.Equipment.createOntClass(jenaModel);
+		ArrayList<Individual> _equipments = new ArrayList<Individual>();
+		//for(Equipment equipment : activity.getEquipments())
+		//	_equipments.add(jenaModel.createIndividual(equipment.getURI()+equipment.getId(), Vita.VitaClass.Equipment.getOntClass(jenaModel)));		
+		
+		//Event : isRelatedTo
+		Vita.VitaClass.Event.createOntClass(jenaModel);
+		Individual _event = jenaModel.createIndividual(event.getURI(), Vita.VitaClass.Organism.getOntClass(jenaModel));	
+		
+		//Add Properties
+		_activity.addProperty(RDFS.label, label);
+		_activity.addProperty(DC.creator, creator.getFullName());
+		_activity.addProperty(Vita.targetOrganism, _organism);
+		_activity.addProperty(Vita.location, _location);
+		for(Individual e : _equipments)
+			_activity.addProperty(Vita.equipments, e);
+		_activity.addProperty(Vita.isRelatedTo, _event);
+		
+		this.writeRDF(jenaModel, db_fishing_ac);	
+		return jenaModel;
 	}
 
 	@Override
@@ -166,22 +286,135 @@ public class AgentWriter extends AgentManager{
 
 	@Override
 	public Model spy(HuntingEvent event) {
-		String idEvent = event.getId().toString();
+		
+		String		idEvent = event.getId().toString();
+		User 		creator = User.findById(event.getCreator().getId().toString());
+		String 		label = event.getLabel();
+		String 		comment = event.getComment();
+		String 		date = event.getDate();
+		Location	location = event.getLocation();
+		
+		//ArrayList<HuntingActivity> 	activities = event.getActivities();
+		//ArrayList<Key<User>> 		registers = event.getRegisters();	
+		
+		//Resource Event
 		Resource _event = jenaModel.createResource(event.getURI()+idEvent);
+		
+		//Location
+		Vita.VitaClass.Location.createOntClass(jenaModel);
+		Individual _location = jenaModel.createIndividual(event.getURI()+"location/", Vita.VitaClass.Location.getOntClass(jenaModel));		
+		_location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(event.getLocation().getLatPos(),XSDDatatype.XSDstring));
+		_location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(event.getLocation().getLongPos(),XSDDatatype.XSDstring));
+	
+		//Activities
+		//ArrayList<Individual> _activities = new ArrayList<Individual>();
+		//for(HuntingActivity activity : activities)
+		//	_activities.add(jenaModel.createIndividual(Vita.getURL()+"activity/"+activity.getId().toString(), Vita.VitaClass.Location.getOntClass(jenaModel)));		
+		
+		//Registers
+		//ArrayList<Individual> _registers = new ArrayList<Individual>();
+		//for(Key<User> register : registers)
+		//	_registers.add(jenaModel.createIndividual(Vita.getURL()+"user/"+register.getId().toString(), Vita.VitaClass.Location.getOntClass(jenaModel)));		
+		
+		//Add properties
+		_event.addProperty(Vita.location, _location);
+		_event.addProperty(RDFS.label, label);
+		_event.addProperty(DC.creator, creator.getFullName());
+		_event.addProperty(RDFS.comment, comment);	
+		//for(Individual e : _activities)
+		//	_event.addProperty(Vita.activities, e);
+		//for(Individual r : _registers)
+		//	_event.addProperty(Vita.registers, r);
 		this.writeRDF(jenaModel, db_hunting_ev);
 		return jenaModel;
 	}
 
 	@Override
 	public Model spy(PickingEvent event) {
-		// TODO Auto-generated method stub
-		return null;
+		String		idEvent = event.getId().toString();
+		User 		creator = User.findById(event.getCreator().getId().toString());
+		String 		label = event.getLabel();
+		String 		comment = event.getComment();
+		String 		date = event.getDate();
+		Location	location = event.getLocation();
+		
+		//ArrayList<HuntingActivity> 	activities = event.getActivities();
+		//ArrayList<Key<User>> 		registers = event.getRegisters();	
+		
+		//Resource Event
+		Resource _event = jenaModel.createResource(event.getURI()+idEvent);
+		
+		//Location
+		Vita.VitaClass.Location.createOntClass(jenaModel);
+		Individual _location = jenaModel.createIndividual(event.getURI()+"location/", Vita.VitaClass.Location.getOntClass(jenaModel));		
+		_location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(event.getLocation().getLatPos(),XSDDatatype.XSDstring));
+		_location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(event.getLocation().getLongPos(),XSDDatatype.XSDstring));
+	
+		//Activities
+		//ArrayList<Individual> _activities = new ArrayList<Individual>();
+		//for(HuntingActivity activity : activities)
+		//	_activities.add(jenaModel.createIndividual(Vita.getURL()+"activity/"+activity.getId().toString(), Vita.VitaClass.Location.getOntClass(jenaModel)));		
+		
+		//Registers
+		//ArrayList<Individual> _registers = new ArrayList<Individual>();
+		//for(Key<User> register : registers)
+		//	_registers.add(jenaModel.createIndividual(Vita.getURL()+"user/"+register.getId().toString(), Vita.VitaClass.Location.getOntClass(jenaModel)));		
+		
+		//Add properties
+		_event.addProperty(Vita.location, _location);
+		_event.addProperty(RDFS.label, label);
+		_event.addProperty(DC.creator, creator.getFullName());
+		_event.addProperty(RDFS.comment, comment);	
+		//for(Individual e : _activities)
+		//	_event.addProperty(Vita.activities, e);
+		//for(Individual r : _registers)
+		//	_event.addProperty(Vita.registers, r);
+		this.writeRDF(jenaModel, db_picking_ev);
+		return jenaModel;
 	}
 
 	@Override
 	public Model spy(FishingEvent event) {
-		// TODO Auto-generated method stub
-		return null;
+		String		idEvent = event.getId().toString();
+		User 		creator = User.findById(event.getCreator().getId().toString());
+		String 		label = event.getLabel();
+		String 		comment = event.getComment();
+		String 		date = event.getDate();
+		Location	location = event.getLocation();
+		
+		//ArrayList<FishingActivity> 	activities = event.getActivities();
+		//ArrayList<Key<User>> 		registers = event.getRegisters();	
+		
+		//Resource Event
+		Resource _event = jenaModel.createResource(event.getURI()+idEvent);
+		
+		//Location
+		Vita.VitaClass.Location.createOntClass(jenaModel);
+		Individual _location = jenaModel.createIndividual(event.getURI()+"location/", Vita.VitaClass.Location.getOntClass(jenaModel));		
+		_location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(event.getLocation().getLatPos(),XSDDatatype.XSDstring));
+		_location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(event.getLocation().getLongPos(),XSDDatatype.XSDstring));
+	
+		//Activities
+		//ArrayList<Individual> _activities = new ArrayList<Individual>();
+		//for(HuntingActivity activity : activities)
+		//	_activities.add(jenaModel.createIndividual(Vita.getURL()+"activity/"+activity.getId().toString(), Vita.VitaClass.Location.getOntClass(jenaModel)));		
+		
+		//Registers
+		//ArrayList<Individual> _registers = new ArrayList<Individual>();
+		//for(Key<User> register : registers)
+		//	_registers.add(jenaModel.createIndividual(Vita.getURL()+"user/"+register.getId().toString(), Vita.VitaClass.Location.getOntClass(jenaModel)));		
+		
+		//Add properties
+		_event.addProperty(Vita.location, _location);
+		_event.addProperty(RDFS.label, label);
+		_event.addProperty(DC.creator, creator.getFullName());
+		_event.addProperty(RDFS.comment, comment);	
+		//for(Individual e : _activities)
+		//	_event.addProperty(Vita.activities, e);
+		//for(Individual r : _registers)
+		//	_event.addProperty(Vita.registers, r);
+		this.writeRDF(jenaModel, db_fishing_ev);
+		return jenaModel;
 	}
 
 	@Override

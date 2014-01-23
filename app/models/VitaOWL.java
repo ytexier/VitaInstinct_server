@@ -23,32 +23,28 @@ public class VitaOWL {
 	/**
 	 * CLASSES DEF
 	 */	
-	OntClass ocDataset;
 	OntClass ocActivity;
 	OntClass ocUser;
 	OntClass ocOrganism;
 	OntClass ocEquipment;
 	OntClass ocEvent;
 	OntClass ocLocation;
-	OntClass ocShowcase;
-	OntClass ocDescription;
-	OntClass ocPicture;
-	OntClass ocSector;
+	
 	
 	/**
 	 * PROPERTIES DEF
 	 */	
-	ObjectProperty activity;
-	ObjectProperty sector;
-	ObjectProperty creator;
+	ObjectProperty activities;
+	ObjectProperty events;
+	ObjectProperty equipments;
+	ObjectProperty registers;
+	ObjectProperty owner;
 	ObjectProperty targetOrganism;
 	ObjectProperty location;
-	ObjectProperty equipments;
-	ObjectProperty isRelatedToEvent;
-	ObjectProperty registrers;
-	ObjectProperty value;
+	ObjectProperty isRelatedTo;
 	ObjectProperty latitude;
 	ObjectProperty longitude;
+	ObjectProperty sector;
 
 	public VitaOWL() {
 			omVita = createModel();
@@ -63,14 +59,12 @@ public class VitaOWL {
 	}
 
 	public void addClasses(OntModel om) {
-		ocDataset		= om.createClass( Vita.getURI() + "Dataset" 	);
 		ocActivity 		= om.createClass( Vita.getURI() + "Activity" 	);
 		ocUser			= om.createClass( Vita.getURI() + "User"		);
 		ocOrganism 		= om.createClass( Vita.getURI() + "Organism" 	);
 		ocEquipment 	= om.createClass( Vita.getURI() + "Equipment" );
 		ocEvent 		= om.createClass( Vita.getURI() + "Event" 	);
 		ocLocation 		= om.createClass( Vita.getURI() + "Location" 	);
-		ocSector 		= om.createClass( Vita.getURI() + "Sector" 	);
 	}
 
 	public void addProperties(OntModel om) {
@@ -81,17 +75,21 @@ public class VitaOWL {
 	     * Object properties
 	     */
 		
-		activity = om.createObjectProperty(Vita.NS +"activity");
-		activity.addRange(ocActivity);
-		activity.addDomain(ocDataset);
+		activities = om.createObjectProperty(Vita.NS +"activities");
+		activities.addRange(ocActivity);
+		activities.addDomain(ocActivity);
 
-		sector = om.createObjectProperty(Vita.NS +"sector");
-		sector.addRange(ocSector);
-		sector.addDomain(ocActivity);
+		events = om.createObjectProperty(Vita.NS +"events");
+		events.addRange(ocEvent);
+		events.addDomain(ocActivity);
 		
-		creator = om.createObjectProperty(Vita.NS + "creator" );
-		creator.addRange(ocUser);
-		creator.addDomain(ocActivity);
+		equipments = om.createObjectProperty(Vita.NS + "equipment" );
+		equipments.addRange(ocEquipment);
+		equipments.addDomain(ocActivity);
+		
+		registers = om.createObjectProperty(Vita.NS + "registers" );
+		registers.addRange(ocUser);
+		registers.addDomain(ocEvent);
 
 		targetOrganism = om.createObjectProperty(Vita.NS + "targetOrganism" );
 		targetOrganism.addRange(ocOrganism);
@@ -101,42 +99,23 @@ public class VitaOWL {
 		location.addRange(ocLocation);
 		location.addDomain(ocActivity);
 			
-		equipments = om.createObjectProperty(Vita.NS + "equipment" );
-		equipments.addRange(ocEquipment);
-		equipments.addDomain(ocActivity);
 			
-		isRelatedToEvent = om.createObjectProperty(Vita.NS + "isRelatedToEvent" );
-		isRelatedToEvent.addRange(ocEvent);
-		isRelatedToEvent.addDomain(ocActivity);
+		owner = om.createObjectProperty(Vita.NS + "owner" );
+		owner.addRange(ocUser);
+		owner.addDomain(ocEquipment);
 		
-		registrers = om.createObjectProperty(Vita.NS + "registrers" );
-		registrers.addRange(ocUser);
-		registrers.addDomain(ocEvent);
+		isRelatedTo = om.createObjectProperty(Vita.NS + "registrers" );
+		isRelatedTo.addRange(ocEvent);
+		isRelatedTo.addDomain(ocActivity);
 		
 	    /**
 	     * Data properties
 	     */	
 		
-		value = om.createObjectProperty(Vita.NS + "value" );
-		value.addIsDefinedBy(RDFS.Literal);
-		value.addRange(ocSector);
-		value.addDomain(ocSector);
-		
-		value = om.createObjectProperty(Vita.NS + "value" );
-		value.addIsDefinedBy(RDFS.Literal);
-		value.addRange(ocEquipment);
-		value.addDomain(ocEquipment);
-		
-		value = om.createObjectProperty(Vita.NS + "value" );
-		value.addIsDefinedBy(RDFS.Literal);
-		value.addRange(ocEvent);
-		value.addDomain(ocEvent);
-		
-		
-		value = om.createObjectProperty(Vita.NS + "description" );
-		value.addIsDefinedBy(RDFS.Literal);
-		value.addRange(ocEvent);
-		value.addDomain(ocEvent);
+		sector = om.createObjectProperty(Vita.NS + "sector" );
+		sector.addIsDefinedBy(RDFS.Literal);
+		sector.addRange(ocEvent);
+		sector.addDomain(ocEvent);
 		
 		
 		latitude = om.createObjectProperty(Vita.NS + "latitude" );
@@ -207,19 +186,5 @@ public class VitaOWL {
 		classes.addAll(properties);
 		return classes.toString();
 	}
-/*	
-	public void write(OutputStream output) {
-        if (mediaType.equals(MediaType.APPLICATION_RDF_XML))
-            //jenaModel.write(output,"RDF/XML");  //this is faster
-            jenaModel.write(output,"RDF/XML-ABBREV");   //this is more readable 
-        else if (mediaType.equals(MediaType.APPLICATION_RDF_TURTLE))
-            jenaModel.write(output,"TURTLE");
-        else if (mediaType.equals(MediaType.TEXT_RDF_N3))
-            jenaModel.write(output,"N3");
-        else if (mediaType.equals(MediaType.TEXT_RDF_NTRIPLES))
-            jenaModel.write(output,"N-TRIPLE");    
-        else
-            jenaModel.write(output,"RDF/XML-ABBREV");    
-	};
-	*/
 }
+

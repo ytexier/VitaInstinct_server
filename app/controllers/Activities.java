@@ -33,7 +33,11 @@ import models.picking.PickingEvent;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.util.FileManager;
+
 import agents.AgentJena;
+import agents.AgentWriter;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -45,6 +49,11 @@ import forms.Secured;
 
 public class Activities extends Controller {
 	
+
+
+	public static String db_hunting_ac 	= "db/hunting/db_hunting_ac.rdf";
+	public static String db_fishing_ac 	= "db/fishing/db_fishing_ac";
+	public static String db_picking_ac 	= "db/fishing/db_picking_ac.rdf";
 
 	
 	static Form<AbstractActivityForm> abstractActivityForm = Form.form(AbstractActivityForm.class);
@@ -75,8 +84,42 @@ public class Activities extends Controller {
    			return ok(out.toString());
    		}
 
-		return ok(Json.toJson(activityFound.getCreator()));
+		return ok(Json.toJson(activityFound));
 	}
+	
+	
+
+	public static Result activities(String sector){
+		
+		String db = "";
+		
+    	AbstractActivity activityFound = null;
+    	
+    	if(sector.equals("hunting"))
+    		db=db_hunting_ac;
+     	if(sector.equals("picking"))
+     		db=db_picking_ac;
+     	if(sector.equals("fishing"))
+     		db=db_fishing_ac;
+     	
+		Model model_loaded = FileManager.get().loadModel(db);
+
+   		if(request().accepts("text/html")){
+   			return ok();
+   		}
+   		
+   		else if(request().accepts("application/json"))
+            return ok(Json.toJson(activityFound));
+   		
+   		else if (request().accepts("application/rdf+xml")){
+   			OutputStream out = new ByteArrayOutputStream();
+   			model_loaded.write(out, "RDF/XML-ABBREV");
+   			return ok(out.toString());
+   		}
+
+		return ok(Json.toJson(activityFound));
+	}
+
 
 	
 	
@@ -199,7 +242,7 @@ public class Activities extends Controller {
 						);
 				
 
-				aActivity.accept(new AgentJena());
+				aActivity.accept(new AgentWriter());
 				
 				return redirect(routes.Application.index());
         }

@@ -13,6 +13,7 @@ import org.mongodb.morphia.Key;
 import com.hp.hpl.jena.vocabulary.OWL;
 import com.hp.hpl.jena.vocabulary.DC;
 import com.hp.hpl.jena.vocabulary.RDFS;
+import com.hp.hpl.jena.vocabulary.VCARD;
 import com.hp.hpl.jena.datatypes.xsd.XSDDatatype;
 import com.hp.hpl.jena.ontology.Individual;
 import com.hp.hpl.jena.ontology.OntModel;
@@ -69,16 +70,13 @@ public class AgentJena extends AgentManager{
 	
 	@Override
 	public Model spy(User user) {
-		/*
-		model = ModelFactory.createDefaultModel();
-		
-		Vita.rscUser = model.createResource(user.getURI())
+		String idUser = user.getId().toString();
+		Resource rsc = jenaModel.createResource(user.getURI()+idUser)
 		    .addProperty(VCARD.FN,user.getFullName())
 			.addProperty(VCARD.Given,user.getGivenName())
 			.addProperty(VCARD.Family,user.getFamilyName())
 			.addProperty(VCARD.NICKNAME, user.getNickName())
 			.addProperty(VCARD.EMAIL, user.getEmail());
-		*/
 		return jenaModel;
 	}
 
@@ -137,11 +135,87 @@ public class AgentJena extends AgentManager{
 
 	@Override
 	public Model spy(PickingActivity activity) {
+		String 			idActivity = activity.getId().toString();	
+		User 			creator = User.findById(activity.getCreator().getId().toString());
+		Amniote 		organism = (Amniote) activity.getOrganism();
+		String 			label = "TODO";
+		PickingEvent	event = activity.getEvent();
+
+		//Resource Activity
+		Resource _activity = jenaModel.createResource(activity.getURI()+idActivity);
+	
+		//Organism : targetOrganism
+		Vita.VitaClass.Organism.createOntClass(jenaModel);
+		Individual _organism = jenaModel.createIndividual(organism.getURI(), Vita.VitaClass.Organism.getOntClass(jenaModel));
+		
+		//Location : location
+		Vita.VitaClass.Location.createOntClass(jenaModel);
+		Individual _location = jenaModel.createIndividual(Vita.getURL()+"location/"+idActivity, Vita.VitaClass.Location.getOntClass(jenaModel));		
+		_location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(activity.getLocation().getLatPos(),XSDDatatype.XSDstring));
+		_location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(activity.getLocation().getLongPos(),XSDDatatype.XSDstring));
+	
+		//List Equipment : equipments
+		Vita.VitaClass.Equipment.createOntClass(jenaModel);
+		ArrayList<Individual> _equipments = new ArrayList<Individual>();
+		//for(Equipment equipment : activity.getEquipments())
+		//	_equipments.add(jenaModel.createIndividual(equipment.getURI()+equipment.getId(), Vita.VitaClass.Equipment.getOntClass(jenaModel)));		
+		
+		//Event : isRelatedTo
+		Vita.VitaClass.Event.createOntClass(jenaModel);
+		Individual _event = jenaModel.createIndividual(event.getURI(), Vita.VitaClass.Organism.getOntClass(jenaModel));	
+		
+		//Add Properties
+		_activity.addProperty(RDFS.label, label);
+		_activity.addProperty(DC.creator, creator.getFullName());
+		_activity.addProperty(Vita.targetOrganism, _organism);
+		_activity.addProperty(Vita.location, _location);
+		for(Individual e : _equipments)
+			_activity.addProperty(Vita.equipments, e);
+		_activity.addProperty(Vita.isRelatedTo, _event);
+		
 		return jenaModel;
 	}
 
 	@Override
 	public Model spy(FishingActivity activity) {
+		String 			idActivity = activity.getId().toString();	
+		User 			creator = User.findById(activity.getCreator().getId().toString());
+		Amniote 		organism = (Amniote) activity.getOrganism();
+		String 			label = "TODO";
+		FishingEvent	event = activity.getEvent();
+
+		//Resource Activity
+		Resource _activity = jenaModel.createResource(activity.getURI()+idActivity);
+	
+		//Organism : targetOrganism
+		Vita.VitaClass.Organism.createOntClass(jenaModel);
+		Individual _organism = jenaModel.createIndividual(organism.getURI(), Vita.VitaClass.Organism.getOntClass(jenaModel));
+		
+		//Location : location
+		Vita.VitaClass.Location.createOntClass(jenaModel);
+		Individual _location = jenaModel.createIndividual(Vita.getURL()+"location/"+idActivity, Vita.VitaClass.Location.getOntClass(jenaModel));		
+		_location.addLiteral(Vita.latitude,jenaModel.createTypedLiteral(activity.getLocation().getLatPos(),XSDDatatype.XSDstring));
+		_location.addLiteral(Vita.longitude,jenaModel.createTypedLiteral(activity.getLocation().getLongPos(),XSDDatatype.XSDstring));
+	
+		//List Equipment : equipments
+		Vita.VitaClass.Equipment.createOntClass(jenaModel);
+		ArrayList<Individual> _equipments = new ArrayList<Individual>();
+		//for(Equipment equipment : activity.getEquipments())
+		//	_equipments.add(jenaModel.createIndividual(equipment.getURI()+equipment.getId(), Vita.VitaClass.Equipment.getOntClass(jenaModel)));		
+		
+		//Event : isRelatedTo
+		Vita.VitaClass.Event.createOntClass(jenaModel);
+		Individual _event = jenaModel.createIndividual(event.getURI(), Vita.VitaClass.Organism.getOntClass(jenaModel));	
+		
+		//Add Properties
+		_activity.addProperty(RDFS.label, label);
+		_activity.addProperty(DC.creator, creator.getFullName());
+		_activity.addProperty(Vita.targetOrganism, _organism);
+		_activity.addProperty(Vita.location, _location);
+		for(Individual e : _equipments)
+			_activity.addProperty(Vita.equipments, e);
+		_activity.addProperty(Vita.isRelatedTo, _event);
+		
 		return jenaModel;
 	}
 	

@@ -52,8 +52,22 @@ GET		/sector/hunting/activity/:id			controllers.Activities.get(id: String, secto
 GET		/sector/fishing/activity/:id			controllers.Activities.get(id: String, sector = "fishing")
 GET		/sector/picking/activity/:id			controllers.Activities.get(id: String, sector = "picking")
 POST	/sector/hunting/activity/:id/delete		controllers.Activities.delete(id: String, sector = "hunting")
-POST	/sector/hunting/activity/:id/delete		controllers.Activities.delete(id: String, sector = "fishing")
-POST	/sector/hunting/activity/:id/delete		controllers.Activities.delete(id: String, sector = "picking")
+POST	/sector/fishing/activity/:id/delete		controllers.Activities.delete(id: String, sector = "fishing")
+POST	/sector/picking/activity/:id/delete		controllers.Activities.delete(id: String, sector = "picking")
+
+GET 	/sector/hunting/activities				controllers.Activities.activities(sector = "hunting")
+GET 	/sector/fishing/activities				controllers.Activities.activities(sector = "fishing")
+GET 	/sector/picking/activities				controllers.Activities.activities(sector = "picking")
+
+GET 	/sector/hunting/equipments				controllers.Equipments.equipments(sector = "hunting")
+GET 	/sector/fishing/equipments				controllers.Equipments.equipments(sector = "fishing")
+GET 	/sector/picking/equipments				controllers.Equipments.equipments(sector = "picking")
+
+GET 	/sector/hunting/events					controllers.Events.events(sector = "hunting")
+GET 	/sector/fishing/events					controllers.Events.events(sector = "fishing")
+GET 	/sector/picking/events					controllers.Events.events(sector = "picking")
+
+GET 	/users									controllers.Users.users()
 
 #
 # EVENT

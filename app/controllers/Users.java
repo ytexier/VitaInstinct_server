@@ -1,5 +1,7 @@
 package controllers;
 
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -7,11 +9,18 @@ import java.util.List;
 import org.mongodb.morphia.Key;
 import org.mongodb.morphia.query.UpdateResults;
 
+import com.hp.hpl.jena.rdf.model.Model;
+import com.hp.hpl.jena.util.FileManager;
+
+import agents.AgentJena;
 import agents.AgentWriter;
 import forms.AddFriendForm;
 import forms.Secured;
 import models.User;
 import models.factory.AbstractActivity;
+import models.fishing.FishingActivity;
+import models.hunting.HuntingActivity;
+import models.picking.PickingActivity;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -20,6 +29,8 @@ import play.mvc.Security;
 
 
 public class Users extends Controller{
+	
+	public static String db_users 		= "db/user/db_users.rdf";
 	
 	static Form<User> userForm = Form.form(User.class);
 	static Form<AddFriendForm> addFriendFrom = Form.form(AddFriendForm.class);
@@ -88,22 +99,49 @@ public class Users extends Controller{
     
      
     public static Result get(String id){
-    	
-        User user = User.findById(id);
-        
+		
+    	User user = User.findById(id);
+
    		if(request().accepts("text/html")){
-   			//TODO
+   			return ok();
    		}
    		
    		else if(request().accepts("application/json"))
             return ok(Json.toJson(user));
    		
    		else if (request().accepts("application/rdf+xml")){
-   			//TODO
+   			OutputStream out = new ByteArrayOutputStream();
+   			user.accept(new AgentJena()).write(out, "RDF/XML-ABBREV");
+   			return ok(out.toString());
    		}
-   		
+
 		return ok(Json.toJson(user));
     }
+    
+	public static Result users(){
+		
+		String db = db_users;
+		
+    	AbstractActivity activityFound = null;
+
+    	Model model_loaded = FileManager.get().loadModel(db);
+
+   		if(request().accepts("text/html")){
+   			return ok();
+   		}
+   		
+   		else if(request().accepts("application/json"))
+            return ok(Json.toJson(activityFound));
+   		
+   		else if (request().accepts("application/rdf+xml")){
+   			OutputStream out = new ByteArrayOutputStream();
+   			model_loaded.write(out, "RDF/XML-ABBREV");
+   			return ok(out.toString());
+   		}
+
+		return ok(Json.toJson(activityFound));
+	}
+    
     
     
     public static Result timeLine(String id) throws Exception{
