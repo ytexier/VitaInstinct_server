@@ -1,3 +1,16 @@
 <rdf:RDF
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:vita="http://localhost:9000/rdf-syntax-ns#">
+  <rdf:Description rdf:about="http://localhost:9000/sector/hunting/equipment/52e127b03e2582459060ccc2">
+    <vita:owner>http://localhost:9000/user/52e126e73e2582459060ccc1</vita:owner>
+    <rdfs:comment>Balles explosives</rdfs:comment>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:label>Uzi Model B</rdfs:label>
+    <vita:sector rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >hunting</vita:sector>
+  </rdf:Description>
 </rdf:RDF>
