@@ -83,7 +83,6 @@
         $.getJSON("/users/"+user_id+"/activities", function(data) {
            console.log(data);
             for(var i in data) {
-        		alert("ok");
                 addViewerMarker(data[i]);
             }
         });
