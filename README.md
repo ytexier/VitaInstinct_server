@@ -1,4 +1,4 @@
-Projet : Web sémantique
+**Projet : Web sémantique**
 
 ================================================
 
