@@ -1,8 +1,11 @@
 package agents;
 
-
 import com.hp.hpl.jena.rdf.model.Model;
-
+import models.Amniote;
+import models.Animal;
+import models.Bird;
+import models.Fish;
+import models.Mammal;
 import models.Organism;
 import models.User;
 import models.fishing.FishingAccessory;
@@ -20,7 +23,6 @@ import models.picking.PickingEvent;
 
 public abstract class AgentManager {
 	
-	public abstract Model spy(User user);
 	
 	public abstract Model spy(HuntingActivity activity);
 	public abstract Model spy(PickingActivity activity);
@@ -33,6 +35,8 @@ public abstract class AgentManager {
 	public abstract Model spy(HuntingEvent event);
 	public abstract Model spy(PickingEvent event);
 	public abstract Model spy(FishingEvent event);
+	
+	public abstract Model spy(User user);
 	
 	//next time
 	//public abstract void spy(HuntingAccessory huntingAccessory);

@@ -10,20 +10,36 @@
   <owl:Class rdf:about="http://localhost:9000/rdf-syntax-ns#Equipment"/>
   <owl:Class rdf:about="http://localhost:9000/rdf-syntax-ns#Organism"/>
   <rdf:Description rdf:about="http://localhost:9000/sector/hunting/activity/52e1286e3e2582459060ccc3">
-    <vita:isRelatedTo>
-      <vita:Event rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/52e127a6b924f76983d95f25"/>
-    </vita:isRelatedTo>
-    <vita:location>
-      <vita:Location rdf:about="http://localhost:9000/location/52e1286e3e2582459060ccc3">
-        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >2.9442786891013384</vita:longitude>
-        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
-        >43.983921991727605</vita:latitude>
-      </vita:Location>
-    </vita:location>
+    <rdfs:label>TODO</rdfs:label>
+    <dc:creator>yohan texier</dc:creator>
     <vita:targetOrganism>
       <vita:Organism rdf:about="http://localhost:9000/organism/"/>
     </vita:targetOrganism>
+    <vita:location>
+      <vita:Location rdf:about="http://localhost:9000/location/52e1286e3e2582459060ccc3">
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >43.983921991727605</vita:latitude>
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >2.9442786891013384</vita:longitude>
+      </vita:Location>
+    </vita:location>
+    <vita:isRelatedTo>
+      <vita:Event rdf:about="http://vita-instinct.herokuapp.com/sector/hunting/event/52e127a6b924f76983d95f25"/>
+    </vita:isRelatedTo>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost:9000/sector/hunting/activity/52ed739c0e913fd669127050">
+    <vita:isRelatedTo>
+      <vita:Event rdf:about="http://localhost:9000/sector/hunting/event/52ed73610e913fd66912704e"/>
+    </vita:isRelatedTo>
+    <vita:location>
+      <vita:Location rdf:about="http://localhost:9000/location/52ed739c0e913fd669127050">
+        <vita:longitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >3.2779884058982134</vita:longitude>
+        <vita:latitude rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+        >43.96613297748067</vita:latitude>
+      </vita:Location>
+    </vita:location>
+    <vita:targetOrganism rdf:resource="http://localhost:9000/organism/"/>
     <dc:creator>yohan texier</dc:creator>
     <rdfs:label>TODO</rdfs:label>
   </rdf:Description>

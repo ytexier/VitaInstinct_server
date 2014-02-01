@@ -5,12 +5,20 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:vita="http://localhost:9000/rdf-syntax-ns#">
-  <rdf:Description rdf:about="http://localhost:9000/sector/hunting/equipment/52e127b03e2582459060ccc2">
-    <vita:owner>http://localhost:9000/user/52e126e73e2582459060ccc1</vita:owner>
+  <rdf:Description rdf:about="http://localhost:9000/sector/hunting/equipment/52ed73760e913fd66912704f">
+    <vita:owner>http://localhost:9000/user/52ed73250e913fd66912704c</vita:owner>
     <rdfs:comment>Balles explosives</rdfs:comment>
     <dc:creator>yohan texier</dc:creator>
     <rdfs:label>Uzi Model B</rdfs:label>
     <vita:sector rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
     >hunting</vita:sector>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost:9000/sector/hunting/equipment/52e127b03e2582459060ccc2">
+    <vita:sector rdf:datatype="http://www.w3.org/2001/XMLSchema#string"
+    >hunting</vita:sector>
+    <rdfs:label>Uzi Model B</rdfs:label>
+    <dc:creator>yohan texier</dc:creator>
+    <rdfs:comment>Balles explosives</rdfs:comment>
+    <vita:owner>http://localhost:9000/user/52e126e73e2582459060ccc1</vita:owner>
   </rdf:Description>
 </rdf:RDF>

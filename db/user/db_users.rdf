@@ -6,6 +6,20 @@
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
     xmlns:vita="http://localhost:9000/rdf-syntax-ns#">
+  <rdf:Description rdf:about="http://localhost:9000/user/52ed73250e913fd66912704c">
+    <vcard:FN>yohan texier</vcard:FN>
+    <vcard:Given>yohan</vcard:Given>
+    <vcard:Family>texier</vcard:Family>
+    <vcard:NICKNAME>ytexier</vcard:NICKNAME>
+    <vcard:EMAIL>yohan.texier@gmail.com</vcard:EMAIL>
+  </rdf:Description>
+  <rdf:Description rdf:about="http://localhost:9000/user/52ed73330e913fd66912704d">
+    <vcard:EMAIL>dimitri.varet@gmail.com</vcard:EMAIL>
+    <vcard:NICKNAME>luckybanana</vcard:NICKNAME>
+    <vcard:Family>varet</vcard:Family>
+    <vcard:Given>dimitri</vcard:Given>
+    <vcard:FN>dimitri varet</vcard:FN>
+  </rdf:Description>
   <rdf:Description rdf:about="http://localhost:9000/user/52e126e73e2582459060ccc1">
     <vcard:EMAIL>yohan.texier@gmail.com</vcard:EMAIL>
     <vcard:NICKNAME>das</vcard:NICKNAME>

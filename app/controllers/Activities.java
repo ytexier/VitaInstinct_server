@@ -28,12 +28,15 @@ import models.picking.PickingActivity;
 import models.picking.PickingEquipment;
 import models.picking.PickingEvent;
 
+import org.bson.types.ObjectId;
 import org.mongodb.morphia.Key;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.UpdateOperations;
 import org.mongodb.morphia.query.UpdateResults;
-
 import com.hp.hpl.jena.rdf.model.Model;
 import com.hp.hpl.jena.util.FileManager;
-
+import play.Logger;
+import play.data.DynamicForm;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -178,10 +181,8 @@ public class Activities extends Controller {
 				);
         if (activityFound != null)
         	MorphiaObject.datastore.delete(activityFound);
-
         return redirect(routes.Application.index());
-    }
-    
+	}
 	
 	@Security.Authenticated(Secured.class)
 	public static Result newActivity() throws Exception{
@@ -265,66 +266,5 @@ public class Activities extends Controller {
 				return redirect(routes.Application.index());
         }
 	}
-/*
-	public static Result add(String user_id) throws Exception{
-        
-		Form<AbstractActivityForm> filledForm = abstractActivityForm.bindFromRequest();
-        
-        if(filledForm.hasErrors()) {
-                return badRequest("newActivity : filledForm.hasErrors()");
-        }
-        else {
-        	
-	        	SimpleDateFormat dateFormatter = new SimpleDateFormat("dd-MM-yyyy");
-	        	
-				String sector = filledForm.get().sector;
-				Date date =	filledForm.get().date;
-				int amountOfOrganism = Integer.parseInt(filledForm.get().amountOfOrganism);
-				String specie = filledForm.get().organism;
-				String sex = filledForm.get().sex;
-				String activityEnding = filledForm.get().activityEnding;
-				
-				Location location = new Location(filledForm.get().longitude, filledForm.get().latitude);
-				
-				FactorySector factorySector = null;
-				AbstractActivity aActivity = null;
-				
-				if(sector.equals("hunting")){
-					factorySector = new FactoryHuntingSector();
-				}else if(sector.equals("fishing")){
-					factorySector = new FactoryFishingSector();
-				}else if(sector.equals("picking")){
-					factorySector = new FactoryPickingSector();
-				}
-				
-				String formattedDate = dateFormatter.format(date);
-				User user = User.findByEmail(request().username());
-				Key<User> creatorKey = MorphiaObject.datastore.getKey(user);
-				
-				aActivity = factorySector.createActivity(specie, amountOfOrganism, formattedDate, location, creatorKey);
-
-				
-				if(Sex.contains(sex))
-					aActivity.getOrganism().setSex(Enum.valueOf(Sex.class, sex));
-				
-				if(ActivityEnding.contains(activityEnding))
-						aActivity.setActivityEnding(Enum.valueOf(ActivityEnding.class, activityEnding));
-
-				
-				Key<AbstractActivity> activityKey = MorphiaObject.datastore.save(aActivity);
-
-				UpdateResults<User> res =
-						MorphiaObject.datastore.update(
-								user,
-								MorphiaObject.datastore.createUpdateOperations(User.class).add("activities", activityKey)
-						);
-				
-				
-				
-				
-				return ok(Json.toJson(aActivity));
-		} 
-		
-	}*/
 	
 }

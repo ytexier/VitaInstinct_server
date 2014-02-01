@@ -17,7 +17,6 @@ POST 	/addFriend                 	controllers.Users.addFriend()
 GET			/ontology						controllers.VitaCtrl.make()
 GET			/jena/:organism					controllers.VitaCtrl.test(organism: String)
 
-
 # Application
 
 GET			/signup							controllers.Application.signup()

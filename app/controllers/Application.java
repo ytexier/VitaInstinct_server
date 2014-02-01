@@ -61,7 +61,11 @@ public class Application extends Controller {
     public static Result authenticate() {
 		Form<LoginForm> filledForm = loginForm.bindFromRequest();
 		if (filledForm.hasErrors()) {
-			return badRequest(login.render(filledForm));
+			if(request().accepts("text/html")) {
+				return badRequest(login.render(filledForm));
+			}else{
+				return ok("Wrong user or password");
+			}
 		}
 		else {
 			if(request().accepts("text/html")) {

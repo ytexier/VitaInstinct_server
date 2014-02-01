@@ -1,0 +1,16 @@
+@(activities	: List[models.factory.AbstractActivity])
+@import helper._
+
+  <h1>@activities.size() activities(s)</h1>
+  
+  <ul>
+    @for(activity <- activities) {
+
+		<li class="@activity.getSector()">@activity.getSector() | @activity.getDate() | @activity.getOrganism().getSpecie()</li>
+
+		@form(routes.Activities.delete(activity.getId().toString(), activity.getSector())) { 
+			<input type="submit" value="Delete"> 
+		}
+
+    }
+  </ul>

@@ -63,9 +63,32 @@
     	padding: 3px;
 	}
 	
+
+.btDeleteActivity
+{
+background-color:white;
+color:black;
+        -moz-border-radius: 30px;
+        -webkit-border-radius: 30px;
+        border-radius: 30px;
+		width:60%;
+		margin-top: 2%;
+		margin-bottom: 2%;
+		margin-left:20%;
+		margin-right:20%;
+		border: 4px solid black;
+}
+
+.btDeleteActivity:hover
+{
+background-color:grey;
+}
+
 	.hunting{
 		background: darkkhaki;
 	}
+	
+
 	.fishing{
 		background: Turquoise;
 	}
